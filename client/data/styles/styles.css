@@ -1,0 +1,84 @@
+.login_menu {
+    padding: 50px;
+}
+
+.signup_menu {
+    padding: 50px;
+}
+
+.switch_auth_menu_label {
+    color: rgb(0, 0, 255);
+    text-decoration-line: underline;
+    padding: 5px;
+    transition: all 0.2s linear;
+}
+
+.event_switch_auth_menu:hover .switch_auth_menu_label {
+    color: rgb(0, 136, 255);
+}
+
+.field_error {
+    /* border-color: red; */
+    background-color: red;
+}
+
+/* rename to correct */
+.field_success { 
+    /* border-color: red; */
+    background-color: rgb(40, 197, 40);
+}
+
+.notify_label {
+    font-size: 11px;
+    color: red;
+    margin: 5px 0 0 5px;
+}
+
+.notify_label--error {
+    color: red;
+}
+
+.notify_label--success {
+    color: rgb(40, 197, 40);
+}
+
+.left_bar {
+    background-color: seagreen;
+}
+
+.scrollable_wrap {
+    background-color: lime;
+}
+
+.chat_list {
+    background-color: maroon;
+}
+
+.create_group_event {
+    background-color: rgba(70, 70, 70, 0.538);
+}
+
+.create_group_menu {
+    background-color: mediumslateblue;
+}
+
+
+/* chat list item */
+.chat_list_item {
+    padding: 20px;
+    background-color: midnightblue;
+}
+
+.chat_list_item_avatar {
+    background-color: yellow;
+    border-radius: 50px;
+}
+
+.chat_list_item_notify {
+    background-color: red;
+    border-radius: 50px;
+}
+
+.chat {
+    background-color: indigo;
+}
