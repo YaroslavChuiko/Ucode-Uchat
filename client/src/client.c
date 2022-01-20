@@ -1,11 +1,15 @@
 #include "../inc/client.h"
 
 t_client_utils* utils;
+GtkWidget *main_window;
 
 void destroy(GtkWidget* widget, gpointer data)
 {
-	if (utils->current_user)
+	if (utils->current_user) {
 		handle_logout_request();
+	} else {
+		handle_client_exit();
+	}
 	client_cleanup();
     gtk_main_quit();
 }

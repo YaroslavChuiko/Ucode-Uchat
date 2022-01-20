@@ -26,6 +26,11 @@ t_request_type handle_request_for(const char* request, t_server_utils* utils) {
     sprintf(str, "The type of the request is: %d\n", type);
     logger(str, INFO_LOG);
     
+    if (type == REQ_CLIENT_EXIT) {
+        cJSON_Delete(json);
+        return type;
+    }
+
     // call the request handler for the gotten type
     request_handlers[type](json, utils);
     

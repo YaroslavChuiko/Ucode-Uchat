@@ -1,3 +1,6 @@
+#ifndef SERVER_HEADER
+#define SERVER_HEADER
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
@@ -92,3 +95,5 @@ static const t_req_handler request_handlers[] = {
 
 // SSL
 void ssl_init(SSL_CTX **ctx);
+
+#endif

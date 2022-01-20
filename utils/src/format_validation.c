@@ -14,10 +14,10 @@ static bool is_pattern_matched_for(const char* str, const char* pattern) {
     regfree(&regex);
     return result != REG_NOMATCH;
 
-} 
+}
 
 bool is_name_format_valid(const char *name) {
 
-    return is_pattern_matched_for(name, "^[a-zA-Z0-9]*$");
+    return is_pattern_matched_for(name, "^[a-zA-Z0-9_]*$");
 
 }

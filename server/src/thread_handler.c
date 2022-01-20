@@ -36,8 +36,8 @@ void* thread_handler(void* arg) {
         if (!(request_str = read_client_data(server_utils->ssl)))
             continue;
 
-        t_request_type req_type = -1;
-        if ((req_type = handle_request_for(request_str, server_utils) == REQ_USR_LOGOUT)) {
+        t_request_type req_type = handle_request_for(request_str, server_utils);
+        if (req_type == REQ_USR_LOGOUT || req_type == REQ_CLIENT_EXIT) {
             mx_strdel(&request_str);
             break;
         }

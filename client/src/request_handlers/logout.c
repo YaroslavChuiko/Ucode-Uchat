@@ -17,3 +17,16 @@ void handle_logout_request() {
     free(response);
 
 }
+
+void handle_client_exit() {
+
+    cJSON *json = cJSON_CreateObject();
+    cJSON_AddNumberToObject(json, "type", REQ_CLIENT_EXIT);
+    char* json_str = cJSON_PrintUnformatted(json);
+    cJSON_Delete(json);
+
+    send_to_server(utils->ssl, json_str);
+
+    free(json_str);
+
+}

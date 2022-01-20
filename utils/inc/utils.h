@@ -1,3 +1,6 @@
+#ifndef UTILS_HEADER
+#define UTILS_HEADER
+
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -44,6 +47,7 @@ typedef enum e_request_type {
     
     // updater requests
     REQ_NEW_MESSAGE,
+    REQ_CLIENT_EXIT,
 }            t_request_type;
 
 typedef struct s_response {
@@ -70,3 +74,5 @@ void logger(const char* info, t_info_type info_type);
 char* get_response_str(t_response_code error_code);
 
 bool is_name_format_valid(const char* name);
+
+#endif
