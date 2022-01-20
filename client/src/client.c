@@ -49,6 +49,18 @@ void on_crossing(GtkWidget *widget, GdkEventCrossing *event)
 	g_object_unref(cursor);
 }
 
+GtkWidget* create_new_window(char *title, int width, int height, bool resizable)
+{
+	GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(window), title);
+	gtk_window_set_default_size(GTK_WINDOW(window), width, height);
+	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); //GTK_WIN_POS_CENTER GTK_WIN_POS_CENTER_ON_PARENT
+	gtk_window_set_resizable(GTK_WINDOW(window), resizable);
+    g_signal_connect(window, "delete_event", G_CALLBACK(destroy), NULL); //delete_event
+
+	return window;
+}
+
 int main(int argc, char **argv) {
 
 	(void)argc;
@@ -60,20 +72,10 @@ int main(int argc, char **argv) {
 	
 	connect_to_server(atoi(argv[1]), &server_socket);
 	client_init(server_socket);
-
-	GtkWidget* window;
 	
     gtk_init(&argc, &argv);
 
-	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_name(GTK_WIDGET(window), "main_window");
-	gtk_window_set_title(GTK_WINDOW(window), "Uchat");
-    // gtk_container_set_border_width(GTK_CONTAINER(window), 50);
-	gtk_window_set_default_size(GTK_WINDOW(window), 500, 0);
-	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); //GTK_WIN_POS_CENTER
-	// gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
-	// gtk_window_set_decorated(GTK_WINDOW(window), FALSE);
-    g_signal_connect(window, "destroy", G_CALLBACK(destroy), NULL);
+	main_window = create_new_window("login", 500, 0, false);
 
 	// CSS
 	GtkCssProvider *styles = gtk_css_provider_new();
@@ -82,10 +84,10 @@ int main(int argc, char **argv) {
 	//
 
 	GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	gtk_container_add(GTK_CONTAINER(window), main_area);
+	gtk_container_add(GTK_CONTAINER(main_window), main_area);
 
 	build_login_menu(&main_area);
-    gtk_widget_show_all(window);
+    gtk_widget_show_all(main_window);
 
 	// pthread_create(&th_read, NULL, handle_server_updates, utils);
 

@@ -17,11 +17,13 @@
 
 #define IP_ADDRESS      "127.0.0.1" // remove later
 
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 880
+#define WINDOW_HEIGHT 760
 
-#define LEFT_BAR_W 360
-#define LEFT_BAR_H 720
+#define LEFT_BAR_W 440
+// #define LEFT_BAR_H 800
+
+GtkWidget *main_window;
 
 struct {
     GtkWidget *username_field;
@@ -34,8 +36,8 @@ struct {
 }   t_auth_fields;
 
 struct {
-    GtkWidget *login_event;
-    GtkWidget *signup_event;
+    GtkWidget *login_menu;
+    GtkWidget *signup_menu;
 }   t_auth_menu;
 
 struct {
@@ -67,10 +69,14 @@ typedef struct s_client_utils {
 
 extern t_client_utils *utils;
 
+
+GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
+
 void build_login_menu(GtkWidget **main_area);
 void build_signup_menu(GtkWidget **main_area);
 void build_chat_screen(GtkWidget **main_area);
 
+void destroy(GtkWidget* widget, gpointer data);
 void on_crossing (GtkWidget *widget, GdkEventCrossing *event);
 void add_class(GtkWidget *widget, char *class_name);
 void remove_class(GtkWidget *widget, char *class_name);
