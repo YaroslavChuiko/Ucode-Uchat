@@ -21,6 +21,12 @@ int main(int argc, char *argv[]) {
     // Initialize this code to run as a daemon
     daemon_init();
 
+	// initialize to init ssl, certificate and key
+	SSL_CTX *ctx = NULL;
+	SSL *ssl = NULL;
+	ssl_init(&ctx); 
+    
+
     // Setup listening on localhost and port 8080
     serv_address.sin_family = AF_INET;
     serv_address.sin_addr.s_addr = INADDR_ANY;
@@ -49,6 +55,14 @@ int main(int argc, char *argv[]) {
 
         // Accept incoming connection and get file descriptor to use when thread is created
         if ((sock_client = accept(server_socket, (struct sockaddr *)&client_address, &address_size)) != -1) {
+        
+        	ssl = SSL_new(ctx);
+			SSL_set_fd(ssl, sock_client);
+			
+			if (SSL_accept(ssl) == -1) {
+				logger(strerror(errno), ERROR_LOG);
+				exit(EXIT_FAILURE);
+			}
             
             int flags = fcntl(sock_client,F_GETFL,0);
             if (flags == -1)
@@ -57,6 +71,7 @@ int main(int argc, char *argv[]) {
             fcntl(sock_client, F_SETFD, O_NONBLOCK);
 
             utils.client_socket = sock_client;
+            utils.ssl = ssl;
 
             pthread_create(&thread, NULL, thread_handler, (void *)&utils);
             // pthread_join(thread, NULL);
@@ -67,6 +82,9 @@ int main(int argc, char *argv[]) {
         
         }
 	}
+	
+	SSL_CTX_free(ctx);
+	
 	return EXIT_FAILURE;
 
 }

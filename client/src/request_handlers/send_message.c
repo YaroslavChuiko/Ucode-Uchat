@@ -10,7 +10,7 @@ void handle_send_msg_request(const char* message_str) {
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
 
-    char* response = send_and_recv_from_server(utils->server_fd, json_str);
+    char* response = send_and_recv_from_server(utils->ssl, json_str);
     int error_code = handle_server_response(response);
     // if ((error_code = handle_server_response(response)) != R_SUCCESS) {
 

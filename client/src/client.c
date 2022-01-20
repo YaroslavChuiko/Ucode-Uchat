@@ -58,8 +58,11 @@ int main(int argc, char **argv) {
 	// pthread_t th_write;
 	pthread_t th_read;
 	
-	connect_to_server(atoi(argv[1]), &server_socket);
-	client_init(server_socket);
+	SSL_CTX *ctx = NULL; 
+	SSL *ssl = NULL;
+
+	connect_to_server(atoi(argv[1]), &server_socket, &ctx, &ssl);
+	client_init(server_socket, ssl);
 
 	GtkWidget* window;
 	

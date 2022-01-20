@@ -8,7 +8,7 @@ int handle_create_chat_request(const char* chat_name) {
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
 
-    char* response = send_and_recv_from_server(utils->server_fd, json_str);
+    char* response = send_and_recv_from_server(utils->ssl, json_str);
 
     int error_code = handle_server_response(response);
     // if ((error_code = handle_server_response(response)) != R_SUCCESS) {

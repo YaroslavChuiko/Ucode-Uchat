@@ -50,7 +50,7 @@ int handle_login_request(const char* user_name, const char* user_password) {
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
     
-    char* response = send_and_recv_from_server(utils->server_fd, json_str);
+    char* response = send_and_recv_from_server(utils->ssl, json_str);
 
     int error_code = handle_login_response(response);
     

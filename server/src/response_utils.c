@@ -13,17 +13,17 @@ char* get_json_response_for(t_response_code error_code, t_request_type req_type)
 }
 
 // Send an error response to the client 
-void send_server_response(int client_fd, t_response_code code, t_request_type req_type) {
+void send_server_response(SSL* ssl, t_response_code code, t_request_type req_type) {
 
     char* response = get_json_response_for(code, req_type);
-    send_response_to(client_fd, response);
+    send_response_to(ssl, response);
     free(response);
 
 }
 
 // Send a string-formatted response to the client
-void send_response_to(int client_fd, const char* response) {
+void send_response_to(SSL* ssl, const char* response) {
 
-    send(client_fd, response, strlen(response), 0);
+    SSL_write(ssl, response, strlen(response));
 
 }

@@ -10,6 +10,8 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
 
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/libmx/inc/libmx.h"
@@ -59,6 +61,7 @@ typedef struct s_chat {
 
 typedef struct s_client_utils {
     int server_fd;
+    SSL *ssl;
     // pthread_t th_reader;
     pthread_mutex_t lock;
     t_user* current_user;
@@ -106,12 +109,15 @@ void* handle_server_updates(void* arg);
 bool is_request_for_update(t_request_type type);
 t_request_type get_request_type(cJSON* json);
 t_response_code handle_server_response(const char* response_str);
-int send_to_server(int server_fd, const char* request_str);
+int send_to_server(SSL *ssl, const char* request_str);
 t_response_code get_response_code(cJSON* json);
-char* send_and_recv_from_server(int server_fd, const char* json_str);
+char* send_and_recv_from_server(SSL *ssl, const char* json_str);
 
-void client_init(int server_fd);
+void client_init(int server_fd, SSL *ssl);
 void client_cleanup();
-void connect_to_server(int port, int* server_fd);
+void connect_to_server(int port, int* server_fd, SSL_CTX **ctx, SSL **ssl);
 void handle_arg_errors(char** argv);
+
+void init_ssl(SSL_CTX **ctx);
+void connect_ssl(SSL **ssl, int* server_fd, SSL_CTX **ctx);
 

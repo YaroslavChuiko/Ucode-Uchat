@@ -11,6 +11,7 @@ typedef struct s_chat {
 // Type for the user saved from the database
 typedef struct s_user {
     int client_fd;
+    SSL* ssl;
     int user_id;
     char* name;
     char* password;
@@ -27,6 +28,7 @@ typedef struct s_msg {
 
 typedef struct s_server_utils {
     int client_socket;
+    SSL *ssl;
     t_user* user;
 }              t_server_utils;
 

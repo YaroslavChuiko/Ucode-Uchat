@@ -30,7 +30,7 @@ void set_user_account_data(sqlite3_stmt* stmt, t_server_utils* utils) {
 
     if (sqlite3_step(stmt) == SQLITE_ROW) {
 
-        utils->user = mx_create_user(sqlite3_column_int64(stmt, 0), utils->client_socket);
+        utils->user = mx_create_user(sqlite3_column_int64(stmt, 0), utils->client_socket, utils->ssl);
         utils->user->name = strdup((const char*)sqlite3_column_text(stmt, 1));
         utils->user->password = strdup((const char*)sqlite3_column_text(stmt, 2));
 
@@ -50,17 +50,17 @@ int set_user_by_username(const char* username, const char* password, t_server_ut
     sqlite3_close(db);
 
     if (utils->user == NULL) {
-        send_server_response(utils->client_socket, R_USR_NOENT, REQ_USR_LOGIN);
+        send_server_response(utils->ssl, R_USR_NOENT, REQ_USR_LOGIN);
         return 1;
     } 
     if (strcmp(utils->user->password, password) != 0) {
-        send_server_response(utils->client_socket, R_INVALID_PASS, REQ_USR_LOGIN);
+        send_server_response(utils->ssl, R_INVALID_PASS, REQ_USR_LOGIN);
         user_cleanup(&utils->user);
         return 1;
     }
     
     char* response = get_json_formatted_user(utils->user);
-    send_response_to(utils->client_socket, response);
+    send_response_to(utils->ssl, response);
     free(response);
     
     char result_to_log[QUERY_LEN];
@@ -76,7 +76,7 @@ int set_user_by_username(const char* username, const char* password, t_server_ut
 void handle_usr_login(const cJSON* user_info, t_server_utils* utils) {
 
     if (database_init() != 0) {
-        send_server_response(utils->client_socket, R_DB_FAILURE, REQ_USR_LOGIN);
+        send_server_response(utils->ssl, R_DB_FAILURE, REQ_USR_LOGIN);
         return;
     }
 
@@ -85,7 +85,7 @@ void handle_usr_login(const cJSON* user_info, t_server_utils* utils) {
     const cJSON *user_password = cJSON_GetObjectItemCaseSensitive(user_info, "password");
 
     if (!cJSON_IsString(user_name) || !cJSON_IsString(user_password)) {
-        send_server_response(utils->client_socket, R_JSON_FAILURE, REQ_USR_LOGIN);
+        send_server_response(utils->ssl, R_JSON_FAILURE, REQ_USR_LOGIN);
         return;
     }
 
@@ -93,7 +93,7 @@ void handle_usr_login(const cJSON* user_info, t_server_utils* utils) {
         return;
 
     pthread_mutex_lock(&global_state.lock);
-    mx_user_push_back(&global_state.logged_users, utils->user->user_id, utils->user->client_fd);
+    mx_user_push_back(&global_state.logged_users, utils->user->user_id, utils->user->client_fd, utils->ssl);
     pthread_mutex_unlock(&global_state.lock);
 
     print_logged_users();
