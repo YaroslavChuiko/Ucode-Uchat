@@ -64,15 +64,9 @@ int handle_login_request(const char* user_name, const char* user_password) {
 
 void build_login_menu(GtkWidget **main_area)
 {
-    //edit event_box and box to box
-	t_auth_menu.login_event = gtk_event_box_new();
-    // gtk_event_box_set_above_child(GTK_EVENT_BOX(t_auth_menu.login_event), TRUE);
-	gtk_box_pack_start(GTK_BOX(*main_area), t_auth_menu.login_event, false, false, 0);
-
-
-	GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
-	gtk_container_add(GTK_CONTAINER(t_auth_menu.login_event), box); 
-    add_class(box, "login_menu");
+	t_auth_menu.login_menu = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
+	gtk_box_pack_start(GTK_BOX(*main_area), t_auth_menu.login_menu, true, false, 0);
+    add_class(t_auth_menu.login_menu, "login_menu");
 
     //username box
     GtkWidget *username_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -145,10 +139,10 @@ void build_login_menu(GtkWidget **main_area)
 	gtk_box_pack_start(GTK_BOX(text_box), event_switch_to_signup,FALSE,FALSE,0);
     //
 
-	gtk_box_pack_start(GTK_BOX(box), username_box,FALSE,FALSE,0);
-	gtk_box_pack_start(GTK_BOX(box), password_box,FALSE,FALSE,0);
-	gtk_box_pack_start(GTK_BOX(box), login_btn_box,FALSE,FALSE,0);
-	gtk_box_pack_start(GTK_BOX(box), text_box,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(t_auth_menu.login_menu), username_box,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(t_auth_menu.login_menu), password_box,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(t_auth_menu.login_menu), login_btn_box,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(t_auth_menu.login_menu), text_box,FALSE,FALSE,0);
 	
-	gtk_widget_show_all(t_auth_menu.login_event);
+	gtk_widget_show_all(t_auth_menu.login_menu);
 }

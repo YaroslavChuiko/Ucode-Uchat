@@ -4,7 +4,7 @@ void switch_to_login_menu(GtkWidget *widget, GdkEventButton *event, gpointer mai
 {
     if(widget){}
     // if(event->type == GDK_BUTTON_PRESS && event->button == 1) {
-        gtk_widget_destroy(GTK_WIDGET(t_auth_menu.signup_event));
+        gtk_widget_destroy(GTK_WIDGET(t_auth_menu.signup_menu));
         build_login_menu((GtkWidget**)main_area);
     // }
 }
@@ -13,7 +13,7 @@ void switch_to_signup_menu(GtkWidget *widget, GdkEventButton *event, gpointer ma
 {
     if(widget){}
     // if (event->type == GDK_BUTTON_PRESS && event->button == 1) {
-        gtk_widget_destroy(GTK_WIDGET(t_auth_menu.login_event));
+        gtk_widget_destroy(GTK_WIDGET(t_auth_menu.login_menu));
         build_signup_menu((GtkWidget**)main_area);
     // }
 }
@@ -61,7 +61,7 @@ void signup_button_click(GtkWidget *widget, gpointer main_area)
 
     if(error_code == R_SUCCESS)
     {
-        gtk_widget_destroy(t_auth_menu.signup_event);
+        gtk_widget_destroy(t_auth_menu.signup_menu);
         build_login_menu((GtkWidget**)main_area);
     }
 }
@@ -86,7 +86,17 @@ void login_button_click(GtkWidget *widget, gpointer main_area)
 
 	if(error_code == R_SUCCESS)
     {
-        gtk_widget_destroy(t_auth_menu.login_event);
-        build_chat_screen((GtkWidget**)main_area);
+        // gtk_widget_destroy(t_auth_menu.login_menu);
+        // build_chat_screen((GtkWidget**)main_area);
+
+        gtk_widget_destroy(main_window);
+	    main_window = create_new_window("UChat", 500, 0, true);
+
+        GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	    gtk_container_add(GTK_CONTAINER(main_window), main_area);
+
+        build_chat_screen(&main_area);
+        gtk_widget_show_all(main_window);
+
     }
 }
