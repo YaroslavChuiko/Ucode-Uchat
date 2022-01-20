@@ -23,8 +23,8 @@ void ssl_sertificate(SSL_CTX *ctx, const char* cert, const char* key) {
 }
 
 void ssl_init(SSL_CTX **ctx) {
-	const char cert[] = "server/src/server_utils/cert.crt";
-	const char key[] = "server/src/server_utils/key.key";
+	const char cert[] = "server/cert.crt";
+	const char key[] = "server/key.key";
 
 	SSL_library_init();
 	OpenSSL_add_all_algorithms();
