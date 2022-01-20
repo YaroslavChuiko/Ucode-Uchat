@@ -28,7 +28,7 @@ void send_response_to_all(t_msg* msg_to_send) {
         }
 
         char* msg_json = get_new_message_json(msg_to_send);
-        send_response_to(curr_user->client_fd, msg_json);
+        send_response_to(curr_user->ssl, msg_json);
         free(msg_json);
 
         curr_user = curr_user->next;

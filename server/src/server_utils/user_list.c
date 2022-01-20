@@ -1,24 +1,25 @@
 #include "../../inc/server.h"
 
-t_msg* mx_create_msg(const char* text, int user_id, int chat_id) {
+t_msg* mx_create_msg(const char* text, int user_id, int chat_id, t_server_utils* utils) {
     
     t_msg *new_node = malloc(sizeof(t_msg));
     
     new_node->text = strdup(text);
     new_node->chat_id = chat_id;
-    new_node->sender = db_get_user_by_id(user_id);
+    new_node->sender = db_get_user_by_id(user_id, utils);
     
     return new_node;
 
 }
 
-t_user* mx_create_user(int id, int client_fd) {
+t_user* mx_create_user(int id, int client_fd, SSL* ssl) {
     t_user *new_node = malloc(sizeof(t_user));
     
     new_node->user_id = id;
     new_node->client_fd = client_fd;
     new_node->name = NULL;
     new_node->password = NULL;
+    new_node->ssl = ssl;
 
     new_node->chats = db_get_chats_by_user_id(id);
     
@@ -26,9 +27,9 @@ t_user* mx_create_user(int id, int client_fd) {
     return new_node;
 }
 
-void mx_user_push_back(t_user** list, int user_id, int client_fd) {
+void mx_user_push_back(t_user** list, int user_id, int client_fd, SSL* ssl) {
 
-    t_user* new_node = mx_create_user(user_id, client_fd);
+    t_user* new_node = mx_create_user(user_id, client_fd, ssl);
     if (list != NULL && *list == NULL) {
         *list = new_node;
         return;

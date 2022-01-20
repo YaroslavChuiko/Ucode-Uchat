@@ -20,7 +20,7 @@ UTILSLIB_NAME = $(UTILSLIB_DIR)/utilslib.a
 CJSON_DIR = ../libraries/cjson
 CJSON_NAME = $(CJSON_DIR)/libcjson.a
 
-LIB_FLAGS = -lm -lcjson -lsqlite3 -L$(LIBMX_DIR) $(LIBMX_NAME) -L$(UTILSLIB_DIR) $(UTILSLIB_NAME) -L$(CJSON_DIR) $(CJSON_NAME)
+LIB_FLAGS = -lm -lcjson -lsqlite3 -lssl -lcrypto -L$(LIBMX_DIR) $(LIBMX_NAME) -L$(UTILSLIB_DIR) $(UTILSLIB_NAME) -L$(CJSON_DIR) $(CJSON_NAME)
 
 all: $(UCHAT)
 

@@ -22,7 +22,7 @@ t_chat* db_get_chats_by_user_id(int user_id) {
 
 }
 
-t_user* db_get_user_by_id(int user_id) {
+t_user* db_get_user_by_id(int user_id, t_server_utils* utils) {
 
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
@@ -33,7 +33,7 @@ t_user* db_get_user_by_id(int user_id) {
 
     if (sqlite3_step(stmt) == SQLITE_ROW) {
 
-        user = mx_create_user(user_id, -1);
+        user = mx_create_user(user_id, -1, utils->ssl);
         user->name = strdup((const char*)sqlite3_column_text(stmt, 1));
         user->password = strdup((const char*)sqlite3_column_text(stmt, 2));
 

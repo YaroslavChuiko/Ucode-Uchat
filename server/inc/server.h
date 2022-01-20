@@ -12,6 +12,13 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#include <openssl/ssl.h>
+#include <openssl/crypto.h>
+#include <openssl/rsa.h>
+#include <openssl/x509.h>
+#include <openssl/pem.h>
+#include <openssl/err.h>
+
 #include "../../libraries/libmx/inc/libmx.h"
 #include "../../utils/inc/utils.h"
 #include "../../libraries/cjson/inc/cJSON.h"
@@ -24,8 +31,8 @@
 void* thread_handler(void* arg);
 void daemon_init();
 void handle_arg_errors(char** argv);
-void send_response_to(int client_fd, const char* response);
-void send_server_response(int client_fd, t_response_code code, t_request_type req_type);
+void send_response_to(SSL* ssl, const char* response);
+void send_server_response(SSL* ssl, t_response_code code, t_request_type req_type);
 void send_response_to_all(t_msg* msg_to_send);
 
 // REQUEST HANDLERS
@@ -51,14 +58,14 @@ sqlite3_stmt* db_execute_stmt_for(const char* query, sqlite3* db);
 bool db_chat_exists(const char* chat_name);
 int db_insert_member(const char* chat_name, t_server_utils* utils);
 t_chat* db_get_chats_by_user_id(int user_id);
-t_user* db_get_user_by_id(int user_id);
+t_user* db_get_user_by_id(int user_id, t_server_utils* utils);
 
 // LIST UTILS
 
-t_msg* mx_create_msg(const char* text, int user_id, int chat_id);
+t_msg* mx_create_msg(const char* text, int user_id, int chat_id, t_server_utils* utils);
 
-t_user *mx_create_user(int id, int client_fd);
-void mx_user_push_back(t_user** list, int user_id, int client_fd);
+t_user *mx_create_user(int id, int client_fd, SSL* ssl);
+void mx_user_push_back(t_user** list, int user_id, int client_fd, SSL* ssl);
 void mx_user_pop_index(t_user **list, int index);
 t_user* mx_get_user_by_id(t_user* list, int user_id);
 void mx_clear_user_list(t_user **list);
@@ -80,3 +87,6 @@ static const t_req_handler request_handlers[] = {
     handle_usr_logout,
     NULL
 };
+
+// SSL
+void ssl_init(SSL_CTX **ctx);

@@ -1,9 +1,9 @@
 #include "../inc/client.h"
 
 // Send a string-formatted client request to the server
-int send_to_server(int server_fd, const char* request_str) {
+int send_to_server(SSL *ssl, const char* request_str) {
 
-    if (send(server_fd, request_str, strlen(request_str), 0) == -1) {
+    if (SSL_write(ssl, request_str, strlen(request_str)) == -1) {
         // logger(strerror(errno), ERROR_LOG);
         return 1;
     }
@@ -53,14 +53,14 @@ t_response_code handle_server_response(const char* response_str) {
 }
 
 // Send a request to the server and call the handler for the response
-char* send_and_recv_from_server(int server_fd, const char* json_str) {
+char* send_and_recv_from_server(SSL *ssl, const char* json_str) {
 
-    if (send_to_server(server_fd, json_str) != 0)
+    if (send_to_server(ssl, json_str) != 0)
         return NULL;
 
     char response[SENT_DATA_LEN];
     int n_bytes = 0;
-    while ((n_bytes = recv(server_fd, response, SENT_DATA_LEN, 0)) <= 0) {
+    while ((n_bytes = SSL_read(ssl, response, SENT_DATA_LEN)) <= 0) {
 
         if (n_bytes == 0)
             return NULL;
