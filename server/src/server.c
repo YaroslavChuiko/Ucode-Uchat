@@ -5,8 +5,6 @@ t_server_state global_state;
 int main(int argc, char *argv[]) {
 
 	// (void)argc;
-
-    // Variable declaration needed to setup the server
     struct sockaddr_in serv_address, client_address;
     t_server_utils utils;
     int server_socket, sock_client;
@@ -14,18 +12,14 @@ int main(int argc, char *argv[]) {
     pthread_t thread;
 
     global_state.logged_users = NULL;
-    
-    // Initialize the global mutex 
     pthread_mutex_init(&global_state.lock, NULL); // don't forget to destroy after
 
-    // Initialize this code to run as a daemon
     daemon_init();
 
 	// initialize to init ssl, certificate and key
 	SSL_CTX *ctx = NULL;
 	SSL *ssl = NULL;
 	ssl_init(&ctx); 
-    
 
     // Setup listening on localhost and port 8080
     serv_address.sin_family = AF_INET;
@@ -34,21 +28,16 @@ int main(int argc, char *argv[]) {
 
     // Set the socket descriptor
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-
         exit(EXIT_FAILURE);
-    
     }
 
     // Bind the sock_descriptor to the serv_address
     if (bind(server_socket, (struct sockaddr *)&serv_address, address_size) == -1) {
-
         exit(EXIT_FAILURE);
-    
     }
 
     // Marks sock_descriptor as listening and accepting incoming connections
     listen(server_socket, 0);
-
 
     // Infinite loop that spawns new threads for incoming connections.
 	while (1) {
@@ -74,7 +63,6 @@ int main(int argc, char *argv[]) {
             utils.ssl = ssl;
 
             pthread_create(&thread, NULL, thread_handler, (void *)&utils);
-            // pthread_join(thread, NULL);
 
         } else {
             
@@ -83,11 +71,14 @@ int main(int argc, char *argv[]) {
         }
 	}
 	
-	SSL_CTX_free(ctx);
-	
 	return EXIT_FAILURE;
 
 }
 
+// SERVER ISSUES
+
+// handle cleanup and thread exit when destroying the auth window
+
+// MISC ISSUES
 
 // Handle escaping of characters for the strings before saving them to the database

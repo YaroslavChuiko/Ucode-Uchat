@@ -34,10 +34,11 @@ void handle_arg_errors(char** argv);
 void send_response_to(SSL* ssl, const char* response);
 void send_server_response(SSL* ssl, t_response_code code, t_request_type req_type);
 void send_response_to_all(t_msg* msg_to_send);
+void client_cleanup(t_server_utils* utils);
 
 // REQUEST HANDLERS
 
-void handle_request_for(const char* req_args, t_server_utils* utils);
+t_request_type handle_request_for(const char* req_args, t_server_utils* utils);
 char* get_new_message_json(t_msg* msg_to_send);
 char* get_json_response_for(t_response_code error_code, t_request_type req_type);
 t_request_type get_request_type(cJSON* json);
@@ -69,6 +70,7 @@ void mx_user_push_back(t_user** list, int user_id, int client_fd, SSL* ssl);
 void mx_user_pop_index(t_user **list, int index);
 t_user* mx_get_user_by_id(t_user* list, int user_id);
 void mx_clear_user_list(t_user **list);
+void mx_clear_user(t_user** p);
 int mx_get_user_id(int user_db_id);
 void print_logged_users();
 

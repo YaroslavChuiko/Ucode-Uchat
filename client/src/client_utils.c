@@ -3,7 +3,7 @@
 /* 	Initialize all the client utils,
 	put the server socket in a non-blocking mode 
 */
-void client_init(int server_fd, SSL *ssl) {
+void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx) {
 
 	int flags = fcntl(server_fd, F_GETFL,0);
     fcntl(server_fd, F_SETFL, flags | O_NONBLOCK);
@@ -12,6 +12,7 @@ void client_init(int server_fd, SSL *ssl) {
 	utils = malloc(sizeof(*utils));
 	utils->server_fd = server_fd;
 	utils->ssl = ssl;
+	utils->ctx = ctx;
 	utils->current_user = NULL;
 	utils->current_chat = NULL;
 	pthread_mutex_init(&utils->lock, NULL);

@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
 	SSL *ssl = NULL;
 
 	connect_to_server(atoi(argv[1]), &server_socket, &ctx, &ssl);
-	client_init(server_socket, ssl);
+	client_init(server_socket, ssl, ctx);
 
 	GtkWidget* window;
 	

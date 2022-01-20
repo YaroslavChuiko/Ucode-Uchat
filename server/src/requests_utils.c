@@ -8,7 +8,7 @@ t_request_type get_request_type(cJSON* json) {
 }
 
 // Call a handler for any valid client request
-void handle_request_for(const char* request, t_server_utils* utils) {
+t_request_type handle_request_for(const char* request, t_server_utils* utils) {
 
     cJSON *json = cJSON_Parse(request);
     if (json == NULL) {
@@ -18,7 +18,7 @@ void handle_request_for(const char* request, t_server_utils* utils) {
             sprintf(error, "Error before: %s\n", error_ptr);
             logger(error, ERROR_LOG);
         }
-        return;
+        return -1;
     }
 
     int type = get_request_type(json);
@@ -30,5 +30,6 @@ void handle_request_for(const char* request, t_server_utils* utils) {
     request_handlers[type](json, utils);
     
     cJSON_Delete(json);
+    return type;
 
 }

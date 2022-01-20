@@ -54,6 +54,7 @@ dkms.conf
 ._.DS_Store
 .vscode
 /server_utils
+memcheck.sh
 
 uchat
 uchat_server

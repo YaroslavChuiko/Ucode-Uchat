@@ -1,17 +1,5 @@
 #include "../../inc/server.h"
 
-void user_cleanup(t_user** user) {
-
-    if (!user || !(*user))
-        return;
-
-    mx_strdel(&(*user)->name);
-    mx_strdel(&(*user)->password);
-    free(*user);
-    *user = NULL;
-
-}
-
 char* get_json_formatted_user(const t_user* user) {
 
     cJSON *json = cJSON_CreateObject();
@@ -55,7 +43,7 @@ int set_user_by_username(const char* username, const char* password, t_server_ut
     } 
     if (strcmp(utils->user->password, password) != 0) {
         send_server_response(utils->ssl, R_INVALID_PASS, REQ_USR_LOGIN);
-        user_cleanup(&utils->user);
+        mx_clear_user(&utils->user);
         return 1;
     }
     

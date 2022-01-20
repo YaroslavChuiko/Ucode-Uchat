@@ -23,12 +23,15 @@ void chat_cleanup(t_chat** chat) {
 
 }
 
-// To be expanded
 void client_cleanup() {
 
 	user_cleanup(&utils->current_user);
 	chat_cleanup(&utils->current_chat);
 	pthread_mutex_destroy(&utils->lock);
+	
+	SSL_free(utils->ssl);
+	SSL_CTX_free(utils->ctx);
+	
 	free(utils);
 	utils = NULL;
 

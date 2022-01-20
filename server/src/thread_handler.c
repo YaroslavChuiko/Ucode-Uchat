@@ -26,29 +26,26 @@ char* read_client_data(SSL *ssl) {
 
 void* thread_handler(void* arg) {
 
-    t_server_utils *temp_utils = malloc(sizeof(*temp_utils));
-    temp_utils->client_socket = ((t_server_utils *)arg)->client_socket;
-    temp_utils->ssl = ((t_server_utils *)arg)->ssl;
-    temp_utils->user = NULL;
-    printf("s1");
+    t_server_utils *server_utils = malloc(sizeof(*server_utils));
+    server_utils->client_socket = ((t_server_utils *)arg)->client_socket;
+    server_utils->ssl = ((t_server_utils *)arg)->ssl;
+    server_utils->user = NULL;
     while (1) {
 
         char* request_str = NULL;
-        if (!(request_str = read_client_data(temp_utils->ssl)))
+        if (!(request_str = read_client_data(server_utils->ssl)))
             continue;
 
-        if (strncmp(request_str, "exit", 4) == 0) {
+        t_request_type req_type = -1;
+        if ((req_type = handle_request_for(request_str, server_utils) == REQ_USR_LOGOUT)) {
+            mx_strdel(&request_str);
             break;
         }
-
-        handle_request_for(request_str, temp_utils);
         mx_strdel(&request_str);
 
     }
-    printf("s2");
-    //SSL_free(temp_utils->ssl);
-    close(temp_utils->client_socket);
-    free(temp_utils);
-    pthread_exit(EXIT_SUCCESS);
+    client_cleanup(server_utils);    
+    pthread_detach(pthread_self());
+    return NULL;
 
 }

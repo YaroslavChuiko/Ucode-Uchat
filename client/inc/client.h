@@ -61,7 +61,8 @@ typedef struct s_chat {
 
 typedef struct s_client_utils {
     int server_fd;
-    SSL *ssl;
+    SSL* ssl;
+    SSL_CTX* ctx;
     // pthread_t th_reader;
     pthread_mutex_t lock;
     t_user* current_user;
@@ -113,7 +114,7 @@ int send_to_server(SSL *ssl, const char* request_str);
 t_response_code get_response_code(cJSON* json);
 char* send_and_recv_from_server(SSL *ssl, const char* json_str);
 
-void client_init(int server_fd, SSL *ssl);
+void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
 void client_cleanup();
 void connect_to_server(int port, int* server_fd, SSL_CTX **ctx, SSL **ssl);
 void handle_arg_errors(char** argv);
