@@ -4,7 +4,7 @@ CFLAGS = -std=gnu11 -pthread -g
 # CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread
 
 OBJDIR = obj
-SRCDIR = src src/api src/server_utils
+SRCDIR = src src/api src/server_utils src/database
 SRVR_UTILS_DIR = ../server_utils
 UCHAT = ../uchat_server
 

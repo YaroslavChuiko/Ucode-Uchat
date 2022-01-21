@@ -34,7 +34,8 @@ int database_init() {
         "CREATE TABLE `members` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 
             "`user_id` INTEGER NOT NULL," 
-            "`chat_id` INTEGER NOT NULL);"
+            "`chat_id` INTEGER NOT NULL,"
+            "`permissions` INTEGER NOT NULL);"
             
         "CREATE TABLE `messages` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 

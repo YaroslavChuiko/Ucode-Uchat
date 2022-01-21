@@ -50,6 +50,7 @@ void handle_usr_logout(const cJSON* user_info, t_server_utils* utils);
 void handle_usr_signup(const cJSON* user_info, t_server_utils* utils);
 void handle_create_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_join_chat(const cJSON* chat_info, t_server_utils* utils);
+void handle_get_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_send_message(const cJSON* message_info, t_server_utils* utils);
 
 // SQL
@@ -59,10 +60,14 @@ sqlite3* open_database();
 int db_execute_query(const char* query);
 sqlite3_stmt* db_execute_stmt_for(const char* query, sqlite3* db);
 
+t_response_code db_insert_chat(const char* chat_name);
 bool db_chat_exists(const char* chat_name);
-int db_insert_member(const char* chat_name, t_server_utils* utils);
+t_chat* db_get_chat_by_id(int user_id, int chat_id);
+int db_insert_member(const char* chat_name, t_member_type member_type, t_server_utils* utils);
 t_chat* db_get_chats_by_user_id(int user_id);
 t_user* db_get_user_by_id(int user_id, t_server_utils* utils);
+bool db_is_chat_member(int user_id, int chat_id);
+int db_get_chat_id_by_name(const char* chat_name);
 
 // LIST UTILS
 
@@ -77,10 +82,6 @@ void mx_clear_user(t_user** p);
 int mx_get_user_id(int user_db_id);
 void print_logged_users();
 
-t_chat *mx_create_chat(int id, const char* name);
-void mx_chat_push_back(t_chat** list, int id, const char* name);
-void mx_clear_chat_list(t_chat **list);
-
 extern t_server_state global_state;
 
 static const t_req_handler request_handlers[] = {
@@ -90,6 +91,7 @@ static const t_req_handler request_handlers[] = {
     handle_join_chat,
     handle_send_message,
     handle_usr_logout,
+    handle_get_chat,
     NULL
 };
 

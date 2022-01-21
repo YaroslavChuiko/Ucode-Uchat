@@ -34,11 +34,6 @@ typedef struct s_user {
     char* password;
 }              t_user;
 
-typedef struct s_chat {
-    int chat_id;
-    char* name;
-}              t_chat;
-
 typedef struct s_client_utils {
     int server_fd;
     SSL* ssl;

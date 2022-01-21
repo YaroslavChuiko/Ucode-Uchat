@@ -1,18 +1,19 @@
-#include "../../inc/server.h"
+#include "../../inc/utils.h"
 
-t_chat *mx_create_chat(int id, const char* name)
+t_chat *mx_create_chat(int id, const char* name, int permissions)
 {
     t_chat *new_node = malloc(sizeof(t_chat));
     
     new_node->id = id;
-    new_node->name = mx_strdup(name);
+    new_node->name = strdup(name);
+    new_node->permissions = permissions;
     new_node->next = NULL;
     return new_node;
 }
 
-void mx_chat_push_back(t_chat** list, int chat_id, const char* name) {
+void mx_chat_push_back(t_chat** list, int chat_id, const char* name, int permissions) {
 
-    t_chat* new_node = mx_create_chat(chat_id, name);
+    t_chat* new_node = mx_create_chat(chat_id, name, permissions);
     if (list != NULL && *list == NULL) {
         *list = new_node;
         return;
@@ -33,7 +34,7 @@ void mx_clear_chat(t_chat** p) {
     if (!p || !(*p))
         return;
 
-    mx_strdel(&(*p)->name);
+    free((*p)->name);
     free(*p);
     *p = NULL;
 

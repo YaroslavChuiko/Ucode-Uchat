@@ -36,7 +36,7 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
 
-    if (!is_name_format_valid(user_name->valuestring)) {
+    if (!is_user_name_format_valid(user_name->valuestring)) {
         send_server_response(utils->ssl, R_NAME_FORMAT_INVALID, REQ_USR_SIGNUP);
         return;
     }

@@ -53,13 +53,14 @@ void handle_login_error_code(int error_code);
 void handle_signup_error_code(int error_code);
 void handle_create_chat_error_code(int error_code, GtkWidget* entry_field);
 
-void handle_join_chat_request(const char* chat_name);
-int handle_signup_request(const char* user_name, const char* user_password);
-int handle_login_request(const char* user_name, const char* user_password);
-void handle_logout_request();
-int handle_create_chat_request(const char* chat_name);
-void handle_send_msg_request(const char* message_str);
+t_response_code handle_join_chat_request(const char* chat_name);
+t_response_code handle_signup_request(const char* user_name, const char* user_password);
+t_response_code handle_login_request(const char* user_name, const char* user_password);
+t_response_code handle_create_chat_request(const char* chat_name);
+t_response_code handle_send_msg_request(const char* message_str);
 t_response_code handle_new_message(cJSON* json);
+t_response_code handle_get_chat_request(const char* chat_name);
+void handle_logout_request();
 void handle_client_exit();
 void* handle_server_updates(void* arg);
 

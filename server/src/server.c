@@ -77,8 +77,6 @@ int main(int argc, char *argv[]) {
 
 // SERVER ISSUES
 
-// handle cleanup and thread exit when destroying the auth window
-
 // MISC ISSUES
 
 // Handle escaping of characters for the strings before saving them to the database

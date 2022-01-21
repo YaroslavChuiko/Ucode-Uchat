@@ -63,8 +63,8 @@ void mx_clear_user(t_user** p) {
     if (!p || !(*p))
         return;
 
-    mx_strdel(&(*p)->name);
-    mx_strdel(&(*p)->password);
+    free((*p)->name);
+    free((*p)->password);
     mx_clear_chat_list(&(*p)->chats);
     free(*p);
     *p = NULL;
@@ -188,12 +188,23 @@ int mx_user_list_size(t_user* list) {
 void print_logged_users() {
 
     t_user* temp = global_state.logged_users;
-    logger("Logged in:\n", INFO_LOG);
+    logger("Logged in:", INFO_LOG);
     while (temp) {
 
-        char user[180];
-        sprintf(user, "logged in -- %d: %s, chat name -- %s\n", temp->user_id, temp->name, temp->chats ? temp->chats->name : "no chat");
+        char user[100];
+        sprintf(user,  "logged in -- %d: %s", temp->user_id, temp->name);
         logger(user, INFO_LOG);
+
+        t_chat* temp_chat = temp->chats;
+        while (temp_chat) {
+
+            char user[180];
+            sprintf(user,  "\t\tchat_id -- %d, chat_name -- %s, chat_perms - %d", 
+                    temp_chat->id, temp_chat->name, temp_chat->permissions);
+            logger(user, INFO_LOG);
+            temp_chat = temp_chat->next;
+
+        }
         temp = temp->next;
 
     }

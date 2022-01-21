@@ -1,6 +1,6 @@
 #include "../../inc/client.h"
 
-void handle_send_msg_request(const char* message_str) {
+t_response_code handle_send_msg_request(const char* message_str) {
 
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_SEND_MESSAGE);
@@ -11,14 +11,11 @@ void handle_send_msg_request(const char* message_str) {
     cJSON_Delete(json);
 
     char* response = send_and_recv_from_server(utils->ssl, json_str);
-    int error_code = handle_server_response(response);
-    // if ((error_code = handle_server_response(response)) != R_SUCCESS) {
+    t_response_code error_code = handle_server_response(response);
+    logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
 
-        // Here, if server responded with error, notify the user via the GUI
-        logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
-
-    // }
     free(json_str);
     free(response);
+    return error_code;
 
 }
