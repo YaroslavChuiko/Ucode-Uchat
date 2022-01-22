@@ -1,4 +1,4 @@
-#include "../inc/client.h"
+#include "../../inc/utils.h"
 
 t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text/*, int date*/) {
     

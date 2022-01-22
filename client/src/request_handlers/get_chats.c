@@ -10,6 +10,10 @@ t_response_code add_chat_to_chatlist(cJSON* json) {
         return R_JSON_FAILURE;
     }
     mx_chat_push_back(&utils->chatlist, chat_id->valueint, chat_name->valuestring, chat_perms->valueint);
+
+    // Fill current chat's messages' list with all existing messages
+    handle_get_chat_msgs_request(chat_id->valueint);
+
     return R_SUCCESS;
 
 }
@@ -70,16 +74,7 @@ t_response_code handle_get_chats_request() {
     }
     free(response);
 
-    t_chat* chat = utils->chatlist;
-    while (chat) {
-
-        char str[200];
-        sprintf(str, "Gotten chat:\n\tid: %d, name: %s, perms: %d\n", 
-                chat->id, chat->name, chat->permissions);
-        logger(str, INFO_LOG);
-        chat = chat->next;
-
-    }
+    mx_print_chat_list(utils->chatlist);
 
     return R_SUCCESS;
 

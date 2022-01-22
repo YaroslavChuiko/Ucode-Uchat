@@ -13,7 +13,11 @@ t_response_code add_msg_to_msglist(cJSON* json) {
 
         return R_JSON_FAILURE;
     }
-    mx_msg_push_back(&utils->messages, sender_id->valueint, sender_name->valuestring,
+    t_chat* chat_by_id = mx_get_chat_by_id(utils->chatlist, chat_id->valueint);
+    if (!chat_by_id)
+        return R_CHAT_NOENT;
+
+    mx_msg_push_back(&chat_by_id->messages, sender_id->valueint, sender_name->valuestring,
                     chat_id->valueint, text->valuestring);
     return R_SUCCESS;
 
@@ -39,8 +43,6 @@ t_response_code handle_get_chat_msgs_response(const char* response_str) {
         cJSON_Delete(json);
         return R_JSON_FAILURE;
     }
-
-    mx_clear_msg_list(&utils->messages);
     
     cJSON* chat = NULL;
     for (int i = 0; i < cJSON_GetArraySize(msg_array); ++i) {
@@ -75,17 +77,6 @@ t_response_code handle_get_chat_msgs_request(int chat_id) {
         return error_code;
     }
     free(response);
-
-    t_msg* msg = utils->messages;
-    while (msg) {
-
-        char str[200];
-        sprintf(str, "Gotten message:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s\n", 
-                msg->text, msg->chat_id, msg->sender_id, msg->sender_name);
-        logger(str, INFO_LOG);
-        msg = msg->next;
-
-    }
-
     return R_SUCCESS;
+
 }

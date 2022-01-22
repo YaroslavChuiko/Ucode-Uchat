@@ -7,6 +7,7 @@ t_chat *mx_create_chat(int id, const char* name, int permissions)
     new_node->id = id;
     new_node->name = strdup(name);
     new_node->permissions = permissions;
+    new_node->messages = NULL;
     new_node->next = NULL;
     return new_node;
 }
@@ -26,6 +27,20 @@ void mx_chat_push_back(t_chat** list, int chat_id, const char* name, int permiss
 
     new_node->next = last->next;
     last->next = new_node;
+
+}
+
+t_chat* mx_get_chat_by_id(t_chat* list, int chat_id) {
+
+    while (list) {
+
+        if (list->id == chat_id)    
+            return list;
+
+        list = list->next;
+
+    }
+    return NULL;
 
 }
 
@@ -114,6 +129,7 @@ void mx_clear_chat_list(t_chat **list)
     while (node != NULL)
     {
         next = node->next;
+        mx_clear_msg_list(&node->messages);
         mx_clear_chat(&node);
         node = next;
     }
@@ -134,5 +150,31 @@ int mx_chat_list_size(t_chat* list) {
 
     }
     return size;
+
+}
+
+void mx_print_chat_list(t_chat* chat) {
+
+    while (chat) {
+
+        char str[200];
+        sprintf(str, "Gotten chat:\n\tid: %d, name: %s, perms: %d\n", 
+                chat->id, chat->name, chat->permissions);
+        logger(str, INFO_LOG);
+
+        t_msg* msg = chat->messages;
+        while (msg) {
+
+            char str[200];
+            sprintf(str, "Chat message:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s\n", 
+                    msg->text, msg->chat_id, msg->sender_id, msg->sender_name);
+            logger(str, INFO_LOG);
+            msg = msg->next;
+
+        }
+
+        chat = chat->next;
+
+    }
 
 }

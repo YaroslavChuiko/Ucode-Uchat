@@ -16,7 +16,6 @@ void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx) {
 	utils->current_user = NULL;
 	utils->current_chat = NULL;
 	utils->chatlist = NULL;
-	utils->messages = NULL;
 	pthread_mutex_init(&utils->lock, NULL);
 
 }

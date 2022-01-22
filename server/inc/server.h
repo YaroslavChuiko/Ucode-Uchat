@@ -26,7 +26,6 @@
 #include "../../utils/inc/utils.h"
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/sqlite/inc/sqlite3.h"
-#include "const.h"
 #include "types.h"
 
 // SERVER UTILS
@@ -73,8 +72,6 @@ bool db_is_chat_member(int user_id, int chat_id);
 int db_get_chat_id_by_name(const char* chat_name);
 
 // LIST UTILS
-
-t_msg* mx_create_msg(const char* text, int user_id, int chat_id, t_server_utils* utils);
 
 t_user *mx_create_user(int id, int client_fd, SSL* ssl);
 void mx_user_push_back(t_user** list, int user_id, int client_fd, SSL* ssl);

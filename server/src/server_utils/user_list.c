@@ -1,17 +1,5 @@
 #include "../../inc/server.h"
 
-t_msg* mx_create_msg(const char* text, int user_id, int chat_id, t_server_utils* utils) {
-    
-    t_msg *new_node = malloc(sizeof(t_msg));
-    
-    new_node->text = strdup(text);
-    new_node->chat_id = chat_id;
-    new_node->sender = db_get_user_by_id(user_id, utils);
-    
-    return new_node;
-
-}
-
 t_user* mx_create_user(int id, int client_fd, SSL* ssl) {
     t_user *new_node = malloc(sizeof(t_user));
     
