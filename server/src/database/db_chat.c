@@ -17,28 +17,18 @@ t_response_code db_insert_chat(const char* chat_name) {
 
 }
 
-t_chat* db_get_chat_by_id(int user_id, int chat_id) {
+bool db_chat_exists(int chat_id) {
 
+    char query[QUERY_LEN];
+    sprintf(query, "SELECT EXISTS (SELECT `id` FROM `chats` WHERE `id` = '%d')", chat_id);
+    
     sqlite3* db = open_database();
-    sqlite3_stmt* stmt;
-    sqlite3_prepare_v2(db, "SELECT chats.id, chats.name, members.permissions FROM `chats`"
-                            "INNER JOIN `members` ON members.chat_id = chats.id WHERE `user_id` = ?", 
-                            -1, &stmt, NULL);
-    sqlite3_bind_int64(stmt, 1, user_id);
-
-    t_chat* chat = NULL;
-
-    if (sqlite3_step(stmt) == SQLITE_ROW) {
-
-        int chat_id = sqlite3_column_int64(stmt, 0);
-        const char* chat_name = (const char*)sqlite3_column_text(stmt, 1);
-        int chat_perms = sqlite3_column_int64(stmt, 2);
-        chat = mx_create_chat(chat_id, chat_name, chat_perms);
-
-    }
+    sqlite3_stmt* stmt = db_execute_stmt_for(query, db);
+    
+    int chat_exists = sqlite3_column_int64(stmt, 0);
     sqlite3_finalize(stmt);
     sqlite3_close(db);
-    return chat;
+    return chat_exists == 1;
 
 }
 
@@ -84,3 +74,5 @@ t_chat* db_get_chats_by_user_id(int user_id) {
     return chats;
 
 }
+
+

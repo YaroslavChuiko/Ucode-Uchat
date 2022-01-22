@@ -48,7 +48,8 @@ typedef enum e_request_type {
     REQ_JOIN_CHAT,
     REQ_SEND_MESSAGE,
     REQ_USR_LOGOUT,
-    REQ_GET_CHAT,
+    REQ_GET_CHATS,
+    REQ_GET_CHAT_MSGS,
     
     REQ_NEW_MESSAGE,
     REQ_CLIENT_EXIT,

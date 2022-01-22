@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     global_state.logged_users = NULL;
     pthread_mutex_init(&global_state.lock, NULL); // don't forget to destroy after
 
-    daemon_init();
+    // daemon_init();
 
 	// initialize to init ssl, certificate and key
 	SSL_CTX *ctx = NULL;

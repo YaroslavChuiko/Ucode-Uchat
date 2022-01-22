@@ -1,0 +1,91 @@
+#include "../../inc/client.h"
+
+t_response_code add_msg_to_msglist(cJSON* json) {
+
+    cJSON* msg_id = cJSON_GetObjectItem(json, "msg_id");
+    cJSON* sender_id = cJSON_GetObjectItem(json, "sender_id");
+    cJSON* sender_name = cJSON_GetObjectItemCaseSensitive(json, "sender_name");
+    cJSON* text = cJSON_GetObjectItemCaseSensitive(json, "text");
+    cJSON* chat_id = cJSON_GetObjectItem(json, "chat_id");
+
+    if (!cJSON_IsNumber(msg_id) || !cJSON_IsNumber(sender_id) || !cJSON_IsNumber(chat_id) || 
+        !cJSON_IsString(sender_name) || !cJSON_IsString(text)) {
+
+        return R_JSON_FAILURE;
+    }
+    mx_msg_push_back(&utils->messages, sender_id->valueint, sender_name->valuestring,
+                    chat_id->valueint, text->valuestring);
+    return R_SUCCESS;
+
+}
+
+t_response_code handle_get_chat_msgs_response(const char* response_str) {
+
+    if (response_str == NULL) {
+        logger(get_response_str(R_INVALID_INPUT), ERROR_LOG);
+        return R_INVALID_INPUT;
+    }
+
+    cJSON* json = cJSON_Parse(response_str);
+
+    int error_code = get_response_code(json);
+    if (error_code != R_SUCCESS) {
+        return error_code;
+        cJSON_Delete(json);
+    }
+
+    cJSON* msg_array = cJSON_GetObjectItemCaseSensitive(json, "messages");
+    if (!cJSON_IsArray(msg_array)) {
+        cJSON_Delete(json);
+        return R_JSON_FAILURE;
+    }
+
+    mx_clear_msg_list(&utils->messages);
+    
+    cJSON* chat = NULL;
+    for (int i = 0; i < cJSON_GetArraySize(msg_array); ++i) {
+        
+        chat = cJSON_GetArrayItem(msg_array, i);
+        if ((error_code = add_msg_to_msglist(chat)) != R_SUCCESS) {
+            cJSON_Delete(json);
+            return error_code;
+        }
+    
+    }
+    cJSON_Delete(json);
+    return R_SUCCESS;
+
+}
+
+t_response_code handle_get_chat_msgs_request(int chat_id) {
+
+    cJSON *json = cJSON_CreateObject();
+    cJSON_AddNumberToObject(json, "chat_id", chat_id);
+    cJSON_AddNumberToObject(json, "type", REQ_GET_CHAT_MSGS);
+    char* json_str = cJSON_PrintUnformatted(json);
+    cJSON_Delete(json);
+
+    int error_code = 0;
+    char* response = send_and_recv_from_server(utils->ssl, json_str);
+    free(json_str);
+
+    if ((error_code = handle_get_chat_msgs_response(response)) != R_SUCCESS) {
+        logger(get_response_str(error_code), ERROR_LOG);
+        free(response);
+        return error_code;
+    }
+    free(response);
+
+    t_msg* msg = utils->messages;
+    while (msg) {
+
+        char str[200];
+        sprintf(str, "Gotten message:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s\n", 
+                msg->text, msg->chat_id, msg->sender_id, msg->sender_name);
+        logger(str, INFO_LOG);
+        msg = msg->next;
+
+    }
+
+    return R_SUCCESS;
+}

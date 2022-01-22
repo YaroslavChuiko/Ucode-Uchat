@@ -59,7 +59,8 @@ t_response_code handle_login_request(const char* user_name, const char* user_pas
 t_response_code handle_create_chat_request(const char* chat_name);
 t_response_code handle_send_msg_request(const char* message_str);
 t_response_code handle_new_message(cJSON* json);
-t_response_code handle_get_chat_request(const char* chat_name);
+t_response_code handle_get_chats_request();
+t_response_code handle_get_chat_msgs_request(int chat_id);
 void handle_logout_request();
 void handle_client_exit();
 void* handle_server_updates(void* arg);
@@ -78,5 +79,14 @@ void handle_arg_errors(char** argv);
 
 void init_ssl(SSL_CTX **ctx);
 void connect_ssl(SSL **ssl, int* server_fd, SSL_CTX **ctx);
+
+// MESSAGES LIST
+
+t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
+void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
+void mx_clear_msg_list(t_msg **list);
+void mx_msg_pop_index(t_msg **list, int index);
+void mx_clear_msg_list(t_msg **list);
+int mx_msg_list_size(t_msg* list);
 
 #endif

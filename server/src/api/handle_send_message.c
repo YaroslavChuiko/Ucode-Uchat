@@ -59,6 +59,6 @@ void handle_send_message(const cJSON* message_info, t_server_utils* utils) {
     }
 
     send_server_response(utils->ssl, R_SUCCESS, REQ_SEND_MESSAGE);
-    send_response_to_all(msg_to_send);
+    // send_response_to_all(msg_to_send);
 
 }

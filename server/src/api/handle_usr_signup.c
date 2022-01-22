@@ -1,20 +1,5 @@
 #include "../../inc/server.h"
 
-bool db_user_exists(const char* username) {
-
-    char query[QUERY_LEN];
-    sprintf(query, "SELECT EXISTS (SELECT `id` FROM `users` WHERE `username` = '%s')", username);
-    
-    sqlite3* db = open_database();
-    sqlite3_stmt* stmt = db_execute_stmt_for(query, db);
-    
-    int user_exists = sqlite3_column_int64(stmt, 0);
-    sqlite3_finalize(stmt);
-    sqlite3_close(db);
-    return user_exists == 1;
-
-}
-
 void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
 
     if (database_init() != 0) {
@@ -22,7 +7,6 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
     
-    // validation here later
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
     const cJSON *user_password = cJSON_GetObjectItemCaseSensitive(user_info, "password");
     
