@@ -9,6 +9,7 @@
 #include <regex.h>
 
 #include "db_types.h"
+#include "const.h"
 
 extern int errno;
 
@@ -48,7 +49,12 @@ typedef enum e_request_type {
     REQ_JOIN_CHAT,
     REQ_SEND_MESSAGE,
     REQ_USR_LOGOUT,
-    REQ_GET_CHAT,
+    REQ_DELETE_CHAT,
+    REQ_DELETE_MESSAGE,
+
+    // updater requests
+    REQ_GET_CHATS,
+    REQ_GET_CHAT_MSGS,
     
     REQ_NEW_MESSAGE,
     REQ_CLIENT_EXIT,
@@ -86,5 +92,18 @@ bool is_user_name_format_valid(const char* name);
 t_chat *mx_create_chat(int id, const char* name, int permissions);
 void mx_chat_push_back(t_chat** list, int id, const char* name, int permissions);
 void mx_clear_chat_list(t_chat **list);
+void mx_clear_chat(t_chat** p);
+t_chat* mx_get_chat_by_id(t_chat* list, int chat_id);
+void mx_chat_pop_id(t_chat **list, int chat_id);
+void mx_chat_pop_index(t_chat **list, int index);
+
+void mx_print_chat_list(t_chat* chat); // remove
+
+t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
+void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
+void mx_clear_msg_list(t_msg **list);
+void mx_msg_pop_index(t_msg **list, int index);
+void mx_clear_msg_list(t_msg **list);
+int mx_msg_list_size(t_msg* list);
 
 #endif

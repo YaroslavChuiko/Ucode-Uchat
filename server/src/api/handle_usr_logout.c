@@ -15,6 +15,4 @@ void handle_usr_logout(const cJSON* user_info, t_server_utils* utils) {
 
     print_logged_users();
 
-    // cleanup and exit the thread here
-
 }

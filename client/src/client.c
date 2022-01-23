@@ -37,12 +37,12 @@ int main(int argc, char **argv) {
 	build_login_menu(&main_area);
     gtk_widget_show_all(main_window);
 
-	// pthread_create(&th_read, NULL, handle_server_updates, utils);
-
     gtk_main();
+
+	// pthread_create(&th_read, NULL, handle_server_updates, utils);
 	// utils->th_reader = th_read;
 	// pthread_create(&th_write, NULL, handle_requests, NULL);
-
+// 
 	// pthread_join(th_write, NULL);
 
 	return EXIT_SUCCESS;
@@ -110,18 +110,12 @@ int main(int argc, char **argv) {
 
 // 			handle_join_chat_request(chat);
 
-// 		} else if (!strncmp(client_request, "get chat", 8)) {
+// 		} else if (!strncmp(client_request, "get chats", 9)) {
 
-// 			char chat_name[100];
-// 			printf("Enter a chat you want to get: ");
-// 			fgets(chat_name, 100, stdin);
-// 			char* trimmed = mx_strndup(chat_name, mx_get_char_index(chat_name, '\n'));
-			
-// 			handle_get_chat_request(trimmed);
-// 			mx_strdel(&trimmed);
+// 			handle_get_chats_request();
 
 // 		} else if (strncmp(client_request, "exit", 4) == 0) {
-// 			send_to_server(utils->ssl, client_request);
+// 			handle_logout_request();
 // 			pthread_detach(pthread_self());
 // 			client_cleanup(&utils);
 // 			pthread_exit((void*)EXIT_SUCCESS);
