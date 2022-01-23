@@ -6,21 +6,6 @@
 extern GtkWidget *main_window;
 
 struct {
-    GtkWidget *username_field;
-    GtkWidget *username_notify_label;
-    GtkWidget *password_field;
-    GtkWidget *password_notify_label;
-    GtkWidget *repassword_field;
-    GtkWidget *repassword_notify_label;
-    GtkWidget *result_notify_label;
-}   t_auth_fields;
-
-struct {
-    GtkWidget *login_menu;
-    GtkWidget *signup_menu;
-}   t_auth_menu;
-
-struct {
     // GtkWidget *chat_screen;
     GtkWidget *popup_menu;
     // GtkWidget *left_bar;

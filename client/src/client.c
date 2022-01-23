@@ -3,68 +3,6 @@
 t_client_utils* utils;
 GtkWidget *main_window;
 
-void destroy(GtkWidget* widget, gpointer data)
-{
-	if (utils->current_user) {
-		handle_logout_request();
-	} else {
-		handle_client_exit();
-	}
-	client_cleanup();
-    gtk_main_quit();
-}
-
-void add_class(GtkWidget *widget, char *class_name)
-{
-	GtkStyleContext *context = gtk_widget_get_style_context(widget);
-	gtk_style_context_add_class(context, class_name);
-}
-
-void remove_class(GtkWidget *widget, char *class_name)
-{
-	GtkStyleContext *context = gtk_widget_get_style_context(widget);
-	gtk_style_context_remove_class(context, class_name);
-}
-
-void on_crossing(GtkWidget *widget, GdkEventCrossing *event)
-{
-	GdkDisplay *display = gtk_widget_get_display(widget);
-	GdkCursor *cursor;	
-
-	switch (gdk_event_get_event_type((GdkEvent*)event))
-	{
-		case GDK_ENTER_NOTIFY:
-			gtk_widget_set_state_flags(GTK_WIDGET(widget), GTK_STATE_FLAG_PRELIGHT, TRUE); // it's for trigger :hover for this widget in CSS
-			cursor = gdk_cursor_new_from_name (display, "hand1");
-			break;
-
-		case GDK_LEAVE_NOTIFY:
-			gtk_widget_unset_state_flags(GTK_WIDGET(widget), GTK_STATE_FLAG_PRELIGHT);
-			cursor = gdk_cursor_new_from_name (display, "default");
-			break;
-
-		default:
-			break;
-	}
-
-	gdk_window_set_cursor (gtk_widget_get_window(widget), cursor);
-
-	// Release the reference on the cursor
-	g_object_unref(cursor);
-}
-
-GtkWidget* create_new_window(char *title, int width, int height, bool resizable)
-{
-	GtkWidget* window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title(GTK_WINDOW(window), title);
-	gtk_window_set_default_size(GTK_WINDOW(window), width, height);
-	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER); //GTK_WIN_POS_CENTER GTK_WIN_POS_CENTER_ON_PARENT
-	gtk_window_set_resizable(GTK_WINDOW(window), resizable);
-    g_signal_connect(window, "delete_event", G_CALLBACK(destroy), NULL); //delete_event
-
-	return window;
-}
-
 // void* handle_requests(void* arg);
 int main(int argc, char **argv) {
 
