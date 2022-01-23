@@ -75,6 +75,18 @@ void mx_chat_pop_back(t_chat **head) {
 
 }
 
+void mx_chat_pop_id(t_chat **list, int chat_id) {
+
+    t_chat *temp = *list;
+    for (int i = 0; temp; temp = temp->next, ++i) {
+        if (temp->id == chat_id) {
+            mx_chat_pop_index(list, i);
+            return;
+        }
+    }
+    return;
+}
+
 void mx_chat_pop_index(t_chat **list, int index) {
 
     int size = 0;

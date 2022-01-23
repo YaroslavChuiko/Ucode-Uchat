@@ -51,6 +51,8 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils);
 void handle_create_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_join_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_send_message(const cJSON* message_info, t_server_utils* utils);
+void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils);
+void handle_delete_message(const cJSON* message_info, t_server_utils* utils);
 
 // SQL
 
@@ -80,6 +82,8 @@ void print_logged_users();
 t_chat *mx_create_chat(int id, const char* name);
 void mx_chat_push_back(t_chat** list, int id, const char* name);
 void mx_clear_chat_list(t_chat **list);
+void mx_chat_pop_id(t_chat **list, int chat_id);
+void mx_chat_pop_index(t_chat **list, int index);
 
 extern t_server_state global_state;
 
@@ -90,6 +94,8 @@ static const t_req_handler request_handlers[] = {
     handle_join_chat,
     handle_send_message,
     handle_usr_logout,
+    handle_delete_chat,
+    handle_delete_message,
     NULL
 };
 

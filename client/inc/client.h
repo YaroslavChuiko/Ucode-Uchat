@@ -62,6 +62,8 @@ void handle_send_msg_request(const char* message_str);
 t_response_code handle_new_message(cJSON* json);
 void handle_client_exit();
 void* handle_server_updates(void* arg);
+int handle_delete_chat_request(const char* chat_name);
+void handle_delete_msg_request(int message_id);
 
 bool is_request_for_update(t_request_type type);
 t_request_type get_request_type(cJSON* json);
