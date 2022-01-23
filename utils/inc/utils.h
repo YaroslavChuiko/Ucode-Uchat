@@ -8,6 +8,9 @@
 #include <errno.h>
 #include <regex.h>
 
+#include "db_types.h"
+#include "const.h"
+
 extern int errno;
 
 #define LOGFILE_NAME "server_utils/info_log.txt"
@@ -31,6 +34,8 @@ typedef enum e_response_code {
     R_INVALID_PASS,
     R_CHAT_EXISTS,
     R_CHAT_NOENT,
+    R_IS_CHAT_MEMBER,
+    R_ISNT_CHAT_MEMBER,
     R_NAME_FORMAT_INVALID,
 
     R_MSG_USR_NOENT,
@@ -48,6 +53,9 @@ typedef enum e_request_type {
     REQ_DELETE_MESSAGE,
 
     // updater requests
+    REQ_GET_CHATS,
+    REQ_GET_CHAT_MSGS,
+    
     REQ_NEW_MESSAGE,
     REQ_CLIENT_EXIT,
 }            t_request_type;
@@ -68,13 +76,34 @@ static const t_response response_objs[] = {
     { R_INVALID_PASS, "The entered password is incorrect" },
     { R_CHAT_EXISTS, "The chat with this name already exists" },
     { R_CHAT_NOENT, "The chat with this name doesn't exist" },
+    { R_IS_CHAT_MEMBER, "You're already a member of this chat" },
+    { R_ISNT_CHAT_MEMBER, "You're not a member of this chat" },
     { R_NAME_FORMAT_INVALID, "The name should contain only letters and digits" },
     { R_MSG_USR_NOENT, "Couldn't find this message's sender" },
 };
 
 void logger(const char* info, t_info_type info_type);
 char* get_response_str(t_response_code error_code);
+bool is_user_name_format_valid(const char* name);
 
-bool is_name_format_valid(const char* name);
+
+// DATABASE LISTS
+
+t_chat *mx_create_chat(int id, const char* name, int permissions);
+void mx_chat_push_back(t_chat** list, int id, const char* name, int permissions);
+void mx_clear_chat_list(t_chat **list);
+void mx_clear_chat(t_chat** p);
+t_chat* mx_get_chat_by_id(t_chat* list, int chat_id);
+void mx_chat_pop_id(t_chat **list, int chat_id);
+void mx_chat_pop_index(t_chat **list, int index);
+
+void mx_print_chat_list(t_chat* chat); // remove
+
+t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
+void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
+void mx_clear_msg_list(t_msg **list);
+void mx_msg_pop_index(t_msg **list, int index);
+void mx_clear_msg_list(t_msg **list);
+int mx_msg_list_size(t_msg* list);
 
 #endif

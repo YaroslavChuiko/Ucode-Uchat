@@ -3,11 +3,11 @@ CFLAGS = -std=gnu11 -Wall -Wextra -Werror -Wpedantic
 # CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
 OBJDIR = obj
-SRCDIR = src
+SRCDIR = src src/db_lists
 LIBNAME = utilslib.a
 LIB = UTILSLIB
 
-SRC = $(SRCDIR)/*.c
+SRC = $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
 OBJS = $(OBJDIR)/*.o
 
 all: $(LIB)

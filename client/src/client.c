@@ -65,6 +65,7 @@ GtkWidget* create_new_window(char *title, int width, int height, bool resizable)
 	return window;
 }
 
+// void* handle_requests(void* arg);
 int main(int argc, char **argv) {
 
 	(void)argc;
@@ -72,7 +73,7 @@ int main(int argc, char **argv) {
 
 	int server_socket = 0;
 	// pthread_t th_write;
-	pthread_t th_read;
+	// pthread_t th_read;
 	
 	SSL_CTX *ctx = NULL; 
 	SSL *ssl = NULL;
@@ -98,12 +99,12 @@ int main(int argc, char **argv) {
 	build_login_menu(&main_area);
     gtk_widget_show_all(main_window);
 
-	// pthread_create(&th_read, NULL, handle_server_updates, utils);
-
     gtk_main();
-	// utils->th_reader = th_read;
-	// pthread_create(&th_write, NULL, handle_requests, utils);
 
+	// pthread_create(&th_read, NULL, handle_server_updates, utils);
+	// utils->th_reader = th_read;
+	// pthread_create(&th_write, NULL, handle_requests, NULL);
+// 
 	// pthread_join(th_write, NULL);
 
 	return EXIT_SUCCESS;
@@ -112,7 +113,7 @@ int main(int argc, char **argv) {
 
 // void* handle_requests(void* arg) {
 
-// 	t_client_utils* utils = (t_client_utils*)arg;
+// 	// t_client_utils* utils = (t_client_utils*)arg;
 // 	while (1) {
 
 // 		char client_request[32];
@@ -127,29 +128,32 @@ int main(int argc, char **argv) {
 			
 // 			printf("Please enter your name: ");
 // 			fgets(user_name, 32, stdin);
+// 			char* user = mx_strndup(user_name, mx_get_char_index(user_name, '\n'));
 
 // 			printf("Enter your password: ");
 // 			fgets(user_password, 32, stdin);
 			
-// 			handle_signup_request(utils, user_name, user_password);
+// 			handle_signup_request(user, user_password);
 
 // 		} else if (!mx_strncmp(client_request, "login", 5)) {
 
 // 			printf("Please enter your name: ");
 // 			fgets(user_name, 32, stdin);
+// 			char* user = mx_strndup(user_name, mx_get_char_index(user_name, '\n'));
 
 // 			printf("Enter your password: ");
 // 			fgets(user_password, 32, stdin);
 
-// 			handle_login_request(utils, user_name, user_password);
+// 			handle_login_request(user, user_password);
 
 // 		} else if (!mx_strncmp(client_request, "create chat", 11)) {
 
 // 			char chat_name[32];
 // 			printf("Please enter chat's name: ");
 // 			fgets(chat_name, 32, stdin);
+// 			char* chat = mx_strndup(chat_name, mx_get_char_index(chat_name, '\n'));
 
-// 			handle_create_chat_request(utils, chat_name);
+// 			handle_create_chat_request(chat);
 
 // 		} else if (!mx_strncmp(client_request, "message", 7)) {
 
@@ -157,19 +161,24 @@ int main(int argc, char **argv) {
 // 			printf("Enter your message: ");
 // 			fgets(message, 1024, stdin);
 
-// 			handle_send_msg_request(utils, message);
+// 			handle_send_msg_request(message);
 
 // 		} else if (!mx_strncmp(client_request, "join chat", 9)) {
 
 // 			char chat_name[100];
 // 			printf("Enter a chat to join: ");
 // 			fgets(chat_name, 100, stdin);
+// 			char* chat = mx_strndup(chat_name, mx_get_char_index(chat_name, '\n'));
 
-// 			handle_join_chat_request(utils, chat_name);
+// 			handle_join_chat_request(chat);
+
+// 		} else if (!strncmp(client_request, "get chats", 9)) {
+
+// 			handle_get_chats_request();
 
 // 		} else if (strncmp(client_request, "exit", 4) == 0) {
-// 			send(utils->server_fd, client_request, 4, 0);
-// 			pthread_detach(utils->th_reader);
+// 			handle_logout_request();
+// 			pthread_detach(pthread_self());
 // 			client_cleanup(&utils);
 // 			pthread_exit((void*)EXIT_SUCCESS);
 // 		}

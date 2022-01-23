@@ -1,8 +1,8 @@
 #include "../../inc/server.h"
 
-t_response_code db_delete_chat(const char* chat_name) {
+t_response_code db_delete_chat(const char* chat_name, int chat_id) {
 
-    if (!db_chat_exists(chat_name)) {
+    if (!db_chat_exists(chat_id)) {
         return R_CHAT_NOENT;
     }
 
@@ -75,7 +75,7 @@ void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils) {
 
     int chat_id = get_chat_id(chat_name->valuestring);
     t_response_code resp_code = 0;
-    if ((resp_code = db_delete_chat(chat_name->valuestring)) != R_SUCCESS) {
+    if ((resp_code = db_delete_chat(chat_name->valuestring, chat_id)) != R_SUCCESS) {
         send_server_response(utils->ssl, resp_code, REQ_DELETE_CHAT);
         return;
     }

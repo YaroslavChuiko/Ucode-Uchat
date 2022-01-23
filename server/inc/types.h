@@ -1,13 +1,6 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-// Type for the chat saved from the database
-typedef struct s_chat {
-    int id;
-    char* name;
-    struct s_chat* next;
-}              t_chat;
-
 // Type for the user saved from the database
 typedef struct s_user {
     int client_fd;
@@ -18,13 +11,6 @@ typedef struct s_user {
     t_chat* chats;
     struct s_user* next;
 }              t_user;
-
-// Type for the user saved from the database
-typedef struct s_msg {
-    int chat_id;
-    char* text;
-    t_user* sender;
-}              t_msg;
 
 typedef struct s_server_utils {
     int client_socket;

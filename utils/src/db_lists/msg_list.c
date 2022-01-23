@@ -1,24 +1,29 @@
-#include "../../inc/server.h"
+#include "../../inc/utils.h"
 
-t_chat *mx_create_chat(int id, const char* name)
-{
-    t_chat *new_node = malloc(sizeof(t_chat));
+t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text/*, int date*/) {
     
-    new_node->id = id;
-    new_node->name = mx_strdup(name);
+    t_msg *new_node = malloc(sizeof(t_msg));
+    
+    new_node->chat_id = chat_id;
+    new_node->sender_id = user_id;
+    new_node->sender_name = strdup(user_name);
+    new_node->text = strdup(text);
+    // new_node->date = date;
     new_node->next = NULL;
+    
     return new_node;
+
 }
 
-void mx_chat_push_back(t_chat** list, int chat_id, const char* name) {
+void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text/*, int date*/) {
 
-    t_chat* new_node = mx_create_chat(chat_id, name);
+    t_msg* new_node = mx_create_msg(user_id, user_name, chat_id, text/*, date*/);
     if (list != NULL && *list == NULL) {
         *list = new_node;
         return;
     }
 
-    t_chat* last = *list;
+    t_msg* last = *list;
     while (last->next != NULL) {
         last = last->next;
     }
@@ -28,115 +33,104 @@ void mx_chat_push_back(t_chat** list, int chat_id, const char* name) {
 
 }
 
-void mx_clear_chat(t_chat** p) {
+void mx_clear_msg(t_msg** p) {
 
     if (!p || !(*p))
         return;
 
-    mx_strdel(&(*p)->name);
+    free((*p)->sender_name);
+    free((*p)->text);
     free(*p);
     *p = NULL;
 
 }
 
-void mx_chat_pop_front(t_chat **head) {
+void mx_msg_pop_front(t_msg **head) {
 
     if (head == NULL || *head == NULL) return; 
 
     if ((*head)->next == NULL) {
-        mx_clear_chat(head);
+        mx_clear_msg(head);
         *head = NULL;
         return;
     }
 
-    t_chat* temp = *head;
+    t_msg* temp = *head;
     *head = (*head)->next;
-    mx_clear_chat(&temp);
+    mx_clear_msg(&temp);
 
 }
 
-void mx_chat_pop_back(t_chat **head) {
+void mx_msg_pop_back(t_msg **head) {
 
     if (head == NULL || *head == NULL) return;
 
     if ((*head)->next == NULL) {
-        mx_clear_chat(head);
+        mx_clear_msg(head);
         return;
     }
 
-    t_chat* prelast = *head;
+    t_msg* prelast = *head;
     while (prelast->next->next != NULL) {
 
         prelast = prelast->next;
 
     }
-    mx_clear_chat(&prelast->next);
+    mx_clear_msg(&prelast->next);
     prelast->next = NULL;
 
 }
 
-void mx_chat_pop_id(t_chat **list, int chat_id) {
-
-    t_chat *temp = *list;
-    for (int i = 0; temp; temp = temp->next, ++i) {
-        if (temp->id == chat_id) {
-            mx_chat_pop_index(list, i);
-            return;
-        }
-    }
-    return;
-}
-
-void mx_chat_pop_index(t_chat **list, int index) {
+void mx_msg_pop_index(t_msg **list, int index) {
 
     int size = 0;
-    t_chat* head = *list;
+    t_msg* head = *list;
     while (head != NULL) {
         head = head->next;
         ++size;
     }
 
     if (index <= 0) {
-        mx_chat_pop_front(list);
+        mx_msg_pop_front(list);
         return;
     } else if (index >= size) {
-        mx_chat_pop_back(list);
+        mx_msg_pop_back(list);
         return;
     }
 
-    t_chat* current = *list;
+    t_msg* current = *list;
     for (int i = 0; current != NULL && i < (index - 1); ++i) {
         current = current->next;
     }
-    t_chat* next = current->next->next;
-    mx_clear_chat(&current->next);
+    t_msg* next = current->next->next;
+    mx_clear_msg(&current->next);
     current->next = next;
 
 }
 
-void mx_clear_chat_list(t_chat **list)
+void mx_clear_msg_list(t_msg **list)
 {
     if (list == NULL || *list == NULL)
         return;
 
-    t_chat *node = *list;
-    t_chat *next = NULL;
+    t_msg *node = *list;
+    t_msg *next = NULL;
 
     while (node != NULL)
     {
         next = node->next;
-        mx_clear_chat(&node);
+        mx_clear_msg(&node);
         node = next;
     }
     
     *list = NULL;
 }
 
-int mx_chat_list_size(t_chat* list) {
+int mx_msg_list_size(t_msg* list) {
 
     if (list == NULL) return 0;
 
-    t_chat* head = list;
+    t_msg* head = list;
     int size = 0;
     while (head != NULL) {
 

@@ -11,8 +11,8 @@ t_response_code handle_signup_response(const char* response_str) {
 }
 
 
-int handle_signup_request(const char* user_name, const char* user_password)
-{
+t_response_code handle_signup_request(const char* user_name, const char* user_password) {
+
     cJSON *json = cJSON_CreateObject();
     cJSON_AddStringToObject(json, "name", user_name);
     cJSON_AddStringToObject(json, "password", user_password);
@@ -22,7 +22,7 @@ int handle_signup_request(const char* user_name, const char* user_password)
 
     char* response = send_and_recv_from_server(utils->ssl, json_str);
 
-    int error_code = handle_signup_response(response);
+    t_response_code error_code = handle_signup_response(response);
             
     logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
 
@@ -30,6 +30,7 @@ int handle_signup_request(const char* user_name, const char* user_password)
     free(response);
 
 	return error_code;
+
 }
 
 void build_signup_menu(GtkWidget **main_area)
