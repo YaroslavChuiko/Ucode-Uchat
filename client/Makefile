@@ -4,7 +4,7 @@ CFLAGS = -std=gnu11 -pthread -g
 # CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread
 
 OBJDIR = obj
-SRCDIR = src src/request_handlers
+SRCDIR = src src/request_handlers src/gui
 UCHAT = ../uchat
 
 SRC = $(foreach dir, $(SRCDIR), $(wildcard $(dir)/*.c))
