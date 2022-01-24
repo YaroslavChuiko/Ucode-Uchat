@@ -23,6 +23,9 @@
 #include "const.h"
 #include "types.h"
 
+unsigned long get_current_time();
+char* mx_get_string_time(unsigned long seconds);
+
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 
 void build_login_menu(GtkWidget **main_area);

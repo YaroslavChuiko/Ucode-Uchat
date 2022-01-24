@@ -6,7 +6,7 @@ typedef struct s_msg {
     int chat_id;
     int sender_id;
     char* sender_name;
-    // int date;
+    char* date_str;
     char* text;
     struct s_msg* next;
 }              t_msg;

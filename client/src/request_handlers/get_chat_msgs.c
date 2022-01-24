@@ -7,9 +7,10 @@ t_response_code add_msg_to_msglist(cJSON* json) {
     cJSON* sender_name = cJSON_GetObjectItemCaseSensitive(json, "sender_name");
     cJSON* text = cJSON_GetObjectItemCaseSensitive(json, "text");
     cJSON* chat_id = cJSON_GetObjectItem(json, "chat_id");
+    cJSON* date = cJSON_GetObjectItemCaseSensitive(json, "date");
 
     if (!cJSON_IsNumber(msg_id) || !cJSON_IsNumber(sender_id) || !cJSON_IsNumber(chat_id) || 
-        !cJSON_IsString(sender_name) || !cJSON_IsString(text)) {
+        !cJSON_IsString(sender_name) || !cJSON_IsString(text) || !cJSON_IsNumber(date)) {
 
         return R_JSON_FAILURE;
     }
@@ -18,7 +19,7 @@ t_response_code add_msg_to_msglist(cJSON* json) {
         return R_CHAT_NOENT;
 
     mx_msg_push_back(&chat_by_id->messages, sender_id->valueint, sender_name->valuestring,
-                    chat_id->valueint, text->valuestring);
+                    chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
     return R_SUCCESS;
 
 }

@@ -3,7 +3,7 @@
 // Check whether the read data was actually an update or logout
 bool is_request_for_update(t_request_type type) {
 
-	return (type == REQ_USR_LOGIN || 
+	return (type == REQ_NEW_MESSAGE || 
 			type == REQ_USR_LOGOUT);
 
 }
@@ -41,7 +41,7 @@ void* handle_server_updates(void* arg) {
 
 		char* update_str = NULL;
 		if (!(update_str = read_server_data(utils->server_fd))) {
-			logger("No data to read\n", ERROR_LOG);
+			// logger("No data to read\n", ERROR_LOG);
 			usleep(10000);
 			continue;
 		}
@@ -49,7 +49,7 @@ void* handle_server_updates(void* arg) {
 		cJSON* json = cJSON_Parse(update_str);
 
 		t_request_type req_type = get_request_type(json);
-		printf("req_type here -- %d\n", req_type);
+		// printf("req_type here -- %d\n", req_type);
 		if (req_type == -1 || !is_request_for_update(req_type)) {
 			cJSON_Delete(json);
 			continue;
@@ -57,14 +57,14 @@ void* handle_server_updates(void* arg) {
 
 		if (req_type == REQ_USR_LOGOUT) {
 			
-			char str[100];
-			sprintf(str, "Logging out for %d, %s\n", utils->current_user->user_id, utils->current_user->name);
-			logger(str, INFO_LOG);
+			// char str[100];
+			// sprintf(str, "Logging out for %d, %s\n", utils->current_user->user_id, utils->current_user->name);
+			// logger(str, INFO_LOG);
 			pthread_exit(EXIT_SUCCESS);
 		
-		} else if (req_type == REQ_USR_LOGIN) {
+		} else if (req_type == REQ_NEW_MESSAGE) {
 
-			logger("Logged from server_updates -- ", INFO_LOG);
+			handle_new_message(json);
 
 		}
 		

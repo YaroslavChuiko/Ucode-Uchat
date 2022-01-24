@@ -41,7 +41,8 @@ int database_init() {
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 
             "`user_id` INTEGER NOT NULL," 
             "`chat_id` INTEGER NOT NULL,"
-            "`text` VARCHAR(1024) NOT NULL);";
+            "`text` VARCHAR(1024) NOT NULL,"
+            "`date` INTEGER NOT NULL);";
     
     char* errmsg;
     if (sqlite3_exec(db, query, NULL, NULL, &errmsg)) {

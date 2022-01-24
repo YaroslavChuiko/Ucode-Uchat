@@ -99,8 +99,8 @@ void mx_chat_pop_index(t_chat **list, int index);
 
 void mx_print_chat_list(t_chat* chat); // remove
 
-t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
-void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text/*, int date*/);
+t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
+void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
 void mx_clear_msg_list(t_msg **list);
 void mx_msg_pop_index(t_msg **list, int index);
 void mx_clear_msg_list(t_msg **list);

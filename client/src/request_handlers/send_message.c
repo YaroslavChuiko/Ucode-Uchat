@@ -8,6 +8,7 @@ t_response_code handle_send_msg_request(const char* message_str) {
     cJSON_AddNumberToObject(json, "user_id", utils->current_user->user_id);
     cJSON_AddStringToObject(json, "user_name", utils->current_user->name);
     cJSON_AddNumberToObject(json, "chat_id", 1/*utils->current_chat->id*/);
+    cJSON_AddNumberToObject(json, "date", get_current_time());
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
 
