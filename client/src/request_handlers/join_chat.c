@@ -13,6 +13,12 @@ t_response_code handle_join_chat_request(const char* chat_name) {
     t_response_code error_code = handle_server_response(response);
     logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
 
+    if (error_code == R_SUCCESS) {
+
+        handle_get_chats_request();
+
+    }
+
     free(json_str);
     free(response);
     return error_code;

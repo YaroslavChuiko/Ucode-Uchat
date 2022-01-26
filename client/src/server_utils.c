@@ -3,8 +3,10 @@
 // Send a string-formatted client request to the server
 int send_to_server(SSL *ssl, const char* request_str) {
 
-    if (SSL_write(ssl, request_str, strlen(request_str)) == -1) {
-        // logger(strerror(errno), ERROR_LOG);
+    int req_len = mx_strlen(request_str);
+    char* len_str = mx_itoa(req_len);
+    // SSL_write(ssl, len_str, mx_strlen(len_str));
+    if (SSL_write(ssl, request_str, req_len) == -1) {
         return 1;
     }
     return 0;
@@ -52,29 +54,67 @@ t_response_code handle_server_response(const char* response_str) {
 
 }
 
-// Send a request to the server and call the handler for the response
-char* send_and_recv_from_server(SSL *ssl, const char* json_str) {
+char* get_server_response(SSL* ssl, int length) {
 
-    if (send_to_server(ssl, json_str) != 0)
-        return NULL;
+    char buffer[SENT_DATA_LEN] = "";
+    int bytesRead = 0;
+    while (bytesRead < length) {
 
-    char response[SENT_DATA_LEN];
+        int bytes = SSL_read(ssl, &buffer[bytesRead], length - bytesRead );
+        if (bytes <= 0) {
+
+            if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
+                continue;
+            }
+            logger(strerror(errno), ERROR_LOG);
+            return NULL;
+
+        } else if (bytes < length) {
+            
+            bytesRead += bytes;
+        
+        } else if (bytes == length) {
+        
+            bytesRead = bytes;
+            break;
+        
+        }
+    }
+    buffer[bytesRead] = '\0';
+    return mx_strdup(buffer);
+
+} 
+
+// Receive a response to a request from server
+char* recv_from_server(SSL* ssl) {
+
     int n_bytes = 0;
-    while ((n_bytes = SSL_read(ssl, response, SENT_DATA_LEN)) <= 0) {
+    char buffer[SENT_DATA_LEN] = "";
+
+    while ((n_bytes = SSL_read(ssl, buffer, SENT_DATA_LEN)) <= 0) {
 
         if (n_bytes == 0)
             return NULL;
 
         if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
-            // logger("blocked from send_and_recv\n", ERROR_LOG);
-            sleep(1);
             continue;
         }
         logger(strerror(errno), ERROR_LOG);
         return NULL;
     
     }
-    response[n_bytes] = '\0';
-    return mx_strdup(response);
+    buffer[n_bytes] = '\0';
+    return mx_strdup(buffer);
+    // return get_server_response(ssl, atoi(buffer));
+
+}
+
+// Send a request to the server and call the handler for the response
+char* send_and_recv_from_server(SSL *ssl, const char* json_str) {
+
+    if (send_to_server(ssl, json_str) != 0)
+        return NULL;
+
+    return recv_from_server(ssl);
 
 }

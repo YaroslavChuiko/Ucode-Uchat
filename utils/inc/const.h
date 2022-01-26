@@ -1,9 +1,12 @@
 #ifndef UTILS_CONST_H
 #define UTILS_CONST_H
 
-#define DB_NAME "server_utils/database.db"
+#define DB_NAME         "server_utils/database.db"
+#define LOGFILE_NAME    "server_utils/uchat.log"
+#define CLIENTLOG_NAME  "client/logs/client"
 
 #define QUERY_LEN 200
+#define SENT_DATA_LEN 1024
 
 // Both for a chat and a user name
 #define MAX_NAME_INPUT_LEN  16

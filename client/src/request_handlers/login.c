@@ -33,6 +33,7 @@ t_response_code handle_login_response(const char* response_str) {
     if (utils->current_user->user_id == -1 ||
         !utils->current_user->name || 
         !utils->current_user->password) {
+            cJSON_Delete(json);
             return R_JSON_FAILURE; 
     }
 
@@ -55,6 +56,13 @@ t_response_code handle_login_request(const char* user_name, const char* user_pas
     t_response_code error_code = handle_login_response(response);
     
     logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
+
+    if (error_code == R_SUCCESS) {
+
+        handle_get_chats_request();
+        utils->log_name = get_log_name();
+    
+    }
 
     free(json_str);
     free(response);

@@ -10,13 +10,16 @@ void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx) {
     fcntl(server_fd, F_SETFD, O_NONBLOCK);
 
 	utils = malloc(sizeof(*utils));
+	pthread_mutex_init(&utils->lock, NULL);
+	pthread_mutex_lock(&utils->lock);
 	utils->server_fd = server_fd;
 	utils->ssl = ssl;
 	utils->ctx = ctx;
 	utils->current_user = NULL;
-	utils->current_chat = NULL;
+	utils->current_chat = mx_create_chat(-1, NULL, -1);
 	utils->chatlist = NULL;
-	pthread_mutex_init(&utils->lock, NULL);
+	utils->log_name = NULL;
+	pthread_mutex_unlock(&utils->lock);
 
 }
 
@@ -52,4 +55,23 @@ void connect_to_server(int port, int* server_fd, SSL_CTX **ctx, SSL **ssl) {
 	}
 
 	connect_ssl(ssl, server_fd, ctx);
+}
+
+void client_log(const char* info, t_info_type type) {
+
+    FILE* fd = fopen(utils->log_name, "a+");
+    fprintf(fd, "%s: ", type == ERROR_LOG ? "ERROR" : "INFO");
+    fprintf(fd, "%s\n", info);
+    fclose(fd);
+
+}
+
+char* get_log_name() {
+
+	char* log_name = mx_strnew(mx_strlen(CLIENTLOG_NAME) + 5);
+	mx_strcat(log_name, CLIENTLOG_NAME);
+	mx_strcat(log_name, mx_itoa(utils->current_user->user_id));
+	mx_strcat(log_name, ".log");
+	return log_name;
+
 }

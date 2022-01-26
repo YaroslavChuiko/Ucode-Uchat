@@ -30,14 +30,14 @@ LIB_FLAGS = -lmx -lcjson -lsqlite3 -lssl -lcrypto\
 all: $(UCHAT)
 
 $(UCHAT):
-	mkdir $(OBJDIR)
+	mkdir logs $(OBJDIR)
 	$(CC) $(CFLAGS) $(GTK_FLAGS) -c $(SRC)
 	mv *.o $(OBJDIR)
 	$(CC) $(CFLAGS) $(GTK_LIBS_FLAGS) -o $(UCHAT) $(OBJS) $(LIB_FLAGS)
 
 clean:
 	rm -f $(OBJS)
-	rm -df $(OBJDIR)
+	rm -rdf logs $(OBJDIR)
 
 uninstall:
 	make clean

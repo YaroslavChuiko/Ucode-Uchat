@@ -18,8 +18,15 @@ t_response_code add_msg_to_msglist(cJSON* json) {
     if (!chat_by_id)
         return R_CHAT_NOENT;
 
-    mx_msg_push_back(&chat_by_id->messages, sender_id->valueint, sender_name->valuestring,
+    mx_msg_dfl_push_back(&chat_by_id->messages, msg_id->valueint, sender_id->valueint, sender_name->valuestring,
                     chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
+
+    if (chat_by_id->last_new_msg)
+		mx_clear_msg(&chat_by_id->last_new_msg);
+
+	chat_by_id->last_new_msg = mx_create_msg(msg_id->valueint, sender_id->valueint, sender_name->valuestring, 
+											chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
+
     return R_SUCCESS;
 
 }
@@ -27,7 +34,6 @@ t_response_code add_msg_to_msglist(cJSON* json) {
 t_response_code handle_get_chat_msgs_response(const char* response_str) {
 
     if (response_str == NULL) {
-        logger(get_response_str(R_INVALID_INPUT), ERROR_LOG);
         return R_INVALID_INPUT;
     }
 

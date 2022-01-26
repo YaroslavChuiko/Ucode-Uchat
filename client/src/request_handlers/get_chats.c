@@ -21,7 +21,6 @@ t_response_code add_chat_to_chatlist(cJSON* json) {
 t_response_code handle_get_chats_response(const char* response_str) {
 
     if (response_str == NULL) {
-        logger(get_response_str(R_INVALID_INPUT), ERROR_LOG);
         return R_INVALID_INPUT;
     }
 

@@ -22,9 +22,9 @@ t_request_type handle_request_for(const char* request, t_server_utils* utils) {
     }
 
     int type = get_request_type(json);
-    char str[100];
-    sprintf(str, "The type of the request is: %d\n", type);
-    logger(str, INFO_LOG);
+    // char str[100];
+    // sprintf(str, "The type of the request is: %d\n", type);
+    // logger(str, INFO_LOG);
     
     if (type == REQ_CLIENT_EXIT) {
         cJSON_Delete(json);

@@ -77,6 +77,8 @@ int main(int argc, char *argv[]) {
 
 // SERVER ISSUES
 
+// Sorting of chats in `get_chats` request
+
 // MISC ISSUES
 
 // Handle escaping of characters for the strings before saving them to the database
