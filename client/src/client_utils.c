@@ -19,6 +19,7 @@ void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx) {
 	utils->current_chat = mx_create_chat(-1, NULL, -1);
 	utils->chatlist = NULL;
 	utils->log_name = NULL;
+	utils->is_suspended = false;
 	pthread_mutex_unlock(&utils->lock);
 
 }

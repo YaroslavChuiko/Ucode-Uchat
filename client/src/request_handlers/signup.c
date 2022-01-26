@@ -13,6 +13,7 @@ t_response_code handle_signup_response(const char* response_str) {
 
 t_response_code handle_signup_request(const char* user_name, const char* user_password) {
 
+    utils->is_suspended = true;
     cJSON *json = cJSON_CreateObject();
     cJSON_AddStringToObject(json, "name", user_name);
     cJSON_AddStringToObject(json, "password", user_password);
@@ -29,6 +30,7 @@ t_response_code handle_signup_request(const char* user_name, const char* user_pa
     free(json_str);
     free(response);
 
+    utils->is_suspended = false;
 	return error_code;
 
 }

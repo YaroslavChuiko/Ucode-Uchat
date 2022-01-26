@@ -60,7 +60,7 @@ char* get_server_response(SSL* ssl, int length) {
     int bytesRead = 0;
     while (bytesRead < length) {
 
-        int bytes = SSL_read(ssl, &buffer[bytesRead], length - bytesRead );
+        int bytes = SSL_read(ssl, &buffer[bytesRead], length - bytesRead);
         if (bytes <= 0) {
 
             if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {

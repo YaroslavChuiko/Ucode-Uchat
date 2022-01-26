@@ -2,6 +2,7 @@
 
 t_response_code handle_send_msg_request(const char* message_str) {
 
+    utils->is_suspended = true;
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_SEND_MESSAGE);
     cJSON_AddStringToObject(json, "text", message_str);
@@ -18,6 +19,7 @@ t_response_code handle_send_msg_request(const char* message_str) {
 
     free(json_str);
     free(response);
+    utils->is_suspended = false;
     return error_code;
 
 }

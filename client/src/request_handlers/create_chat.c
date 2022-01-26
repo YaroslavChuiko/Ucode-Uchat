@@ -2,6 +2,8 @@
 
 t_response_code handle_create_chat_request(const char* chat_name) {
 
+    utils->is_suspended = true;
+
     cJSON *json = cJSON_CreateObject();
     cJSON_AddStringToObject(json, "name", chat_name);
     cJSON_AddNumberToObject(json, "date", get_current_time());
@@ -23,5 +25,6 @@ t_response_code handle_create_chat_request(const char* chat_name) {
     free(json_str);
     free(response);
 
+    utils->is_suspended = false;
     return error_code;
 }

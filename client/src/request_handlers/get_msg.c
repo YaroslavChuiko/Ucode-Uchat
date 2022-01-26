@@ -25,7 +25,6 @@ t_msg* handle_get_msg_response() {
     char* response_str = recv_from_server(utils->ssl);
 
     if (response_str == NULL) {
-        logger("in handle_get_msg_response", ERROR_LOG);
         return NULL;
     }
 
@@ -54,6 +53,7 @@ t_msg* handle_get_msg_response() {
 
 void handle_get_msg_request(int chat_id, int message_id) {
 
+    utils->is_suspended = true;
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_GET_MSG);
     cJSON_AddNumberToObject(json, "message_id", message_id);
@@ -63,5 +63,6 @@ void handle_get_msg_request(int chat_id, int message_id) {
 
     send_to_server(utils->ssl, json_str);
     free(json_str);
+    utils->is_suspended = false;
 
 }

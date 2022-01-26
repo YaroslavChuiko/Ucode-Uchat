@@ -51,6 +51,7 @@ void handle_create_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_join_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_get_chats(const cJSON* chat_info, t_server_utils* utils);
 void handle_get_chat_msgs(const cJSON* chat_info, t_server_utils* utils);
+void handle_search_chats(const cJSON* chat_info, t_server_utils* utils);
 void handle_get_msg(const cJSON* msg_info, t_server_utils* utils);
 void handle_new_msg_count(const cJSON* chat_info, t_server_utils* utils);
 void handle_send_message(const cJSON* message_info, t_server_utils* utils);
@@ -74,7 +75,7 @@ t_chat* db_get_chats_by_user_id(int user_id);
 t_user* db_get_user_by_id(int user_id, t_server_utils* utils);
 bool db_is_chat_member(int user_id, int chat_id);
 int db_get_chat_id_by_name(const char* chat_name);
-cJSON* get_chat_json(sqlite3_stmt* stmt);
+cJSON* get_chat_json(sqlite3_stmt* stmt, bool is_for_search);
 cJSON* get_msg_json(sqlite3_stmt* stmt);
 
 // LIST UTILS
@@ -103,6 +104,7 @@ static const t_req_handler request_handlers[] = {
     handle_get_chat_msgs,
     handle_get_msg,
     handle_new_msg_count,
+    handle_search_chats,
     NULL
 };
 

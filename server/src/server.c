@@ -77,7 +77,8 @@ int main(int argc, char *argv[]) {
 
 // SERVER ISSUES
 
-// Sorting of chats in `get_chats` request
+// Add check for whether a chat exists when adding a message
+// Add a message to a list when handling send message request 
 
 // MISC ISSUES
 

@@ -81,7 +81,7 @@ void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);
 
-t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str);
+t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
 t_request_type get_request_type(cJSON* json);
 t_response_code handle_server_response(const char* response_str);
 int send_to_server(SSL *ssl, const char* request_str);

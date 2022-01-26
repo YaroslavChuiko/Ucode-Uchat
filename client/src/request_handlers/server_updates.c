@@ -49,10 +49,15 @@ void* handle_server_updates(void* arg) {
 	
     while (1) {
 
+		if (utils && utils->is_suspended)
+			continue;
+		
 		if (!utils)
 			break;
-			
+
+		pthread_mutex_lock(&utils->lock);
 		t_chat* curr_chat = utils->chatlist;
+		pthread_mutex_unlock(&utils->lock);
 		while (curr_chat) {
 
 			pthread_mutex_lock(&utils->lock);
@@ -64,6 +69,7 @@ void* handle_server_updates(void* arg) {
 				curr_chat = curr_chat->next;
 				continue;
 			}
+			
 			int last_msg_id = mx_get_last_msg_id(curr_chat, is_current_chat);
 			for (int i = 1; i <= new_msg_count; ++i) {
 				

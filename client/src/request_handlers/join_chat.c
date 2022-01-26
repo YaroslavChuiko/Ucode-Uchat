@@ -2,6 +2,7 @@
 
 t_response_code handle_join_chat_request(const char* chat_name) {
 
+    utils->is_suspended = true;
     cJSON *json = cJSON_CreateObject();
     cJSON_AddStringToObject(json, "chat_name", chat_name);
     cJSON_AddNumberToObject(json, "type", REQ_JOIN_CHAT);
@@ -21,6 +22,7 @@ t_response_code handle_join_chat_request(const char* chat_name) {
 
     free(json_str);
     free(response);
+    utils->is_suspended = false;
     return error_code;
 
 }

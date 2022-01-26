@@ -30,6 +30,8 @@ typedef struct s_client_utils {
     t_chat* current_chat;
     t_chat* chatlist;
     char* log_name;
+    // for suspending server updates during request handling
+    bool is_suspended;
 }              t_client_utils;
 
 extern t_client_utils *utils;

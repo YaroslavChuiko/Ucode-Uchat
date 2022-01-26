@@ -6,7 +6,7 @@
 #define CLIENTLOG_NAME  "client/logs/client"
 
 #define QUERY_LEN 200
-#define SENT_DATA_LEN 1024
+#define SENT_DATA_LEN 4000
 
 // Both for a chat and a user name
 #define MAX_NAME_INPUT_LEN  16

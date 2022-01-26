@@ -13,7 +13,6 @@ char* get_client_request(SSL* ssl, int length) {
             if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
                 continue;
             }
-            logger(strerror(errno), ERROR_LOG);
             return NULL;
 
         } else if (bytes < length) {
@@ -42,7 +41,6 @@ char* read_client_data(SSL *ssl) {
         if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
             return NULL;
         }
-        logger(strerror(errno), ERROR_LOG);
         return NULL;
     
     }
