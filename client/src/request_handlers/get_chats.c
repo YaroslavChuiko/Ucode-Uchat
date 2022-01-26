@@ -1,6 +1,6 @@
 #include "../../inc/client.h"
 
-t_response_code add_chat_to_chatlist(cJSON* json) {
+t_response_code add_chat_to_chatlist(cJSON* json, t_chat** chat_list) {
 
     cJSON* chat_id = cJSON_GetObjectItem(json, "chat_id");
     cJSON* chat_name = cJSON_GetObjectItemCaseSensitive(json, "chat_name");
@@ -9,7 +9,7 @@ t_response_code add_chat_to_chatlist(cJSON* json) {
     if (!cJSON_IsNumber(chat_id) || !cJSON_IsString(chat_name) || !cJSON_IsNumber(chat_perms)) {
         return R_JSON_FAILURE;
     }
-    mx_chat_push_back(&utils->chatlist, chat_id->valueint, chat_name->valuestring, chat_perms->valueint);
+    mx_chat_push_back(chat_list, chat_id->valueint, chat_name->valuestring, chat_perms->valueint);
 
     // Fill current chat's messages' list with all existing messages
     handle_get_chat_msgs_request(chat_id->valueint);
@@ -18,7 +18,7 @@ t_response_code add_chat_to_chatlist(cJSON* json) {
 
 }
 
-t_response_code handle_get_chats_response(const char* response_str) {
+t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str) {
 
     if (response_str == NULL) {
         return R_INVALID_INPUT;
@@ -38,13 +38,13 @@ t_response_code handle_get_chats_response(const char* response_str) {
         return R_JSON_FAILURE;
     }
 
-    mx_clear_chat_list(&utils->chatlist);
+    mx_clear_chat_list(chat_list);
     
     cJSON* chat = NULL;
     for (int i = 0; i < cJSON_GetArraySize(chats_array); ++i) {
         
         chat = cJSON_GetArrayItem(chats_array, i);
-        if ((error_code = add_chat_to_chatlist(chat)) != R_SUCCESS) {
+        if ((error_code = add_chat_to_chatlist(chat, chat_list)) != R_SUCCESS) {
             cJSON_Delete(json);
             return error_code;
         }
@@ -66,7 +66,7 @@ t_response_code handle_get_chats_request() {
     char* response = send_and_recv_from_server(utils->ssl, json_str);
     free(json_str);
 
-    if ((error_code = handle_get_chats_response(response)) != R_SUCCESS) {
+    if ((error_code = handle_get_chats_response(&utils->chatlist, response)) != R_SUCCESS) {
         logger(get_response_str(error_code), ERROR_LOG);
         free(response);
         return error_code;

@@ -30,6 +30,7 @@ void handle_new_msg_count(const cJSON* chat_info, t_server_utils* utils) {
     int last_msg_id = -1;
     if ((last_msg_id = get_last_msg_id(chat_info, utils)) == -1) {
         send_server_response(utils->ssl, R_JSON_FAILURE, REQ_NEW_MSG_COUNT);
+        return;
     }
     cJSON* json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "last_msg_id", last_msg_id);
