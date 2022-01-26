@@ -4,6 +4,7 @@ t_response_code handle_create_chat_request(const char* chat_name) {
 
     cJSON *json = cJSON_CreateObject();
     cJSON_AddStringToObject(json, "name", chat_name);
+    cJSON_AddNumberToObject(json, "date", get_current_time());
     cJSON_AddNumberToObject(json, "type", REQ_CREATE_CHAT);
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);

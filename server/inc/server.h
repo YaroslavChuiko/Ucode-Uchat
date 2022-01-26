@@ -64,7 +64,7 @@ sqlite3* open_database();
 int db_execute_query(const char* query);
 sqlite3_stmt* db_execute_stmt_for(const char* query, sqlite3* db);
 
-t_response_code db_insert_chat(const char* chat_name);
+t_response_code db_insert_chat(const char* chat_name, int date);
 bool db_chat_exists(int chat_id);
 bool db_user_exists(const char* username);
 char* db_get_username_by_id(int user_id);

@@ -1,6 +1,6 @@
 #include "../../inc/server.h"
 
-t_response_code db_insert_chat(const char* chat_name) {
+t_response_code db_insert_chat(const char* chat_name, int date) {
 
     int chat_id = db_get_chat_id_by_name(chat_name);
     if (chat_id != -1) {
@@ -8,7 +8,7 @@ t_response_code db_insert_chat(const char* chat_name) {
     }
 
     char query[QUERY_LEN];
-    sprintf(query, "INSERT INTO `chats` (`name`) VALUES('%s')", chat_name);
+    sprintf(query, "INSERT INTO `chats` (`name`, `date`) VALUES('%s', '%d')", chat_name, date);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;

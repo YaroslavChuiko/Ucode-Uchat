@@ -17,9 +17,10 @@ cJSON* get_chats_array_json(int user_id) {
     cJSON* chats_json = cJSON_CreateArray();
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
-    sqlite3_prepare_v2(db, "SELECT chats.id, chats.name, members.permissions FROM chats"
-                            " INNER JOIN `members` ON members.chat_id = chats.id"
-                            " WHERE chats.id IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?) AND members.user_id = ?",
+    sqlite3_prepare_v2(db,  "SELECT chats.id, chats.name, members.permissions FROM chats "
+                            "INNER JOIN `members` ON members.chat_id = chats.id "
+                            "WHERE chats.id IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?) AND members.user_id = ? "
+                            "ORDER BY chats.date DESC ",
                             -1, &stmt, NULL);
                             
     sqlite3_bind_int64(stmt, 1, user_id);
