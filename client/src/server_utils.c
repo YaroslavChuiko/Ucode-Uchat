@@ -67,7 +67,7 @@ char* send_and_recv_from_server(SSL *ssl, const char* json_str) {
 
         if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
             // logger("blocked from send_and_recv\n", ERROR_LOG);
-            sleep(1);
+            // sleep(1);
             continue;
         }
         logger(strerror(errno), ERROR_LOG);

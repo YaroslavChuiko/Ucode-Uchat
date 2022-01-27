@@ -32,6 +32,7 @@ int main(int argc, char **argv) {
 	//
 
 	GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+	gtk_widget_set_name(main_area, "main_area");
 	gtk_container_add(GTK_CONTAINER(main_window), main_area);
 
 	build_login_menu(&main_area);

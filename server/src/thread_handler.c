@@ -12,7 +12,7 @@ char* read_client_data(SSL *ssl) {
             return NULL;
         
         if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
-            sleep(1);
+            // sleep(1);
             return NULL;
         }
         logger(strerror(errno), ERROR_LOG);

@@ -15,7 +15,7 @@ void user_cleanup(t_user** user) {
 void client_cleanup() {
 
 	user_cleanup(&utils->current_user);
-	mx_clear_chat(&utils->current_chat);
+	// mx_clear_chat(&utils->current_chat);
 	mx_clear_chat_list(&utils->chatlist);
 	pthread_mutex_destroy(&utils->lock);
 	

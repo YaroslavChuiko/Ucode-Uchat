@@ -96,6 +96,7 @@ void mx_clear_chat(t_chat** p);
 t_chat* mx_get_chat_by_id(t_chat* list, int chat_id);
 void mx_chat_pop_id(t_chat **list, int chat_id);
 void mx_chat_pop_index(t_chat **list, int index);
+int mx_chat_list_size(t_chat* list);
 
 void mx_print_chat_list(t_chat* chat); // remove
 
