@@ -15,12 +15,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#include <openssl/ssl.h>
-#include <openssl/crypto.h>
-#include <openssl/rsa.h>
-#include <openssl/x509.h>
-#include <openssl/pem.h>
-#include <openssl/err.h>
+#include "../../libraries/openssl/openssl/ssl.h"
+#include "../../libraries/openssl/openssl/err.h"
 
 #include "../../libraries/libmx/inc/libmx.h"
 #include "../../utils/inc/utils.h"

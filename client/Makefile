@@ -22,10 +22,15 @@ CJSON_NAME = $(CJSON_DIR)/libcjson.a
 GTK_FLAGS = `pkg-config --cflags gtk+-3.0`
 GTK_LIBS_FLAGS = `pkg-config --cflags --libs gtk+-3.0`
 
+SSL_DIR = ../libraries/openssl
+SSL_FILES:= ../local_lib/lib
+SSL_INC_FILES:= $(SSL_DIR)
+
 LIB_FLAGS = -lmx -lcjson -lsqlite3 -lssl -lcrypto\
 			-L$(LIBMX_DIR) $(LIBMX_NAME)\
 			-L$(UTILSLIB_DIR) $(UTILSLIB_NAME)\
-			-L$(CJSON_DIR) $(CJSON_NAME)
+			-L$(CJSON_DIR) $(CJSON_NAME)\
+			-L$(SSL_FILES) -I$(SSL_INC_FILES)
 
 all: $(UCHAT)
 

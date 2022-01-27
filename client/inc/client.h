@@ -13,8 +13,9 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
-#include <openssl/ssl.h>
-#include <openssl/err.h>
+
+#include "../../libraries/openssl/openssl/ssl.h"
+#include "../../libraries/openssl/openssl/err.h"
 
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/libmx/inc/libmx.h"
