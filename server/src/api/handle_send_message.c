@@ -1,6 +1,6 @@
 #include "../../inc/server.h"
 
-t_response_code db_insert_message(const cJSON* msg_json, t_msg** msg_to_send, t_server_utils* utils) {
+t_response_code db_insert_message(const cJSON* msg_json, int* message_id, t_server_utils* utils) {
 
     const cJSON *user_id = cJSON_GetObjectItem(msg_json, "user_id");
     const cJSON *chat_id = cJSON_GetObjectItem(msg_json, "chat_id");
@@ -17,29 +17,26 @@ t_response_code db_insert_message(const cJSON* msg_json, t_msg** msg_to_send, t_
     }
     char query[QUERY_LEN];
     sprintf(query, "INSERT INTO `messages` (`user_id`, `chat_id`, `text`, `date`) VALUES('%d', '%d', '%s', '%d')", 
-        user_id->valueint, utils->user->chats->id, message->valuestring, date->valueint);
+            user_id->valueint, chat_id->valueint, message->valuestring, date->valueint);
     
-    if (db_execute_query(query) != 0) {
-        return R_DB_FAILURE;
-    }
+    sqlite3* db = open_database();
+    sqlite3_stmt* stmt;
+    sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    sqlite3_step(stmt);
+    sqlite3_reset(stmt);
+    bzero(query, sizeof(query));
+    sprintf(query,  "SELECT id FROM `messages` WHERE `user_id` = '%d' AND `chat_id` = '%d' "
+                    "ORDER BY `id` DESC LIMIT 1",
+            user_id->valueint, chat_id->valueint);
+    sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    sqlite3_step(stmt);
+    
+    *message_id = sqlite3_column_int64(stmt, 0);
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
 
     return R_SUCCESS;
-
-}
-
-char* get_new_message_json(t_msg* msg_to_send) {
-
-    cJSON* json = cJSON_CreateObject();
-    cJSON_AddNumberToObject(json, "type", REQ_NEW_MESSAGE);
-    cJSON_AddNumberToObject(json, "chat_id", msg_to_send->chat_id);
-    cJSON_AddStringToObject(json, "text", msg_to_send->text);
-    cJSON_AddNumberToObject(json, "sender_id", msg_to_send->sender_id);
-    cJSON_AddStringToObject(json, "sender_name", msg_to_send->sender_name);
-    cJSON_AddStringToObject(json, "date", msg_to_send->date_str);
-    cJSON_AddNumberToObject(json, "error_code", R_SUCCESS);
-    char* json_str = cJSON_PrintUnformatted(json);
-    cJSON_Delete(json);
-    return json_str;
 
 }
 
@@ -52,12 +49,20 @@ void handle_send_message(const cJSON* message_info, t_server_utils* utils) {
 
     // validation here later
     t_response_code resp_code = 0;
-    t_msg* msg_to_send = NULL;
-    if ((resp_code = db_insert_message(message_info, &msg_to_send, utils)) != R_SUCCESS) {
+    int message_id = 0;
+    if ((resp_code = db_insert_message(message_info, &message_id, utils)) != R_SUCCESS) {
         send_server_response(utils->ssl, resp_code, REQ_SEND_MESSAGE);
         return;
     }
 
-    send_server_response(utils->ssl, R_SUCCESS, REQ_SEND_MESSAGE);
+    cJSON* json_to_send = cJSON_CreateObject();
+    cJSON_AddNumberToObject(json_to_send, "message_id", message_id);
+    cJSON_AddNumberToObject(json_to_send, "type", REQ_SEND_MESSAGE);
+    cJSON_AddNumberToObject(json_to_send, "error_code", R_SUCCESS);
+    char* json_str = cJSON_PrintUnformatted(json_to_send);
+    cJSON_Delete(json_to_send);
+
+    send_response_to(utils->ssl, json_str);
+    free(json_str);
 
 }

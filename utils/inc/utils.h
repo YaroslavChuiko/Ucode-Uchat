@@ -70,7 +70,7 @@ typedef struct s_response {
 static const t_response response_objs[] = {
     { R_SUCCESS, "Request handled successfully" },
     { R_DB_FAILURE, "A database error occurred when handling the request" },
-    { R_DB_FAILURE, "A json error occurred when handling the request" },
+    { R_JSON_FAILURE, "A json error occurred when handling the request" },
     { R_INVALID_INPUT, "The input was invalid" },
     { R_USR_EXISTS, "The user with this name already exists" },
     { R_USR_NOENT, "There's no user by that name" },
@@ -106,10 +106,11 @@ void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* use
 void mx_msg_push_back(t_msg** list, t_msg* new_node);
 void mx_clear_msg_list(t_msg **list);
 void mx_msg_pop_index(t_msg **list, int index);
+void mx_msg_pop_id(t_msg **list, int msg_id);
 int mx_get_msg_idx_by_id(t_msg* list, int id);
 void mx_clear_msg_list(t_msg **list);
 int mx_msg_list_size(t_msg* list);
-int mx_get_last_msg_id(t_chat* chat, bool is_current);
+int mx_get_last_msg_id(t_chat* chat, bool is_current, int user_id);
 void mx_clear_msg(t_msg** p);
 t_msg* mx_get_last_msg_node(t_msg* list);
 void mx_print_msg(t_msg* msg); // remove

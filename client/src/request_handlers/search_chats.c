@@ -17,6 +17,7 @@ t_chat* handle_search_chats_request(const char* search_str) {
     if ((error_code = handle_get_chats_response(&chat_list, response, true)) != R_SUCCESS) {
         logger(get_response_str(error_code), ERROR_LOG);
         free(response);
+        utils->is_suspended = false;
         return NULL;
     }
     free(response);

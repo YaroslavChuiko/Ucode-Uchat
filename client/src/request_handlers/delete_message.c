@@ -17,7 +17,10 @@ void handle_delete_msg_request(int message_id) {
     logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
 
     if (error_code == R_SUCCESS) {
-        handle_get_chats_request();
+        
+        mx_msg_pop_id(&utils->current_chat->messages, message_id);
+        // remove a message widget !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
     }
 
     free(json_str);

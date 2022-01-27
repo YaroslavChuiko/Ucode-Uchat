@@ -169,7 +169,7 @@ int mx_chat_list_size(t_chat* list) {
 
 }
 
-int mx_get_last_msg_id(t_chat* chat, bool is_current) {
+int mx_get_last_msg_id(t_chat* chat, bool is_current, int user_id) {
 
     if (!chat) 
         return 0;
@@ -179,12 +179,16 @@ int mx_get_last_msg_id(t_chat* chat, bool is_current) {
         return 0;
 
     t_msg* current = is_current ? chat->messages : chat->last_new_msg;
-    while (current->next) {
+    t_msg* result = NULL;
+    while (current) {
 
+        if (current->sender_id != user_id) {
+            result = current;
+        }
         current = current->next;
 
     }
-    return current ? current->message_id : 0;
+    return result ? result->message_id : 0;
 
 }
 
@@ -201,8 +205,8 @@ void mx_print_chat_list(t_chat* chat) {
         while (msg) {
 
             char str[200];
-            sprintf(str, "Chat message:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
-                    msg->text, msg->chat_id, msg->sender_id, msg->sender_name, msg->date_str);
+            sprintf(str, "Chat message:\n\tid: %d, text: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
+                    msg->message_id, msg->text, msg->chat_id, msg->sender_id, msg->sender_name, msg->date_str);
             logger(str, INFO_LOG);
             msg = msg->next;
 

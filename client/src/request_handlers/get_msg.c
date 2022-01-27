@@ -39,7 +39,7 @@ t_msg* handle_get_msg_response() {
     cJSON* msg_json = cJSON_GetObjectItem(json, "message");
     t_msg* new_msg = get_msg_from_json(msg_json);
 
-    if (new_msg == NULL) {
+    if (new_msg == NULL /*|| new_msg->sender_id == utils->current_user->user_id*/) {
         cJSON_Delete(json);
         logger(get_response_str(R_JSON_FAILURE), ERROR_LOG);
         return NULL;
@@ -53,7 +53,6 @@ t_msg* handle_get_msg_response() {
 
 void handle_get_msg_request(int chat_id, int message_id) {
 
-    // utils->is_suspended = true;
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_GET_MSG);
     cJSON_AddNumberToObject(json, "message_id", message_id);
@@ -63,6 +62,5 @@ void handle_get_msg_request(int chat_id, int message_id) {
 
     send_to_server(utils->ssl, json_str);
     free(json_str);
-    // utils->is_suspended = false;
 
 }

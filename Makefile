@@ -23,7 +23,7 @@ OBJS = $(OBJDIR)/*.o
 all: $(LIBMX) $(UTILSLIB) $(CJSON) $(SQLITE) $(SERVER) $(CLIENT)
 
 $(LIBMX):
-	# make -sC $(LIBMX_DIR)
+	make -sC $(LIBMX_DIR)
 
 $(UTILSLIB):
 	make -sC $(UTILSLIB_DIR)

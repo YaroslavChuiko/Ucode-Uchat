@@ -14,8 +14,13 @@
 #include <pthread.h>
 #include <gtk/gtk.h>
 
+#ifdef __MACH__
 #include "../../libraries/openssl/openssl/ssl.h"
 #include "../../libraries/openssl/openssl/err.h"
+#else
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+#endif
 
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/libmx/inc/libmx.h"
@@ -81,14 +86,15 @@ void handle_client_exit();
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);
+t_msg* get_msg_from_json(cJSON* json);
 
 t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
-t_request_type get_request_type(cJSON* json);
 t_response_code handle_server_response(const char* response_str);
 int send_to_server(SSL *ssl, const char* request_str);
-t_response_code get_response_code(cJSON* json);
 char* send_and_recv_from_server(SSL *ssl, const char* json_str);
 char* recv_from_server(SSL* ssl);
+t_response_code get_response_code(cJSON* json);
+t_request_type get_request_type(cJSON* json);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
 void client_cleanup();

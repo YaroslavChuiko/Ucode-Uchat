@@ -15,8 +15,13 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#ifdef __MACH__
 #include "../../libraries/openssl/openssl/ssl.h"
 #include "../../libraries/openssl/openssl/err.h"
+#else
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+#endif
 
 #include "../../libraries/libmx/inc/libmx.h"
 #include "../../utils/inc/utils.h"
