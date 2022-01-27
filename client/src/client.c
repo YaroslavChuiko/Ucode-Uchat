@@ -111,6 +111,14 @@ void* handle_requests(void* arg) {
 
 			handle_send_msg_request(message);
 
+		} else if (!mx_strncmp(client_request, "delete message", 14)) {
+
+			char id_char[1024];
+			printf("Enter id of message to delete: ");
+			fgets(id_char, 1024, stdin);
+			int id = atoi(id_char);
+			handle_delete_msg_request(id);
+
 		} else if (!mx_strncmp(client_request, "join chat", 9)) {
 
 			char chat_name[100];

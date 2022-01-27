@@ -17,6 +17,10 @@ int handle_delete_chat_request(const char* chat_name) {
     int error_code = handle_server_response(response);
     logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
 
+    if (error_code == R_SUCCESS) {
+        handle_get_chats_request();
+    }
+
     free(json_str);
     free(response);
 

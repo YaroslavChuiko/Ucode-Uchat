@@ -14,7 +14,7 @@ t_response_code db_insert_message(const cJSON* msg_json, t_msg** msg_to_send, t_
     }
     char query[QUERY_LEN];
     sprintf(query, "INSERT INTO `messages` (`user_id`, `chat_id`, `text`, `date`) VALUES('%d', '%d', '%s', '%d')", 
-        user_id->valueint, chat_id->valueint, message->valuestring, date->valueint);
+        user_id->valueint, utils->user->chats->id, message->valuestring, date->valueint);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;
