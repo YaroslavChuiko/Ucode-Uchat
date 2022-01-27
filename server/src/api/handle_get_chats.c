@@ -1,12 +1,12 @@
 #include "../../inc/server.h"
 
 // Get a single chat in JSON format
-cJSON* get_chat_json(sqlite3_stmt* stmt) {
+cJSON* get_chat_json(sqlite3_stmt* stmt, bool is_for_search) {
 
     cJSON* json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "chat_id", sqlite3_column_int64(stmt, 0));
     cJSON_AddStringToObject(json, "chat_name", (const char*)sqlite3_column_text(stmt, 1));
-    cJSON_AddNumberToObject(json, "chat_permissions", sqlite3_column_int64(stmt, 2));
+    cJSON_AddNumberToObject(json, "chat_permissions", !is_for_search ? sqlite3_column_int64(stmt, 2) : 1);
     return json;
 
 }
@@ -17,9 +17,10 @@ cJSON* get_chats_array_json(int user_id) {
     cJSON* chats_json = cJSON_CreateArray();
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
-    sqlite3_prepare_v2(db, "SELECT chats.id, chats.name, members.permissions FROM chats"
-                            " INNER JOIN `members` ON members.chat_id = chats.id"
-                            " WHERE chats.id IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?) AND members.user_id = ?",
+    sqlite3_prepare_v2(db,  "SELECT chats.id, chats.name, members.permissions FROM chats "
+                            "INNER JOIN `members` ON members.chat_id = chats.id "
+                            "WHERE chats.id IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?) AND members.user_id = ? "
+                            "ORDER BY chats.date DESC ",
                             -1, &stmt, NULL);
                             
     sqlite3_bind_int64(stmt, 1, user_id);
@@ -27,7 +28,7 @@ cJSON* get_chats_array_json(int user_id) {
 
     while (sqlite3_step(stmt) == SQLITE_ROW) {
 
-        cJSON_AddItemToArray(chats_json, get_chat_json(stmt));
+        cJSON_AddItemToArray(chats_json, get_chat_json(stmt, false));
 
     }
     sqlite3_finalize(stmt);

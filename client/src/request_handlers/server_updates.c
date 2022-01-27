@@ -1,75 +1,87 @@
 #include "../../inc/client.h"
 
-// Check whether the read data was actually an update or logout
-bool is_request_for_update(t_request_type type) {
+static int handle_new_message(t_chat* curr_chat, int idx, int last_msg_id) {
 
-	return (type == REQ_NEW_MESSAGE || 
-			type == REQ_USR_LOGOUT);
+	handle_get_msg_request(curr_chat->id, last_msg_id + idx);
+	t_msg* new_msg = NULL;
 
-}
-
-// Read server data (either a response to a request, or an update for this client)
-char* read_server_data(int server_fd) {
-
-	char buffer[SENT_DATA_LEN];
-	int n_bytes = 0;
-	if ((n_bytes = recv(server_fd, buffer, SENT_DATA_LEN, 0)) <= 0) {
-
-		if (n_bytes == 0)
-			return NULL;
-
-		if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
-			sleep(4);
-			return NULL;
-		}
-		logger(strerror(errno), ERROR_LOG);
-		return NULL;
-
+	if (!(new_msg = handle_get_msg_response())) {
+		return 1;
 	}
-	buffer[n_bytes] = '\0';
-	return mx_strdup(buffer);
+
+	pthread_mutex_lock(&utils->lock);
+	if (utils->current_chat && curr_chat->id == utils->current_chat->id) {
+
+		// if the current chat is the one where we got new messages
+		// generate a new widget for the created `new_msg` here
+		char str[200];
+		sprintf(str, "You're reading an incoming message from %s", curr_chat->name);
+		client_log(str, INFO_LOG);
+
+		mx_msg_dfl_push_back(&curr_chat->messages, new_msg->message_id, new_msg->sender_id, new_msg->sender_name, 
+							new_msg->chat_id, new_msg->text, new_msg->date_str);
+
+	} else {
+		// if we got messages from a different chat (the one not being selected)
+		char str[200];
+		sprintf(str, "You have an incoming message from %s", curr_chat->name);
+		client_log(str, INFO_LOG);
+	}
+
+	if (curr_chat->last_new_msg)
+		mx_clear_msg(&curr_chat->last_new_msg);
+
+	curr_chat->last_new_msg = mx_create_msg(new_msg->message_id, new_msg->sender_id, new_msg->sender_name, 
+											new_msg->chat_id, new_msg->text, new_msg->date_str);
+
+	pthread_mutex_unlock(&utils->lock);
+	char str[200];
+	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
+			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str);
+	client_log(str, INFO_LOG);
+	g_usleep(10000);
+	return 0;
 	
 }
 
-/*	Thread handler for checking and handling server updates
-	Note: the read server data could be a response to a request,
-	in which case it's omitted in updater and is handled via handle_requests()   
-*/
+//	Thread handler for checking and handling server updates
 void* handle_server_updates(void* arg) {
 	
     while (1) {
 
-		char* update_str = NULL;
-		if (!(update_str = read_server_data(utils->server_fd))) {
-			// logger("No data to read\n", ERROR_LOG);
-			usleep(10000);
+		if (utils && utils->is_suspended)
 			continue;
-		}
-		// never getting here if sleeping more than other functions that also have to `recv`
-		cJSON* json = cJSON_Parse(update_str);
+		
+		if (!utils)
+			break;
 
-		t_request_type req_type = get_request_type(json);
-		// printf("req_type here -- %d\n", req_type);
-		if (req_type == -1 || !is_request_for_update(req_type)) {
-			cJSON_Delete(json);
-			continue;
-		}
+		pthread_mutex_lock(&utils->lock);
+		t_chat* curr_chat = utils->chatlist;
+		pthread_mutex_unlock(&utils->lock);
+		while (curr_chat) {
 
-		if (req_type == REQ_USR_LOGOUT) {
+			pthread_mutex_lock(&utils->lock);
+			bool is_current_chat = utils->current_chat && curr_chat->id == utils->current_chat->id;
+			pthread_mutex_unlock(&utils->lock);
+
+			int new_msg_count = handle_new_msg_count_request(curr_chat->id, is_current_chat);
+			if (new_msg_count <= 0) {
+				curr_chat = curr_chat->next;
+				continue;
+			}
 			
-			// char str[100];
-			// sprintf(str, "Logging out for %d, %s\n", utils->current_user->user_id, utils->current_user->name);
-			// logger(str, INFO_LOG);
-			pthread_exit(EXIT_SUCCESS);
-		
-		} else if (req_type == REQ_NEW_MESSAGE) {
+			int last_msg_id = mx_get_last_msg_id(curr_chat, is_current_chat);
+			for (int i = 1; i <= new_msg_count; ++i) {
+				
+				if (handle_new_message(curr_chat, i, last_msg_id) != 0)
+					continue;
 
-			handle_new_message(json);
+			}
+			g_usleep(0.5 * 1000000);
+			curr_chat = curr_chat->next;
 
 		}
-		
-		cJSON_Delete(json);
-		mx_strdel(&update_str);
+		g_usleep(0.5 * 1000000);
 
 	}
 	return NULL;

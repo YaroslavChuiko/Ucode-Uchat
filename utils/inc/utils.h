@@ -13,9 +13,6 @@
 
 extern int errno;
 
-#define LOGFILE_NAME "server_utils/info_log.txt"
-#define SENT_DATA_LEN 1024
-
 // Enum for the type of info being logged
 typedef enum e_info_type {
     INFO_LOG,
@@ -36,6 +33,7 @@ typedef enum e_response_code {
     R_CHAT_NOENT,
     R_IS_CHAT_MEMBER,
     R_ISNT_CHAT_MEMBER,
+    R_NO_CHAT_PERMS,
     R_NAME_FORMAT_INVALID,
 
     R_MSG_USR_NOENT,
@@ -51,10 +49,14 @@ typedef enum e_request_type {
     REQ_USR_LOGOUT,
     REQ_DELETE_CHAT,
     REQ_DELETE_MESSAGE,
+    REQ_EDIT_MESSAGE,
 
     // updater requests
     REQ_GET_CHATS,
     REQ_GET_CHAT_MSGS,
+    REQ_GET_MSG,
+    REQ_NEW_MSG_COUNT,
+    REQ_SEARCH_CHATS,
     
     REQ_NEW_MESSAGE,
     REQ_CLIENT_EXIT,
@@ -78,6 +80,7 @@ static const t_response response_objs[] = {
     { R_CHAT_NOENT, "The chat with this name doesn't exist" },
     { R_IS_CHAT_MEMBER, "You're already a member of this chat" },
     { R_ISNT_CHAT_MEMBER, "You're not a member of this chat" },
+    { R_NO_CHAT_PERMS, "You don't have the permissions for this action" },
     { R_NAME_FORMAT_INVALID, "The name should contain only letters and digits" },
     { R_MSG_USR_NOENT, "Couldn't find this message's sender" },
 };
@@ -100,11 +103,17 @@ int mx_chat_list_size(t_chat* list);
 
 void mx_print_chat_list(t_chat* chat); // remove
 
-t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
-void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
+t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
+void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
+void mx_msg_push_back(t_msg** list, t_msg* new_node);
 void mx_clear_msg_list(t_msg **list);
 void mx_msg_pop_index(t_msg **list, int index);
+int mx_get_msg_idx_by_id(t_msg* list, int id);
 void mx_clear_msg_list(t_msg **list);
 int mx_msg_list_size(t_msg* list);
+int mx_get_last_msg_id(t_chat* chat, bool is_current);
+void mx_clear_msg(t_msg** p);
+t_msg* mx_get_last_msg_node(t_msg* list);
+void mx_print_msg(t_msg* msg); // remove
 
 #endif

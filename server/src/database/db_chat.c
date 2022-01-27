@@ -1,6 +1,6 @@
 #include "../../inc/server.h"
 
-t_response_code db_insert_chat(const char* chat_name) {
+t_response_code db_insert_chat(const char* chat_name, int date) {
 
     int chat_id = db_get_chat_id_by_name(chat_name);
     if (chat_id != -1) {
@@ -8,7 +8,7 @@ t_response_code db_insert_chat(const char* chat_name) {
     }
 
     char query[QUERY_LEN];
-    sprintf(query, "INSERT INTO `chats` (`name`) VALUES('%s')", chat_name);
+    sprintf(query, "INSERT INTO `chats` (`name`, `date`) VALUES('%s', '%d')", chat_name, date);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;
@@ -55,7 +55,7 @@ t_chat* db_get_chats_by_user_id(int user_id) {
 
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
-    sqlite3_prepare_v2(db, "SELECT * FROM `chats` WHERE `id` IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?)", 
+    sqlite3_prepare_v2(db, "SELECT chats.id, chats.name, chats.permissions FROM `chats` WHERE `id` IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?)", 
                         -1, &stmt, NULL);
     sqlite3_bind_int64(stmt, 1, user_id);
 
@@ -75,4 +75,17 @@ t_chat* db_get_chats_by_user_id(int user_id) {
 
 }
 
+bool db_has_chat_perms(int user_id, int chat_id, t_member_type perms) {
 
+    char query[QUERY_LEN];
+    sprintf(query, "SELECT `permissions` FROM `members` WHERE `user_id` = '%d' AND `chat_id` = '%d'", user_id, chat_id);
+    
+    sqlite3* db = open_database();
+    sqlite3_stmt* stmt = db_execute_stmt_for(query, db);
+    
+    int chat_perms = sqlite3_column_int64(stmt, 0);
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+    return (t_member_type)chat_perms == perms;
+
+}

@@ -29,7 +29,8 @@ int database_init() {
 
         "CREATE TABLE `chats` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 
-            "`name` VARCHAR(32) NOT NULL);"
+            "`name` VARCHAR(32) NOT NULL,"
+            "`date` INTEGER NOT NULL);" 
         
         "CREATE TABLE `members` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 

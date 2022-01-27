@@ -13,8 +13,11 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
+
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+// #include "../../libraries/openssl/openssl/ssl.h"
+// #include "../../libraries/openssl/openssl/err.h"
 
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/libmx/inc/libmx.h"
@@ -100,21 +103,26 @@ t_response_code handle_signup_request(const char* user_name, const char* user_pa
 t_response_code handle_login_request(const char* user_name, const char* user_password);
 t_response_code handle_create_chat_request(const char* chat_name);
 t_response_code handle_send_msg_request(const char* message_str);
-t_response_code handle_new_message(cJSON* json);
 t_response_code handle_get_chats_request();
 t_response_code handle_get_chat_msgs_request(int chat_id);
+void handle_get_msg_request(int chat_id, int message_id);
+t_msg* handle_get_msg_response();
+t_chat* handle_search_chats_request(const char* search_str);
+int handle_new_msg_count_request(int chat_id, bool is_current);
 void handle_logout_request();
 void handle_client_exit();
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);
+void handle_edit_msg_request(int message_id, const char* new_msg_text);
 
-bool is_request_for_update(t_request_type type);
+t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
 t_request_type get_request_type(cJSON* json);
 t_response_code handle_server_response(const char* response_str);
 int send_to_server(SSL *ssl, const char* request_str);
 t_response_code get_response_code(cJSON* json);
 char* send_and_recv_from_server(SSL *ssl, const char* json_str);
+char* recv_from_server(SSL* ssl);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
 void client_cleanup();
@@ -123,5 +131,7 @@ void handle_arg_errors(char** argv);
 
 void init_ssl(SSL_CTX **ctx);
 void connect_ssl(SSL **ssl, int* server_fd, SSL_CTX **ctx);
+void client_log(const char* info, t_info_type type);
+char* get_log_name();
 
 #endif

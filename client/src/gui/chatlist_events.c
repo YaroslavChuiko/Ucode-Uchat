@@ -41,15 +41,15 @@ void clicked_chatlist_item(GtkWidget *widget, gpointer data)
 void update_chatlist()
 {
     GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
-    int id;
+    // int id;
 
-    if (utils->current_chat)
-    {
-        id = utils->current_chat->id;
-    }
+    // if (utils->current_chat)
+    // {
+    //     id = utils->current_chat->id;
+    // }
     
-    if(handle_get_chats_request() == R_SUCCESS)
-    {
+    // if(handle_get_chats_request() == R_SUCCESS)
+    // {
         // clear_chatlist();
         clear_container(chatlist_container);
 
@@ -66,12 +66,12 @@ void update_chatlist()
                 chatlist = chatlist->next;
             }
 
-            utils->current_chat = mx_get_chat_by_id(utils->chatlist, id);
+            // utils->current_chat = mx_get_chat_by_id(utils->chatlist, id);
             if (utils->current_chat)
             {
                 set_chatlist_item_active(get_widget_by_name_r(chatlist_container, utils->current_chat->name));
                 // set_chatlist_item_active(get_widget_by_name_r(chatlist_container, mx_itoa(utils->current_chat->id)));
             }
         }
-    }
+    // }
 }

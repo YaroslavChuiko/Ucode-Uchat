@@ -3,13 +3,21 @@
 t_response_code db_delete_message(const cJSON* msg_json, t_server_utils* utils) {
 
     const cJSON *message_id = cJSON_GetObjectItem(msg_json, "id");
-    if (!cJSON_IsNumber(message_id)) {
+    const cJSON *chat_id = cJSON_GetObjectItem(msg_json, "chat_id");
+    if (!cJSON_IsNumber(message_id) || !cJSON_IsNumber(chat_id)) {
         return R_JSON_FAILURE;
+    }
+
+    if (!db_chat_exists(chat_id->valueint)) {
+        return R_CHAT_NOENT;
+    }
+    if (!db_is_chat_member(utils->user->user_id, chat_id->valueint)) {
+        return R_ISNT_CHAT_MEMBER;
     }
 
     char query[QUERY_LEN];
     sprintf(query, "DELETE FROM `messages` WHERE `id` = '%d' AND `user_id` = '%d' AND `chat_id` = '%d'", 
-        message_id->valueint, utils->user->user_id, utils->user->chats->id);
+        message_id->valueint, utils->user->user_id, chat_id->valueint);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;

@@ -24,10 +24,14 @@ typedef struct s_client_utils {
     int server_fd;
     SSL* ssl;
     SSL_CTX* ctx;
+    pthread_t th_reader;
     pthread_mutex_t lock;
     t_user* current_user;
     t_chat* current_chat;
     t_chat* chatlist;
+    char* log_name;
+    // for suspending server updates during request handling
+    bool is_suspended;
 }              t_client_utils;
 
 extern t_client_utils *utils;

@@ -3,6 +3,7 @@
 
 // Type for the message saved from the server
 typedef struct s_msg {
+    int message_id;
     int chat_id;
     int sender_id;
     char* sender_name;
@@ -17,6 +18,7 @@ typedef struct s_chat {
     char* name;
     int permissions;
     t_msg* messages;
+    t_msg* last_new_msg;
     struct s_chat* next;
 }              t_chat;
 

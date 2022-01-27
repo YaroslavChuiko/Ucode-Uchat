@@ -1,6 +1,36 @@
 #include "../inc/server.h"
 #include <sys/select.h>
 
+char* get_client_request(SSL* ssl, int length) {
+
+    char buffer[SENT_DATA_LEN] = "";
+    int bytesRead = 0;
+    while (bytesRead < length) {
+
+        int bytes = SSL_read(ssl, &buffer[bytesRead], length - bytesRead );
+        if (bytes <= 0) {
+
+            if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
+                continue;
+            }
+            return NULL;
+
+        } else if (bytes < length) {
+            
+            bytesRead += bytes;
+        
+        } else if (bytes == length) {
+        
+            bytesRead = bytes;
+            break;
+        
+        }
+    }
+    buffer[bytesRead] = '\0';
+    return mx_strdup(buffer);
+
+} 
+
 // Read client data (a request to be handled)
 char* read_client_data(SSL *ssl) {
 
@@ -8,19 +38,15 @@ char* read_client_data(SSL *ssl) {
     int n_bytes = 0;
     if ((n_bytes = SSL_read(ssl, buffer, SENT_DATA_LEN)) <= 0) {
         
-        if (n_bytes == 0)
-            return NULL;
-        
         if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
-            // sleep(1);
             return NULL;
         }
-        logger(strerror(errno), ERROR_LOG);
         return NULL;
     
     }
     buffer[n_bytes] = '\0';
     return mx_strdup(buffer);
+    // return get_client_request(ssl, atoi(buffer));
 
 }
 

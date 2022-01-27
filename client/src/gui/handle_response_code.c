@@ -89,6 +89,12 @@ void handle_create_chat_response_code(int response_code, GtkWidget* entry_field,
             GtkWidget *toplevel = gtk_widget_get_toplevel(entry_field);
             update_chatlist();
             // set_chatlist_item_active(get_widget_by_name_r(chatlist_container, mx_itoa(utils->current_chat->id)));
+            // if (utils->current_chat)
+            // {
+            //     printf("%s\n", utils->current_chat->name);
+            //     set_chatlist_item_active(get_widget_by_name_r(chatlist_container, utils->current_chat->name));
+            // }
+            
             utils->current_chat ? set_chatlist_item_active(get_widget_by_name_r(chatlist_container, utils->current_chat->name)) : (void)0;
             gtk_widget_destroy(toplevel);
             break;
