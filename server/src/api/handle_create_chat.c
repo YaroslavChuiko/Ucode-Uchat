@@ -8,8 +8,9 @@ void handle_create_chat(const cJSON* chat_info, t_server_utils* utils) {
     }
 
     const cJSON *chat_name = cJSON_GetObjectItemCaseSensitive(chat_info, "name");
+    const cJSON *date = cJSON_GetObjectItem(chat_info, "date");
 
-    if (!cJSON_IsString(chat_name))    {
+    if (!cJSON_IsString(chat_name) || !cJSON_IsNumber(date)) {
         send_server_response(utils->ssl, R_JSON_FAILURE, REQ_CREATE_CHAT);
         return;
     }
@@ -20,7 +21,7 @@ void handle_create_chat(const cJSON* chat_info, t_server_utils* utils) {
     }
 
     t_response_code resp_code = 0;
-    if ((resp_code = db_insert_chat(chat_name->valuestring)) != R_SUCCESS) {
+    if ((resp_code = db_insert_chat(chat_name->valuestring, date->valueint)) != R_SUCCESS) {
         send_server_response(utils->ssl, resp_code, REQ_CREATE_CHAT);
         return;
     }

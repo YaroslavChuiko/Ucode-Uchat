@@ -6,21 +6,22 @@ t_response_code db_insert_message(const cJSON* msg_json, t_msg** msg_to_send, t_
     const cJSON *chat_id = cJSON_GetObjectItem(msg_json, "chat_id");
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(msg_json, "user_name");
     const cJSON *message = cJSON_GetObjectItemCaseSensitive(msg_json, "text");
+    const cJSON *date = cJSON_GetObjectItemCaseSensitive(msg_json, "date");
     if (!cJSON_IsNumber(user_id) || !cJSON_IsNumber(chat_id) || 
-        !cJSON_IsString(user_name) || !cJSON_IsString(message)) {
+        !cJSON_IsString(user_name) || !cJSON_IsString(message) || !cJSON_IsNumber(date)) {
         
         return R_JSON_FAILURE;
     }
-
+    if (!db_chat_exists(chat_id->valueint)) {
+        return R_CHAT_NOENT;
+    }
     char query[QUERY_LEN];
-    sprintf(query, "INSERT INTO `messages` (`user_id`, `chat_id`, `text`) VALUES('%d', '%d', '%s')", 
-        user_id->valueint, chat_id->valueint, message->valuestring);
+    sprintf(query, "INSERT INTO `messages` (`user_id`, `chat_id`, `text`, `date`) VALUES('%d', '%d', '%s', '%d')", 
+        user_id->valueint, utils->user->chats->id, message->valuestring, date->valueint);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;
     }
-
-    *msg_to_send = mx_create_msg(user_id->valueint, user_name->valuestring, chat_id->valueint, message->valuestring);
 
     return R_SUCCESS;
 
@@ -34,6 +35,7 @@ char* get_new_message_json(t_msg* msg_to_send) {
     cJSON_AddStringToObject(json, "text", msg_to_send->text);
     cJSON_AddNumberToObject(json, "sender_id", msg_to_send->sender_id);
     cJSON_AddStringToObject(json, "sender_name", msg_to_send->sender_name);
+    cJSON_AddStringToObject(json, "date", msg_to_send->date_str);
     cJSON_AddNumberToObject(json, "error_code", R_SUCCESS);
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
@@ -56,12 +58,6 @@ void handle_send_message(const cJSON* message_info, t_server_utils* utils) {
         return;
     }
 
-    if (!msg_to_send || !msg_to_send->sender_name) {
-        send_server_response(utils->ssl, R_MSG_USR_NOENT, REQ_SEND_MESSAGE);
-        return;
-    }
-
     send_server_response(utils->ssl, R_SUCCESS, REQ_SEND_MESSAGE);
-    // send_response_to_all(msg_to_send);
 
 }

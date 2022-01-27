@@ -17,20 +17,23 @@
     color: rgb(0, 136, 255);
 }
 
-.field_error {
+.input_field {
+
+}
+
+.input_field--error {
     /* border-color: red; */
     background-color: red;
 }
 
-/* rename to correct */
-.field_success { 
+.input_field--success { 
     /* border-color: red; */
     background-color: rgb(40, 197, 40);
 }
 
 .notify_label {
     font-size: 11px;
-    color: red;
+    /* color: red; */
     margin: 5px 0 0 5px;
 }
 
@@ -54,11 +57,11 @@
     background-color: maroon;
 }
 
-.create_group_event {
+.create_chat_event {
     background-color: rgba(70, 70, 70, 0.538);
 }
 
-.create_group_menu {
+.create_chat_menu {
     background-color: mediumslateblue;
 }
 

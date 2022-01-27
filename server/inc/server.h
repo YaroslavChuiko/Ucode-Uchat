@@ -15,12 +15,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#include <openssl/ssl.h>
-#include <openssl/crypto.h>
-#include <openssl/rsa.h>
-#include <openssl/x509.h>
-#include <openssl/pem.h>
-#include <openssl/err.h>
+#include "../../libraries/openssl/openssl/ssl.h"
+#include "../../libraries/openssl/openssl/err.h"
 
 #include "../../libraries/libmx/inc/libmx.h"
 #include "../../utils/inc/utils.h"
@@ -51,6 +47,9 @@ void handle_create_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_join_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_get_chats(const cJSON* chat_info, t_server_utils* utils);
 void handle_get_chat_msgs(const cJSON* chat_info, t_server_utils* utils);
+void handle_search_chats(const cJSON* chat_info, t_server_utils* utils);
+void handle_get_msg(const cJSON* msg_info, t_server_utils* utils);
+void handle_new_msg_count(const cJSON* chat_info, t_server_utils* utils);
 void handle_send_message(const cJSON* message_info, t_server_utils* utils);
 void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_delete_message(const cJSON* message_info, t_server_utils* utils);
@@ -63,8 +62,9 @@ sqlite3* open_database();
 int db_execute_query(const char* query);
 sqlite3_stmt* db_execute_stmt_for(const char* query, sqlite3* db);
 
-t_response_code db_insert_chat(const char* chat_name);
+t_response_code db_insert_chat(const char* chat_name, int date);
 bool db_chat_exists(int chat_id);
+bool db_has_chat_perms(int user_id, int chat_id, t_member_type perms);
 bool db_user_exists(const char* username);
 char* db_get_username_by_id(int user_id);
 t_chat* db_get_chat_by_id(int user_id, int chat_id);
@@ -73,6 +73,8 @@ t_chat* db_get_chats_by_user_id(int user_id);
 t_user* db_get_user_by_id(int user_id, t_server_utils* utils);
 bool db_is_chat_member(int user_id, int chat_id);
 int db_get_chat_id_by_name(const char* chat_name);
+cJSON* get_chat_json(sqlite3_stmt* stmt, bool is_for_search);
+cJSON* get_msg_json(sqlite3_stmt* stmt);
 
 // LIST UTILS
 
@@ -99,6 +101,10 @@ static const t_req_handler request_handlers[] = {
     handle_edit_message,
     handle_get_chats,
     handle_get_chat_msgs,  
+    handle_get_chat_msgs,
+    handle_get_msg,
+    handle_new_msg_count,
+    handle_search_chats,
     NULL
 };
 

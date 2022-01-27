@@ -77,6 +77,8 @@ int main(int argc, char *argv[]) {
 
 // SERVER ISSUES
 
+// Add a message to a list when handling send message request 
+
 // MISC ISSUES
 
 // Handle escaping of characters for the strings before saving them to the database

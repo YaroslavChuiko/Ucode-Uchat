@@ -7,9 +7,10 @@ t_response_code add_msg_to_msglist(cJSON* json) {
     cJSON* sender_name = cJSON_GetObjectItemCaseSensitive(json, "sender_name");
     cJSON* text = cJSON_GetObjectItemCaseSensitive(json, "text");
     cJSON* chat_id = cJSON_GetObjectItem(json, "chat_id");
+    cJSON* date = cJSON_GetObjectItemCaseSensitive(json, "date");
 
     if (!cJSON_IsNumber(msg_id) || !cJSON_IsNumber(sender_id) || !cJSON_IsNumber(chat_id) || 
-        !cJSON_IsString(sender_name) || !cJSON_IsString(text)) {
+        !cJSON_IsString(sender_name) || !cJSON_IsString(text) || !cJSON_IsNumber(date)) {
 
         return R_JSON_FAILURE;
     }
@@ -17,8 +18,15 @@ t_response_code add_msg_to_msglist(cJSON* json) {
     if (!chat_by_id)
         return R_CHAT_NOENT;
 
-    mx_msg_push_back(&chat_by_id->messages, sender_id->valueint, sender_name->valuestring,
-                    chat_id->valueint, text->valuestring);
+    mx_msg_dfl_push_back(&chat_by_id->messages, msg_id->valueint, sender_id->valueint, sender_name->valuestring,
+                    chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
+
+    if (chat_by_id->last_new_msg)
+		mx_clear_msg(&chat_by_id->last_new_msg);
+
+	chat_by_id->last_new_msg = mx_create_msg(msg_id->valueint, sender_id->valueint, sender_name->valuestring, 
+											chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
+
     return R_SUCCESS;
 
 }
@@ -26,7 +34,6 @@ t_response_code add_msg_to_msglist(cJSON* json) {
 t_response_code handle_get_chat_msgs_response(const char* response_str) {
 
     if (response_str == NULL) {
-        logger(get_response_str(R_INVALID_INPUT), ERROR_LOG);
         return R_INVALID_INPUT;
     }
 
@@ -61,6 +68,8 @@ t_response_code handle_get_chat_msgs_response(const char* response_str) {
 
 t_response_code handle_get_chat_msgs_request(int chat_id) {
 
+    utils->is_suspended = true;
+
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "chat_id", chat_id);
     cJSON_AddNumberToObject(json, "type", REQ_GET_CHAT_MSGS);
@@ -77,6 +86,7 @@ t_response_code handle_get_chat_msgs_request(int chat_id) {
         return error_code;
     }
     free(response);
+    utils->is_suspended = false;
     return R_SUCCESS;
 
 }

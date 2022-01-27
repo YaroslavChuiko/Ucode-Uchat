@@ -24,6 +24,10 @@ void send_server_response(SSL* ssl, t_response_code code, t_request_type req_typ
 // Send a string-formatted response to the client
 void send_response_to(SSL* ssl, const char* response) {
 
-    SSL_write(ssl, response, strlen(response));
+    int response_len = mx_strlen(response);
+    char* len_str = mx_itoa(response_len);
+    // SSL_write(ssl, len_str, mx_strlen(len_str));
+    SSL_write(ssl, response, response_len);
+    mx_strdel(&len_str);
 
 }

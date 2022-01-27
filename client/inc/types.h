@@ -6,21 +6,6 @@
 extern GtkWidget *main_window;
 
 struct {
-    GtkWidget *username_field;
-    GtkWidget *username_notify_label;
-    GtkWidget *password_field;
-    GtkWidget *password_notify_label;
-    GtkWidget *repassword_field;
-    GtkWidget *repassword_notify_label;
-    GtkWidget *result_notify_label;
-}   t_auth_fields;
-
-struct {
-    GtkWidget *login_menu;
-    GtkWidget *signup_menu;
-}   t_auth_menu;
-
-struct {
     // GtkWidget *chat_screen;
     GtkWidget *popup_menu;
     // GtkWidget *left_bar;
@@ -39,10 +24,14 @@ typedef struct s_client_utils {
     int server_fd;
     SSL* ssl;
     SSL_CTX* ctx;
+    pthread_t th_reader;
     pthread_mutex_t lock;
     t_user* current_user;
     t_chat* current_chat;
     t_chat* chatlist;
+    char* log_name;
+    // for suspending server updates during request handling
+    bool is_suspended;
 }              t_client_utils;
 
 extern t_client_utils *utils;

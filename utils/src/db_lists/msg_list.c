@@ -1,23 +1,24 @@
 #include "../../inc/utils.h"
 
-t_msg* mx_create_msg(int user_id, const char* user_name, int chat_id, const char* text/*, int date*/) {
+t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str) {
     
     t_msg *new_node = malloc(sizeof(t_msg));
     
+    new_node->message_id = msg_id;
     new_node->chat_id = chat_id;
     new_node->sender_id = user_id;
     new_node->sender_name = strdup(user_name);
     new_node->text = strdup(text);
-    // new_node->date = date;
+    new_node->date_str = strdup(date_str);
     new_node->next = NULL;
     
     return new_node;
 
 }
 
-void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat_id, const char* text/*, int date*/) {
 
-    t_msg* new_node = mx_create_msg(user_id, user_name, chat_id, text/*, date*/);
+void mx_msg_push_back(t_msg** list, t_msg* new_node) {
+
     if (list != NULL && *list == NULL) {
         *list = new_node;
         return;
@@ -33,6 +34,14 @@ void mx_msg_push_back(t_msg** list, int user_id, const char* user_name, int chat
 
 }
 
+void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* user_name, 
+                        int chat_id, const char* text, const char* date_str) {
+
+    t_msg* new_node = mx_create_msg(msg_id, user_id, user_name, chat_id, text, date_str);
+    mx_msg_push_back(list, new_node);
+
+}
+
 void mx_clear_msg(t_msg** p) {
 
     if (!p || !(*p))
@@ -40,6 +49,7 @@ void mx_clear_msg(t_msg** p) {
 
     free((*p)->sender_name);
     free((*p)->text);
+    free((*p)->date_str);
     free(*p);
     *p = NULL;
 
@@ -139,5 +149,39 @@ int mx_msg_list_size(t_msg* list) {
 
     }
     return size;
+
+}
+
+t_msg* mx_get_last_msg_node(t_msg* list) {
+
+    while (list->next) {
+        list = list->next;
+    }
+    return list;
+
+}
+
+int mx_get_msg_idx_by_id(t_msg* list, int id) {
+
+    int i = 0;
+    while (list) {
+
+        if (list->message_id == id)
+            return i;
+
+        ++i;
+        list = list->next;
+
+    }
+    return -1;
+
+}
+
+void mx_print_msg(t_msg* msg) {
+
+    char str[200];
+    sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
+            msg->text, msg->chat_id, msg->sender_id, msg->sender_name, msg->date_str);
+    logger(str, INFO_LOG);
 
 }

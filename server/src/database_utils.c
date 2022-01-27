@@ -29,7 +29,8 @@ int database_init() {
 
         "CREATE TABLE `chats` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 
-            "`name` VARCHAR(32) NOT NULL);"
+            "`name` VARCHAR(32) NOT NULL,"
+            "`date` INTEGER NOT NULL);" 
         
         "CREATE TABLE `members` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 
@@ -41,7 +42,8 @@ int database_init() {
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 
             "`user_id` INTEGER NOT NULL," 
             "`chat_id` INTEGER NOT NULL,"
-            "`text` VARCHAR(1024) NOT NULL);";
+            "`text` VARCHAR(1024) NOT NULL,"
+            "`date` INTEGER NOT NULL);";
     
     char* errmsg;
     if (sqlite3_exec(db, query, NULL, NULL, &errmsg)) {
