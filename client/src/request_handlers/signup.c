@@ -10,7 +10,6 @@ t_response_code handle_signup_response(const char* response_str) {
 
 }
 
-
 t_response_code handle_signup_request(const char* user_name, const char* user_password) {
 
     utils->is_suspended = true;

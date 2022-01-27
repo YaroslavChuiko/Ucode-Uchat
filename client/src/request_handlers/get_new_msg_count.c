@@ -26,7 +26,7 @@ t_response_code get_new_msg_count_response(const char* response_str, int* i_last
 
 int handle_new_msg_count_request(int chat_id, bool is_current) {
 
-    utils->is_suspended = true;
+    // utils->is_suspended = true;
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "chat_id", chat_id);
     cJSON_AddNumberToObject(json, "type", REQ_NEW_MSG_COUNT);
@@ -39,6 +39,9 @@ int handle_new_msg_count_request(int chat_id, bool is_current) {
 
     int last_msg_id = 0;
     if ((error_code = get_new_msg_count_response(response, &last_msg_id)) != R_SUCCESS) {
+        if (error_code == R_CHAT_NOENT) {
+            mx_chat_pop_id(&utils->chatlist, chat_id);
+        }
         logger(get_response_str(error_code), ERROR_LOG);
         free(response);
         return -1;
@@ -48,7 +51,7 @@ int handle_new_msg_count_request(int chat_id, bool is_current) {
     t_chat* current_chat = mx_get_chat_by_id(utils->chatlist, chat_id);
     int last_client_msg_id = mx_get_last_msg_id(current_chat, is_current);
 
-    utils->is_suspended = false;
+    // utils->is_suspended = false;
     return last_msg_id - last_client_msg_id;
 
 }

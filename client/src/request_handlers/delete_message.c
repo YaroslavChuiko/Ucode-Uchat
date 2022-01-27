@@ -8,7 +8,7 @@ void handle_delete_msg_request(int message_id) {
     cJSON_AddNumberToObject(json, "type", REQ_DELETE_MESSAGE);
     cJSON_AddNumberToObject(json, "id", message_id);
     cJSON_AddNumberToObject(json, "user_id", utils->current_user->user_id);
-    cJSON_AddNumberToObject(json, "chat_id", 1); // chat_id here
+    cJSON_AddNumberToObject(json, "chat_id", utils->current_chat->id);
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
 

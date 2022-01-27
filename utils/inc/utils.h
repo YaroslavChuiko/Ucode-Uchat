@@ -33,6 +33,7 @@ typedef enum e_response_code {
     R_CHAT_NOENT,
     R_IS_CHAT_MEMBER,
     R_ISNT_CHAT_MEMBER,
+    R_NO_CHAT_PERMS,
     R_NAME_FORMAT_INVALID,
 
     R_MSG_USR_NOENT,
@@ -78,6 +79,7 @@ static const t_response response_objs[] = {
     { R_CHAT_NOENT, "The chat with this name doesn't exist" },
     { R_IS_CHAT_MEMBER, "You're already a member of this chat" },
     { R_ISNT_CHAT_MEMBER, "You're not a member of this chat" },
+    { R_NO_CHAT_PERMS, "You don't have the permissions for this action" },
     { R_NAME_FORMAT_INVALID, "The name should contain only letters and digits" },
     { R_MSG_USR_NOENT, "Couldn't find this message's sender" },
 };

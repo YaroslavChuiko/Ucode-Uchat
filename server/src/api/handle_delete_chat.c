@@ -61,6 +61,17 @@ void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils) {
     }
 
     int chat_id = db_get_chat_id_by_name(chat_name->valuestring);
+
+    if (!db_is_chat_member(utils->user->user_id, chat_id)) {
+        send_server_response(utils->ssl, R_ISNT_CHAT_MEMBER, REQ_DELETE_CHAT);
+        return;
+    }
+
+    if (!db_has_chat_perms(utils->user->user_id, chat_id, ADMIN_MEMBER)) {
+        send_server_response(utils->ssl, R_NO_CHAT_PERMS, REQ_DELETE_CHAT);
+        return;
+    }
+    
     t_response_code resp_code = 0;
     if ((resp_code = db_delete_chat(chat_name->valuestring, chat_id)) != R_SUCCESS) {
         send_server_response(utils->ssl, resp_code, REQ_DELETE_CHAT);
