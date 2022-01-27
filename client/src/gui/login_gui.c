@@ -35,7 +35,6 @@ void build_login_menu(GtkWidget **main_area)
 	gtk_entry_set_placeholder_text(GTK_ENTRY(password_field), "Password");
     // gtk_entry_set_max_length(GTK_ENTRY(password_field), MAX_USERNAME);
 	gtk_entry_set_visibility(GTK_ENTRY(password_field), false);
-	// g_signal_connect(G_OBJECT(password_field), "focus-out-event", G_CALLBACK(focus_out_password_field), NULL);
 
     GtkWidget *password_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(password_notify_label, GTK_ALIGN_START);
@@ -51,7 +50,7 @@ void build_login_menu(GtkWidget **main_area)
     GtkWidget *login_btn_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	GtkWidget *login_btn = gtk_button_new_with_label("Login");
-	g_signal_connect(login_btn, "clicked", G_CALLBACK(login_button_click), main_area);
+	g_signal_connect(login_btn, "clicked", G_CALLBACK(login_button_click), NULL);
     
     GtkWidget *login_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(login_notify_label, GTK_ALIGN_CENTER);

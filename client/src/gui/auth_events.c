@@ -47,7 +47,7 @@ void focus_out_repassword_field(GtkWidget *widget, gpointer data)
     validate_repassword_field(password_field, repassword_field, repassword_notify_label);
 }
 
-void signup_button_click(GtkWidget *widget, gpointer main_area)
+void signup_button_click(GtkWidget *widget, gpointer data)
 {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     GtkWidget *username_field = get_widget_by_name_r(toplevel, "username_field");
@@ -75,18 +75,11 @@ void signup_button_click(GtkWidget *widget, gpointer main_area)
     char *user_name = (char*)gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(username_field)));
 	char *user_password = (char*)gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(password_field)));
 
-	int error_code = handle_signup_request(user_name, user_password);
-    handle_signup_error_code(error_code, signup_notify_label);
-
-    if(error_code == R_SUCCESS)
-    {
-        GtkWidget *signup_menu = get_widget_by_name_r(toplevel, "signup_menu");
-        gtk_widget_destroy(signup_menu);
-        build_login_menu((GtkWidget**)main_area);
-    }
+	int response_code = handle_signup_request(user_name, user_password);
+    handle_signup_response_code(response_code, signup_notify_label);
 }
 
-void login_button_click(GtkWidget *widget, gpointer main_area)
+void login_button_click(GtkWidget *widget, gpointer data)
 {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     GtkWidget *username_field = get_widget_by_name_r(toplevel, "username_field");
@@ -106,18 +99,6 @@ void login_button_click(GtkWidget *widget, gpointer main_area)
 	char *user_name = (char*)gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(username_field)));
 	char *user_password = (char*)gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(password_field)));
 
-    int error_code = handle_login_request(user_name, user_password);
-    handle_login_error_code(error_code, login_notify_label);
-
-	if(error_code == R_SUCCESS)
-    {
-        gtk_widget_destroy(main_window);
-	    main_window = create_new_window("UChat", 500, 0, true);
-
-        GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	    gtk_container_add(GTK_CONTAINER(main_window), main_area);
-
-        build_chat_screen(&main_area);
-        gtk_widget_show_all(main_window);
-    }
+    int response_code = handle_login_request(user_name, user_password);
+    handle_login_response_code(response_code, login_notify_label);
 }

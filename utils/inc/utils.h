@@ -49,6 +49,7 @@ typedef enum e_request_type {
     REQ_USR_LOGOUT,
     REQ_DELETE_CHAT,
     REQ_DELETE_MESSAGE,
+    REQ_EDIT_MESSAGE,
 
     // updater requests
     REQ_GET_CHATS,
@@ -98,6 +99,7 @@ void mx_clear_chat(t_chat** p);
 t_chat* mx_get_chat_by_id(t_chat* list, int chat_id);
 void mx_chat_pop_id(t_chat **list, int chat_id);
 void mx_chat_pop_index(t_chat **list, int index);
+int mx_chat_list_size(t_chat* list);
 
 void mx_print_chat_list(t_chat* chat); // remove
 

@@ -58,6 +58,7 @@ void handle_new_msg_count(const cJSON* chat_info, t_server_utils* utils);
 void handle_send_message(const cJSON* message_info, t_server_utils* utils);
 void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_delete_message(const cJSON* message_info, t_server_utils* utils);
+void handle_edit_message(const cJSON* message_info, t_server_utils* utils);
 
 // SQL
 
@@ -102,6 +103,7 @@ static const t_req_handler request_handlers[] = {
     handle_usr_logout,
     handle_delete_chat,
     handle_delete_message,
+    handle_edit_message,
     handle_get_chats,
     handle_get_chat_msgs,
     handle_get_msg,

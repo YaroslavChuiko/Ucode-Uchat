@@ -75,6 +75,12 @@ t_response_code handle_get_chats_request() {
     char* response = send_and_recv_from_server(utils->ssl, json_str);
     free(json_str);
 
+    int curr_chat_id;
+    if (utils->current_chat)
+    {
+        curr_chat_id = utils->current_chat->id;
+    }
+
     if ((error_code = handle_get_chats_response(&utils->chatlist, response, false)) != R_SUCCESS) {
         logger(get_response_str(error_code), ERROR_LOG);
         free(response);
@@ -82,6 +88,8 @@ t_response_code handle_get_chats_request() {
         return error_code;
     }
     free(response);
+
+    utils->current_chat = mx_get_chat_by_id(utils->chatlist, curr_chat_id);
 
     mx_print_chat_list(utils->chatlist);
 
