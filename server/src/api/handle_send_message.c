@@ -12,6 +12,9 @@ t_response_code db_insert_message(const cJSON* msg_json, t_msg** msg_to_send, t_
         
         return R_JSON_FAILURE;
     }
+    if (!db_chat_exists(chat_id->valueint)) {
+        return R_CHAT_NOENT;
+    }
     char query[QUERY_LEN];
     sprintf(query, "INSERT INTO `messages` (`user_id`, `chat_id`, `text`, `date`) VALUES('%d', '%d', '%s', '%d')", 
         user_id->valueint, chat_id->valueint, message->valuestring, date->valueint);

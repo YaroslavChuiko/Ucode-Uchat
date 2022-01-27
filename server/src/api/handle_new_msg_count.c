@@ -1,10 +1,14 @@
 #include "../../inc/server.h"
 
-int get_last_msg_id(const cJSON* chat_info, t_server_utils* utils) {
+t_response_code get_last_msg_id(const cJSON* chat_info, t_server_utils* utils, int* last_msg_id) {
 
     const cJSON *chat_id = cJSON_GetObjectItemCaseSensitive(chat_info, "chat_id");
-    if (!cJSON_IsNumber(chat_id))    {
-        return -1;
+    if (!cJSON_IsNumber(chat_id)) {
+        return R_JSON_FAILURE;
+    }
+
+    if (!db_chat_exists(chat_id->valueint)) {
+        return R_CHAT_NOENT;
     }
 
     char query[QUERY_LEN];
@@ -14,10 +18,10 @@ int get_last_msg_id(const cJSON* chat_info, t_server_utils* utils) {
     sqlite3* db = open_database();
     sqlite3_stmt* stmt = db_execute_stmt_for(query, db);
     
-    int last_msg_id = sqlite3_column_int64(stmt, 0);
+    *last_msg_id = sqlite3_column_int64(stmt, 0);
     sqlite3_finalize(stmt);
     sqlite3_close(db);
-    return last_msg_id;
+    return R_SUCCESS;
 
 }
 
@@ -28,8 +32,9 @@ void handle_new_msg_count(const cJSON* chat_info, t_server_utils* utils) {
         return;
     }
     int last_msg_id = -1;
-    if ((last_msg_id = get_last_msg_id(chat_info, utils)) == -1) {
-        send_server_response(utils->ssl, R_JSON_FAILURE, REQ_NEW_MSG_COUNT);
+    int error_code = 0;
+    if ((error_code = get_last_msg_id(chat_info, utils, &last_msg_id)) != R_SUCCESS) {
+        send_server_response(utils->ssl, error_code, REQ_NEW_MSG_COUNT);
         return;
     }
     cJSON* json = cJSON_CreateObject();
