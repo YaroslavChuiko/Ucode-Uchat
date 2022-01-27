@@ -51,6 +51,7 @@ typedef enum e_request_type {
     REQ_USR_LOGOUT,
     REQ_DELETE_CHAT,
     REQ_DELETE_MESSAGE,
+    REQ_EDIT_MESSAGE,
 
     // updater requests
     REQ_GET_CHATS,

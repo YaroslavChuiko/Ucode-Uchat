@@ -66,6 +66,7 @@ void handle_client_exit();
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);
+void handle_edit_msg_request(int message_id, const char* new_msg_text);
 
 bool is_request_for_update(t_request_type type);
 t_request_type get_request_type(cJSON* json);
