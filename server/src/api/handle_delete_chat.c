@@ -46,19 +46,6 @@ int db_delete_messages(int chat_id, t_server_utils* utils) {
 
 }
 
-int get_chat_id(const char* chat_name) {
-    char query[QUERY_LEN];
-    sprintf(query, "SELECT `id` FROM `chats` WHERE `name` = '%s'", chat_name);
-
-    sqlite3* db = open_database();
-    sqlite3_stmt* stmt = db_execute_stmt_for(query, db);
-
-    int chat_id = sqlite3_column_int64(stmt, 0);
-    sqlite3_finalize(stmt);
-    sqlite3_close(db);
-    return chat_id;
-}
-
 void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils) {
 
     if (database_init() != 0) {
@@ -73,7 +60,7 @@ void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils) {
         return;
     }
 
-    int chat_id = get_chat_id(chat_name->valuestring);
+    int chat_id = db_get_chat_id_by_name(chat_name->valuestring);
     t_response_code resp_code = 0;
     if ((resp_code = db_delete_chat(chat_name->valuestring, chat_id)) != R_SUCCESS) {
         send_server_response(utils->ssl, resp_code, REQ_DELETE_CHAT);

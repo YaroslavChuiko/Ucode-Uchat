@@ -94,6 +94,15 @@ void* handle_requests(void* arg) {
 
 			handle_create_chat_request(chat);
 
+		} else if (!mx_strncmp(client_request, "delete chat", 11)) {
+
+			char chat_name[100];
+			printf("Enter a name of chat to delete: ");
+			fgets(chat_name, 100, stdin);
+			char* chat = mx_strndup(chat_name, mx_get_char_index(chat_name, '\n'));
+
+			handle_delete_chat_request(chat);
+
 		} else if (!mx_strncmp(client_request, "message", 7)) {
 
 			char message[1024];
