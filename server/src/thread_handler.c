@@ -60,14 +60,13 @@ void* thread_handler(void* arg) {
             continue;
 
         t_request_type req_type = handle_request_for(request_str, server_utils);
-        if (req_type == REQ_USR_LOGOUT) {
+        if (req_type == REQ_CLIENT_EXIT) {
             mx_strdel(&request_str);
             break;
         }
         mx_strdel(&request_str);
 
     }
-    client_cleanup(server_utils);    
     pthread_detach(pthread_self());
     return NULL;
 

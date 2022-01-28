@@ -59,6 +59,7 @@ typedef enum e_request_type {
     REQ_SEARCH_CHATS,
     
     REQ_USR_LOGOUT,
+    REQ_CLIENT_EXIT,
 }            t_request_type;
 
 typedef struct s_response {
