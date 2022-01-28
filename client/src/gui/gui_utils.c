@@ -3,6 +3,7 @@
 void destroy(GtkWidget* widget, gpointer data)
 {
 	handle_logout_request();
+    // pthread_cancel(utils->th_reader);
 	client_cleanup();
     gtk_main_quit();
 }

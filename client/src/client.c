@@ -38,14 +38,14 @@ int main(int argc, char **argv) {
 	build_login_menu(&main_area);
     gtk_widget_show_all(main_window);
 
-    gtk_main();
-
 	// pthread_create(&th_read, NULL, handle_server_updates, utils);
 	// utils->th_reader = th_read;
+	// pthread_join(th_read, NULL);
+
+    gtk_main();
 	// pthread_create(&th_write, NULL, handle_requests, NULL);
 
 	// pthread_join(th_write, NULL);
-	// pthread_join(th_read, NULL);
 
 	return EXIT_SUCCESS;
 

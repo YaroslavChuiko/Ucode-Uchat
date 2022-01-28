@@ -6,7 +6,19 @@ int send_to_server(SSL *ssl, const char* request_str) {
     int req_len = mx_strlen(request_str);
     char* len_str = mx_itoa(req_len);
     // SSL_write(ssl, len_str, mx_strlen(len_str));
-    if (SSL_write(ssl, request_str, req_len) == -1) {
+    unsigned long err = 0;
+    while (SSL_write(ssl, request_str, req_len) == -1) {
+
+        // int server_sock = 0;
+        // SSL* ssl;
+        // SSL_CTX* ctx;
+        // connect_to_server(8080, &server_sock, &ctx, &ssl);
+        // utils->ssl = ssl;
+        // utils->ctx = ctx;
+
+        if ((err = ERR_get_error())) {
+            printf("error is: %s\nreason -- %s\n", ERR_error_string(err, NULL), ERR_reason_error_string(err));
+        }
         mx_strdel(&len_str);
         return 1;
     }

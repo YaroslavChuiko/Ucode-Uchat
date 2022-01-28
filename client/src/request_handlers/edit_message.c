@@ -16,6 +16,14 @@ void handle_edit_msg_request(int message_id, const char* new_msg_text) {
     int error_code = handle_server_response(response);
     logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
 
+    if (error_code == R_SUCCESS) {
+
+        t_msg* msg_to_edit = mx_get_msg_by_id(utils->current_chat->messages, message_id);
+        mx_strdel(&msg_to_edit->text);
+        msg_to_edit->text = mx_strdup(new_msg_text);
+
+    }
+
     free(json_str);
     free(response);
 
