@@ -60,7 +60,7 @@ bool is_empty_field(GtkWidget *field, GtkWidget *notify_label);
 
 //CHATLIST
 void add_chatlist_item(int id, char *chat_name);
-void buid_chatlist_message(char *message);
+void build_chatlist_message(char *message);
 
 //CHATLIST EVENTS
 void clear_container(GtkWidget *container);
@@ -73,8 +73,8 @@ void build_start_messaging_label();////////////////////////////////
 void build_delete_chat_btn();/////////////?????????????????????????????
 
 //SEARCH CHAT
-void check_empty_field(GtkWidget *widget, gpointer data);
-void clear_entry_field(GtkWidget *widget, gpointer entry_field);
+void search_field_change_event(GtkWidget *widget, gpointer data);
+void clear_search_field(GtkWidget *widget, gpointer entry_field);
 void search_field_enter_pressed(GtkWidget *widget, gpointer data);
 
 //DELETE CHAT EVENTS
@@ -87,6 +87,10 @@ void build_create_chat_menu(GtkWidget *main_area);
 void popup_create_chat_menu(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen);
 void create_chat_btn_click(GtkWidget *widget, gpointer data);
 
+//JOIN CHAT
+void join_chat_event(GtkWidget *widget, GdkEventButton *event, gpointer data);
+void add_join_chat_item(int id, char *chat_name);
+
 //VALIDATION
 bool validate_name_field(GtkWidget *username_field, GtkWidget *username_notify_label);
 bool validate_password_field(GtkWidget *password_field, GtkWidget *password_notify_label);
@@ -96,7 +100,7 @@ bool validate_repassword_field(GtkWidget *password_field, GtkWidget *repassword_
 void handle_login_response_code(int error_code, GtkWidget *login_notify_label);
 void handle_signup_response_code(int error_code, GtkWidget *signup_notify_label);
 void handle_create_chat_response_code(int error_code, GtkWidget* entry_field, GtkWidget *create_chat_notify_label);
-void handle_search_chat_response_code(int error_code, char *chat_name);
+void handle_join_chat_response_code(int error_code, char *chat_name);
 
 t_response_code handle_join_chat_request(const char* chat_name);
 t_response_code handle_signup_request(const char* user_name, const char* user_password);

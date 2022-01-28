@@ -34,14 +34,14 @@ void build_leftbar(GtkWidget *chat_screen)
 
     GtkWidget *search_field = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(search_field), "Search");
-    gtk_widget_set_name(search_field, "search_field");
-    g_signal_connect(G_OBJECT(search_field), "activate", G_CALLBACK(search_field_enter_pressed), NULL);
-	g_signal_connect(G_OBJECT(search_field), "changed", G_CALLBACK(check_empty_field), NULL);
+    gtk_widget_set_name(search_field, "global_search_field");
+    // g_signal_connect(G_OBJECT(search_field), "activate", G_CALLBACK(search_field_enter_pressed), NULL);
+	g_signal_connect(G_OBJECT(search_field), "changed", G_CALLBACK(search_field_change_event), NULL);
 
     GtkWidget *clear_field_btn = gtk_button_new_with_label("X");
     gtk_widget_set_size_request(GTK_WIDGET(clear_field_btn), 40, 40);
     gtk_widget_grab_focus(clear_field_btn);
-	g_signal_connect(G_OBJECT(clear_field_btn), "clicked", G_CALLBACK(clear_entry_field), search_field);
+	g_signal_connect(G_OBJECT(clear_field_btn), "clicked", G_CALLBACK(clear_search_field), search_field);
 
     gtk_box_pack_start(GTK_BOX(search_block), search_field, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(search_block), clear_field_btn, false, false, 0);

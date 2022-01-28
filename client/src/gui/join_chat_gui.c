@@ -1,6 +1,24 @@
 #include "../../inc/client.h"
 
-void add_chatlist_item(int id, char *chat_name)
+void join_chat_event(GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+    char *chat_name = (char *)gtk_widget_get_name(widget);
+
+    if (event->type == GDK_BUTTON_PRESS && event->button == 1)
+    {
+        set_chatlist_item_active(widget);
+    }
+    else if (event->type == GDK_DOUBLE_BUTTON_PRESS && event->button == 1)
+    {
+        int response_code = handle_join_chat_request(chat_name);
+        handle_join_chat_response_code(response_code, chat_name);
+        
+        GtkWidget *search_field = get_widget_by_name_r(main_window, "global_search_field");
+        gtk_entry_set_text(GTK_ENTRY(search_field), "");
+    }
+}
+
+void add_join_chat_item(int id, char *chat_name)
 {
     GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
 
@@ -12,7 +30,7 @@ void add_chatlist_item(int id, char *chat_name)
     add_class(event_box, "chatlist_item_wrap");
 	g_signal_connect(G_OBJECT(event_box), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(event_box), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-	g_signal_connect(G_OBJECT(event_box), "button_press_event", G_CALLBACK(clicked_chatlist_item), NULL);
+    g_signal_connect(G_OBJECT(event_box), "button_press_event", G_CALLBACK(join_chat_event), NULL);
 
     GtkWidget *chatlist_item = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_name(chatlist_item, mx_itoa(id));
@@ -44,46 +62,30 @@ void add_chatlist_item(int id, char *chat_name)
     // gtk_widget_set_name(chatlist_item_title, "chat_name");
     gtk_widget_set_halign(GTK_WIDGET(chatlist_item_title), GTK_ALIGN_START);
     gtk_box_pack_start(GTK_BOX(chatlist_item_text), chatlist_item_title, false, false, 0);
-    GtkWidget *chat_list_item_message = gtk_label_new("Last message");
-    gtk_widget_set_halign(GTK_WIDGET(chat_list_item_message), GTK_ALIGN_START);
-    gtk_box_pack_start(GTK_BOX(chatlist_item_text), chat_list_item_message, false, false, 0);
+    // GtkWidget *chat_list_item_message = gtk_label_new("Last message");
+    // gtk_widget_set_halign(GTK_WIDGET(chat_list_item_message), GTK_ALIGN_START);
+    // gtk_box_pack_start(GTK_BOX(chatlist_item_text), chat_list_item_message, false, false, 0);
     //
 
     // info block
-    GtkWidget *chatlist_item_info = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_widget_set_halign(GTK_WIDGET(chatlist_item_info), GTK_ALIGN_END);
-    // gtk_widget_set_valign(GTK_WIDGET(chatlist_item_info), GTK_ALIGN_END);
-    gtk_box_pack_end(GTK_BOX(chatlist_item), chatlist_item_info, false, false, 0);
-    add_class(chatlist_item_info, "chatlist_item_info");
+    // GtkWidget *chatlist_item_info = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    // gtk_widget_set_halign(GTK_WIDGET(chatlist_item_info), GTK_ALIGN_END);
+    // // gtk_widget_set_valign(GTK_WIDGET(chatlist_item_info), GTK_ALIGN_END);
+    // gtk_box_pack_end(GTK_BOX(chatlist_item), chatlist_item_info, false, false, 0);
+    // add_class(chatlist_item_info, "chatlist_item_info");
 
-    GtkWidget *chatlist_item_time = gtk_label_new("15:00");
-    gtk_widget_set_valign(GTK_WIDGET(chatlist_item_time), GTK_ALIGN_START);
-    gtk_widget_set_halign(GTK_WIDGET(chatlist_item_time), GTK_ALIGN_END);
-    gtk_box_pack_start(GTK_BOX(chatlist_item_info), chatlist_item_time, false, false, 0);
-    add_class(chatlist_item_time, "chatlist_item_time");
-    GtkWidget *chatlist_item_notify = gtk_label_new("2");
-    gtk_widget_set_size_request(GTK_WIDGET(chatlist_item_notify), 20, 20);
-    gtk_widget_set_valign(GTK_WIDGET(chatlist_item_notify), GTK_ALIGN_END);
-    gtk_widget_set_halign(GTK_WIDGET(chatlist_item_notify), GTK_ALIGN_END);
-    gtk_box_pack_start(GTK_BOX(chatlist_item_info), chatlist_item_notify, false, false, 0);
-    add_class(chatlist_item_notify, "chatlist_item_notify");
+    // GtkWidget *chatlist_item_time = gtk_label_new("15:00");
+    // gtk_widget_set_valign(GTK_WIDGET(chatlist_item_time), GTK_ALIGN_START);
+    // gtk_widget_set_halign(GTK_WIDGET(chatlist_item_time), GTK_ALIGN_END);
+    // gtk_box_pack_start(GTK_BOX(chatlist_item_info), chatlist_item_time, false, false, 0);
+    // add_class(chatlist_item_time, "chatlist_item_time");
+    // GtkWidget *chatlist_item_notify = gtk_label_new("2");
+    // gtk_widget_set_size_request(GTK_WIDGET(chatlist_item_notify), 20, 20);
+    // gtk_widget_set_valign(GTK_WIDGET(chatlist_item_notify), GTK_ALIGN_END);
+    // gtk_widget_set_halign(GTK_WIDGET(chatlist_item_notify), GTK_ALIGN_END);
+    // gtk_box_pack_start(GTK_BOX(chatlist_item_info), chatlist_item_notify, false, false, 0);
+    // add_class(chatlist_item_notify, "chatlist_item_notify");
     //
 
     gtk_widget_show_all(event_box);
-}
-
-void build_chatlist_message(char *message)
-{
-    GtkWidget *chatlist = get_widget_by_name_r(main_window, "chatlist");
-    clear_container(chatlist);
-
-    GtkWidget *chat_not_found_label = gtk_label_new(message);
-    gtk_widget_set_name(chat_not_found_label, "chat_not_found_label");
-    gtk_widget_set_halign(GTK_WIDGET(chat_not_found_label), GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(GTK_WIDGET(chat_not_found_label), GTK_ALIGN_CENTER);
-    gtk_box_pack_start(GTK_BOX(chatlist), chat_not_found_label, FALSE, FALSE, 0);
-    gtk_widget_set_vexpand(chat_not_found_label, TRUE);
-    gtk_widget_set_hexpand(chat_not_found_label, TRUE);
-
-    gtk_widget_show_all(chatlist);
 }

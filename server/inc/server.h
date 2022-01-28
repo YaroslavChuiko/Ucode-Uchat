@@ -101,7 +101,6 @@ static const t_req_handler request_handlers[] = {
     handle_edit_message,
     handle_get_chats,
     handle_get_chat_msgs,  
-    handle_get_chat_msgs,
     handle_get_msg,
     handle_new_msg_count,
     handle_search_chats,
