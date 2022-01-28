@@ -7,4 +7,6 @@ void client_cleanup(t_server_utils* utils) {
     mx_clear_user(&utils->user);
     free(utils);
 
+    logger("Cleanup completed\n", INFO_LOG);
+
 }

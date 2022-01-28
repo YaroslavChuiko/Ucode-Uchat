@@ -84,6 +84,7 @@ t_response_code handle_get_chats_request() {
     if ((error_code = handle_get_chats_response(&utils->chatlist, response, false)) != R_SUCCESS) {
         logger(get_response_str(error_code), ERROR_LOG);
         free(response);
+        utils->is_suspended = false;
         return error_code;
     }
     free(response);

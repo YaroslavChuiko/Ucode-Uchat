@@ -73,6 +73,7 @@ void handle_get_chat_msgs(const cJSON* chat_info, t_server_utils* utils) {
     char* json_str = cJSON_PrintUnformatted(json);
     send_response_to(utils->ssl, json_str);
     
+    cJSON_Delete(messages);
     cJSON_Delete(json);
     free(json_str);
     

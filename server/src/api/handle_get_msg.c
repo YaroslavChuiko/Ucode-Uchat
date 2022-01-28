@@ -38,7 +38,6 @@ void handle_get_msg(const cJSON* msg_info, t_server_utils* utils) {
         return;
     }
 
-    cJSON* json = cJSON_CreateObject();
     cJSON* msg_json = get_msg_by_id(msg_info, utils);
     
     if (msg_json == NULL) {
@@ -46,6 +45,7 @@ void handle_get_msg(const cJSON* msg_info, t_server_utils* utils) {
         return;
     }
 
+    cJSON* json = cJSON_CreateObject();
     cJSON_AddItemReferenceToObject(json, "message", msg_json);
     cJSON_AddNumberToObject(json, "type", REQ_GET_MSG);
     cJSON_AddNumberToObject(json, "error_code", R_SUCCESS);

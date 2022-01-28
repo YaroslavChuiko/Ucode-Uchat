@@ -1,8 +1,8 @@
 #include "../../inc/client.h"
 
-static int handle_new_message(t_chat* curr_chat, int idx, int last_msg_id) {
+static int handle_new_message(t_chat* curr_chat, int message_id) {
 
-	handle_get_msg_request(curr_chat->id, last_msg_id + idx);
+	handle_get_msg_request(curr_chat->id, message_id);
 	t_msg* new_msg = NULL;
 
 	if (!(new_msg = handle_get_msg_response())) {
@@ -18,8 +18,7 @@ static int handle_new_message(t_chat* curr_chat, int idx, int last_msg_id) {
 		sprintf(str, "You're reading an incoming message from %s", curr_chat->name);
 		client_log(str, INFO_LOG);
 
-		mx_msg_dfl_push_back(&curr_chat->messages, new_msg->message_id, new_msg->sender_id, new_msg->sender_name, 
-							new_msg->chat_id, new_msg->text, new_msg->date_str);
+		mx_msg_push_back(&curr_chat->messages, new_msg);
 
 	} else {
 		// if we got messages from a different chat (the one not being selected)
@@ -47,6 +46,7 @@ static int handle_new_message(t_chat* curr_chat, int idx, int last_msg_id) {
 //	Thread handler for checking and handling server updates
 void* handle_server_updates(void* arg) {
 	
+	(void)arg;
     while (1) {
 
 		if (utils && utils->is_suspended)
@@ -70,10 +70,10 @@ void* handle_server_updates(void* arg) {
 				continue;
 			}
 			
-			int last_msg_id = mx_get_last_msg_id(curr_chat, is_current_chat);
+			int last_msg_id = mx_get_last_msg_id(curr_chat, is_current_chat, utils->current_user->user_id);
 			for (int i = 1; i <= new_msg_count; ++i) {
 				
-				if (handle_new_message(curr_chat, i, last_msg_id) != 0)
+				if (handle_new_message(curr_chat, last_msg_id + i) != 0)
 					continue;
 
 			}

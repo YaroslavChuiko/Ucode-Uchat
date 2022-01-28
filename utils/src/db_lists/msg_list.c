@@ -7,9 +7,9 @@ t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id
     new_node->message_id = msg_id;
     new_node->chat_id = chat_id;
     new_node->sender_id = user_id;
-    new_node->sender_name = strdup(user_name);
-    new_node->text = strdup(text);
-    new_node->date_str = strdup(date_str);
+    new_node->sender_name = mx_strdup(user_name);
+    new_node->text = mx_strdup(text);
+    new_node->date_str = mx_strdup(date_str);
     new_node->next = NULL;
     
     return new_node;
@@ -117,6 +117,18 @@ void mx_msg_pop_index(t_msg **list, int index) {
     current->next = next;
 
 }
+
+void mx_msg_pop_id(t_msg **list, int msg_id) {
+
+    t_msg *temp = *list;
+    for (int i = 0; temp; temp = temp->next, ++i) {
+        if (temp->message_id == msg_id) {
+            mx_msg_pop_index(list, i);
+            return;
+        }
+    }
+}
+
 
 void mx_clear_msg_list(t_msg **list)
 {

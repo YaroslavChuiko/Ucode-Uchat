@@ -19,8 +19,8 @@ void set_user_account_data(sqlite3_stmt* stmt, t_server_utils* utils) {
     if (sqlite3_step(stmt) == SQLITE_ROW) {
 
         utils->user = mx_create_user(sqlite3_column_int64(stmt, 0), utils->client_socket, utils->ssl);
-        utils->user->name = strdup((const char*)sqlite3_column_text(stmt, 1));
-        utils->user->password = strdup((const char*)sqlite3_column_text(stmt, 2));
+        utils->user->name = mx_strdup((const char*)sqlite3_column_text(stmt, 1));
+        utils->user->password = mx_strdup((const char*)sqlite3_column_text(stmt, 2));
 
     }
     sqlite3_finalize(stmt);
@@ -79,11 +79,5 @@ void handle_usr_login(const cJSON* user_info, t_server_utils* utils) {
 
     if (set_user_by_username(user_name->valuestring, user_password->valuestring, utils) != 0)
         return;
-
-    pthread_mutex_lock(&global_state.lock);
-    mx_user_push_back(&global_state.logged_users, utils->user->user_id, utils->user->client_fd, utils->ssl);
-    pthread_mutex_unlock(&global_state.lock);
-
-    print_logged_users();
 
 }

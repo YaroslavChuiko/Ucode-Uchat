@@ -123,6 +123,7 @@ void build_rightbar(GtkWidget *chat_screen)
 {
     GtkWidget *chat = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_widget_set_hexpand(chat, TRUE);
+    gtk_widget_set_vexpand(chat, TRUE);
     gtk_widget_set_size_request(GTK_WIDGET(chat), WINDOW_WIDTH - LEFT_BAR_W, WINDOW_HEIGHT);
     gtk_grid_attach(GTK_GRID(chat_screen), chat, 1, 0, 2, 1);
     gtk_widget_set_name(chat, "chat");

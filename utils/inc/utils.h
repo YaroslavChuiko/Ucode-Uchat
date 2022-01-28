@@ -10,6 +10,7 @@
 
 #include "db_types.h"
 #include "const.h"
+#include "../../libraries/libmx/inc/libmx.h"
 
 extern int errno;
 
@@ -34,6 +35,7 @@ typedef enum e_response_code {
     R_IS_CHAT_MEMBER,
     R_ISNT_CHAT_MEMBER,
     R_NO_CHAT_PERMS,
+    R_CHATS_TOTAL_REACHED,
     R_NAME_FORMAT_INVALID,
 
     R_MSG_USR_NOENT,
@@ -46,20 +48,17 @@ typedef enum e_request_type {
     REQ_CREATE_CHAT,
     REQ_JOIN_CHAT,
     REQ_SEND_MESSAGE,
-    REQ_USR_LOGOUT,
     REQ_DELETE_CHAT,
     REQ_DELETE_MESSAGE,
     REQ_EDIT_MESSAGE,
 
-    // updater requests
     REQ_GET_CHATS,
     REQ_GET_CHAT_MSGS,
     REQ_GET_MSG,
     REQ_NEW_MSG_COUNT,
     REQ_SEARCH_CHATS,
     
-    REQ_NEW_MESSAGE,
-    REQ_CLIENT_EXIT,
+    REQ_USR_LOGOUT,
 }            t_request_type;
 
 typedef struct s_response {
@@ -71,7 +70,7 @@ typedef struct s_response {
 static const t_response response_objs[] = {
     { R_SUCCESS, "Request handled successfully" },
     { R_DB_FAILURE, "A database error occurred when handling the request" },
-    { R_DB_FAILURE, "A json error occurred when handling the request" },
+    { R_JSON_FAILURE, "A json error occurred when handling the request" },
     { R_INVALID_INPUT, "The input was invalid" },
     { R_USR_EXISTS, "The user with this name already exists" },
     { R_USR_NOENT, "There's no user by that name" },
@@ -81,6 +80,7 @@ static const t_response response_objs[] = {
     { R_IS_CHAT_MEMBER, "You're already a member of this chat" },
     { R_ISNT_CHAT_MEMBER, "You're not a member of this chat" },
     { R_NO_CHAT_PERMS, "You don't have the permissions for this action" },
+    { R_CHATS_TOTAL_REACHED, "You can't be a member of more than 15 chats" },
     { R_NAME_FORMAT_INVALID, "The name should contain only letters and digits" },
     { R_MSG_USR_NOENT, "Couldn't find this message's sender" },
 };
@@ -108,10 +108,11 @@ void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* use
 void mx_msg_push_back(t_msg** list, t_msg* new_node);
 void mx_clear_msg_list(t_msg **list);
 void mx_msg_pop_index(t_msg **list, int index);
+void mx_msg_pop_id(t_msg **list, int msg_id);
 int mx_get_msg_idx_by_id(t_msg* list, int id);
 void mx_clear_msg_list(t_msg **list);
 int mx_msg_list_size(t_msg* list);
-int mx_get_last_msg_id(t_chat* chat, bool is_current);
+int mx_get_last_msg_id(t_chat* chat, bool is_current, int user_id);
 void mx_clear_msg(t_msg** p);
 t_msg* mx_get_last_msg_node(t_msg* list);
 void mx_print_msg(t_msg* msg); // remove

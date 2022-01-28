@@ -14,10 +14,13 @@
 #include <pthread.h>
 #include <gtk/gtk.h>
 
+#ifdef __MACH__
+#include "../../libraries/openssl/openssl/ssl.h"
+#include "../../libraries/openssl/openssl/err.h"
+#else
 #include <openssl/ssl.h>
 #include <openssl/err.h>
-// #include "../../libraries/openssl/openssl/ssl.h"
-// #include "../../libraries/openssl/openssl/err.h"
+#endif
 
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/libmx/inc/libmx.h"
@@ -114,19 +117,19 @@ t_msg* handle_get_msg_response();
 t_chat* handle_search_chats_request(const char* search_str);
 int handle_new_msg_count_request(int chat_id, bool is_current);
 void handle_logout_request();
-void handle_client_exit();
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);
+t_msg* get_msg_from_json(cJSON* json);
 void handle_edit_msg_request(int message_id, const char* new_msg_text);
 
 t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
-t_request_type get_request_type(cJSON* json);
 t_response_code handle_server_response(const char* response_str);
 int send_to_server(SSL *ssl, const char* request_str);
-t_response_code get_response_code(cJSON* json);
 char* send_and_recv_from_server(SSL *ssl, const char* json_str);
 char* recv_from_server(SSL* ssl);
+t_response_code get_response_code(cJSON* json);
+t_request_type get_request_type(cJSON* json);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
 void client_cleanup();
@@ -138,4 +141,14 @@ void connect_ssl(SSL **ssl, int* server_fd, SSL_CTX **ctx);
 void client_log(const char* info, t_info_type type);
 char* get_log_name();
 
+void build_rightbar_chat();
+void delete_message(GtkWidget *widget, t_msg *message);
+void edit_button_click(GtkWidget *widget, t_msg *message);
+void edit_message(GtkWidget *widget, t_msg *message);
+void add_message(t_msg *message);
+void update_chat_field();
+void scroll_to_end(GtkWidget *widget, gpointer data);
+void send_button_click(GtkWidget *widget, gpointer new_message_field);
+
 #endif
+

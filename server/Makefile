@@ -1,7 +1,7 @@
 CC = clang
 CFLAGS = -std=gnu11 -pthread -g 
 # -Wall -Wextra -Werror -Wpedantic
-# CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread
+# CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread -g
 
 OBJDIR = obj
 SRCDIR = src src/api src/server_utils src/database
@@ -24,10 +24,11 @@ SSL_DIR = ../libraries/openssl
 SSL_FILES:= ../local_lib/lib
 SSL_INC_FILES:= $(SSL_DIR)
 
-LIB_FLAGS = -lm -lcjson -lsqlite3 -lssl -lcrypto -L$(LIBMX_DIR) $(LIBMX_NAME)\
-												 -L$(UTILSLIB_DIR) $(UTILSLIB_NAME)\
-												 -L$(CJSON_DIR) $(CJSON_NAME)\
-												#  -L$(SSL_FILES) -I$(SSL_INC_FILES)
+LIB_FLAGS = -lmx -lcjson -lsqlite3 -lssl -lcrypto \
+			-L$(LIBMX_DIR) $(LIBMX_NAME) \
+			-L$(UTILSLIB_DIR) $(UTILSLIB_NAME) \
+			-L$(CJSON_DIR) $(CJSON_NAME) \
+			# -L$(SSL_FILES) -I$(SSL_INC_FILES)
 
 all: $(UCHAT)
 
