@@ -138,4 +138,14 @@ void connect_ssl(SSL **ssl, int* server_fd, SSL_CTX **ctx);
 void client_log(const char* info, t_info_type type);
 char* get_log_name();
 
+void build_rightbar_chat();
+void delete_message(GtkWidget *widget, t_msg *message);
+void edit_button_click(GtkWidget *widget, t_msg *message);
+void edit_message(GtkWidget *widget, t_msg *message);
+void add_message(t_msg *message);
+void update_chat_field();
+void scroll_to_end(GtkWidget *widget, gpointer data);
+void send_button_click(GtkWidget *widget, gpointer new_message_field);
+
 #endif
+

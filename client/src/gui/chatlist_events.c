@@ -36,6 +36,7 @@ void clicked_chatlist_item(GtkWidget *widget, gpointer data)
     set_current_chat(widget);
     set_chatlist_item_active(widget);
     // build_delete_chat_btn();
+    build_rightbar_chat();
 }
 
 void update_chatlist()

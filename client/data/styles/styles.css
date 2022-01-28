@@ -122,3 +122,21 @@
     padding: 0;
     margin: 0;
 }
+
+.right_message {
+    background-color: rgb(192, 172, 206);
+    color: rgb(24, 11, 33);
+    padding: 5px;
+    border-radius: 10px 0 10px 10px;
+}
+
+.left_message {
+    background-color: rgb(192, 172, 206);
+    color: rgb(24, 11, 33);
+    padding: 5px;
+    border-radius: 0 10px 10px 10px;
+}
+
+.message_btn {
+    padding: 0;
+}
