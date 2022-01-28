@@ -36,7 +36,7 @@ void daemon_init();
 void handle_arg_errors(char** argv);
 void send_response_to(SSL* ssl, const char* response);
 void send_server_response(SSL* ssl, t_response_code code, t_request_type req_type);\
-void client_cleanup(t_server_utils* utils);
+void client_cleanup(t_server_utils* utils, bool is_client_exit);
 int server_socket_init(struct sockaddr* serv_address, socklen_t address_size);
 void new_client_create(SSL* ssl, int client_socket);
 
@@ -59,6 +59,7 @@ void handle_send_message(const cJSON* message_info, t_server_utils* utils);
 void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_delete_message(const cJSON* message_info, t_server_utils* utils);
 void handle_edit_message(const cJSON* message_info, t_server_utils* utils);
+t_request_type handle_usr_logout(const cJSON* logout_info, t_server_utils* utils);
 
 // SQL
 
