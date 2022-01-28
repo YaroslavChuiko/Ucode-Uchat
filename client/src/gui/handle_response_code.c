@@ -88,13 +88,6 @@ void handle_create_chat_response_code(int response_code, GtkWidget* entry_field,
             GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
             GtkWidget *toplevel = gtk_widget_get_toplevel(entry_field);
             update_chatlist();
-            // set_chatlist_item_active(get_widget_by_name_r(chatlist_container, mx_itoa(utils->current_chat->id)));
-            // if (utils->current_chat)
-            // {
-            //     printf("%s\n", utils->current_chat->name);
-            //     set_chatlist_item_active(get_widget_by_name_r(chatlist_container, utils->current_chat->name));
-            // }
-            
             utils->current_chat ? set_chatlist_item_active(get_widget_by_name_r(chatlist_container, utils->current_chat->name)) : (void)0;
             gtk_widget_destroy(toplevel);
             break;
@@ -109,7 +102,7 @@ void handle_create_chat_response_code(int response_code, GtkWidget* entry_field,
     }
 }
 
-void handle_search_chat_response_code(int response_code, char *chat_name)
+void handle_join_chat_response_code(int response_code, char *chat_name)
 {
     switch (response_code)
     {
@@ -121,11 +114,11 @@ void handle_search_chat_response_code(int response_code, char *chat_name)
             break;
 
         case R_CHAT_NOENT:
-            buid_chatlist_message(get_response_str(R_CHAT_NOENT));
+            build_chatlist_message(get_response_str(R_CHAT_NOENT));
             break;
 
         case R_IS_CHAT_MEMBER:
-            buid_chatlist_message(get_response_str(R_IS_CHAT_MEMBER));
+            build_chatlist_message(get_response_str(R_IS_CHAT_MEMBER));
             break;
         
         default:
