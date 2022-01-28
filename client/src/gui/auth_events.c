@@ -22,7 +22,6 @@ void switch_to_signup_menu(GtkWidget *widget, GdkEventButton *event, gpointer da
 
 void focus_out_username_field(GtkWidget *widget, gpointer data)
 {
-    // GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     GtkWidget *username_field = get_widget_by_name_r(main_window, "username_field");
     GtkWidget *username_notify_label = get_widget_by_name_r(main_window, "username_notify_label");
     validate_name_field(username_field, username_notify_label);
@@ -30,7 +29,6 @@ void focus_out_username_field(GtkWidget *widget, gpointer data)
 
 void focus_out_password_field(GtkWidget *widget, gpointer data)
 {
-    // GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");
     GtkWidget *password_notify_label = get_widget_by_name_r(main_window, "password_notify_label");
     validate_password_field(password_field, password_notify_label);
@@ -38,7 +36,6 @@ void focus_out_password_field(GtkWidget *widget, gpointer data)
 
 void focus_out_repassword_field(GtkWidget *widget, gpointer data)
 {
-    // GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");
     GtkWidget *repassword_field = get_widget_by_name_r(main_window, "repassword_field");
     GtkWidget *repassword_notify_label = get_widget_by_name_r(main_window, "repassword_notify_label");
@@ -47,7 +44,6 @@ void focus_out_repassword_field(GtkWidget *widget, gpointer data)
 
 void signup_button_click(GtkWidget *widget, gpointer data)
 {
-    // GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     GtkWidget *username_field = get_widget_by_name_r(main_window, "username_field");
     GtkWidget *username_notify_label = get_widget_by_name_r(main_window, "username_notify_label");
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");
@@ -79,7 +75,6 @@ void signup_button_click(GtkWidget *widget, gpointer data)
 
 void login_button_click(GtkWidget *widget, gpointer data)
 {
-    // GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     GtkWidget *username_field = get_widget_by_name_r(main_window, "username_field");
     GtkWidget *username_notify_label = get_widget_by_name_r(main_window, "username_notify_label");
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");

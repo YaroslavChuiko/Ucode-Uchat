@@ -3,21 +3,6 @@
 t_client_utils* utils;
 GtkWidget *main_window;
 
-void build_authorizatioin_window()
-{
-	if (main_window)
-        gtk_widget_destroy(main_window);
-
-	main_window = create_new_window("login", 500, 0, false);
-
-	GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	gtk_widget_set_name(main_area, "main_area");
-	gtk_container_add(GTK_CONTAINER(main_window), main_area);
-
-	build_login_menu();
-	gtk_widget_show_all(main_window);
-}
-
 void* handle_requests(void* arg);
 int main(int argc, char **argv) {
 
@@ -34,11 +19,7 @@ int main(int argc, char **argv) {
 	connect_to_server(atoi(argv[1]), &server_socket, &ctx, &ssl);
 	client_init(server_socket, ssl, ctx);
 
-	// GtkWidget* window;
-	
     gtk_init(&argc, &argv);
-
-	// main_window = create_new_window("login", 500, 0, false);
 
 	// CSS
 	GtkCssProvider *styles = gtk_css_provider_new();
@@ -47,13 +28,6 @@ int main(int argc, char **argv) {
 	//
 
 	build_authorizatioin_window();
-
-	// GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-	// gtk_widget_set_name(main_area, "main_area");
-	// gtk_container_add(GTK_CONTAINER(main_window), main_area);
-
-	// build_login_menu();
-    // gtk_widget_show_all(main_window);
 
 	// pthread_create(&th_read, NULL, handle_server_updates, utils);
 	// utils->th_reader = th_read;

@@ -33,7 +33,6 @@ unsigned long get_current_time();
 char* mx_get_string_time(unsigned long seconds);
 
 //GUI UTILS
-void destroy(GtkWidget* widget, gpointer data);
 void on_crossing (GtkWidget *widget, GdkEventCrossing *event);
 void add_class(GtkWidget *widget, char *class_name);
 void remove_class(GtkWidget *widget, char *class_name);
@@ -43,9 +42,13 @@ void set_notify_error_style( GtkWidget *notify_label, char *message);
 void set_notify_success_style( GtkWidget *notify_label, char *message);
 GtkWidget *get_widget_by_name(GtkWidget *container, char *name);
 GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name);
+
+//BUILD WINDOWS
+// void destroy(GtkWidget* widget, gpointer data);
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 GtkWidget *create_popup_window(int width, int height);
 void build_authorizatioin_window();
+void build_chat_window();
 
 //AUTH
 void build_login_menu();

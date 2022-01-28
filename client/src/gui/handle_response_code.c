@@ -14,21 +14,6 @@ static void login_or_password_is_invalid(GtkWidget *login_notify_label)
     set_notify_error_style(password_notify_label, "Login or password is invalid");
 }
 
-static void build_chat_window()
-{
-    if (main_window)
-        gtk_widget_destroy(main_window);
-
-    main_window = create_new_window("UChat", 500, 0, true);
-
-    GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_widget_set_name(main_area, "main_area");
-    gtk_container_add(GTK_CONTAINER(main_window), main_area);
-
-    build_chat_screen();
-    gtk_widget_show_all(main_window);
-}
-
 void handle_login_response_code(int response_code, GtkWidget *login_notify_label)
 {
     switch (response_code)
