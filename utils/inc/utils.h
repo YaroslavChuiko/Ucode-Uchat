@@ -35,6 +35,7 @@ typedef enum e_response_code {
     R_IS_CHAT_MEMBER,
     R_ISNT_CHAT_MEMBER,
     R_NO_CHAT_PERMS,
+    R_CHATS_TOTAL_REACHED,
     R_NAME_FORMAT_INVALID,
 
     R_MSG_USR_NOENT,
@@ -51,7 +52,6 @@ typedef enum e_request_type {
     REQ_DELETE_MESSAGE,
     REQ_EDIT_MESSAGE,
 
-    // updater requests
     REQ_GET_CHATS,
     REQ_GET_CHAT_MSGS,
     REQ_GET_MSG,
@@ -80,6 +80,7 @@ static const t_response response_objs[] = {
     { R_IS_CHAT_MEMBER, "You're already a member of this chat" },
     { R_ISNT_CHAT_MEMBER, "You're not a member of this chat" },
     { R_NO_CHAT_PERMS, "You don't have the permissions for this action" },
+    { R_CHATS_TOTAL_REACHED, "You can't be a member of more than 15 chats" },
     { R_NAME_FORMAT_INVALID, "The name should contain only letters and digits" },
     { R_MSG_USR_NOENT, "Couldn't find this message's sender" },
 };

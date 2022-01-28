@@ -16,6 +16,8 @@
 #define MIN_PASS_INPUT_LEN  8
 
 #define MAX_MSG_INPUT_LEN   1024
-#define MIN_MSG_INPUT_LEN  1
+#define MIN_MSG_INPUT_LEN   1
+
+#define MAX_CHATS_TOTAL     15
 
 #endif
