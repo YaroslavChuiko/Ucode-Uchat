@@ -10,13 +10,8 @@ INC_FILES = $(wildcard $(INC_DIR)/*.h)
 
 CC = clang
 
-CFLAGS = -std=gnu11 -Wall -Wextra -Werror -Wpedantic
-# CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
-
-# SFLAGS = -fPIC -pedantic -Wstrict-prototypes -Wwrite-strings -Wshadow \
-# 		 -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes \
-# 		 -Wstrict-overflow=2 -Wcast-qual -Wc++-compat -Wundef \
-# 		 -Wswitch-default -Wconversion
+# CFLAGS = -std=gnu11 -Wall -Wextra -Werror -Wpedantic
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
 all: $(NAME)
 

@@ -23,6 +23,11 @@ void handle_join_chat(const cJSON* chat_info, t_server_utils* utils) {
         return;
     }
 
+    if (db_get_chats_total(utils->user->user_id) >= MAX_CHATS_TOTAL) {
+        send_server_response(utils->ssl, R_CHATS_TOTAL_REACHED, REQ_CREATE_CHAT);
+        return;
+    }
+
     t_response_code resp_code = 0;
     if ((resp_code = db_insert_member(chat_name->valuestring, NORMAL_MEMBER, utils)) != R_SUCCESS) {
         send_server_response(utils->ssl, resp_code, REQ_JOIN_CHAT);
@@ -30,7 +35,5 @@ void handle_join_chat(const cJSON* chat_info, t_server_utils* utils) {
     }
 
     send_server_response(utils->ssl, R_SUCCESS, REQ_JOIN_CHAT);
-
-    print_logged_users();
 
 }

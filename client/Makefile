@@ -1,7 +1,7 @@
 CC = clang
 CFLAGS = -std=gnu11 -pthread -g 
 # -Wall -Wextra -Werror -Wpedantic
-# CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread
+# CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread -g
 
 OBJDIR = obj
 SRCDIR = src src/request_handlers src/gui

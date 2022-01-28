@@ -40,10 +40,6 @@ int db_insert_member(const char* chat_name, t_member_type member_type, t_server_
     }
 
     mx_chat_push_back(&utils->user->chats, chat_id, chat_name, member_type);
-    t_user* user_to_update = NULL;
-    if ((user_to_update = mx_get_user_by_id(global_state.logged_users, user_id))) {
-        mx_chat_push_back(&user_to_update->chats, chat_id, chat_name, member_type);
-    }
     
     return 0;
 

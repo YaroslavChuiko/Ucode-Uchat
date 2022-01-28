@@ -46,6 +46,7 @@ static int handle_new_message(t_chat* curr_chat, int message_id) {
 //	Thread handler for checking and handling server updates
 void* handle_server_updates(void* arg) {
 	
+	(void)arg;
     while (1) {
 
 		if (utils && utils->is_suspended)

@@ -26,12 +26,15 @@ t_request_type handle_request_for(const char* request, t_server_utils* utils) {
     // sprintf(str, "The type of the request is: %d\n", type);
     // logger(str, INFO_LOG);
     
-    if (type == REQ_CLIENT_EXIT) {
+    if (type == REQ_USR_LOGOUT) {
+        char str[100];
+        sprintf(str, "User (%d, %s) logged out\n", utils->user->user_id, utils->user->name);
+        logger(str, INFO_LOG);
         cJSON_Delete(json);
         return type;
     }
 
-    // call the request handler for the gotten type
+    // call the request handler for the gotten request type
     request_handlers[type](json, utils);
     
     cJSON_Delete(json);

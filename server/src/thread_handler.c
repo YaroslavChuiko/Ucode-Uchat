@@ -52,10 +52,7 @@ char* read_client_data(SSL *ssl) {
 
 void* thread_handler(void* arg) {
 
-    t_server_utils *server_utils = malloc(sizeof(*server_utils));
-    server_utils->client_socket = ((t_server_utils *)arg)->client_socket;
-    server_utils->ssl = ((t_server_utils *)arg)->ssl;
-    server_utils->user = NULL;
+    t_server_utils *server_utils = (t_server_utils*)arg;
     while (1) {
 
         char* request_str = NULL;
@@ -63,7 +60,7 @@ void* thread_handler(void* arg) {
             continue;
 
         t_request_type req_type = handle_request_for(request_str, server_utils);
-        if (req_type == REQ_USR_LOGOUT || req_type == REQ_CLIENT_EXIT) {
+        if (req_type == REQ_USR_LOGOUT) {
             mx_strdel(&request_str);
             break;
         }
