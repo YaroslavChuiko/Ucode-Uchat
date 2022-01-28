@@ -16,15 +16,17 @@ static void login_or_password_is_invalid(GtkWidget *login_notify_label)
 
 static void build_chat_window()
 {
+    if (main_window)
         gtk_widget_destroy(main_window);
-	    main_window = create_new_window("UChat", 500, 0, true);
 
-        GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-        gtk_widget_set_name(main_area, "main_area");
-	    gtk_container_add(GTK_CONTAINER(main_window), main_area);
+    main_window = create_new_window("UChat", 500, 0, true);
 
-        build_chat_screen(&main_area);
-        gtk_widget_show_all(main_window);
+    GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    gtk_widget_set_name(main_area, "main_area");
+    gtk_container_add(GTK_CONTAINER(main_window), main_area);
+
+    build_chat_screen();
+    gtk_widget_show_all(main_window);
 }
 
 void handle_login_response_code(int response_code, GtkWidget *login_notify_label)
@@ -109,8 +111,7 @@ void handle_join_chat_response_code(int response_code, char *chat_name)
         case R_SUCCESS:
             update_chatlist();
             GtkWidget *new_chatlist_item = get_widget_by_name_r(main_window, chat_name);
-            set_current_chat(new_chatlist_item);
-            set_chatlist_item_active(new_chatlist_item);
+            activate_chat(new_chatlist_item);
             break;
 
         case R_CHAT_NOENT:

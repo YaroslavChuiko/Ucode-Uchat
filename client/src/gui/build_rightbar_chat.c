@@ -68,6 +68,20 @@ void build_rightbar_chat() {
     gtk_widget_set_halign(GTK_WIDGET(chat_header_time), GTK_ALIGN_START);
     gtk_box_pack_start(GTK_BOX(chat_header_text), chat_header_time, false, false, 0);
 
+    if (utils->current_chat->permissions == ADMIN_MEMBER)
+    {
+        GtkWidget *delete_chat_btn = gtk_event_box_new();
+        add_class(delete_chat_btn, "event_switch_auth_menu");
+        gtk_widget_set_halign(GTK_WIDGET(delete_chat_btn), GTK_ALIGN_CENTER);
+        g_signal_connect(G_OBJECT(delete_chat_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+        g_signal_connect(G_OBJECT(delete_chat_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+        g_signal_connect(G_OBJECT(delete_chat_btn), "button_press_event", G_CALLBACK(delete_chat_btn_click), NULL);
+        GtkWidget *delete_chat_label = gtk_label_new("Delete chat");
+        add_class(delete_chat_label, "switch_auth_menu_label");
+        gtk_container_add(GTK_CONTAINER(delete_chat_btn), delete_chat_label);
+        gtk_box_pack_end(GTK_BOX(chat_header), delete_chat_btn, FALSE, FALSE, 0);
+    }
+
     GtkWidget *scrollable_wrap = gtk_scrolled_window_new(NULL, NULL);
     gtk_widget_set_name(scrollable_wrap, "scrollable_wrap");
 

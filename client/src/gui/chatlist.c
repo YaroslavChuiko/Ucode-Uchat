@@ -12,7 +12,7 @@ void add_chatlist_item(int id, char *chat_name)
     add_class(event_box, "chatlist_item_wrap");
 	g_signal_connect(G_OBJECT(event_box), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(event_box), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-	g_signal_connect(G_OBJECT(event_box), "button_press_event", G_CALLBACK(clicked_chatlist_item), NULL);
+	g_signal_connect(G_OBJECT(event_box), "button_press_event", G_CALLBACK(chatlist_item_on_click), NULL);
 
     GtkWidget *chatlist_item = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_name(chatlist_item, mx_itoa(id));

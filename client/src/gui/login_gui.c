@@ -1,9 +1,11 @@
 #include "../../inc/client.h"
 
-void build_login_menu(GtkWidget **main_area)
+void build_login_menu()
 {
+	GtkWidget* main_area = get_widget_by_name_r(main_window, "main_area");
+
 	GtkWidget *login_menu = gtk_box_new(GTK_ORIENTATION_VERTICAL, 20);
-	gtk_box_pack_start(GTK_BOX(*main_area), login_menu, true, false, 0);
+	gtk_box_pack_start(GTK_BOX(main_area), login_menu, true, false, 0);
     gtk_widget_set_name(login_menu, "login_menu");
     add_class(login_menu, "login_menu");
 
@@ -70,7 +72,7 @@ void build_login_menu(GtkWidget **main_area)
 	add_class(event_switch_to_signup, "event_switch_auth_menu");
 	g_signal_connect(G_OBJECT(event_switch_to_signup), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(event_switch_to_signup), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-	g_signal_connect(G_OBJECT(event_switch_to_signup), "button_press_event", G_CALLBACK(switch_to_signup_menu), main_area);
+	g_signal_connect(G_OBJECT(event_switch_to_signup), "button_press_event", G_CALLBACK(switch_to_signup_menu), NULL);
 
 	GtkWidget *signup_label = gtk_label_new("Sign up");
 	add_class(signup_label, "switch_auth_menu_label");

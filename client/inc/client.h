@@ -45,11 +45,12 @@ GtkWidget *get_widget_by_name(GtkWidget *container, char *name);
 GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name);
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 GtkWidget *create_popup_window(int width, int height);
+void build_authorizatioin_window();
 
 //AUTH
-void build_login_menu(GtkWidget **main_area);
-void build_signup_menu(GtkWidget **main_area);
-void build_chat_screen(GtkWidget **main_area);
+void build_login_menu();
+void build_signup_menu();
+void build_chat_screen();
 
 //AUTH EVENTS
 void signup_button_click(GtkWidget *widget, gpointer data);
@@ -70,10 +71,11 @@ void clear_container(GtkWidget *container);
 void update_chatlist();
 void set_chatlist_item_active(GtkWidget *widget);
 void set_current_chat(GtkWidget *chatlist_item);
-void clicked_chatlist_item(GtkWidget *widget, gpointer data);
+void chatlist_item_on_click(GtkWidget *widget, gpointer data);
+void activate_chat(GtkWidget *chatlist_item);
 
 void build_start_messaging_label();////////////////////////////////
-void build_delete_chat_btn();/////////////?????????????????????????????
+// void build_delete_chat_btn();/////////////?????????????????????????????
 
 //SEARCH CHAT
 void search_field_change_event(GtkWidget *widget, gpointer data);
@@ -93,6 +95,9 @@ void create_chat_btn_click(GtkWidget *widget, gpointer data);
 //JOIN CHAT
 void join_chat_event(GtkWidget *widget, GdkEventButton *event, gpointer data);
 void add_join_chat_item(int id, char *chat_name);
+
+//LOG OUT
+void logout_btn_click(GtkWidget *widget, gpointer data);
 
 //VALIDATION
 bool validate_name_field(GtkWidget *username_field, GtkWidget *username_notify_label);

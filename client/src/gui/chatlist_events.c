@@ -31,12 +31,16 @@ void set_chatlist_item_active(GtkWidget *widget)
     add_class(widget, "active");
 }
 
-void clicked_chatlist_item(GtkWidget *widget, gpointer data)
+void activate_chat(GtkWidget *chatlist_item)
 {
-    set_current_chat(widget);
-    set_chatlist_item_active(widget);
-    // build_delete_chat_btn();
+    set_current_chat(chatlist_item);
+    set_chatlist_item_active(chatlist_item);
     build_rightbar_chat();
+}
+
+void chatlist_item_on_click(GtkWidget *chatlist_item, gpointer data)
+{
+    activate_chat(chatlist_item);
 }
 
 void update_chatlist()
