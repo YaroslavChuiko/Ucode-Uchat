@@ -132,7 +132,7 @@ t_response_code get_response_code(cJSON* json);
 t_request_type get_request_type(cJSON* json);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
-void client_cleanup();
+void client_cleanup(bool is_client_exit);
 void connect_to_server(int port, int* server_fd, SSL_CTX **ctx, SSL **ssl);
 void handle_arg_errors(char** argv);
 
