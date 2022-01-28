@@ -31,6 +31,4 @@ void handle_join_chat(const cJSON* chat_info, t_server_utils* utils) {
 
     send_server_response(utils->ssl, R_SUCCESS, REQ_JOIN_CHAT);
 
-    print_logged_users();
-
 }

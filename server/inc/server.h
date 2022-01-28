@@ -35,9 +35,10 @@ void* thread_handler(void* arg);
 void daemon_init();
 void handle_arg_errors(char** argv);
 void send_response_to(SSL* ssl, const char* response);
-void send_server_response(SSL* ssl, t_response_code code, t_request_type req_type);
-void send_response_to_all(t_msg* msg_to_send);
+void send_server_response(SSL* ssl, t_response_code code, t_request_type req_type);\
 void client_cleanup(t_server_utils* utils);
+int server_socket_init(struct sockaddr* serv_address, socklen_t address_size);
+void new_client_create(SSL* ssl, int client_socket);
 
 // REQUEST HANDLERS
 
@@ -46,7 +47,6 @@ char* get_new_message_json(t_msg* msg_to_send);
 char* get_json_response_for(t_response_code error_code, t_request_type req_type);
 t_request_type get_request_type(cJSON* json);
 void handle_usr_login(const cJSON* user_info, t_server_utils* utils);
-void handle_usr_logout(const cJSON* user_info, t_server_utils* utils);
 void handle_usr_signup(const cJSON* user_info, t_server_utils* utils);
 void handle_create_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_join_chat(const cJSON* chat_info, t_server_utils* utils);
@@ -90,17 +90,14 @@ t_user* mx_get_user_by_id(t_user* list, int user_id);
 void mx_clear_user_list(t_user **list);
 void mx_clear_user(t_user** p);
 int mx_get_user_id(int user_db_id);
-void print_logged_users();
 
-extern t_server_state global_state;
-
+// An array of function pointers for request handlers
 static const t_req_handler request_handlers[] = {
     handle_usr_signup,
     handle_usr_login,
     handle_create_chat,
     handle_join_chat,
     handle_send_message,
-    handle_usr_logout,
     handle_delete_chat,
     handle_delete_message,
     handle_edit_message,

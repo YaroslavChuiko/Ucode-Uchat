@@ -5,7 +5,7 @@ t_chat *mx_create_chat(int id, const char* name, int permissions)
     t_chat *new_node = malloc(sizeof(t_chat));
     
     new_node->id = id;
-    new_node->name = name ? strdup(name) : NULL;
+    new_node->name = name ? mx_strdup(name) : NULL;
     new_node->permissions = permissions;
     new_node->messages = NULL;
     new_node->last_new_msg = NULL;

@@ -113,7 +113,6 @@ t_msg* handle_get_msg_response();
 t_chat* handle_search_chats_request(const char* search_str);
 int handle_new_msg_count_request(int chat_id, bool is_current);
 void handle_logout_request();
-void handle_client_exit();
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);

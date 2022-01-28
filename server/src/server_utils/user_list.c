@@ -122,21 +122,21 @@ void mx_user_pop_index(t_user **list, int index) {
 
 }
 
-int mx_get_user_id(int user_db_id) {
+// int mx_get_user_id(int user_db_id) {
 
-    int i = 0;
-    t_user* curr_usr = global_state.logged_users;
-    for (; curr_usr; ++i) {
+//     int i = 0;
+//     t_user* curr_usr = global_state.logged_users;
+//     for (; curr_usr; ++i) {
 
-        if (curr_usr->user_id == user_db_id)
-            return i;
+//         if (curr_usr->user_id == user_db_id)
+//             return i;
 
-        curr_usr = curr_usr->next;
+//         curr_usr = curr_usr->next;
 
-    }
-    return i;
+//     }
+//     return i;
 
-}
+// }
 
 void mx_clear_user_list(t_user **list)
 {
@@ -173,28 +173,28 @@ int mx_user_list_size(t_user* list) {
 }
 
 // remove later
-void print_logged_users() {
+// void print_logged_users() {
 
-    t_user* temp = global_state.logged_users;
-    logger("Logged in:", INFO_LOG);
-    while (temp) {
+//     t_user* temp = global_state.logged_users;
+//     logger("Logged in:", INFO_LOG);
+//     while (temp) {
 
-        char user[100];
-        sprintf(user,  "logged in -- %d: %s", temp->user_id, temp->name);
-        logger(user, INFO_LOG);
+//         char user[100];
+//         sprintf(user,  "logged in -- %d: %s", temp->user_id, temp->name);
+//         logger(user, INFO_LOG);
 
-        t_chat* temp_chat = temp->chats;
-        while (temp_chat) {
+//         t_chat* temp_chat = temp->chats;
+//         while (temp_chat) {
 
-            char user[180];
-            sprintf(user,  "\t\tchat_id -- %d, chat_name -- %s, chat_perms - %d", 
-                    temp_chat->id, temp_chat->name, temp_chat->permissions);
-            logger(user, INFO_LOG);
-            temp_chat = temp_chat->next;
+//             char user[180];
+//             sprintf(user,  "\t\tchat_id -- %d, chat_name -- %s, chat_perms - %d", 
+//                     temp_chat->id, temp_chat->name, temp_chat->permissions);
+//             logger(user, INFO_LOG);
+//             temp_chat = temp_chat->next;
 
-        }
-        temp = temp->next;
+//         }
+//         temp = temp->next;
 
-    }
+//     }
 
-}
+// }

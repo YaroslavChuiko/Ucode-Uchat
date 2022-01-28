@@ -1,6 +1,6 @@
 #include "../../inc/server.h"
 
-t_response_code db_insert_message(const cJSON* msg_json, int* message_id, t_server_utils* utils) {
+t_response_code db_insert_message(const cJSON* msg_json, int* message_id) {
 
     const cJSON *user_id = cJSON_GetObjectItem(msg_json, "user_id");
     const cJSON *chat_id = cJSON_GetObjectItem(msg_json, "chat_id");
@@ -50,7 +50,7 @@ void handle_send_message(const cJSON* message_info, t_server_utils* utils) {
     // validation here later
     t_response_code resp_code = 0;
     int message_id = 0;
-    if ((resp_code = db_insert_message(message_info, &message_id, utils)) != R_SUCCESS) {
+    if ((resp_code = db_insert_message(message_info, &message_id)) != R_SUCCESS) {
         send_server_response(utils->ssl, resp_code, REQ_SEND_MESSAGE);
         return;
     }

@@ -32,7 +32,5 @@ void handle_create_chat(const cJSON* chat_info, t_server_utils* utils) {
     }
     
     send_server_response(utils->ssl, R_SUCCESS, REQ_CREATE_CHAT);
-
-    print_logged_users();
     
 }

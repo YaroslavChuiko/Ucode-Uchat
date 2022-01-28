@@ -7,8 +7,10 @@ int send_to_server(SSL *ssl, const char* request_str) {
     char* len_str = mx_itoa(req_len);
     // SSL_write(ssl, len_str, mx_strlen(len_str));
     if (SSL_write(ssl, request_str, req_len) == -1) {
+        mx_strdel(&len_str);
         return 1;
     }
+    mx_strdel(&len_str);
     return 0;
 
 }

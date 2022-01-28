@@ -10,6 +10,7 @@
 
 #include "db_types.h"
 #include "const.h"
+#include "../../libraries/libmx/inc/libmx.h"
 
 extern int errno;
 
@@ -46,7 +47,6 @@ typedef enum e_request_type {
     REQ_CREATE_CHAT,
     REQ_JOIN_CHAT,
     REQ_SEND_MESSAGE,
-    REQ_USR_LOGOUT,
     REQ_DELETE_CHAT,
     REQ_DELETE_MESSAGE,
     REQ_EDIT_MESSAGE,
@@ -58,8 +58,7 @@ typedef enum e_request_type {
     REQ_NEW_MSG_COUNT,
     REQ_SEARCH_CHATS,
     
-    REQ_NEW_MESSAGE,
-    REQ_CLIENT_EXIT,
+    REQ_USR_LOGOUT,
 }            t_request_type;
 
 typedef struct s_response {

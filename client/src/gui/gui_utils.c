@@ -2,11 +2,7 @@
 
 void destroy(GtkWidget* widget, gpointer data)
 {
-	if (utils->current_user) {
-		handle_logout_request();
-	} else {
-		handle_client_exit();
-	}
+	handle_logout_request();
 	client_cleanup();
     gtk_main_quit();
 }
@@ -26,7 +22,7 @@ void remove_class(GtkWidget *widget, char *class_name)
 void on_crossing(GtkWidget *widget, GdkEventCrossing *event)
 {
 	GdkDisplay *display = gtk_widget_get_display(widget);
-	GdkCursor *cursor;	
+	GdkCursor *cursor = NULL;	
 
 	switch (gdk_event_get_event_type((GdkEvent*)event))
 	{
