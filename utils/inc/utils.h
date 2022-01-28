@@ -113,6 +113,7 @@ int mx_get_msg_idx_by_id(t_msg* list, int id);
 void mx_clear_msg_list(t_msg **list);
 int mx_msg_list_size(t_msg* list);
 int mx_get_last_msg_id(t_chat* chat, bool is_current, int user_id);
+t_msg* mx_get_msg_by_id(t_msg* list, int id);
 void mx_clear_msg(t_msg** p);
 t_msg* mx_get_last_msg_node(t_msg* list);
 void mx_print_msg(t_msg* msg); // remove

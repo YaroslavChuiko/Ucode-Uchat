@@ -68,7 +68,6 @@ void handle_usr_login(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
 
-    // validation here later
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
     const cJSON *user_password = cJSON_GetObjectItemCaseSensitive(user_info, "password");
 

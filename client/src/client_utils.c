@@ -70,9 +70,11 @@ void client_log(const char* info, t_info_type type) {
 char* get_log_name() {
 
 	char* log_name = mx_strnew(mx_strlen(CLIENTLOG_NAME) + 5);
+	char* id_str = mx_itoa(utils->current_user->user_id);
 	mx_strcat(log_name, CLIENTLOG_NAME);
-	mx_strcat(log_name, mx_itoa(utils->current_user->user_id));
+	mx_strcat(log_name, id_str);
 	mx_strcat(log_name, ".log");
+	mx_strdel(&id_str);
 	return log_name;
 
 }

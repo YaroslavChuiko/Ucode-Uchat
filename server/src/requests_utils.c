@@ -27,9 +27,11 @@ t_request_type handle_request_for(const char* request, t_server_utils* utils) {
     // logger(str, INFO_LOG);
     
     if (type == REQ_USR_LOGOUT) {
-        char str[100];
-        sprintf(str, "User (%d, %s) logged out\n", utils->user->user_id, utils->user->name);
-        logger(str, INFO_LOG);
+        if (utils->user) {
+            char str[100];
+            sprintf(str, "User (%d, %s) logged out\n", utils->user->user_id, utils->user->name);
+            logger(str, INFO_LOG);
+        }
         cJSON_Delete(json);
         return type;
     }

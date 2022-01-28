@@ -173,6 +173,20 @@ t_msg* mx_get_last_msg_node(t_msg* list) {
 
 }
 
+t_msg* mx_get_msg_by_id(t_msg* list, int id) {
+
+    while (list) {
+
+        if (list->message_id == id)
+            return list;
+
+        list = list->next;
+
+    }
+    return NULL;
+
+}
+
 int mx_get_msg_idx_by_id(t_msg* list, int id) {
 
     int i = 0;

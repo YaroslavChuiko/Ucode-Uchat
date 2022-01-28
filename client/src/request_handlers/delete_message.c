@@ -19,7 +19,6 @@ void handle_delete_msg_request(int message_id) {
     if (error_code == R_SUCCESS) {
         
         mx_msg_pop_id(&utils->current_chat->messages, message_id);
-        // remove a message widget !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
     }
 
