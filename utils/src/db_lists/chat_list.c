@@ -9,6 +9,7 @@ t_chat *mx_create_chat(int id, const char* name, int permissions)
     new_node->permissions = permissions;
     new_node->messages = NULL;
     new_node->last_new_msg = NULL;
+    new_node->new_msg_count = 0;
     new_node->next = NULL;
     return new_node;
 }
@@ -36,6 +37,20 @@ t_chat* mx_get_chat_by_id(t_chat* list, int chat_id) {
     while (list) {
 
         if (list->id == chat_id)    
+            return list;
+
+        list = list->next;
+
+    }
+    return NULL;
+
+}
+
+t_chat* mx_get_chat_by_name(t_chat* list, const char* name) {
+
+    while (list) {
+
+        if (mx_strcmp(list->name, name) == 0)
             return list;
 
         list = list->next;

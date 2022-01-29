@@ -108,7 +108,7 @@ void build_rightbar(GtkWidget *chat_screen)
     gtk_widget_set_name(chat, "chat");
     add_class(chat, "chat");
 
-    build_start_messaging_label();
+    // build_start_messaging_label();
 }
 
 void build_chat_screen()

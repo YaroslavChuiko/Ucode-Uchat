@@ -18,6 +18,6 @@ char* mx_get_string_time(unsigned long seconds) {
     GDateTime *dt = g_date_time_new_from_unix_utc(seconds);
     GDateTime *new = g_date_time_to_local(dt);
 
-    return (char*)g_date_time_format(new, "%d.%m.%Y %H:%M");
+    return (char*)g_date_time_format(new, "%d.%m  %H:%M");
 
 }

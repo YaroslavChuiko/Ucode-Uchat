@@ -156,9 +156,9 @@ void add_message(t_msg *message) {
     if (cur_user) {
         gtk_box_pack_start(GTK_BOX(message_box), avatar, FALSE, FALSE, 0);
     }
-
     gtk_widget_show_all(chat_field);
-}*/
+
+}
 
 void update_chat_field() {
     GtkWidget *chat_field = get_widget_by_name_r(main_window, "chat_field");

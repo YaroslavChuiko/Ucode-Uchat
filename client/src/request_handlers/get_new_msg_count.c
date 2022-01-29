@@ -29,8 +29,17 @@ void remove_chat_from_list(int chat_id) {
     t_chat* curr_chat = mx_get_chat_by_id(utils->chatlist, chat_id);
     if (curr_chat) {
 
+        // pthread_mutex_lock(&utils->lock);
+        // if (utils->current_chat->id == chat_id) {
+            utils->current_chat = NULL;
+        // }
         mx_chat_pop_id(&utils->chatlist, chat_id);
-        // remove the widget with this chat id !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (mx_chat_list_size(utils->chatlist) == 0) {
+            utils->chatlist = NULL;
+        }
+
+        // pthread_mutex_unlock(&utils->lock);
+        update_chatlist();
 
     }
 
