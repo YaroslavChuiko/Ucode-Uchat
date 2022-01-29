@@ -158,7 +158,7 @@ void add_message(t_msg *message) {
     }
     gtk_widget_show_all(chat_field);
 
-}
+}*/
 
 void update_chat_field() {
     GtkWidget *chat_field = get_widget_by_name_r(main_window, "chat_field");
