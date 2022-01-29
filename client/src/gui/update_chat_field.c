@@ -5,6 +5,95 @@ void add_message(t_msg *message) {
 
     int cur_user = message->sender_id == utils->current_user->user_id ? 1 : 0;
 
+    GtkWidget *message_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    gtk_widget_set_halign(GTK_WIDGET(message_box), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
+    gtk_widget_set_valign(GTK_WIDGET(message_box), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
+    gtk_widget_set_hexpand(message_box, TRUE);
+    add_class(message_box, "message_btn");
+    gtk_box_pack_start(GTK_BOX(chat_field), message_box, FALSE, FALSE, 0);
+
+    GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(avatar), 23, 23);
+    gtk_widget_set_halign(avatar, cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
+    gtk_widget_set_valign(avatar, GTK_ALIGN_START);
+    if (!cur_user) {
+        gtk_box_pack_start(GTK_BOX(message_box), avatar, FALSE, FALSE, 0);
+    }
+    add_class(avatar, "chatlist_item_avatar");
+
+    GtkWidget *message_text = gtk_box_new(GTK_ORIENTATION_VERTICAL, 3);
+    gtk_widget_set_halign(GTK_WIDGET(message_text), cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
+    gtk_widget_set_valign(GTK_WIDGET(message_text), cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
+    gtk_box_pack_start(GTK_BOX(message_box), message_text, false, false, 0);
+    add_class(message_text, "chatlist_item_text");
+
+    GtkWidget *message_head = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    gtk_box_pack_start(GTK_BOX(message_text), message_head, false, false, 0);
+    add_class(message_head, "chatlist_item_text");
+
+    GtkWidget *delete_btn = gtk_event_box_new();
+	add_class(delete_btn, "msg_btn");
+	g_signal_connect(G_OBJECT(delete_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(delete_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+	g_signal_connect(G_OBJECT(delete_btn), "button_press_event", G_CALLBACK(delete_message), message);
+
+	GtkWidget *delete_label = gtk_label_new("D");
+	gtk_container_add(GTK_CONTAINER(delete_btn), delete_label);
+	if (cur_user) {
+        gtk_box_pack_start(GTK_BOX(message_head), delete_btn, FALSE, FALSE, 0);
+    }
+    else {
+        gtk_box_pack_end(GTK_BOX(message_head), delete_btn, FALSE, FALSE, 0);
+    }
+
+    if (cur_user) {
+        GtkWidget *edit_btn = gtk_event_box_new();
+        add_class(edit_btn, "msg_btn");
+        g_signal_connect(G_OBJECT(edit_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+        g_signal_connect(G_OBJECT(edit_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+        g_signal_connect(G_OBJECT(edit_btn), "button_press_event", G_CALLBACK(edit_message), message);
+
+        GtkWidget *edit_label = gtk_label_new("E");
+        gtk_container_add(GTK_CONTAINER(edit_btn), edit_label);
+        gtk_box_pack_start(GTK_BOX(message_head), edit_btn, FALSE, FALSE, 0);
+    }
+
+    GtkWidget *user_name = gtk_label_new(message->sender_name);
+    if (cur_user) {
+        gtk_box_pack_end(GTK_BOX(message_head), user_name, false, false, 0);
+    }
+    else {
+        gtk_box_pack_start(GTK_BOX(message_head), user_name, false, false, 0);
+    }
+    
+    GtkWidget *sent_message = gtk_label_new(message->text);
+    gtk_widget_set_halign(GTK_WIDGET(sent_message), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
+    ////
+    gtk_label_set_selectable(GTK_LABEL(sent_message), TRUE);
+    gtk_label_set_single_line_mode(GTK_LABEL(sent_message), FALSE);
+    gtk_label_set_max_width_chars(GTK_LABEL(sent_message), 50);
+    gtk_label_set_line_wrap(GTK_LABEL(sent_message), TRUE);
+    gtk_label_set_line_wrap_mode(GTK_LABEL(sent_message), PANGO_WRAP_WORD);
+    /////
+    gtk_box_pack_start(GTK_BOX(message_text), sent_message, false, false, 0);
+    add_class(sent_message, cur_user ? "right_message" : "left_message");
+
+    GtkWidget *message_time = gtk_label_new(message->date_str); 
+    gtk_widget_set_halign(GTK_WIDGET(message_time), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
+    gtk_box_pack_start(GTK_BOX(message_text), message_time, false, false, 0);
+
+    if (cur_user) {
+        gtk_box_pack_start(GTK_BOX(message_box), avatar, FALSE, FALSE, 0);
+    }
+
+    gtk_widget_show_all(chat_field);
+}
+
+/*void add_message(t_msg *message) {
+    GtkWidget *chat_field = get_widget_by_name_r(main_window, "chat_field");
+
+    int cur_user = message->sender_id == utils->current_user->user_id ? 1 : 0;
+
     GtkWidget *menubar = gtk_menu_bar_new();
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *del_message = gtk_menu_item_new_with_label("Delete");
@@ -50,6 +139,13 @@ void add_message(t_msg *message) {
     
     GtkWidget *sent_message = gtk_label_new(message->text);
     gtk_widget_set_halign(GTK_WIDGET(sent_message), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
+    ////
+    gtk_label_set_selectable(GTK_LABEL(sent_message), TRUE);
+    gtk_label_set_single_line_mode(GTK_LABEL(sent_message), FALSE);
+    gtk_label_set_max_width_chars(GTK_LABEL(sent_message), 50);
+    gtk_label_set_line_wrap(GTK_LABEL(sent_message), TRUE);
+    gtk_label_set_line_wrap_mode(GTK_LABEL(sent_message), PANGO_WRAP_WORD);
+    /////
     gtk_box_pack_start(GTK_BOX(message_text), sent_message, false, false, 0);
     add_class(sent_message, cur_user ? "right_message" : "left_message");
 
@@ -60,7 +156,9 @@ void add_message(t_msg *message) {
     if (cur_user) {
         gtk_box_pack_start(GTK_BOX(message_box), avatar, FALSE, FALSE, 0);
     }
-}
+
+    gtk_widget_show_all(chat_field);
+}*/
 
 void update_chat_field() {
     GtkWidget *chat_field = get_widget_by_name_r(main_window, "chat_field");
@@ -76,6 +174,7 @@ void update_chat_field() {
         gtk_widget_set_vexpand(messaging_label, TRUE);
         gtk_widget_set_hexpand(messaging_label, TRUE);
         gtk_box_pack_start(GTK_BOX(chat_field), messaging_label, FALSE, FALSE, 0);
+        gtk_widget_show_all(chat_field);
     }
     else {
         while (messages) {
@@ -83,7 +182,5 @@ void update_chat_field() {
             messages = messages->next;
         }
     }
-
-    gtk_widget_show_all(chat_field);
 }
 

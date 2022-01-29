@@ -32,11 +32,13 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field) {
 
     gtk_entry_set_text(new_message_field, "");
 
+    printf("%s\n", new_message);
+
     if (handle_send_msg_request(new_message) == R_SUCCESS) {
 
         add_message(mx_get_last_msg_node(utils->current_chat->messages));
 
-        gtk_widget_show_all(chat_container);
+        //gtk_widget_show_all(chat_container);
     
     }
 
@@ -58,18 +60,11 @@ void build_rightbar_chat() {
     gtk_box_pack_start(GTK_BOX(chat_header), avatar, FALSE, FALSE, 0);
     add_class(avatar, "chatlist_item_avatar");
 
-    GtkWidget *chat_header_text = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_widget_set_halign(GTK_WIDGET(chat_header_text), GTK_ALIGN_START);
-    gtk_widget_set_valign(GTK_WIDGET(chat_header_text), GTK_ALIGN_START);
-    gtk_box_pack_start(GTK_BOX(chat_header), chat_header_text, false, false, 0);
-    add_class(chat_header_text, "chatlist_item_text");
-
     GtkWidget *chat_header_title = gtk_label_new(utils->current_chat->name);
     gtk_widget_set_halign(GTK_WIDGET(chat_header_title), GTK_ALIGN_START);
-    gtk_box_pack_start(GTK_BOX(chat_header_text), chat_header_title, false, false, 0);
-    GtkWidget *chat_header_time = gtk_label_new("Online");
-    gtk_widget_set_halign(GTK_WIDGET(chat_header_time), GTK_ALIGN_START);
-    gtk_box_pack_start(GTK_BOX(chat_header_text), chat_header_time, false, false, 0);
+    gtk_widget_set_valign(GTK_WIDGET(chat_header_title), GTK_ALIGN_CENTER);
+    gtk_box_pack_start(GTK_BOX(chat_header), chat_header_title, false, false, 0);
+    add_class(chat_header_title, "chatlist_item_text");
 
     if (utils->current_chat->permissions == ADMIN_MEMBER)
     {
@@ -108,6 +103,7 @@ void build_rightbar_chat() {
     gtk_entry_set_placeholder_text(GTK_ENTRY(new_message_field), "Message");
     gtk_widget_set_halign(GTK_WIDGET(new_message_field), GTK_ALIGN_FILL);
     gtk_widget_set_valign(GTK_WIDGET(new_message_field), GTK_ALIGN_FILL);
+    gtk_entry_set_max_length(GTK_ENTRY(new_message_field), 100);
     g_signal_connect(new_message_field, "activate", G_CALLBACK(send_button_click), new_message_field);
     gtk_box_pack_start(GTK_BOX(message_field), new_message_field, TRUE, TRUE, 0);
 

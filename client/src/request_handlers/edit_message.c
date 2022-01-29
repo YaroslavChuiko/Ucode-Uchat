@@ -19,8 +19,10 @@ void handle_edit_msg_request(int message_id, const char* new_msg_text) {
     if (error_code == R_SUCCESS) {
 
         t_msg* msg_to_edit = mx_get_msg_by_id(utils->current_chat->messages, message_id);
-        mx_strdel(&msg_to_edit->text);
-        msg_to_edit->text = mx_strdup(new_msg_text);
+        if (msg_to_edit) {
+            mx_strdel(&msg_to_edit->text);
+            msg_to_edit->text = mx_strdup(new_msg_text);
+        }
 
     }
 

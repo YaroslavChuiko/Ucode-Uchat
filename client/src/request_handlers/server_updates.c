@@ -24,6 +24,8 @@ static int handle_new_message(t_chat* curr_chat, int message_id) {
 
 		mx_msg_push_back(&curr_chat->messages, new_msg);
 
+		add_message(new_msg);
+
 	} else {
 		// if we got messages from a different chat (the one not being selected)
 		char str[200];
