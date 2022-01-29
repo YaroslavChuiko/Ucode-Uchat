@@ -36,7 +36,7 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field) {
 
         add_message(mx_get_last_msg_node(utils->current_chat->messages));
 
-        gtk_widget_show_all(chat_container);
+        // gtk_widget_show_all(chat_container);
     
     }
 

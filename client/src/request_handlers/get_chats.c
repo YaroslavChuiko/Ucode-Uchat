@@ -75,7 +75,7 @@ t_response_code handle_get_chats_request() {
     char* response = send_and_recv_from_server(utils->ssl, json_str);
     free(json_str);
 
-    int curr_chat_id;
+    int curr_chat_id = -1;
     if (utils->current_chat)
     {
         curr_chat_id = utils->current_chat->id;
@@ -89,7 +89,11 @@ t_response_code handle_get_chats_request() {
     }
     free(response);
 
-    utils->current_chat = mx_get_chat_by_id(utils->chatlist, curr_chat_id);
+    if (curr_chat_id >= 0 )
+    {
+        utils->current_chat = mx_get_chat_by_id(utils->chatlist, curr_chat_id);
+    }
+    
 
     mx_print_chat_list(utils->chatlist);
 

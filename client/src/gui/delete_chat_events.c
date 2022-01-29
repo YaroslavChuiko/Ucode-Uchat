@@ -6,7 +6,8 @@ void delete_chat_btn_click(GtkWidget *widget, gpointer data)
 
     if (response_code == R_SUCCESS)
     {
+        utils->current_chat = NULL;
         update_chatlist();
-        build_start_messaging_label();
+        // build_start_messaging_label();
     }
 }

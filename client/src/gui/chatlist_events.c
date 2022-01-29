@@ -50,6 +50,7 @@ void update_chatlist()
     if (mx_chat_list_size(chatlist) == 0)
     {
         build_chatlist_message("Join to chat to start messaging");
+        build_start_messaging_label();
     }
     else
     {
@@ -65,6 +66,10 @@ void update_chatlist()
         if (utils->current_chat)
         {
             set_chatlist_item_active(get_widget_by_name_r(chatlist_container, utils->current_chat->name));
+        }
+        else
+        {
+            build_start_messaging_label();
         }
     }
 }

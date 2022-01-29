@@ -29,8 +29,8 @@ int main(int argc, char **argv) {
 
 	build_authorizatioin_window();
 
-	// pthread_create(&th_read, NULL, handle_server_updates, utils);
-	// utils->th_reader = th_read;
+	pthread_create(&th_read, NULL, handle_server_updates, utils);
+	utils->th_reader = th_read;
 	// pthread_join(th_read, NULL);
 
     gtk_main();
@@ -44,10 +44,8 @@ int main(int argc, char **argv) {
 
 // CLIENT ISSUES
 
-// 1. Check error code after send message request 
+// 1. Fix new msg count after first get chats request
 // 2. Remove the chat widget for all the participants after the chat was deleted
-// 3. Delete / Edit options should be only for the current user
-// 4. Add / remove the message widget on server updates 
 
 // void* handle_requests(void* arg) {
 
