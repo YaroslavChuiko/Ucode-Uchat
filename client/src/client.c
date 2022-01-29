@@ -42,6 +42,13 @@ int main(int argc, char **argv) {
 
 }
 
+// CLIENT ISSUES
+
+// 1. Check error code after send message request 
+// 2. Remove the chat widget for all the participants after the chat was deleted
+// 3. Delete / Edit options should be only for the current user
+// 4. Add / remove the message widget on server updates 
+
 // void* handle_requests(void* arg) {
 
 // 	// t_client_utils* utils = (t_client_utils*)arg;

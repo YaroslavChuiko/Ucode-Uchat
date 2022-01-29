@@ -33,7 +33,6 @@ void handle_delete_message(const cJSON* message_info, t_server_utils* utils) {
         return;
     }
 
-    // validation here later
     t_response_code resp_code = 0;
     if ((resp_code = db_delete_message(message_info, utils) != R_SUCCESS)) {
         send_server_response(utils->ssl, resp_code, REQ_DELETE_MESSAGE);

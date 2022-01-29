@@ -32,11 +32,14 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field) {
 
     gtk_entry_set_text(new_message_field, "");
 
-    handle_send_msg_request(new_message);
+    if (handle_send_msg_request(new_message) == R_SUCCESS) {
 
-    add_message(mx_get_last_msg_node(utils->current_chat->messages));
+        add_message(mx_get_last_msg_node(utils->current_chat->messages));
 
-    gtk_widget_show_all(chat_container);
+        gtk_widget_show_all(chat_container);
+    
+    }
+
 }
 
 void build_rightbar_chat() {

@@ -6,6 +6,10 @@ static int handle_new_message(t_chat* curr_chat, int message_id) {
 	t_msg* new_msg = NULL;
 
 	if (!(new_msg = handle_get_msg_response())) {
+		// t_msg* msg_to_remove = mx_get_msg_by_id(curr_chat->messages, message_id);
+		// if (msg_to_remove->sender_id != utils->current_user->user_id) {
+		// 	mx_msg_pop_id(&curr_chat->messages, message_id);
+		// }
 		return 1;
 	}
 

@@ -21,6 +21,10 @@ t_response_code add_msg_to_msglist(cJSON* json) {
     mx_msg_dfl_push_back(&chat_by_id->messages, msg_id->valueint, sender_id->valueint, sender_name->valuestring,
                     chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
 
+    if (sender_id->valueint == utils->current_user->user_id) {
+        return R_SUCCESS;
+    }
+
     if (chat_by_id->last_new_msg)
 		mx_clear_msg(&chat_by_id->last_new_msg);
 

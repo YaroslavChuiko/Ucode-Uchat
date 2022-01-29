@@ -10,7 +10,6 @@ t_request_type handle_usr_logout(const cJSON* logout_info, t_server_utils* utils
     }
     int is_client_exit = client_exit->valueint;
 
-    printf("client exit -- %d\n", is_client_exit);
     if (utils->user) {
         char str[100];
         sprintf(str, "User (%d, %s) logging out\n", utils->user->user_id, utils->user->name);

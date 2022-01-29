@@ -62,6 +62,7 @@ void daemon_init() {
     }
 
     if (pid > 0) {
+        printf("The process id is: %d\n", pid);
         exit(EXIT_SUCCESS);
     }
 
