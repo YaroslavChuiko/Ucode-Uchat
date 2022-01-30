@@ -72,8 +72,6 @@ t_response_code handle_get_chat_msgs_response(const char* response_str) {
 
 t_response_code handle_get_chat_msgs_request(int chat_id) {
 
-    utils->is_suspended = true;
-
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "chat_id", chat_id);
     cJSON_AddNumberToObject(json, "type", REQ_GET_CHAT_MSGS);
@@ -91,7 +89,6 @@ t_response_code handle_get_chat_msgs_request(int chat_id) {
         return error_code;
     }
     free(response);
-    utils->is_suspended = false;
     return R_SUCCESS;
 
 }

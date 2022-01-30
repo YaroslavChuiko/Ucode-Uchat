@@ -64,8 +64,6 @@ t_response_code handle_get_chats_response(t_chat** chat_list, const char* respon
 
 t_response_code handle_get_chats_request() {
 
-    utils->is_suspended = true;
-
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_GET_CHATS);
     char* json_str = cJSON_PrintUnformatted(json);
@@ -76,8 +74,7 @@ t_response_code handle_get_chats_request() {
     free(json_str);
 
     int curr_chat_id = -1;
-    if (utils->current_chat)
-    {
+    if (utils->current_chat) {
         curr_chat_id = utils->current_chat->id;
     }
 
@@ -89,15 +86,11 @@ t_response_code handle_get_chats_request() {
     }
     free(response);
 
-    if (curr_chat_id >= 0 )
-    {
+    if (curr_chat_id >= 0) {
         utils->current_chat = mx_get_chat_by_id(utils->chatlist, curr_chat_id);
     }
     
-
     mx_print_chat_list(utils->chatlist);
-
-    utils->is_suspended = false;
     return R_SUCCESS;
 
 }
