@@ -160,7 +160,7 @@ void mx_clear_chat_list(t_chat **list)
     {
         next = node->next;
         mx_clear_msg_list(&node->messages);
-        mx_clear_msg_list(&node->last_new_msg);
+        // mx_clear_msg_list(&node->last_new_msg);
         mx_clear_chat(&node);
         node = next;
     }
@@ -184,16 +184,15 @@ int mx_chat_list_size(t_chat* list) {
 
 }
 
-int mx_get_last_msg_id(t_chat* chat, bool is_current, int user_id) {
+int mx_get_last_msg_id(t_chat* chat, int user_id) {
 
     if (!chat) 
         return 0;
-    if (is_current && !chat->messages)
-        return 0;
-    if (!is_current && !chat->last_new_msg)
+
+    if (!chat->messages)
         return 0;
 
-    t_msg* current = is_current ? chat->messages : chat->last_new_msg;
+    t_msg* current = chat->messages;
     t_msg* result = NULL;
     while (current) {
 

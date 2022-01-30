@@ -13,8 +13,8 @@ t_response_code get_last_msg_id(const cJSON* chat_info, t_server_utils* utils, i
     }
 
     char query[QUERY_LEN];
-    sprintf(query, "SELECT id FROM `messages` WHERE chat_id = %d AND NOT user_id = %d ORDER BY id DESC LIMIT 1", 
-            chat_id->valueint, utils->user->user_id);
+    sprintf(query, "SELECT id FROM `messages` WHERE chat_id = %d ORDER BY id DESC LIMIT 1", 
+            chat_id->valueint);
     
     sqlite3* db = open_database();
     sqlite3_stmt* stmt = db_execute_stmt_for(query, db);

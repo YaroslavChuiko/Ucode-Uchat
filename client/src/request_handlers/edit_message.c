@@ -1,6 +1,19 @@
 #include "../../inc/client.h"
 
+static void edit_global_messages(int message_id, const char* new_msg_text) {
+
+    t_msg* msg_to_edit = mx_get_msg_by_id(utils->current_chat->messages, message_id);
+    if (msg_to_edit) {
+        mx_strdel(&msg_to_edit->text);
+        msg_to_edit->text = mx_strdup(new_msg_text);
+        update_chatlist();
+    }
+
+}
+
 void handle_edit_msg_request(int message_id, const char* new_msg_text) {
+
+    utils->is_suspended = true;
 
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_EDIT_MESSAGE);
@@ -18,15 +31,12 @@ void handle_edit_msg_request(int message_id, const char* new_msg_text) {
 
     if (error_code == R_SUCCESS) {
 
-        t_msg* msg_to_edit = mx_get_msg_by_id(utils->current_chat->messages, message_id);
-        if (msg_to_edit) {
-            mx_strdel(&msg_to_edit->text);
-            msg_to_edit->text = mx_strdup(new_msg_text);
-        }
+        edit_global_messages(message_id, new_msg_text);
 
     }
 
     free(json_str);
     free(response);
+    utils->is_suspended = false;
 
 }

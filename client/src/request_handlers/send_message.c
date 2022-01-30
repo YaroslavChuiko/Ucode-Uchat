@@ -1,15 +1,5 @@
 #include "../../inc/client.h"
 
-void update_last_chat_msg(t_chat* chat_to_update, t_msg* new_msg) {
-
-    if (chat_to_update->last_new_msg)
-		mx_clear_msg(&chat_to_update->last_new_msg);
-
-	chat_to_update->last_new_msg = mx_create_msg(new_msg->message_id, new_msg->sender_id, new_msg->sender_name, 
-											new_msg->chat_id, new_msg->text, new_msg->date_str);
-
-}
-
 t_response_code add_to_global_msglist(t_msg* new_msg) {
 
     t_chat* curr_chat = mx_get_chat_by_id(utils->chatlist, new_msg->chat_id);
@@ -18,7 +8,8 @@ t_response_code add_to_global_msglist(t_msg* new_msg) {
     }
 
     mx_msg_push_back(&curr_chat->messages, new_msg);
-    update_last_chat_msg(curr_chat, new_msg);
+    curr_chat->last_new_msg = new_msg;
+    update_chatlist();
     return R_SUCCESS;
     
 }
