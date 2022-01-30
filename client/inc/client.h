@@ -72,6 +72,7 @@ void build_chatlist_message(char *message);
 //CHATLIST EVENTS
 void clear_container(GtkWidget *container);
 void update_chatlist();
+void update_chatlist_item_info(t_chat* chat);
 void set_chatlist_item_active(GtkWidget *widget);
 void set_current_chat(GtkWidget *chatlist_item);
 void chatlist_item_on_click(GtkWidget *widget, gpointer data);

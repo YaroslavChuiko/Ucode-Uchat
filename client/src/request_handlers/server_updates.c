@@ -26,15 +26,16 @@ static int handle_new_message(t_chat* curr_chat, int message_id, int new_msg_cou
 	}
 	
 	curr_chat->last_new_msg = new_msg;
-	update_chatlist();
+	// update_chatlist();
+	update_chatlist_item_info(curr_chat);
 
 	char str[200];
 	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
-			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str);
+		new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str);
 	client_log(str, INFO_LOG);
 	g_usleep(10000);
 	return 0;
-	
+  
 }
 
 //	Thread handler for checking and handling server updates
