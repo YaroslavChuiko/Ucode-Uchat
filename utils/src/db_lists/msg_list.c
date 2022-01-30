@@ -166,6 +166,9 @@ int mx_msg_list_size(t_msg* list) {
 
 t_msg* mx_get_last_msg_node(t_msg* list) {
 
+    if (!list)
+        return NULL;
+
     while (list->next) {
         list = list->next;
     }

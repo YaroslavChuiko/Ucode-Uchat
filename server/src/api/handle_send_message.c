@@ -15,13 +15,18 @@ t_response_code db_insert_message(const cJSON* msg_json, int* message_id) {
     if (!db_chat_exists(chat_id->valueint)) {
         return R_CHAT_NOENT;
     }
+
+    if (!is_strlen_valid(message->valuestring, MIN_MSG_INPUT_LEN, MAX_MSG_INPUT_LEN)) {
+        return R_MSG_LEN_INVALID;
+    }
     char query[QUERY_LEN];
-    sprintf(query, "INSERT INTO `messages` (`user_id`, `chat_id`, `text`, `date`) VALUES('%d', '%d', '%s', '%d')", 
-            user_id->valueint, chat_id->valueint, message->valuestring, date->valueint);
+    sprintf(query, "INSERT INTO `messages` (`user_id`, `chat_id`, `text`, `date`) VALUES('%d', '%d', ?, '%d')", 
+            user_id->valueint, chat_id->valueint, date->valueint);
     
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
     sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    sqlite3_bind_text(stmt, 1, message->valuestring, -1, NULL);
     sqlite3_step(stmt);
     sqlite3_reset(stmt);
     bzero(query, sizeof(query));
@@ -47,7 +52,6 @@ void handle_send_message(const cJSON* message_info, t_server_utils* utils) {
         return;
     }
 
-    // validation here later
     t_response_code resp_code = 0;
     int message_id = 0;
     if ((resp_code = db_insert_message(message_info, &message_id)) != R_SUCCESS) {

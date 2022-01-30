@@ -16,8 +16,8 @@ t_response_code db_delete_message(const cJSON* msg_json, t_server_utils* utils) 
     }
 
     char query[QUERY_LEN];
-    sprintf(query, "DELETE FROM `messages` WHERE `id` = '%d' AND `user_id` = '%d' AND `chat_id` = '%d'", 
-        message_id->valueint, utils->user->user_id, chat_id->valueint);
+    sprintf(query, "DELETE FROM `messages` WHERE `id` = '%d' AND `chat_id` = '%d'", 
+        message_id->valueint, chat_id->valueint);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;

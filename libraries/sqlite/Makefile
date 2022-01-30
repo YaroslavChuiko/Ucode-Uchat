@@ -10,8 +10,7 @@ INC_FILES = $(wildcard $(INC_DIR)/*.h)
 
 CC = clang
 CFLAGS = -std=gnu11 -Wall -Wextra -Werror -Wpedantic
-# CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic 
-# -D_POSIX_C_SOURCE=200809L
+# CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
 all: $(NAME)
 

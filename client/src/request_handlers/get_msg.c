@@ -39,7 +39,7 @@ t_msg* handle_get_msg_response() {
     cJSON* msg_json = cJSON_GetObjectItem(json, "message");
     t_msg* new_msg = get_msg_from_json(msg_json);
 
-    if (new_msg == NULL /*|| new_msg->sender_id == utils->current_user->user_id*/) {
+    if (new_msg == NULL || new_msg->sender_id == utils->current_user->user_id) {
         cJSON_Delete(json);
         logger(get_response_str(R_JSON_FAILURE), ERROR_LOG);
         return NULL;

@@ -1,5 +1,16 @@
 #include "../../inc/client.h"
 
+static void edit_global_messages(int message_id) {
+
+    bool is_last_msg = message_id == utils->current_chat->last_new_msg->message_id;
+    mx_msg_pop_id(&utils->current_chat->messages, message_id);
+    if (is_last_msg) {
+        utils->current_chat->last_new_msg = mx_get_last_msg_node(utils->current_chat->messages);
+        update_chatlist();
+    }
+
+}
+
 void handle_delete_msg_request(int message_id) {
 
     utils->is_suspended = true;
@@ -18,7 +29,7 @@ void handle_delete_msg_request(int message_id) {
 
     if (error_code == R_SUCCESS) {
         
-        mx_msg_pop_id(&utils->current_chat->messages, message_id);
+        edit_global_messages(message_id);
 
     }
 

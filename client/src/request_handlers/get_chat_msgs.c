@@ -18,18 +18,10 @@ t_response_code add_msg_to_msglist(cJSON* json) {
     if (!chat_by_id)
         return R_CHAT_NOENT;
 
-    mx_msg_dfl_push_back(&chat_by_id->messages, msg_id->valueint, sender_id->valueint, sender_name->valuestring,
-                    chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
-
-    if (sender_id->valueint == utils->current_user->user_id) {
-        return R_SUCCESS;
-    }
-
-    if (chat_by_id->last_new_msg)
-		mx_clear_msg(&chat_by_id->last_new_msg);
-
-	chat_by_id->last_new_msg = mx_create_msg(msg_id->valueint, sender_id->valueint, sender_name->valuestring, 
+	t_msg* new_msg = mx_create_msg(msg_id->valueint, sender_id->valueint, sender_name->valuestring, 
 											chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
+    mx_msg_push_back(&chat_by_id->messages, new_msg);
+    chat_by_id->last_new_msg = new_msg;
 
     return R_SUCCESS;
 
@@ -72,8 +64,6 @@ t_response_code handle_get_chat_msgs_response(const char* response_str) {
 
 t_response_code handle_get_chat_msgs_request(int chat_id) {
 
-    utils->is_suspended = true;
-
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "chat_id", chat_id);
     cJSON_AddNumberToObject(json, "type", REQ_GET_CHAT_MSGS);
@@ -91,7 +81,6 @@ t_response_code handle_get_chat_msgs_request(int chat_id) {
         return error_code;
     }
     free(response);
-    utils->is_suspended = false;
     return R_SUCCESS;
 
 }

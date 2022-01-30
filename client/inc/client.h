@@ -124,7 +124,7 @@ t_response_code handle_get_chat_msgs_request(int chat_id);
 void handle_get_msg_request(int chat_id, int message_id);
 t_msg* handle_get_msg_response();
 t_chat* handle_search_chats_request(const char* search_str);
-int handle_new_msg_count_request(int chat_id, bool is_current);
+int handle_new_msg_count_request(int chat_id);
 void handle_logout_request(bool is_client_exit);
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
@@ -139,6 +139,7 @@ char* send_and_recv_from_server(SSL *ssl, const char* json_str);
 char* recv_from_server(SSL* ssl);
 t_response_code get_response_code(cJSON* json);
 t_request_type get_request_type(cJSON* json);
+void update_last_chat_msg(t_chat* chat_to_update, t_msg* new_msg);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
 void client_cleanup(bool is_client_exit);
