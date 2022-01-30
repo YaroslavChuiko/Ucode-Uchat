@@ -18,27 +18,27 @@ static int handle_new_message(t_chat* curr_chat, int message_id) {
 		add_message(new_msg);
 		curr_chat->new_msg_count = 0;
 
-		add_message(new_msg);
-
 	} else {
 		client_log("You have an incoming message", INFO_LOG);
+		curr_chat->new_msg_count += 1;
 	}
 
 	if (curr_chat->last_new_msg)
 		mx_clear_msg(&curr_chat->last_new_msg);
 
 	curr_chat->last_new_msg = mx_create_msg(new_msg->message_id, new_msg->sender_id, new_msg->sender_name, 
-											new_msg->chat_id, new_msg->text, new_msg->date_str);
+						new_msg->chat_id, new_msg->text, new_msg->date_str);
 
 	pthread_mutex_unlock(&utils->lock);
-	update_chatlist();
+	update_chatlist_item_info(curr_chat);
+	// update_chatlist();
 	char str[200];
 	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
-			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str);
+		new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str);
 	client_log(str, INFO_LOG);
 	g_usleep(10000);
 	return 0;
-	
+  
 }
 
 //	Thread handler for checking and handling server updates
@@ -68,8 +68,6 @@ void* handle_server_updates(void* arg) {
 				continue;
 			}
 			
-			curr_chat->new_msg_count += new_msg_count;
-			printf("new msg count -- %d\n",  new_msg_count);
 			int last_msg_id = mx_get_last_msg_id(curr_chat, is_current_chat, utils->current_user->user_id);
 			for (int i = 1; i <= new_msg_count; ++i) {
 				
