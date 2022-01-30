@@ -182,5 +182,6 @@ void update_chat_field() {
             messages = messages->next;
         }
     }
+    // gtk_widget_show_all(chat_field);
 }
 

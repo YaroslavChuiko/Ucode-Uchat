@@ -37,6 +37,9 @@ typedef enum e_response_code {
     R_NO_CHAT_PERMS,
     R_CHATS_TOTAL_REACHED,
     R_NAME_FORMAT_INVALID,
+    R_NAME_LEN_INVALID,
+    R_PASS_LEN_INVALID,
+    R_MSG_LEN_INVALID,
 
     R_MSG_USR_NOENT,
 }            t_response_code;
@@ -83,12 +86,16 @@ static const t_response response_objs[] = {
     { R_NO_CHAT_PERMS, "You don't have the permissions for this action" },
     { R_CHATS_TOTAL_REACHED, "You can't be a member of more than 15 chats" },
     { R_NAME_FORMAT_INVALID, "The name should contain only letters and digits" },
+    { R_NAME_LEN_INVALID, "The name's length should be in a (4, 16) range" },
+    { R_PASS_LEN_INVALID, "The password's length should be in a (8, 30) range" },
+    { R_MSG_LEN_INVALID, "The message's length can't be greater than 1024 symbols" },
     { R_MSG_USR_NOENT, "Couldn't find this message's sender" },
 };
 
 void logger(const char* info, t_info_type info_type);
 char* get_response_str(t_response_code error_code);
 bool is_user_name_format_valid(const char* name);
+bool is_strlen_valid(const char* str, int min_len, int max_len);
 
 
 // DATABASE LISTS

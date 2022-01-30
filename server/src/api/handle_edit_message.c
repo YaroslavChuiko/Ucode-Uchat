@@ -9,13 +9,21 @@ t_response_code db_edit_message(const cJSON* msg_json, t_server_utils* utils) {
         return R_JSON_FAILURE;
     }
 
-    char query[QUERY_LEN];
-    sprintf(query, "UPDATE `messages` SET `text` = '%s' WHERE `id` = '%d' AND `user_id` = '%d' AND `chat_id` = '%d'", 
-        new_text->valuestring, message_id->valueint, utils->user->user_id, chat_id->valueint);
-    
-    if (db_execute_query(query) != 0) {
-        return R_DB_FAILURE;
+    if (!is_strlen_valid(new_text->valuestring, MIN_MSG_INPUT_LEN, MAX_MSG_INPUT_LEN)) {
+        return R_MSG_LEN_INVALID;
     }
+
+    char query[QUERY_LEN];
+    sprintf(query, "UPDATE `messages` SET `text` = ? WHERE `id` = '%d' AND `user_id` = '%d' AND `chat_id` = '%d'", 
+        message_id->valueint, utils->user->user_id, chat_id->valueint);
+    
+    sqlite3* db = open_database();
+    sqlite3_stmt* stmt;
+    sqlite3_prepare_v2(db, query, -1, &stmt, NULL);
+    sqlite3_bind_text(stmt, 1, new_text->valuestring, -1, NULL);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
 
     return 0;
 }

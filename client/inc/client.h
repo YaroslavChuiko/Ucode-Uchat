@@ -138,6 +138,7 @@ char* send_and_recv_from_server(SSL *ssl, const char* json_str);
 char* recv_from_server(SSL* ssl);
 t_response_code get_response_code(cJSON* json);
 t_request_type get_request_type(cJSON* json);
+void update_last_chat_msg(t_chat* chat_to_update, t_msg* new_msg);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
 void client_cleanup(bool is_client_exit);

@@ -16,19 +16,14 @@ static int handle_new_message(t_chat* curr_chat, int message_id) {
 
 		mx_msg_push_back(&curr_chat->messages, new_msg);
 		add_message(new_msg);
-		curr_chat->new_msg_count = 0;
+		curr_chat->new_msg_count -= 1;
 
 	} else {
 		client_log("You have an incoming message", INFO_LOG);
 		curr_chat->new_msg_count += 1;
 	}
 
-	if (curr_chat->last_new_msg)
-		mx_clear_msg(&curr_chat->last_new_msg);
-
-	curr_chat->last_new_msg = mx_create_msg(new_msg->message_id, new_msg->sender_id, new_msg->sender_name, 
-											new_msg->chat_id, new_msg->text, new_msg->date_str);
-
+	update_last_chat_msg(curr_chat, new_msg);
 	pthread_mutex_unlock(&utils->lock);
 	// update_chatlist();
 	char str[200];
@@ -75,7 +70,7 @@ void* handle_server_updates(void* arg) {
 
 			}
 			g_usleep(0.5 * 1000000);
-			curr_chat = curr_chat->next;
+			curr_chat = curr_chat ? curr_chat->next : NULL;
 
 		}
 		g_usleep(0.5 * 1000000);
