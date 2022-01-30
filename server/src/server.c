@@ -40,10 +40,3 @@ int main(int argc, char *argv[]) {
 	return EXIT_FAILURE;
 
 }
-
-// SERVER ISSUES
-
-
-// MISC ISSUES
-
-// Handle escaping of characters for the strings before saving them to the database

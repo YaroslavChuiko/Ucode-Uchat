@@ -60,6 +60,9 @@ typedef enum e_request_type {
     REQ_GET_MSG,
     REQ_NEW_MSG_COUNT,
     REQ_SEARCH_CHATS,
+    REQ_EDIT_CHAT,
+    REQ_EDIT_USERNAME,
+    REQ_EDIT_PASSWORD,
     
     REQ_USR_LOGOUT,
     REQ_CLIENT_EXIT,

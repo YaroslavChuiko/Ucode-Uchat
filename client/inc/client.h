@@ -130,6 +130,9 @@ int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);
 t_msg* get_msg_from_json(cJSON* json);
 void handle_edit_msg_request(int message_id, const char* new_msg_text);
+t_response_code handle_edit_chat_request(int chat_id, const char* new_name);
+t_response_code handle_edit_username_request(const char* new_name);
+t_response_code handle_edit_password_request(const char* new_pass, const char* old_pass);
 
 t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
 t_response_code handle_server_response(const char* response_str);

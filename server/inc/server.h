@@ -59,6 +59,9 @@ void handle_send_message(const cJSON* message_info, t_server_utils* utils);
 void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_delete_message(const cJSON* message_info, t_server_utils* utils);
 void handle_edit_message(const cJSON* message_info, t_server_utils* utils);
+void handle_edit_chat(const cJSON* chat_info, t_server_utils* utils);
+void handle_edit_username(const cJSON* user_info, t_server_utils* utils);
+void handle_edit_password(const cJSON* pass_info, t_server_utils* utils);
 t_request_type handle_usr_logout(const cJSON* logout_info, t_server_utils* utils);
 
 // SQL
@@ -108,6 +111,9 @@ static const t_req_handler request_handlers[] = {
     handle_get_msg,
     handle_new_msg_count,
     handle_search_chats,
+    handle_edit_chat,
+    handle_edit_username,
+    handle_edit_password,
     NULL
 };
 
