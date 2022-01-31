@@ -6,7 +6,7 @@ static int handle_new_message(t_chat* curr_chat, int message_id, int new_msg_cou
 	bool to_change_count = new_msg_count > curr_chat->new_msg_count;
 	int last_new_msg_id = curr_chat->last_new_msg ? curr_chat->last_new_msg->message_id : 0;
 	if (message_id <= last_new_msg_id && !is_current) {
-			// printf("msg id -- %d, last new msg id -- %d\n", message_id, last_new_msg_id);
+			printf("msg id -- %d, last new msg id -- %d\n", message_id, last_new_msg_id);
 		return 1;
 	}
 
@@ -71,8 +71,11 @@ void* handle_server_updates(void* arg) {
 			}
 			
 			int last_msg_id = mx_get_last_msg_id(curr_chat);
+			if (last_msg_id == 0) {
+				last_msg_id = new_msg_count;
+			}
 			int curr_new_msg_count = curr_chat->new_msg_count;
-			// printf("last new msg id -- %d, new msg count -- %d\n", last_msg_id, new_msg_count);
+			printf("last new msg id -- %d, new msg count -- %d\n", last_msg_id, new_msg_count);
 			for (int i = 1; i <= curr_new_msg_count + 1; ++i) {
 				
 				if (handle_new_message(curr_chat, last_msg_id + i, new_msg_count) != 0)

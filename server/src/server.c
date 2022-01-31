@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     serv_address.sin_family = AF_INET;
     serv_address.sin_addr.s_addr = INADDR_ANY;
-    serv_address.sin_port = htons(8080);
+    serv_address.sin_port = htons(8080); // atoi(argv[1])
 
     int server_socket = server_socket_init((struct sockaddr *)&serv_address, address_size);
 
