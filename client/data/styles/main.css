@@ -93,6 +93,10 @@
     background-color: @main-bg-color;
 }
 
+.chatscreen_notify {
+    color: @main-font-color;
+}
+
 .hidden {
     font-size: 0px;
     opacity: 0;

@@ -104,7 +104,7 @@ void build_start_messaging_label()
     gtk_widget_set_valign(GTK_WIDGET(messaging_label), GTK_ALIGN_CENTER);
     gtk_widget_set_vexpand(messaging_label, TRUE);
     gtk_widget_set_hexpand(messaging_label, TRUE);
-    add_class();
+    add_class(messaging_label, "chatscreen_notify");
 
     gtk_box_pack_start(GTK_BOX(chat_container), messaging_label, FALSE, FALSE, 0);
 
