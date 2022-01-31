@@ -97,13 +97,14 @@ void build_chatlist_message(char *message)
     GtkWidget *chatlist = get_widget_by_name_r(main_window, "chatlist");
     clear_container(chatlist);
 
-    GtkWidget *chat_not_found_label = gtk_label_new(message);
-    gtk_widget_set_name(chat_not_found_label, "chat_not_found_label");
-    gtk_widget_set_halign(GTK_WIDGET(chat_not_found_label), GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(GTK_WIDGET(chat_not_found_label), GTK_ALIGN_CENTER);
-    gtk_box_pack_start(GTK_BOX(chatlist), chat_not_found_label, FALSE, FALSE, 0);
-    gtk_widget_set_vexpand(chat_not_found_label, TRUE);
-    gtk_widget_set_hexpand(chat_not_found_label, TRUE);
+    GtkWidget *chatlist_notify_label = gtk_label_new(message);
+    gtk_widget_set_name(chatlist_notify_label, "chatlist_notify_label");
+    add_class(chatlist_notify_label, "chatscreen_notify");
+    gtk_widget_set_halign(GTK_WIDGET(chatlist_notify_label), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(chatlist_notify_label), GTK_ALIGN_CENTER);
+    gtk_box_pack_start(GTK_BOX(chatlist), chatlist_notify_label, FALSE, FALSE, 0);
+    gtk_widget_set_vexpand(chatlist_notify_label, TRUE);
+    gtk_widget_set_hexpand(chatlist_notify_label, TRUE);
 
     gtk_widget_show_all(chatlist);
 }

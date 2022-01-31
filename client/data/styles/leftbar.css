@@ -1,0 +1,70 @@
+.leftbar {
+    background-color: @main-bg-color;
+    border-right: 1px solid #383d5c;
+    /* border-color: white; */
+}
+
+.leftbar_header_block {
+    margin: 30px 0px 20px;
+    padding: 0px 30px;
+}
+
+.leftbar_header_label {
+    font-size: 32px;
+    color: @main-font-color;
+    font-weight: 600;
+}
+
+.search_block {
+    padding: 0px 30px;
+    margin-bottom: 10px;
+}
+
+.scrollable_wrap {
+    /* background-color: lime; */
+}
+
+.chatlist {
+    /* background-color: maroon; */
+    padding: 0px 30px;    
+}
+
+.btn_block {
+    padding: 10px 30px;
+}
+/* .create_chat_event {
+    background-color: rgba(70, 70, 70, 0.538);
+} */
+
+.create_chat_menu {
+    background-color: mediumslateblue;
+}
+
+
+/* chat list item */
+.chatlist_item {
+    padding: 18px;
+    background-color: #2f334d;
+    border-radius: 10px;
+    color: white;
+}
+
+.chatlist_item_wrap:hover .chatlist_item{
+    background-color: #2a4cbc;
+    transition: 0.2s background linear;
+}
+
+.chatlist_item_wrap.active .chatlist_item{
+    background-color: #476eef;
+    transition: 0.2s background linear;
+}
+
+.chatlist_item_avatar {
+    background-color: yellow;
+    border-radius: 50px;
+}
+
+.chatlist_item_notify {
+    background-color: #f84469;
+    border-radius: 50px;
+}

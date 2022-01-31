@@ -22,9 +22,12 @@ static int handle_new_message(t_chat* curr_chat, int message_id, int new_msg_cou
 		client_log("You're reading an incoming message", INFO_LOG);
 
 		mx_msg_push_back(&curr_chat->messages, new_msg);
-		curr_chat->last_new_msg = mx_get_last_msg_node(curr_chat->messages);
-		add_message(curr_chat->last_new_msg);
-		
+		if (mx_msg_list_size(curr_chat->messages) == 1) {
+			update_chat_field();
+		}
+		else {
+			add_message(new_msg);
+		}
 		if (curr_chat->new_msg_count >= 1)
 			curr_chat->new_msg_count -= 1;
 

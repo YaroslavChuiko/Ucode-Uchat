@@ -163,5 +163,7 @@ void update_chat_field();
 void scroll_to_end(GtkWidget *widget, gpointer data);
 void send_button_click(GtkWidget *widget, gpointer new_message_field);
 
+void build_change_password_window(GtkWidget *widget, gpointer data);
+
 #endif
 
