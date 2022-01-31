@@ -74,6 +74,9 @@ void* handle_server_updates(void* arg) {
 			}
 			
 			int last_msg_id = mx_get_last_msg_id(curr_chat);
+			if (last_msg_id == 0) {
+				last_msg_id = new_msg_count;
+			}
 			int curr_new_msg_count = curr_chat->new_msg_count;
 			printf("last new msg id -- %d, new msg count -- %d\n", last_msg_id, new_msg_count);
 			for (int i = 1; i <= curr_new_msg_count + 1; ++i) {

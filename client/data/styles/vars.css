@@ -1,0 +1,32 @@
+/* background color */
+@define-color main-bg-color #292c43;
+@define-color second-bg-color #2f334d;
+@define-color activete-bg-color #476eef;
+
+/* fonts */
+@define-color main-font-color #f1f2f3;
+@define-color second-font-color #717590;
+
+/* entry */
+@define-color entry-focus-color rgb(26,92,255);
+@define-color entry-success-color rgb(70,201,58);
+@define-color entry-danger-color rgb(255,71,87);
+
+/* :root {
+    --main-bg-color: #292c43;
+    --second-bg-color: #2f334d;
+    --third-bg-color: #476eef;
+    --main-font-color: #f1f2f3;
+    --second-font-color: #717590;
+
+    --primary-color: rgb(26,92,255);
+    --primary-bg-color: rgba(26,92,255, .1);
+
+    --main-success-color: #42b983;
+    --success-font-color: #2e825c;
+    --success-color: rgb(70,201,58);
+    --success-bg-color: rgba(70,201,58,.1);
+
+    --danger-bg-color: rgb(255,71,87);
+    --danger-bg-color: rgb(255,71,87, .1);
+} */

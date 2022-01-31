@@ -3,9 +3,11 @@
 // Send a string-formatted client request to the server
 int send_to_server(SSL *ssl, const char* request_str) {
 
+    char buffer[1];
     int req_len = mx_strlen(request_str);
     char* len_str = mx_itoa(req_len);
-    // SSL_write(ssl, len_str, mx_strlen(len_str));
+    SSL_write(ssl, len_str, mx_strlen(len_str));
+    // SSL_read(ssl, buffer, 1);
     unsigned long err = 0;
     while (SSL_write(ssl, request_str, req_len) == -1) {
 
@@ -110,9 +112,10 @@ char* recv_from_server(SSL* ssl) {
         return NULL;
     
     }
-    buffer[n_bytes] = '\0';
-    return mx_strdup(buffer);
-    // return get_server_response(ssl, atoi(buffer));
+    // buffer[n_bytes] = '\0';
+    // return mx_strdup(buffer);
+    // SSL_write(ssl, "", 1);
+    return get_server_response(ssl, atoi(buffer));
 
 }
 

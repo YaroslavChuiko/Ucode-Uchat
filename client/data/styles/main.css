@@ -28,13 +28,21 @@
 } */
 
 /* @import url("../fonts/Poppins/Poppins-Regular.ttf"); */
+@import url("vars.css");
 @import url("login.css");
-/* caret-color: rgb(180, 191, 216); */
+@import url("leftbar.css");
+/* ///////////////////////////////  caret-color: rgb(180, 191, 216); */
 
 /* * {
     font-family: 'Poppins', sans-serif;
 } */
 
+
+* {
+    /* color: @main-font-color;
+    background-color: @main-bg-color; */
+    font-family: "Poppins", sans-serif;
+}
 
 .signup_menu {
     padding: 50px;
@@ -79,78 +87,14 @@
     color: rgb(40, 197, 40);
 }
 
-.leftbar {
-    background-color: #292c43;
-    border-right: 1px solid #383d5c;
-    /* border-color: white; */
-}
 
-.leftbar_header_block {
-    margin: 30px 0px 20px;
-    padding: 0px 30px;
-}
-
-.leftbar_header_label {
-    font-size: 32px;
-    color: white;
-}
-
-.search_block {
-    padding: 0px 30px;
-    margin-bottom: 10px;
-}
-
-.scrollable_wrap {
-    /* background-color: lime; */
-}
-
-.chatlist {
-    /* background-color: maroon; */
-    padding: 0px 30px;    
-}
-
-.btn_block {
-    padding: 10px 30px;
-}
-.create_chat_event {
-    background-color: rgba(70, 70, 70, 0.538);
-}
-
-.create_chat_menu {
-    background-color: mediumslateblue;
-}
-
-
-/* chat list item */
-.chatlist_item {
-    padding: 18px;
-    background-color: #2f334d;
-    border-radius: 10px;
-    color: white;
-}
-
-.chatlist_item_wrap:hover .chatlist_item{
-    background-color: #2a4cbc;
-    transition: 0.2s background linear;
-}
-
-.chatlist_item_wrap.active .chatlist_item{
-    background-color: #476eef;
-    transition: 0.2s background linear;
-}
-
-.chatlist_item_avatar {
-    background-color: yellow;
-    border-radius: 50px;
-}
-
-.chatlist_item_notify {
-    background-color: #f84469;
-    border-radius: 50px;
-}
 
 .chat {
-    background-color: indigo;
+    background-color: @main-bg-color;
+}
+
+.chatscreen_notify {
+    color: @main-font-color;
 }
 
 .hidden {

@@ -10,14 +10,13 @@ static cJSON* get_msg_by_id(const cJSON* msg_info, t_server_utils* utils) {
     }
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
-    sqlite3_prepare_v2(db, "SELECT messages.id, messages.user_id, users.username, messages.chat_id, messages.text, messages.date "
+    sqlite3_prepare_v2(db,  "SELECT messages.id, messages.user_id, users.username, messages.chat_id, messages.text, messages.date "
                             "FROM `messages` INNER JOIN `users` ON users.id = messages.user_id "
-                            "WHERE messages.chat_id = ? AND messages.id = ? AND NOT messages.user_id = ?",
+                            "WHERE messages.chat_id = ? AND messages.id = ?",
                             -1, &stmt, NULL);
                             
     sqlite3_bind_int64(stmt, 1, chat_id->valueint);
     sqlite3_bind_int64(stmt, 2, message_id->valueint);
-    sqlite3_bind_int64(stmt, 3, utils->user->user_id);
 
     cJSON* message_json = NULL; 
     if (sqlite3_step(stmt) == SQLITE_ROW) {
@@ -27,6 +26,8 @@ static cJSON* get_msg_by_id(const cJSON* msg_info, t_server_utils* utils) {
     }
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+    if (!message_json)
+        printf("json for %d, %d -- %s\n", chat_id->valueint, message_id->valueint, "not found");
     return message_json;
 
 }

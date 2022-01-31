@@ -44,9 +44,10 @@ char* read_client_data(SSL *ssl) {
         return NULL;
     
     }
-    buffer[n_bytes] = '\0';
-    return mx_strdup(buffer);
-    // return get_client_request(ssl, atoi(buffer));
+    // buffer[n_bytes] = '\0';
+    // return mx_strdup(buffer);
+    // SSL_write(ssl, "", 1);
+    return get_client_request(ssl, atoi(buffer));
 
 }
 
