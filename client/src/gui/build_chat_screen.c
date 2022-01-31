@@ -75,6 +75,18 @@ void build_leftbar(GtkWidget *chat_screen)
     gtk_container_add(GTK_CONTAINER(logout_btn), logout_label);
     gtk_box_pack_start(GTK_BOX(btn_block), logout_btn, FALSE, FALSE, 0);
 
+    GtkWidget *change_login_btn = gtk_event_box_new();
+    add_class(change_login_btn, "event_switch_auth_menu");
+    gtk_widget_set_halign(GTK_WIDGET(change_login_btn), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(change_login_btn), GTK_ALIGN_START);
+    g_signal_connect(G_OBJECT(change_login_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(change_login_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(change_login_btn), "button_press_event", G_CALLBACK(build_change_login_window), NULL);
+    GtkWidget *change_login_label = gtk_label_new("Change login");
+    add_class(change_login_label, "switch_auth_menu_label");
+    gtk_container_add(GTK_CONTAINER(change_login_btn), change_login_label);
+    gtk_box_pack_start(GTK_BOX(btn_block), change_login_btn, FALSE, FALSE, 0);
+
     GtkWidget *change_password_btn = gtk_event_box_new();
     add_class(change_password_btn, "event_switch_auth_menu");
     gtk_widget_set_halign(GTK_WIDGET(change_password_btn), GTK_ALIGN_CENTER);
