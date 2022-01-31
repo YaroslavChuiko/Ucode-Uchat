@@ -40,7 +40,7 @@ void build_leftbar(GtkWidget *chat_screen)
 
     GtkWidget *clear_field_btn = gtk_button_new_with_label("X");
     gtk_widget_set_size_request(GTK_WIDGET(clear_field_btn), 40, 40);
-    gtk_widget_grab_focus(clear_field_btn);
+    // gtk_widget_grab_focus(clear_field_btn);
 	g_signal_connect(G_OBJECT(clear_field_btn), "clicked", G_CALLBACK(clear_search_field), search_field);
 
     gtk_box_pack_start(GTK_BOX(search_block), search_field, TRUE, TRUE, 0);
@@ -81,7 +81,7 @@ void build_leftbar(GtkWidget *chat_screen)
     gtk_widget_set_valign(GTK_WIDGET(change_password_btn), GTK_ALIGN_START);
     g_signal_connect(G_OBJECT(change_password_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(change_password_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-    g_signal_connect(G_OBJECT(change_password_btn), "button_press_event", G_CALLBACK(build_change_password_window), NULL);
+    // g_signal_connect(G_OBJECT(change_password_btn), "button_press_event", G_CALLBACK(build_change_password_window), NULL);
     GtkWidget *change_password_label = gtk_label_new("Change password");
     add_class(change_password_label, "switch_auth_menu_label");
     gtk_container_add(GTK_CONTAINER(change_password_btn), change_password_label);
@@ -104,6 +104,7 @@ void build_start_messaging_label()
     gtk_widget_set_valign(GTK_WIDGET(messaging_label), GTK_ALIGN_CENTER);
     gtk_widget_set_vexpand(messaging_label, TRUE);
     gtk_widget_set_hexpand(messaging_label, TRUE);
+    add_class();
 
     gtk_box_pack_start(GTK_BOX(chat_container), messaging_label, FALSE, FALSE, 0);
 
