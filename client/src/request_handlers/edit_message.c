@@ -6,7 +6,7 @@ static void edit_global_messages(int message_id, const char* new_msg_text) {
     if (msg_to_edit) {
         mx_strdel(&msg_to_edit->text);
         msg_to_edit->text = mx_strdup(new_msg_text);
-        update_chatlist();
+        update_chatlist_item_info(utils->current_chat);
     }
 
 }

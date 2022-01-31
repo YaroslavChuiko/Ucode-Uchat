@@ -9,7 +9,7 @@ t_response_code add_to_global_msglist(t_msg* new_msg) {
 
     mx_msg_push_back(&curr_chat->messages, new_msg);
     curr_chat->last_new_msg = new_msg;
-    update_chatlist();
+    update_chatlist_item_info(curr_chat);
     return R_SUCCESS;
     
 }
