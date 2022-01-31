@@ -60,6 +60,9 @@ typedef enum e_request_type {
     REQ_GET_MSG,
     REQ_NEW_MSG_COUNT,
     REQ_SEARCH_CHATS,
+    REQ_EDIT_CHAT,
+    REQ_EDIT_USERNAME,
+    REQ_EDIT_PASSWORD,
     
     REQ_USR_LOGOUT,
     REQ_CLIENT_EXIT,
@@ -120,7 +123,7 @@ void mx_msg_pop_id(t_msg **list, int msg_id);
 int mx_get_msg_idx_by_id(t_msg* list, int id);
 void mx_clear_msg_list(t_msg **list);
 int mx_msg_list_size(t_msg* list);
-int mx_get_last_msg_id(t_chat* chat, int user_id);
+int mx_get_last_msg_id(t_chat* chat);
 t_chat* mx_get_chat_by_name(t_chat* list, const char* name);
 t_msg* mx_get_msg_by_id(t_msg* list, int id);
 void mx_clear_msg(t_msg** p);

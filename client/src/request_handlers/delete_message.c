@@ -5,8 +5,12 @@ static void edit_global_messages(int message_id) {
     bool is_last_msg = message_id == utils->current_chat->last_new_msg->message_id;
     mx_msg_pop_id(&utils->current_chat->messages, message_id);
     if (is_last_msg) {
-        utils->current_chat->last_new_msg = mx_get_last_msg_node(utils->current_chat->messages);
-        update_chatlist();
+        if (mx_msg_list_size(utils->current_chat->messages) == 0) {
+            utils->current_chat->last_new_msg = NULL;
+        } else {
+            utils->current_chat->last_new_msg = mx_get_last_msg_node(utils->current_chat->messages);
+        }
+        update_chatlist_item_info(utils->current_chat);
     }
 
 }

@@ -27,7 +27,7 @@ void set_user_account_data(sqlite3_stmt* stmt, t_server_utils* utils) {
 
 }
 
-int set_user_by_username(const char* username, const char* password, t_server_utils* utils) {
+t_response_code set_user_by_username(const char* username, const char* password, t_server_utils* utils) {
 
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
@@ -38,13 +38,11 @@ int set_user_by_username(const char* username, const char* password, t_server_ut
     sqlite3_close(db);
 
     if (utils->user == NULL) {
-        send_server_response(utils->ssl, R_USR_NOENT, REQ_USR_LOGIN);
-        return 1;
+        return R_USR_NOENT;
     } 
     if (strcmp(utils->user->password, password) != 0) {
-        send_server_response(utils->ssl, R_INVALID_PASS, REQ_USR_LOGIN);
         mx_clear_user(&utils->user);
-        return 1;
+        return R_INVALID_PASS;
     }
     
     char* response = get_json_formatted_user(utils->user);
@@ -57,7 +55,7 @@ int set_user_by_username(const char* username, const char* password, t_server_ut
             utils->user->name);
 
     logger(result_to_log, INFO_LOG);
-    return 0;
+    return R_SUCCESS;
 
 }
 
@@ -68,6 +66,7 @@ void handle_usr_login(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
 
+    int error_code = 0;
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
     const cJSON *user_password = cJSON_GetObjectItemCaseSensitive(user_info, "password");
 
@@ -76,7 +75,9 @@ void handle_usr_login(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
 
-    if (set_user_by_username(user_name->valuestring, user_password->valuestring, utils) != 0)
-        return;
+    if ((error_code = set_user_by_username(user_name->valuestring, 
+                                        user_password->valuestring, utils)) != R_SUCCESS) {
+        send_server_response(utils->ssl, error_code, REQ_USR_LOGIN);
+    }
 
 }

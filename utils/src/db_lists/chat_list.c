@@ -184,25 +184,18 @@ int mx_chat_list_size(t_chat* list) {
 
 }
 
-int mx_get_last_msg_id(t_chat* chat, int user_id) {
+int mx_get_last_msg_id(t_chat* chat) {
 
-    if (!chat) 
-        return 0;
-
-    if (!chat->messages)
+    if (!chat || !chat->messages) 
         return 0;
 
     t_msg* current = chat->messages;
-    t_msg* result = NULL;
-    while (current) {
-
-        if (current->sender_id != user_id) {
-            result = current;
-        }
+    while (current->next) {
+        
         current = current->next;
 
     }
-    return result ? result->message_id : 0;
+    return current ? current->message_id : 0;
 
 }
 

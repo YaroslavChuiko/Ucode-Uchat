@@ -1,5 +1,18 @@
 #include "../../inc/server.h"
 
+t_response_code db_add_user(const char* user_name, const char* password) {
+
+    char query[QUERY_LEN];
+    sprintf(query, "INSERT INTO `users` (`username`, `password`) VALUES('%s', '%s')", 
+        user_name, password);
+    
+    if (db_execute_query(query) != 0) {
+        return R_DB_FAILURE;
+    }
+    return R_SUCCESS;
+
+}
+
 void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
 
     if (database_init() != 0) {
@@ -34,14 +47,12 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
 
-    char query[QUERY_LEN];
-    sprintf(query, "INSERT INTO `users` (`username`, `password`) VALUES('%s', '%s')", 
-        user_name->valuestring, user_password->valuestring);
-    
-    if (db_execute_query(query) != 0) {
-        send_server_response(utils->ssl, R_DB_FAILURE, REQ_USR_SIGNUP);
+    int error_code = 0;
+    if ((error_code = db_add_user(user_name->valuestring, user_password->valuestring)) != R_SUCCESS) {
+        send_server_response(utils->ssl, error_code, REQ_USR_SIGNUP);
         return;
     }
+    
     send_server_response(utils->ssl, R_SUCCESS, REQ_USR_SIGNUP);
 
 }

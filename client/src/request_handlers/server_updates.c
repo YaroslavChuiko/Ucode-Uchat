@@ -2,6 +2,14 @@
 
 static int handle_new_message(t_chat* curr_chat, int message_id, int new_msg_count) {
 
+	bool is_current = utils->current_chat && curr_chat->id == utils->current_chat->id;
+	bool to_change_count = new_msg_count > curr_chat->new_msg_count;
+	int last_new_msg_id = curr_chat->last_new_msg ? curr_chat->last_new_msg->message_id : 0;
+	if (message_id <= last_new_msg_id && !is_current) {
+			// printf("msg id -- %d, last new msg id -- %d\n", message_id, last_new_msg_id);
+		return 1;
+	}
+
 	handle_get_msg_request(curr_chat->id, message_id);
 	t_msg* new_msg = NULL;
 
@@ -9,7 +17,7 @@ static int handle_new_message(t_chat* curr_chat, int message_id, int new_msg_cou
 		return 1;
 	}
 
-	if (utils->current_chat && curr_chat->id == utils->current_chat->id) {
+	if (is_current) {
 
 		client_log("You're reading an incoming message", INFO_LOG);
 
@@ -23,15 +31,14 @@ static int handle_new_message(t_chat* curr_chat, int message_id, int new_msg_cou
 		if (curr_chat->new_msg_count >= 1)
 			curr_chat->new_msg_count -= 1;
 
-	} else if (new_msg_count > curr_chat->new_msg_count) {
+	} else if (to_change_count) {
 		
 		client_log("You have an incoming message", INFO_LOG);
 		curr_chat->new_msg_count += 1;
+		curr_chat->last_new_msg = new_msg;
 	
 	}
 	
-	curr_chat->last_new_msg = new_msg;
-	// update_chatlist();
 	update_chatlist_item_info(curr_chat);
 
 	char str[200];
@@ -66,8 +73,10 @@ void* handle_server_updates(void* arg) {
 				continue;
 			}
 			
-			int last_msg_id = mx_get_last_msg_id(curr_chat, utils->current_user->user_id);
-			for (int i = 1; i <= new_msg_count; ++i) {
+			int last_msg_id = mx_get_last_msg_id(curr_chat);
+			int curr_new_msg_count = curr_chat->new_msg_count;
+			// printf("last new msg id -- %d, new msg count -- %d\n", last_msg_id, new_msg_count);
+			for (int i = 1; i <= curr_new_msg_count + 1; ++i) {
 				
 				if (handle_new_message(curr_chat, last_msg_id + i, new_msg_count) != 0)
 					continue;

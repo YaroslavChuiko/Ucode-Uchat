@@ -3,7 +3,7 @@
 t_client_utils* utils;
 GtkWidget *main_window;
 
-void* handle_requests(void* arg);
+// void* handle_requests(void* arg);
 int main(int argc, char **argv) {
 
 	(void)argc;
@@ -41,11 +41,6 @@ int main(int argc, char **argv) {
 	return EXIT_SUCCESS;
 
 }
-
-// CLIENT ISSUES
-
-// 2. Remove the chat widget for all the participants after the chat was deleted
-// 4. Add / remove the message widget don server upates 
 
 // void* handle_requests(void* arg) {
 
@@ -167,12 +162,33 @@ int main(int argc, char **argv) {
 // 			printf("Enter a chat id: ");
 // 			fgets(chat_id, 100, stdin);
 
-// 			handle_new_msg_count_request(atoi(chat_id), true);
+// 			handle_new_msg_count_request(atoi(chat_id));
+
+// 		} else if (!strncmp(client_request, "edit user", 9)) {
+
+// 			char chat_name[100];
+// 			fgets(chat_name, 100, stdin);
+// 			char* chat = mx_strndup(chat_name, mx_get_char_index(chat_name, '\n'));
+
+// 			handle_edit_username_request(chat);
+
+// 		} else if (!strncmp(client_request, "edit pass", 9)) {
+
+// 			char old_pass[100];
+// 			char new_pass[100];
+// 			printf("Enter a chat id: ");
+// 			fgets(old_pass, 100, stdin);
+// 			printf("Enter a chat name: ");
+// 			fgets(new_pass, 100, stdin);
+// 			char* old = mx_strndup(old_pass, mx_get_char_index(old_pass, '\n'));
+// 			char* new = mx_strndup(new_pass, mx_get_char_index(new_pass, '\n'));
+
+// 			handle_edit_password_request(new_pass, old_pass);
 
 // 		} else if (strncmp(client_request, "exit", 4) == 0) {
-// 			handle_logout_request();
-// 			pthread_cancel(utils->th_reader);
-// 			client_cleanup(&utils);
+// 			handle_logout_request(true);
+// 			// pthread_cancel(utils->th_reader);
+// 			client_cleanup(true);
 // 			pthread_exit(NULL);
 // 		}
 

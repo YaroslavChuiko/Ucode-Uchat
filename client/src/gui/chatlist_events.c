@@ -47,13 +47,16 @@ void update_chatlist_item_info(t_chat* chat)
 {
     GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
     GtkWidget *chatlist_item = get_widget_by_name_r(chatlist_container, chat->name);
+    char* text = chat->last_new_msg ? chat->last_new_msg->text : "No messages yet"; 
+    char* date_str = chat->last_new_msg ? chat->last_new_msg->date_str : ""; 
+    int new_msg_count = chat ? chat->new_msg_count : 0; 
 
     GtkWidget *chatlist_item_message = get_widget_by_name_r(chatlist_item, "chatlist_item_message");
     GtkWidget *chatlist_item_time = get_widget_by_name_r(chatlist_item, "chatlist_item_time");
     GtkWidget *chatlist_item_notify = get_widget_by_name_r(chatlist_item, "chatlist_item_notify");
-    gtk_label_set_text(GTK_LABEL(chatlist_item_message), chat->last_new_msg->text);
-    gtk_label_set_text(GTK_LABEL(chatlist_item_time), chat->last_new_msg->date_str);
-    gtk_label_set_text(GTK_LABEL(chatlist_item_notify), mx_itoa(chat->new_msg_count));
+    gtk_label_set_text(GTK_LABEL(chatlist_item_message), text);
+    gtk_label_set_text(GTK_LABEL(chatlist_item_time), date_str);
+    gtk_label_set_text(GTK_LABEL(chatlist_item_notify), mx_itoa(new_msg_count));
 }
 
 void update_chatlist()

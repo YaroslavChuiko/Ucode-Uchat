@@ -13,6 +13,5 @@ void handle_logout_request(bool is_client_exit) {
     send_to_server(utils->ssl, json_str);
 
     free(json_str);
-    utils->is_suspended = false;
 
 }

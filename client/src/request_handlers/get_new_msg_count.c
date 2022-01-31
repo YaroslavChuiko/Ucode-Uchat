@@ -39,7 +39,6 @@ void remove_chat_from_list(int chat_id) {
         }
 
         // pthread_mutex_unlock(&utils->lock);
-        // update_chatlist();
 
     }
 
@@ -69,7 +68,7 @@ int handle_new_msg_count_request(int chat_id) {
     free(response);
 
     t_chat* current_chat = mx_get_chat_by_id(utils->chatlist, chat_id);
-    int last_client_msg_id = mx_get_last_msg_id(current_chat, utils->current_user->user_id);
+    int last_client_msg_id = mx_get_last_msg_id(current_chat);
     return last_msg_id - last_client_msg_id;
 
 }
