@@ -174,7 +174,6 @@ void update_chat_field() {
         gtk_widget_set_vexpand(messaging_label, TRUE);
         gtk_widget_set_hexpand(messaging_label, TRUE);
         gtk_box_pack_start(GTK_BOX(chat_field), messaging_label, FALSE, FALSE, 0);
-        gtk_widget_show_all(chat_field);
     }
     else {
         while (messages) {
@@ -182,6 +181,7 @@ void update_chat_field() {
             messages = messages->next;
         }
     }
-    // gtk_widget_show_all(chat_field);
+    
+    gtk_widget_show_all(chat_field);
 }
 
