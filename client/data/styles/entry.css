@@ -1,63 +1,116 @@
-.entry-field {
+.input-field {
     padding: 5px 20px 5px 45px;
     font-size: 14px;
     border-radius: 10px;
-    transition: 0.2s border, color, background linear;
+    transition: 0.2s all linear;
+    /* border: 0px solid @main-bg-color; */
     border: 3px solid @second-bg-color;
     background-color: @second-bg-color;
     color: @second-font-color;
 }
 
-.entry-field:focus {
+.input-field:focus {
     outline: none;
     box-shadow: none;
-    background-color: rgba(26,92,255, 0.1);
-    border-color: rgba(26,92,255, 0.1);
-    color: @activete-bg-color;
-    border-bottom: 3px solid @activete-bg-color;
-    caret-color: @activete-bg-color;
+    background-color: rgba(71, 110, 239, 0.1);
+    border-color: rgba(71, 110, 239, 0.1);
+    border-bottom: 3px solid @onfocus-color;
+    color: @onfocus-color;
+    caret-color: @onfocus-color;
 }
 
-.entry-field--search {
-    /* padding-left: 50px; */
+.input-field--search {
     background-image: url("../img/search.png");
     background-position: 12px 12px;
     background-size: 20px 20px;
     background-repeat: no-repeat;
 }
 
-.entry-field--search:focus {
+.input-field--search:focus {
     background-image: url("../img/search-focus.png");
 }
 
-/* .entry-field:placeholder { 
-    color: red;
-} */
-
-.input_field {
-
+.input-field--name {
+    background-image: url("../img/user.png");
+    background-position: 14px 14px;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
 }
 
-.input_field--error {
-    /* border-color: red; */
-    background-color: red;
+.input-field--name:focus {
+    background-image: url("../img/user-focus.png");
 }
 
-.input_field--success { 
-    /* border-color: red; */
-    background-color: rgb(40, 197, 40);
+.input-field--name.input-field--danger {
+    background-image: url("../img/user-danger.png");
 }
 
-.notify_label {
-    font-size: 11px;
-    /* color: red; */
-    margin: 5px 0 0 5px;
+.input-field--name.input-field--success {
+    background-image: url("../img/user-success.png");
 }
 
-.notify_label--error {
-    color: red;
+.input-field--password {
+    background-image: url("../img/lock.png");
+    background-position: 14px 14px;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
 }
 
-.notify_label--success {
-    color: rgb(40, 197, 40);
+.input-field--password:focus {
+    background-image: url("../img/lock-focus.png");
+}
+
+.input-field--password.input-field--danger {
+    background-image: url("../img/lock-danger.png");
+}
+
+.input-field--password.input-field--success {
+    background-image: url("../img/lock-success.png");
+}
+
+.input-field--danger {
+    background-color: rgba(255,71,87, 0.1);
+    border-color: rgba(255,71,87, 0.1);
+    color: @danger-color;
+    caret-color: @danger-color;
+}
+
+.input-field--danger:focus {
+    background-color: rgba(255,71,87, 0.1);
+    border-color: rgba(255,71,87, 0.1);
+    border-bottom: 3px solid @danger-color;
+    color: @danger-color;
+    caret-color: @danger-color;
+}
+
+.input-field--success { 
+    background-color: rgba(70,201,58, 0.1);
+    border-color: rgba(70,201,58, 0.1);
+    color: @success-color;
+    caret-color: @success-color;
+}
+
+.input-field--success:focus {
+    background-color: rgba(70,201,58, 0.1);
+    border-color: rgba(70,201,58, 0.1);
+    border-bottom: 3px solid @success-color;
+    color: @success-color;
+    caret-color: @success-color;
+}
+
+.notify-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+    font-size: 12px;
+    margin: 5px 0 20px 10px;
+    /* transition: 0.2s color linear; */
+    color: @second-font-color;
+}
+
+.notify-label--danger {
+    color: @danger-color;
+}
+
+.notify-label--success {
+    color: @success-color;
 }

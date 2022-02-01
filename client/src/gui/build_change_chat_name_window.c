@@ -55,7 +55,7 @@ void build_change_chat_name_window(GtkWidget *widget, gpointer data) {
     GtkWidget *chat_name_notify_label = gtk_label_new(" ");
     gtk_widget_set_halign(chat_name_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(chat_name_notify_label, "chat_name_notify_label");
-    add_class(chat_name_notify_label, "notify_label");
+    add_class(chat_name_notify_label, "notify-label");
 
     GtkWidget *change_chat_name_btn = gtk_button_new_with_label("Change chat name");
     g_signal_connect(G_OBJECT(change_chat_name_btn), "clicked", G_CALLBACK(change_chat_name_btn_click), NULL);
@@ -63,7 +63,7 @@ void build_change_chat_name_window(GtkWidget *widget, gpointer data) {
     GtkWidget *change_chat_name_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(change_chat_name_notify_label, GTK_ALIGN_CENTER);
     gtk_widget_set_name(change_chat_name_notify_label, "change_chat_name_notify_label");
-	add_class(change_chat_name_notify_label, "notify_label");
+	add_class(change_chat_name_notify_label, "notify-label");
 
     gtk_box_pack_start(GTK_BOX(change_chat_name_box), change_chat_name_title, FALSE, FALSE, 20);
     gtk_box_pack_start(GTK_BOX(change_chat_name_box), chat_name_label, FALSE, FALSE, 0);

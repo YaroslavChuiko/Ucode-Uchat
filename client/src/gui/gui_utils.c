@@ -41,27 +41,27 @@ void on_crossing(GtkWidget *widget, GdkEventCrossing *event)
 
 void set_field_error_style(GtkWidget *field)
 {
-    remove_class(field, "input_field--success");
-    add_class(field, "input_field--error");
+    remove_class(field, "input-field--success");
+    add_class(field, "input-field--danger");
 }
 
 void set_field_success_style(GtkWidget *field)
 {
-    remove_class(field, "input_field--error");
-    add_class(field, "input_field--success");
+    remove_class(field, "input-field--danger");
+    add_class(field, "input-field--success");
 }
 
 void set_notify_error_style( GtkWidget *notify_label, char *message)
 {
-    remove_class(notify_label, "notify_label--success");
-    add_class(notify_label, "notify_label--error");
+    remove_class(notify_label, "notify-label--success");
+    add_class(notify_label, "notify-label--danger");
     gtk_label_set_text(GTK_LABEL(notify_label), message);
 }
 
 void set_notify_success_style( GtkWidget *notify_label, char *message)
 {
-    remove_class(notify_label, "notify_label--error");
-    add_class(notify_label, "notify_label--success");
+    remove_class(notify_label, "notify-label--danger");
+    add_class(notify_label, "notify-label--success");
     gtk_label_set_text(GTK_LABEL(notify_label), message);
 }
 

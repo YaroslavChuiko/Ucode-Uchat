@@ -35,8 +35,8 @@ void build_leftbar(GtkWidget *chat_screen)
     GtkWidget *search_field = gtk_entry_new();
     gtk_entry_set_placeholder_text(GTK_ENTRY(search_field), "Search");
     gtk_widget_set_name(search_field, "global_search_field");
-    add_class(search_field, "entry-field");
-    add_class(search_field, "entry-field--search");
+    add_class(search_field, "input-field");
+    add_class(search_field, "input-field--search");
 	g_signal_connect(G_OBJECT(search_field), "changed", G_CALLBACK(search_field_change_event), NULL);
 
     GtkWidget *clear_field_btn = gtk_button_new_with_label("X");

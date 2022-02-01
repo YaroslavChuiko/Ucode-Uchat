@@ -102,7 +102,7 @@ void build_change_password_window(GtkWidget *widget, gpointer data) {
     GtkWidget *current_password_notify_label = gtk_label_new(" ");
     gtk_widget_set_halign(current_password_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(current_password_notify_label, "current_password_notify_label");
-    add_class(current_password_notify_label, "notify_label");
+    add_class(current_password_notify_label, "notify-label");
 
     GtkWidget *new_password_label = gtk_label_new("New password:");
     gtk_widget_set_halign(GTK_WIDGET(new_password_label), GTK_ALIGN_START);
@@ -115,7 +115,7 @@ void build_change_password_window(GtkWidget *widget, gpointer data) {
     GtkWidget *new_password_notify_label = gtk_label_new(" ");
     gtk_widget_set_halign(new_password_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(new_password_notify_label, "new_password_notify_label");
-    add_class(new_password_notify_label, "notify_label");
+    add_class(new_password_notify_label, "notify-label");
 
     GtkWidget *re_new_password_label = gtk_label_new("Repeat password:");
     gtk_widget_set_halign(GTK_WIDGET(re_new_password_label), GTK_ALIGN_START);
@@ -128,7 +128,7 @@ void build_change_password_window(GtkWidget *widget, gpointer data) {
     GtkWidget *re_new_password_notify_label = gtk_label_new(" ");
     gtk_widget_set_halign(re_new_password_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(re_new_password_notify_label, "re_new_password_notify_label");
-    add_class(re_new_password_notify_label, "notify_label");
+    add_class(re_new_password_notify_label, "notify-label");
 
     GtkWidget *change_password_btn = gtk_button_new_with_label("Change password");
     g_signal_connect(G_OBJECT(change_password_btn), "clicked", G_CALLBACK(change_password_btn_click), NULL);
@@ -136,7 +136,7 @@ void build_change_password_window(GtkWidget *widget, gpointer data) {
     GtkWidget *change_password_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(change_password_notify_label, GTK_ALIGN_CENTER);
     gtk_widget_set_name(change_password_notify_label, "change_password_notify_label");
-	add_class(change_password_notify_label, "notify_label");
+	add_class(change_password_notify_label, "notify-label");
 
     gtk_box_pack_start(GTK_BOX(change_password_box), change_password_title, FALSE, FALSE, 20);
     gtk_box_pack_start(GTK_BOX(change_password_box), current_password_label, FALSE, FALSE, 0);

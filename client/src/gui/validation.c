@@ -12,7 +12,7 @@ bool is_empty_field(GtkWidget *field, GtkWidget *notify_label)
     }
     else
     {
-        remove_class(field, "input_field--error");
+        remove_class(field, "input-field--danger");
         set_notify_error_style(notify_label, "");
 		return false;
     }

@@ -55,7 +55,7 @@ void build_change_login_window(GtkWidget *widget, gpointer data) {
     GtkWidget *login_notify_label = gtk_label_new(" ");
     gtk_widget_set_halign(login_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(login_notify_label, "login_notify_label");
-    add_class(login_notify_label, "notify_label");
+    add_class(login_notify_label, "notify-label");
 
     GtkWidget *change_login_btn = gtk_button_new_with_label("Change login");
     g_signal_connect(G_OBJECT(change_login_btn), "clicked", G_CALLBACK(change_login_btn_click), NULL);
@@ -63,7 +63,7 @@ void build_change_login_window(GtkWidget *widget, gpointer data) {
     GtkWidget *change_login_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(change_login_notify_label, GTK_ALIGN_CENTER);
     gtk_widget_set_name(change_login_notify_label, "change_login_notify_label");
-	add_class(change_login_notify_label, "notify_label");
+	add_class(change_login_notify_label, "notify-label");
 
     gtk_box_pack_start(GTK_BOX(change_login_box), change_login_title, FALSE, FALSE, 20);
     gtk_box_pack_start(GTK_BOX(change_login_box), login_label, FALSE, FALSE, 0);

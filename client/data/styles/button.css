@@ -1,0 +1,43 @@
+.btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 8px 0px;
+    border: none;
+    transition: 0.2s all linear;
+    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    /* text-transform: uppercase;
+    max-width: 400px; */
+    background-color: @onfocus-color;
+    color: @main-font-color;
+}
+
+.btn:hover {
+    background-color: rgb(92, 128, 246);
+    box-shadow: rgba(71, 110, 239, 0.2) 0px 8px 24px;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+}
+
+.btn:active {
+    background-color: rgb(38, 81, 221);
+}
+
+.btn:focus {
+    background-color: rgb(92, 128, 246);
+
+}
+
+.switch_auth_menu_label {
+    /* color: rgb(0, 0, 255); */
+    color: @onfocus-color;
+    /* text-decoration-line: underline; */
+    padding: 3px 5px;
+    transition: all 0.2s linear;
+}
+
+.event_switch_auth_menu:hover .switch_auth_menu_label {
+    /* color: rgb(0, 136, 255); */
+    color: rgb(167, 188, 255);
+}

@@ -29,8 +29,9 @@
 
 /* @import url("../fonts/Poppins/Poppins-Regular.ttf"); */
 @import url("vars.css");
-@import url("login.css");
 @import url("entry.css");
+@import url("button.css");
+@import url("auth.css");
 @import url("leftbar.css");
 /* ///////////////////////////////  caret-color: rgb(180, 191, 216); */
 
@@ -42,22 +43,13 @@
 * {
     /* color: @main-font-color;
     background-color: @main-bg-color; */
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
 }
 
-.signup_menu {
-    padding: 50px;
-}
-
-.switch_auth_menu_label {
-    color: rgb(0, 0, 255);
-    text-decoration-line: underline;
-    padding: 5px;
-    transition: all 0.2s linear;
-}
-
-.event_switch_auth_menu:hover .switch_auth_menu_label {
-    color: rgb(0, 136, 255);
+window {
+    border-radius: 0 0 10px 10px;
+    background-color: @main-bg-color;
 }
 
 

@@ -24,7 +24,7 @@ void build_create_chat_menu(GtkWidget *main_area)
     GtkWidget *chat_name_notify_label = gtk_label_new(" ");
     gtk_widget_set_halign(chat_name_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(chat_name_notify_label, "chat_name_notify_label");
-    add_class(chat_name_notify_label, "notify_label");
+    add_class(chat_name_notify_label, "notify-label");
 
     GtkWidget *create_chat_btn = gtk_button_new_with_label("Create chat");
     g_signal_connect(G_OBJECT(create_chat_btn), "clicked", G_CALLBACK(create_chat_btn_click), NULL);
