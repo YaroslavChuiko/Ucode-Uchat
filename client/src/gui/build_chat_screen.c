@@ -76,7 +76,26 @@ void build_leftbar(GtkWidget *chat_screen)
     gtk_container_add(GTK_CONTAINER(logout_btn), logout_label);
     gtk_box_pack_start(GTK_BOX(btn_block), logout_btn, FALSE, FALSE, 0);
 
-    GtkWidget *change_login_btn = gtk_event_box_new();
+    GtkWidget *menubar = gtk_menu_bar_new();
+    GtkWidget *menu = gtk_menu_new();
+    GtkWidget *change_login_btn = gtk_menu_item_new_with_label("Change login");
+    g_signal_connect(change_login_btn, "activate", G_CALLBACK(build_change_login_window), NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), change_login_btn);
+    GtkWidget *change_password_btn = gtk_menu_item_new_with_label("Change password");
+    g_signal_connect(change_password_btn, "activate", G_CALLBACK(build_change_password_window), NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), change_password_btn);
+
+    gtk_widget_set_halign(GTK_WIDGET(menubar), GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(GTK_WIDGET(menubar), GTK_ALIGN_START);
+    add_class(menubar, "chat");
+    gtk_box_pack_end(GTK_BOX(btn_block), menubar, FALSE, FALSE, 0);
+
+    GtkWidget *edit_profile_btn = gtk_menu_item_new_with_label("Edit profile");
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit_profile_btn), menu);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menubar), edit_profile_btn);
+    add_class(edit_profile_btn, "switch_auth_menu_label");
+
+    /*GtkWidget *change_login_btn = gtk_event_box_new();
     add_class(change_login_btn, "event_switch_auth_menu");
     gtk_widget_set_halign(GTK_WIDGET(change_login_btn), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(change_login_btn), GTK_ALIGN_START);
@@ -94,11 +113,11 @@ void build_leftbar(GtkWidget *chat_screen)
     gtk_widget_set_valign(GTK_WIDGET(change_password_btn), GTK_ALIGN_START);
     g_signal_connect(G_OBJECT(change_password_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(change_password_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-    // g_signal_connect(G_OBJECT(change_password_btn), "button_press_event", G_CALLBACK(build_change_password_window), NULL);
+    g_signal_connect(G_OBJECT(change_password_btn), "button_press_event", G_CALLBACK(build_change_password_window), NULL);
     GtkWidget *change_password_label = gtk_label_new("Change password");
     add_class(change_password_label, "switch_auth_menu_label");
     gtk_container_add(GTK_CONTAINER(change_password_btn), change_password_label);
-    gtk_box_pack_start(GTK_BOX(btn_block), change_password_btn, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(btn_block), change_password_btn, FALSE, FALSE, 0);*/
 
     gtk_box_pack_start(GTK_BOX(left_bar), header_block, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(left_bar), search_block, FALSE, FALSE, 0);

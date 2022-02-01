@@ -136,6 +136,7 @@ t_response_code handle_edit_username_request(const char* new_name);
 t_response_code handle_edit_password_request(const char* new_pass, const char* old_pass);
 void handle_edit_password_response_code(int response_code, GtkWidget *change_password_notify_label);
 void handle_edit_username_response_code(int response_code, GtkWidget *change_login_notify_label);
+void handle_edit_chat_response_code(int response_code, GtkWidget *change_chat_name_notify_label);
 
 t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
 t_response_code handle_server_response(const char* response_str);
@@ -167,6 +168,7 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field);
 
 void build_change_password_window(GtkWidget *widget, gpointer data);
 void build_change_login_window(GtkWidget *widget, gpointer data);
+void build_change_chat_name_window(GtkWidget *widget, gpointer data);
 
 #endif
 
