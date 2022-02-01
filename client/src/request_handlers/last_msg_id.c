@@ -1,6 +1,6 @@
 #include "../../inc/client.h"
 
-t_response_code get_new_msg_count_response(const char* response_str, int* i_last_msg_id) {
+t_response_code last_msg_id_response(const char* response_str, int* i_last_msg_id) {
 
     if (response_str == NULL) {
         return R_INVALID_INPUT;
@@ -57,7 +57,7 @@ int handle_last_msg_id_request(int chat_id) {
     free(json_str);
 
     int last_msg_id = 0;
-    if ((error_code = get_new_msg_count_response(response, &last_msg_id)) != R_SUCCESS) {
+    if ((error_code = last_msg_id_response(response, &last_msg_id)) != R_SUCCESS) {
         // if (error_code == R_CHAT_NOENT) {
         //     remove_chat_from_list(chat_id);
         // }

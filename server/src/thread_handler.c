@@ -36,10 +36,10 @@ char* read_client_data(SSL *ssl) {
 
     char buffer[SENT_DATA_LEN];
     int n_bytes = 0;
-    if ((n_bytes = SSL_read(ssl, buffer, SENT_DATA_LEN)) <= 0) {
+    while ((n_bytes = SSL_read(ssl, buffer, SENT_DATA_LEN)) <= 0) {
         
         if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
-            return NULL;
+            continue;
         }
         return NULL;
     

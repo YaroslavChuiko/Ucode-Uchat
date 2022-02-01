@@ -28,8 +28,6 @@ t_response_code handle_signup_request(const char* user_name, const char* user_pa
 
     free(json_str);
     free(response);
-
-    utils->is_suspended = false;
 	return error_code;
 
 }

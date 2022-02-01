@@ -51,6 +51,7 @@ typedef enum e_request_type {
     REQ_CREATE_CHAT,
     REQ_JOIN_CHAT,
     REQ_SEND_MESSAGE,
+    REQ_LEAVE_CHAT,
     REQ_DELETE_CHAT,
     REQ_DELETE_MESSAGE,
     REQ_EDIT_MESSAGE,
@@ -63,6 +64,7 @@ typedef enum e_request_type {
     REQ_EDIT_CHAT,
     REQ_EDIT_USERNAME,
     REQ_EDIT_PASSWORD,
+    REQ_DELETE_ACCOUNT,
     
     REQ_USR_LOGOUT,
     REQ_CLIENT_EXIT,

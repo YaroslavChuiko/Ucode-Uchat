@@ -129,11 +129,14 @@ void handle_logout_request(bool is_client_exit);
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);
 void handle_delete_msg_request(int message_id);
-t_msg* get_msg_from_json(cJSON* json);
+t_response_code handle_delete_account_request();
 void handle_edit_msg_request(int message_id, const char* new_msg_text);
 t_response_code handle_edit_chat_request(int chat_id, const char* new_name);
 t_response_code handle_edit_username_request(const char* new_name);
 t_response_code handle_edit_password_request(const char* new_pass, const char* old_pass);
+t_response_code handle_leave_chat_request(const char* chat_name);
+
+t_msg* get_msg_from_json(cJSON* json);
 void handle_edit_password_response_code(int response_code, GtkWidget *change_password_notify_label);
 void handle_edit_username_response_code(int response_code, GtkWidget *change_login_notify_label);
 void handle_edit_chat_response_code(int response_code, GtkWidget *change_chat_name_notify_label);
