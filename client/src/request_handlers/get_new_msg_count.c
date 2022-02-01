@@ -44,11 +44,11 @@ void remove_chat_from_list(int chat_id) {
 
 }
 
-int handle_new_msg_count_request(int chat_id) {
+int handle_last_msg_id_request(int chat_id) {
 
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "chat_id", chat_id);
-    cJSON_AddNumberToObject(json, "type", REQ_NEW_MSG_COUNT);
+    cJSON_AddNumberToObject(json, "type", REQ_LAST_MSG_ID);
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
     
@@ -66,9 +66,6 @@ int handle_new_msg_count_request(int chat_id) {
         return -1;
     }
     free(response);
-
-    t_chat* current_chat = mx_get_chat_by_id(utils->chatlist, chat_id);
-    int last_client_msg_id = mx_get_last_msg_id(current_chat);
-    return last_msg_id - last_client_msg_id;
+    return last_msg_id;
 
 }

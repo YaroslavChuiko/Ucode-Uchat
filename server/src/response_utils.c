@@ -26,9 +26,7 @@ void send_response_to(SSL* ssl, const char* response) {
 
     int response_len = mx_strlen(response);
     char* len_str = mx_itoa(response_len);
-    char buffer[1];
     SSL_write(ssl, len_str, mx_strlen(len_str));
-    // SSL_read(ssl, buffer, 1);
     SSL_write(ssl, response, response_len);
     mx_strdel(&len_str);
 

@@ -54,7 +54,7 @@ void handle_get_chats(const cJSON* chat_info, t_server_utils* utils);
 void handle_get_chat_msgs(const cJSON* chat_info, t_server_utils* utils);
 void handle_search_chats(const cJSON* chat_info, t_server_utils* utils);
 void handle_get_msg(const cJSON* msg_info, t_server_utils* utils);
-void handle_new_msg_count(const cJSON* chat_info, t_server_utils* utils);
+void handle_last_msg_id(const cJSON* chat_info, t_server_utils* utils);
 void handle_send_message(const cJSON* message_info, t_server_utils* utils);
 void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils);
 void handle_delete_message(const cJSON* message_info, t_server_utils* utils);
@@ -109,7 +109,7 @@ static const t_req_handler request_handlers[] = {
     handle_get_chats,
     handle_get_chat_msgs,
     handle_get_msg,
-    handle_new_msg_count,
+    handle_last_msg_id,
     handle_search_chats,
     handle_edit_chat,
     handle_edit_username,

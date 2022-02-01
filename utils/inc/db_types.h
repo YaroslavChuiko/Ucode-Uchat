@@ -18,6 +18,7 @@ typedef struct s_chat {
     char* name;
     int permissions;
     t_msg* messages;
+    t_msg* new_messages;
     t_msg* last_new_msg;
     int new_msg_count;
     struct s_chat* next;

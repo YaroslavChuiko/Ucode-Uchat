@@ -11,7 +11,9 @@ t_response_code add_chat_to_chatlist(cJSON* json, t_chat** chat_list, bool is_se
     }
     if (!is_search)
         pthread_mutex_lock(&utils->lock);
+    
     mx_chat_push_back(chat_list, chat_id->valueint, chat_name->valuestring, chat_perms->valueint);
+    
     if (!is_search)
         pthread_mutex_unlock(&utils->lock);
 

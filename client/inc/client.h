@@ -124,7 +124,7 @@ t_response_code handle_get_chat_msgs_request(int chat_id);
 void handle_get_msg_request(int chat_id, int message_id);
 t_msg* handle_get_msg_response();
 t_chat* handle_search_chats_request(const char* search_str);
-int handle_new_msg_count_request(int chat_id);
+int handle_last_msg_id_request(int chat_id);
 void handle_logout_request(bool is_client_exit);
 void* handle_server_updates(void* arg);
 int handle_delete_chat_request(const char* chat_name);

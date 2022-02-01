@@ -58,7 +58,7 @@ typedef enum e_request_type {
     REQ_GET_CHATS,
     REQ_GET_CHAT_MSGS,
     REQ_GET_MSG,
-    REQ_NEW_MSG_COUNT,
+    REQ_LAST_MSG_ID,
     REQ_SEARCH_CHATS,
     REQ_EDIT_CHAT,
     REQ_EDIT_USERNAME,
