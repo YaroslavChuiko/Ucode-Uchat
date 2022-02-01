@@ -90,11 +90,11 @@ void* handle_server_updates(void* arg) {
 	(void)arg;
     while (1) {
 
-		if (utils && utils->is_suspended)
-			continue;
-		
 		if (!utils)
 			break;
+		
+		if (utils && utils->is_suspended)
+			continue;
 
 		pthread_mutex_lock(&utils->lock);
 		t_chat* curr_chat = utils->chatlist;
