@@ -61,6 +61,7 @@ void build_rightbar_chat() {
     add_class(avatar, "chatlist_item_avatar");
 
     GtkWidget *chat_header_title = gtk_label_new(utils->current_chat->name);
+    gtk_widget_set_name(chat_header_title, "chat_header_title");
     gtk_widget_set_halign(GTK_WIDGET(chat_header_title), GTK_ALIGN_START);
     gtk_widget_set_valign(GTK_WIDGET(chat_header_title), GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(chat_header), chat_header_title, false, false, 0);
@@ -79,6 +80,29 @@ void build_rightbar_chat() {
         gtk_container_add(GTK_CONTAINER(delete_chat_btn), delete_chat_label);
         gtk_box_pack_end(GTK_BOX(chat_header), delete_chat_btn, FALSE, FALSE, 0);
     }
+    else {
+        GtkWidget *leave_chat_btn = gtk_event_box_new();
+        add_class(leave_chat_btn, "event_switch_auth_menu");
+        gtk_widget_set_halign(GTK_WIDGET(leave_chat_btn), GTK_ALIGN_CENTER);
+        g_signal_connect(G_OBJECT(leave_chat_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+        g_signal_connect(G_OBJECT(leave_chat_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+        g_signal_connect(G_OBJECT(leave_chat_btn), "button_press_event", G_CALLBACK(leave_chat_btn_click), NULL);
+        GtkWidget *leave_chat_label = gtk_label_new("Leave chat");
+        add_class(leave_chat_label, "switch_auth_menu_label");
+        gtk_container_add(GTK_CONTAINER(leave_chat_btn), leave_chat_label);
+        gtk_box_pack_end(GTK_BOX(chat_header), leave_chat_btn, FALSE, FALSE, 0);
+    }
+
+    GtkWidget *change_chat_name_btn = gtk_event_box_new();
+    add_class(change_chat_name_btn, "event_switch_auth_menu");
+    gtk_widget_set_halign(GTK_WIDGET(change_chat_name_btn), GTK_ALIGN_CENTER);
+    g_signal_connect(G_OBJECT(change_chat_name_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(change_chat_name_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(change_chat_name_btn), "button_press_event", G_CALLBACK(build_change_chat_name_window), NULL);
+    GtkWidget *change_chat_name_label = gtk_label_new("Change chat name");
+    add_class(change_chat_name_label, "switch_auth_menu_label");
+    gtk_container_add(GTK_CONTAINER(change_chat_name_btn), change_chat_name_label);
+    gtk_box_pack_end(GTK_BOX(chat_header), change_chat_name_btn, FALSE, FALSE, 0);
 
     GtkWidget *scrollable_wrap = gtk_scrolled_window_new(NULL, NULL);
     gtk_widget_set_name(scrollable_wrap, "scrollable_wrap");

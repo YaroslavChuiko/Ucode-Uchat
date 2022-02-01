@@ -1,0 +1,63 @@
+.entry-field {
+    padding: 5px 20px 5px 45px;
+    font-size: 14px;
+    border-radius: 10px;
+    transition: 0.2s border, color, background linear;
+    border: 3px solid @second-bg-color;
+    background-color: @second-bg-color;
+    color: @second-font-color;
+}
+
+.entry-field:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: rgba(26,92,255, 0.1);
+    border-color: rgba(26,92,255, 0.1);
+    color: @activete-bg-color;
+    border-bottom: 3px solid @activete-bg-color;
+    caret-color: @activete-bg-color;
+}
+
+.entry-field--search {
+    /* padding-left: 50px; */
+    background-image: url("../img/search.png");
+    background-position: 12px 12px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+}
+
+.entry-field--search:focus {
+    background-image: url("../img/search-focus.png");
+}
+
+/* .entry-field:placeholder { 
+    color: red;
+} */
+
+.input_field {
+
+}
+
+.input_field--error {
+    /* border-color: red; */
+    background-color: red;
+}
+
+.input_field--success { 
+    /* border-color: red; */
+    background-color: rgb(40, 197, 40);
+}
+
+.notify_label {
+    font-size: 11px;
+    /* color: red; */
+    margin: 5px 0 0 5px;
+}
+
+.notify_label--error {
+    color: red;
+}
+
+.notify_label--success {
+    color: rgb(40, 197, 40);
+}

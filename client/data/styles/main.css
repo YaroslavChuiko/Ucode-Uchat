@@ -30,6 +30,7 @@
 /* @import url("../fonts/Poppins/Poppins-Regular.ttf"); */
 @import url("vars.css");
 @import url("login.css");
+@import url("entry.css");
 @import url("leftbar.css");
 /* ///////////////////////////////  caret-color: rgb(180, 191, 216); */
 
@@ -58,35 +59,6 @@
 .event_switch_auth_menu:hover .switch_auth_menu_label {
     color: rgb(0, 136, 255);
 }
-
-.input_field {
-
-}
-
-.input_field--error {
-    /* border-color: red; */
-    background-color: red;
-}
-
-.input_field--success { 
-    /* border-color: red; */
-    background-color: rgb(40, 197, 40);
-}
-
-.notify_label {
-    font-size: 11px;
-    /* color: red; */
-    margin: 5px 0 0 5px;
-}
-
-.notify_label--error {
-    color: red;
-}
-
-.notify_label--success {
-    color: rgb(40, 197, 40);
-}
-
 
 
 .chat {
