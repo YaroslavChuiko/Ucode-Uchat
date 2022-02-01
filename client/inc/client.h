@@ -170,5 +170,8 @@ void build_change_password_window(GtkWidget *widget, gpointer data);
 void build_change_login_window(GtkWidget *widget, gpointer data);
 void build_change_chat_name_window(GtkWidget *widget, gpointer data);
 
+void leave_chat_btn_click(GtkWidget *widget, gpointer data);
+void delete_account_btn_click(GtkWidget *widget, gpointer data);
+
 #endif
 

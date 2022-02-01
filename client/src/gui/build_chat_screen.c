@@ -84,6 +84,9 @@ void build_leftbar(GtkWidget *chat_screen)
     GtkWidget *change_password_btn = gtk_menu_item_new_with_label("Change password");
     g_signal_connect(change_password_btn, "activate", G_CALLBACK(build_change_password_window), NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), change_password_btn);
+    GtkWidget *delete_account_btn = gtk_menu_item_new_with_label("Delete account");
+    g_signal_connect(delete_account_btn, "activate", G_CALLBACK(delete_account_btn_click), NULL); 
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), delete_account_btn);
 
     gtk_widget_set_halign(GTK_WIDGET(menubar), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(menubar), GTK_ALIGN_START);
