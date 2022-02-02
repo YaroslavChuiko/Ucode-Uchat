@@ -74,7 +74,7 @@ void build_rightbar_chat() {
         gtk_widget_set_halign(GTK_WIDGET(delete_chat_btn), GTK_ALIGN_CENTER);
         g_signal_connect(G_OBJECT(delete_chat_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
         g_signal_connect(G_OBJECT(delete_chat_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-        g_signal_connect(G_OBJECT(delete_chat_btn), "button_press_event", G_CALLBACK(delete_chat_btn_click), NULL);
+        g_signal_connect(G_OBJECT(delete_chat_btn), "button_press_event", G_CALLBACK(build_confirm_delete_chat_window), NULL);
         GtkWidget *delete_chat_label = gtk_label_new("Delete chat");
         add_class(delete_chat_label, "switch_auth_menu_label");
         gtk_container_add(GTK_CONTAINER(delete_chat_btn), delete_chat_label);
@@ -86,7 +86,7 @@ void build_rightbar_chat() {
         gtk_widget_set_halign(GTK_WIDGET(leave_chat_btn), GTK_ALIGN_CENTER);
         g_signal_connect(G_OBJECT(leave_chat_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
         g_signal_connect(G_OBJECT(leave_chat_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-        g_signal_connect(G_OBJECT(leave_chat_btn), "button_press_event", G_CALLBACK(leave_chat_btn_click), NULL);
+        g_signal_connect(G_OBJECT(leave_chat_btn), "button_press_event", G_CALLBACK(build_confirm_leave_chat_window), NULL);
         GtkWidget *leave_chat_label = gtk_label_new("Leave chat");
         add_class(leave_chat_label, "switch_auth_menu_label");
         gtk_container_add(GTK_CONTAINER(leave_chat_btn), leave_chat_label);
