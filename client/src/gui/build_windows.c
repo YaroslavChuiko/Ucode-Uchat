@@ -2,8 +2,8 @@
 
 static void destroy(GtkWidget* widget, gpointer data)
 {
-	handle_logout_request(true);
     pthread_cancel(utils->th_reader);
+	handle_logout_request(true);
 	client_cleanup(true);
     gtk_main_quit();
 }
