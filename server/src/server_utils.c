@@ -11,7 +11,7 @@ int server_socket_init(struct sockaddr* serv_address, socklen_t address_size) {
         exit(EXIT_FAILURE);
     }
 
-    listen(server_socket, 0);
+    listen(server_socket, 10);
     return server_socket;
 
 }

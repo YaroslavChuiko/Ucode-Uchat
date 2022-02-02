@@ -80,6 +80,7 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
 			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str);
 	client_log(str, INFO_LOG);
+	g_usleep(100000);
 	return 0;
   
 }
@@ -96,9 +97,7 @@ void* handle_server_updates(void* arg) {
 		if (utils && utils->is_suspended)
 			continue;
 
-		pthread_mutex_lock(&utils->lock);
-		t_chat* curr_chat = utils->chatlist;
-		pthread_mutex_unlock(&utils->lock);
+		t_chat* curr_chat = utils ? utils->chatlist : NULL;
 		while (curr_chat) {
 			
 			bool is_current = utils->current_chat && curr_chat->id == utils->current_chat->id;
@@ -117,10 +116,10 @@ void* handle_server_updates(void* arg) {
 			handle_new_message(curr_chat, last_msg_id, is_current);
 			
 			curr_chat = curr_chat ? curr_chat->next : NULL;
-			g_usleep(0.5 * 1000000);
+			g_usleep(500000);
 
 		}
-		g_usleep(0.5 * 1000000);
+		g_usleep(500000);
 
 	}
 	return NULL;
