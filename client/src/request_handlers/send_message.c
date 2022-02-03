@@ -46,7 +46,7 @@ t_response_code handle_send_msg_request(const char* message_str) {
     
     unsigned long curr_time = get_current_time();
     t_msg* sent_msg = mx_create_msg(-1, utils->current_user->user_id, utils->current_user->name,
-                                    utils->current_chat->id, message_str, mx_get_string_time(curr_time));
+                                    utils->current_chat->id, message_str, get_string_time(curr_time));
 
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_SEND_MESSAGE);

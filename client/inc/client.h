@@ -30,7 +30,8 @@
 #include "types.h"
 
 unsigned long get_current_time();
-char* mx_get_string_time(unsigned long seconds);
+char* get_string_time(unsigned long seconds);
+t_avatar_color get_avatar_color();
 
 //GUI UTILS
 void on_crossing (GtkWidget *widget, GdkEventCrossing *event);

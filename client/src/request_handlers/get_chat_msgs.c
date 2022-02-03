@@ -19,7 +19,7 @@ t_response_code add_msg_to_msglist(cJSON* json) {
         return R_CHAT_NOENT;
 
 	t_msg* new_msg = mx_create_msg(msg_id->valueint, sender_id->valueint, sender_name->valuestring, 
-											chat_id->valueint, text->valuestring, mx_get_string_time(date->valueint));
+											chat_id->valueint, text->valuestring, get_string_time(date->valueint));
     mx_msg_push_back(&chat_by_id->messages, new_msg);
     chat_by_id->last_new_msg = mx_get_last_msg_node(chat_by_id->messages);
 

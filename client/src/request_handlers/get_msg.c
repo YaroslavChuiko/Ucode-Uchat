@@ -16,7 +16,7 @@ t_msg* get_msg_from_json(cJSON* json) {
     }
 
     return mx_create_msg(msg_id->valueint, sender_id->valueint, sender_name->valuestring, chat_id->valueint, 
-                        text->valuestring, mx_get_string_time(date->valueint));
+                        text->valuestring, get_string_time(date->valueint));
 
 }
 

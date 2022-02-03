@@ -8,6 +8,7 @@ int main(int argc, char **argv) {
 
 	(void)argc;
 	handle_arg_errors(argv);
+	srand(time(NULL));
 
 	int server_socket = 0;
 	pthread_t th_write;
