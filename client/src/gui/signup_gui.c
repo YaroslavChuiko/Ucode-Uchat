@@ -94,9 +94,11 @@ void build_signup_menu()
     GtkWidget *signup_btn_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	GtkWidget *signup_btn = gtk_button_new_with_label("Sign up");
-	// GTK_WIDGET_UNSET_FLAGS(signup_btn, GTK_CAN_FOCUS); //This code line disables the focus.
+	g_signal_connect(G_OBJECT(signup_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(signup_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
 	g_signal_connect(signup_btn, "clicked", G_CALLBACK(signup_button_click), NULL);
 	add_class(signup_btn, "btn");
+	add_class(signup_btn, "btn--blue");
 
     GtkWidget *signup_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(signup_notify_label, GTK_ALIGN_CENTER);

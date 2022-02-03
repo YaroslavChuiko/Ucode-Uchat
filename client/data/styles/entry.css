@@ -4,6 +4,8 @@
     border-radius: 10px;
     transition: 0.2s all linear;
     /* border: 0px solid @main-bg-color; */
+    outline: none;
+    box-shadow: none;
     border: 3px solid @second-bg-color;
     background-color: @second-bg-color;
     color: @second-font-color;
@@ -96,6 +98,14 @@
     border-bottom: 3px solid @success-color;
     color: @success-color;
     caret-color: @success-color;
+}
+
+.input-field_title {
+    margin: 0 0 5px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    /* color: @main-font-color; */
+    color: @second-font-color;
 }
 
 .notify-label {

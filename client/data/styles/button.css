@@ -5,28 +5,72 @@
     border-radius: 10px;
     padding: 8px 0px;
     border: none;
+    outline: none;
     transition: 0.2s all linear;
     /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    /* text-transform: uppercase;
-    max-width: 400px; */
-    background-color: @onfocus-color;
+    /* background-color: @onfocus-color; */
     color: @main-font-color;
 }
 
-.btn:hover {
+.btn--blue {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: @onfocus-color;
+}
+
+.btn--blue:hover {
     background-color: rgb(92, 128, 246);
     box-shadow: rgba(71, 110, 239, 0.2) 0px 8px 24px;
     /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 }
 
-.btn:active {
+.btn--blue:active {
     background-color: rgb(38, 81, 221);
 }
 
-.btn:focus {
+.btn--blue:focus {
     background-color: rgb(92, 128, 246);
+}
 
+.btn--dark-blue {
+    box-shadow: rgba(61, 64, 67, 0.2) 0px 8px 24px;
+    background-color: @second-bg-color;
+}
+
+.btn--dark-blue:hover {
+    background-color: #4a5078;
+    box-shadow: rgba(55, 74, 135, 0.2) 0px 8px 24px;
+    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+}
+
+.btn--dark-blue:active {
+    background-color: #282b41;
+}
+
+.btn--dark-blue:focus {
+    background-color: #4a5078;
+}
+
+.clear_search_btn {
+    font-size: 14px;
+    border-radius: 10px;
+    background-image: url("../img/close.png");
+    background-size: 14px 14px;
+    transition: 0.2s background linear;
+    background-color: @second-bg-color;
+}
+
+.clear_search_btn:hover {
+    background-image: url("../img/close-hover.png");
+    background-color: rgba(71, 110, 239, 0.1);
+}
+.clear_search_btn:active {
+    /* background-size: 18px 18px;
+    transform: scale(1); */
+}
+
+.clear_search_btn:focus {
+    background-image: url("../img/close-hover.png");
+    background-color: rgba(71, 110, 239, 0.4);
 }
 
 .switch_auth_menu_label {

@@ -9,11 +9,11 @@ void add_message(t_msg *message) {
     gtk_widget_set_halign(GTK_WIDGET(message_box), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
     gtk_widget_set_valign(GTK_WIDGET(message_box), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
     gtk_widget_set_hexpand(message_box, TRUE);
-    add_class(message_box, "message_btn");
+    add_class(message_box, "msg_box");
     gtk_box_pack_start(GTK_BOX(chat_field), message_box, FALSE, FALSE, 0);
 
     GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_set_size_request(GTK_WIDGET(avatar), 23, 23);
+    gtk_widget_set_size_request(GTK_WIDGET(avatar), 27, 27);
     gtk_widget_set_halign(avatar, cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
     gtk_widget_set_valign(avatar, GTK_ALIGN_START);
     if (!cur_user) {
@@ -21,24 +21,25 @@ void add_message(t_msg *message) {
     }
     add_class(avatar, "chatlist_item_avatar");
 
-    GtkWidget *message_text = gtk_box_new(GTK_ORIENTATION_VERTICAL, 3);
+    GtkWidget *message_text = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_widget_set_halign(GTK_WIDGET(message_text), cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
     gtk_widget_set_valign(GTK_WIDGET(message_text), cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
     gtk_box_pack_start(GTK_BOX(message_box), message_text, false, false, 0);
-    add_class(message_text, "chatlist_item_text");
+    add_class(message_text, "msg_text");
 
     GtkWidget *message_head = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
     gtk_box_pack_start(GTK_BOX(message_text), message_head, false, false, 0);
-    add_class(message_head, "chatlist_item_text");
+    add_class(message_head, "msg_head");
 
     GtkWidget *delete_btn = gtk_event_box_new();
-	add_class(delete_btn, "msg_btn");
+    gtk_widget_set_size_request(GTK_WIDGET(delete_btn), 20, 16);
+	add_class(delete_btn, "delete_msg_btn");
 	g_signal_connect(G_OBJECT(delete_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(delete_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
 	g_signal_connect(G_OBJECT(delete_btn), "button_press_event", G_CALLBACK(delete_message), message);
 
-	GtkWidget *delete_label = gtk_label_new("D");
-	gtk_container_add(GTK_CONTAINER(delete_btn), delete_label);
+	// GtkWidget *delete_label = gtk_label_new("D");
+	// gtk_container_add(GTK_CONTAINER(delete_btn), delete_label);
 	if (cur_user) {
         gtk_box_pack_start(GTK_BOX(message_head), delete_btn, FALSE, FALSE, 0);
     }
@@ -48,17 +49,19 @@ void add_message(t_msg *message) {
 
     if (cur_user) {
         GtkWidget *edit_btn = gtk_event_box_new();
-        add_class(edit_btn, "msg_btn");
+        gtk_widget_set_size_request(GTK_WIDGET(edit_btn), 20, 16);
+        add_class(edit_btn, "edit_msg_btn");
         g_signal_connect(G_OBJECT(edit_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
         g_signal_connect(G_OBJECT(edit_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
         g_signal_connect(G_OBJECT(edit_btn), "button_press_event", G_CALLBACK(edit_message), message);
 
-        GtkWidget *edit_label = gtk_label_new("E");
-        gtk_container_add(GTK_CONTAINER(edit_btn), edit_label);
+        // GtkWidget *edit_label = gtk_label_new("E");
+        // gtk_container_add(GTK_CONTAINER(edit_btn), edit_label);
         gtk_box_pack_start(GTK_BOX(message_head), edit_btn, FALSE, FALSE, 0);
     }
 
     GtkWidget *user_name = gtk_label_new(message->sender_name);
+    add_class(user_name, "msg_name");
     if (cur_user) {
         gtk_box_pack_end(GTK_BOX(message_head), user_name, false, false, 0);
     }
@@ -79,6 +82,7 @@ void add_message(t_msg *message) {
     add_class(sent_message, cur_user ? "right_message" : "left_message");
 
     GtkWidget *message_time = gtk_label_new(message->date_str); 
+    add_class(message_time, "msg_time");
     gtk_widget_set_halign(GTK_WIDGET(message_time), cur_user ? GTK_ALIGN_END : GTK_ALIGN_START);
     gtk_box_pack_start(GTK_BOX(message_text), message_time, false, false, 0);
 
