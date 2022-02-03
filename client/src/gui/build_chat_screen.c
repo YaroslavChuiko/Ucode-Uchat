@@ -74,7 +74,7 @@ void build_leftbar(GtkWidget *chat_screen)
     gtk_widget_set_valign(GTK_WIDGET(logout_btn), GTK_ALIGN_START);
     g_signal_connect(G_OBJECT(logout_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(logout_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-    g_signal_connect(G_OBJECT(logout_btn), "button_press_event", G_CALLBACK(logout_btn_click), NULL);
+    g_signal_connect(G_OBJECT(logout_btn), "button_press_event", G_CALLBACK(build_confirm_logout_window), NULL);
     GtkWidget *logout_label = gtk_label_new("Log out");
     add_class(logout_label, "switch_auth_menu_label");
     gtk_container_add(GTK_CONTAINER(logout_btn), logout_label);
@@ -89,7 +89,7 @@ void build_leftbar(GtkWidget *chat_screen)
     g_signal_connect(change_password_btn, "activate", G_CALLBACK(build_change_password_window), NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), change_password_btn);
     GtkWidget *delete_account_btn = gtk_menu_item_new_with_label("Delete account");
-    g_signal_connect(delete_account_btn, "activate", G_CALLBACK(delete_account_btn_click), NULL); 
+    g_signal_connect(delete_account_btn, "activate", G_CALLBACK(build_confirm_delete_account_window), NULL); 
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), delete_account_btn);
 
     gtk_widget_set_halign(GTK_WIDGET(menubar), GTK_ALIGN_CENTER);

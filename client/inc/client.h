@@ -89,6 +89,7 @@ void search_field_enter_pressed(GtkWidget *widget, gpointer data);
 
 //DELETE CHAT EVENTS
 void delete_chat_btn_click(GtkWidget *widget, gpointer data);
+void build_confirm_delete_chat_window(GtkWidget *widget, gpointer data);
 
 //CREATE CHAT MENU
 void build_create_chat_menu(GtkWidget *main_area);
@@ -103,6 +104,7 @@ void add_join_chat_item(int id, char *chat_name);
 
 //LOG OUT
 void logout_btn_click(GtkWidget *widget, gpointer data);
+void build_confirm_logout_window(GtkWidget *widget, gpointer data);
 
 //VALIDATION
 bool validate_name_field(GtkWidget *username_field, GtkWidget *username_notify_label);
@@ -175,7 +177,11 @@ void build_change_login_window(GtkWidget *widget, gpointer data);
 void build_change_chat_name_window(GtkWidget *widget, gpointer data);
 
 void leave_chat_btn_click(GtkWidget *widget, gpointer data);
+void build_confirm_leave_chat_window(GtkWidget *widget, gpointer data);
+void cancel_btn_click(GtkWidget *widget, gpointer data);
+
 void delete_account_btn_click(GtkWidget *widget, gpointer data);
+void build_confirm_delete_account_window(GtkWidget *widget, gpointer data);
 
 #endif
 

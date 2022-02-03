@@ -29,7 +29,7 @@ void ssl_init(SSL_CTX **ctx) {
 	SSL_library_init();
 	OpenSSL_add_all_algorithms();
 	SSL_load_error_strings();
-	*ctx = SSL_CTX_new(SSLv23_server_method());
+	*ctx = SSL_CTX_new(TLS_server_method());
 	
 	if (!*ctx) {
 		logger(strerror(errno), ERROR_LOG);
