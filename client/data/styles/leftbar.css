@@ -1,23 +1,24 @@
 .leftbar {
     background-color: @main-bg-color;
-    border-right: 1px solid #383d5c;
-    /* border-color: white; */
+    /* border-right: 1px solid #383d5c; */
+    border-right: 1px solid @second-bg-color;
 }
 
 .leftbar_header_block {
-    margin: 30px 0px 20px;
+    margin: 50px 0px 30px;
     padding: 0px 30px;
 }
 
 .leftbar_header_label {
     font-size: 32px;
-    color: @main-font-color;
     font-weight: 600;
+    color: @main-font-color;
 }
 
 .search_block {
     padding: 0px 30px;
     margin-bottom: 10px;
+    border: none;
 }
 
 .scrollable_wrap {
@@ -32,39 +33,72 @@
 .btn_block {
     padding: 10px 30px;
 }
-/* .create_chat_event {
-    background-color: rgba(70, 70, 70, 0.538);
-} */
-
-.create_chat_menu {
-    background-color: mediumslateblue;
-}
-
 
 /* chat list item */
 .chatlist_item {
-    padding: 18px;
+    padding: 15px 18px;
     background-color: #2f334d;
     border-radius: 10px;
-    color: white;
+    color: @second-font-color;
 }
 
 .chatlist_item_wrap:hover .chatlist_item{
-    background-color: #2a4cbc;
+    background-color: rgba(71, 110, 239, 0.3);
     transition: 0.2s background linear;
 }
 
 .chatlist_item_wrap.active .chatlist_item{
-    background-color: #476eef;
+    background-color: @onfocus-color;
     transition: 0.2s background linear;
+}
+
+.chatlist_item_wrap.active .chatlist_item_message{
+    color: @main-font-color;
+    transition: 0.2s color linear;
+}
+
+.chatlist_item_wrap.active .chatlist_item_time{
+    color: @main-font-color;
+    transition: 0.2s color linear;
 }
 
 .chatlist_item_avatar {
     background-color: yellow;
-    border-radius: 50px;
+    border-radius: 50%;
+}
+
+.chatlist_item_text {
+    margin-left: 10px;
+}
+
+.chatlist_item_title {
+    font-weight: 500;
+    font-size: 16px;
+    color: @main-font-color;
+}
+
+.chatlist_item_message {
+    color: @second-font-color;
+}
+
+.chatlist_item_info {
+
+}
+
+.chatlist_item_time {
+    color: @second-font-color;
+    margin-bottom: 15px;
 }
 
 .chatlist_item_notify {
     background-color: #f84469;
-    border-radius: 50px;
+    font-weight: 500;
+    border-radius: 50%;
+    opacity: 0;
+    transition: 0.2s opacity linear;
+    color: @main-font-color;
+}
+
+.chatlist_item_notify--visible {
+    opacity: 1;
 }

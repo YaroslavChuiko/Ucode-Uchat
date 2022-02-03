@@ -171,12 +171,13 @@ void handle_edit_username_response_code(int response_code, GtkWidget *change_log
     }
 }
 
-void handle_edit_chat_response_code(int response_code, GtkWidget *change_chat_name_notify_label)
+void handle_edit_chat_response_code(int response_code, GtkWidget* entry_field, GtkWidget *change_chat_name_notify_label)
 {
     switch (response_code)
     {
         case R_SUCCESS:
-            set_notify_success_style(change_chat_name_notify_label, "You have successfully changed chat name!");
+            set_notify_success_style(change_chat_name_notify_label, "");
+
             GtkWidget *toplevel = gtk_widget_get_toplevel(change_chat_name_notify_label);
             gtk_widget_destroy(toplevel);
 
@@ -188,18 +189,22 @@ void handle_edit_chat_response_code(int response_code, GtkWidget *change_chat_na
             break;
 
         case R_CHAT_NOENT:
+            set_field_error_style(entry_field);
             set_notify_error_style(change_chat_name_notify_label, get_response_str(R_CHAT_NOENT));
             break;
 
         case R_NAME_LEN_INVALID:
+            set_field_error_style(entry_field);
             set_notify_error_style(change_chat_name_notify_label, get_response_str(R_NAME_LEN_INVALID));
             break;
 
         case R_NAME_FORMAT_INVALID:
+            set_field_error_style(entry_field);
             set_notify_error_style(change_chat_name_notify_label, get_response_str(R_NAME_FORMAT_INVALID));
             break;
 
         case R_CHAT_EXISTS:
+            set_field_error_style(entry_field);
             set_notify_error_style(change_chat_name_notify_label, get_response_str(R_CHAT_EXISTS));
             break;
         

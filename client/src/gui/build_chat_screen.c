@@ -19,7 +19,7 @@ void build_leftbar(GtkWidget *chat_screen)
     g_signal_connect(G_OBJECT(create_new_chat_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(create_new_chat_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(create_new_chat_btn), "button_press_event", G_CALLBACK(popup_create_chat_menu), chat_screen);
-    GtkWidget *create_chat_label = gtk_label_new("Create new chat");
+    GtkWidget *create_chat_label = gtk_label_new("+ New chat");
     add_class(create_chat_label, "switch_auth_menu_label");
     gtk_container_add(GTK_CONTAINER(create_new_chat_btn), create_chat_label);
     
@@ -28,7 +28,7 @@ void build_leftbar(GtkWidget *chat_screen)
     //
 
     // search block
-    GtkWidget *search_block = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *search_block = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 8);
     // gtk_widget_set_size_request(GTK_WIDGET(search_block), 350, 40);
     add_class(search_block, "search_block");
 
@@ -39,9 +39,13 @@ void build_leftbar(GtkWidget *chat_screen)
     add_class(search_field, "input-field--search");
 	g_signal_connect(G_OBJECT(search_field), "changed", G_CALLBACK(search_field_change_event), NULL);
 
-    GtkWidget *clear_field_btn = gtk_button_new_with_label("X");
-    gtk_widget_set_size_request(GTK_WIDGET(clear_field_btn), 40, 40);
+    // GtkWidget *clear_field_btn = gtk_button_new_with_label("X");
+    GtkWidget *clear_field_btn = gtk_button_new();
+    gtk_widget_set_size_request(GTK_WIDGET(clear_field_btn), 45, 45);
+    add_class(clear_field_btn, "clear_search_btn");
     // gtk_widget_grab_focus(clear_field_btn);
+    g_signal_connect(G_OBJECT(clear_field_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(clear_field_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
 	g_signal_connect(G_OBJECT(clear_field_btn), "clicked", G_CALLBACK(clear_search_field), search_field);
 
     gtk_box_pack_start(GTK_BOX(search_block), search_field, TRUE, TRUE, 0);

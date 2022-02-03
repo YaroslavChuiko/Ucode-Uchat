@@ -47,6 +47,7 @@ GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name);
 // void destroy(GtkWidget* widget, gpointer data);
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 GtkWidget *create_popup_window(int width, int height);
+void destroy_popup_window(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen);
 void build_authorizatioin_window();
 void build_chat_window();
 
@@ -139,7 +140,7 @@ t_response_code handle_leave_chat_request(const char* chat_name);
 t_msg* get_msg_from_json(cJSON* json);
 void handle_edit_password_response_code(int response_code, GtkWidget *change_password_notify_label);
 void handle_edit_username_response_code(int response_code, GtkWidget *change_login_notify_label);
-void handle_edit_chat_response_code(int response_code, GtkWidget *change_chat_name_notify_label);
+void handle_edit_chat_response_code(int response_code, GtkWidget* entry_field, GtkWidget *change_chat_name_notify_label);
 
 t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
 t_response_code handle_server_response(const char* response_str);
