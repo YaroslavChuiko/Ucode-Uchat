@@ -137,6 +137,8 @@ void build_rightbar_chat() {
     gtk_widget_set_size_request(GTK_WIDGET(send_btn), 55, 55);
     gtk_widget_set_name(send_btn, "send_btn");
     add_class(send_btn, "input-msg_send-btn");
+    g_signal_connect(G_OBJECT(send_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(send_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(send_btn, "clicked", G_CALLBACK(send_button_click), new_message_field);
     gtk_widget_set_halign(GTK_WIDGET(send_btn), GTK_ALIGN_END);
     gtk_widget_set_valign(GTK_WIDGET(send_btn), GTK_ALIGN_END);

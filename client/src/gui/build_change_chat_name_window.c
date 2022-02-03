@@ -54,7 +54,7 @@ void build_change_chat_name_window(GtkWidget *widget, gpointer data) {
     add_class(chat_name_notify_label, "notify-label");
 
     //btn box
-    GtkWidget *btn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 8);
+    GtkWidget *btn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     gtk_widget_set_halign(GTK_WIDGET(btn_box), GTK_ALIGN_CENTER);
     add_class(btn_box, "popup_btn_box");
 

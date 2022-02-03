@@ -28,7 +28,8 @@ void build_create_chat_menu(GtkWidget *main_area)
     add_class(chat_name_notify_label, "notify-label");
 
     //btn box
-    GtkWidget *btn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 8);
+    GtkWidget *btn_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    gtk_widget_set_halign(GTK_WIDGET(btn_box), GTK_ALIGN_CENTER);
     add_class(btn_box, "popup_btn_box");
 
     GtkWidget *create_chat_btn = gtk_button_new_with_label("Create");

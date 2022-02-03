@@ -93,5 +93,20 @@
     border-radius: 50%;
     background-image: url("../img/send3.png");
     background-size: 25px 25px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: 0.2s all linear;
     background-color: @onfocus-color;
+}
+
+.input-msg_send-btn:hover {
+    background-color: rgb(92, 128, 246);
+    box-shadow: rgba(71, 110, 239, 0.2) 0px 8px 24px;
+}
+
+.input-msg_send-btn:active {
+    background-color: rgb(38, 81, 221);
+}
+
+.input-msg_send-btn:focus {
+    background-color: rgb(92, 128, 246);
 }
