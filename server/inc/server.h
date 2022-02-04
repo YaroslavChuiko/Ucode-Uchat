@@ -66,6 +66,9 @@ void handle_delete_account(const cJSON* chat_info, t_server_utils* utils);
 void handle_leave_chat(const cJSON* chat_info, t_server_utils* utils);
 t_request_type handle_usr_logout(const cJSON* logout_info, t_server_utils* utils);
 
+void handle_set_default_user_image(char *path, int id);
+void handle_update_user_image(const cJSON* data, t_server_utils* utils);
+void handle_get_user_image(const cJSON* data, t_server_utils* utils);
 // SQL
 
 int database_init();
@@ -87,6 +90,7 @@ bool db_is_chat_member(int user_id, int chat_id);
 int db_get_chat_id_by_name(const char* chat_name);
 cJSON* get_chat_json(sqlite3_stmt* stmt, bool is_for_search);
 cJSON* get_msg_json(sqlite3_stmt* stmt);
+int db_get_id_by_username(const char* username);
 
 // LIST UTILS
 
@@ -109,6 +113,8 @@ static const t_req_handler request_handlers[] = {
     handle_delete_chat,
     handle_delete_message,
     handle_edit_message,
+    handle_update_user_image,
+    handle_get_user_image,
     handle_get_chats,
     handle_get_chat_msgs,
     handle_get_msg,

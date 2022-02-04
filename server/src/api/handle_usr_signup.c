@@ -20,7 +20,7 @@ t_response_code db_add_user(const cJSON* user_info) {
     // if (!is_strlen_valid(user_password->valuestring, MIN_PASS_INPUT_LEN, MAX_PASS_INPUT_LEN)) {
     //     return R_PASS_LEN_INVALID;
     // }
-
+    
     if (!is_user_name_format_valid(user_name->valuestring)) {
         return R_NAME_FORMAT_INVALID;
     }
@@ -48,7 +48,9 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
         send_server_response(utils->ssl, error_code, REQ_USR_SIGNUP);
         return;
     }
-    
+    const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
+    handle_set_default_user_image("default_image.png", db_get_id_by_username(user_name->valuestring));
+
     send_server_response(utils->ssl, R_SUCCESS, REQ_USR_SIGNUP);
 
 }

@@ -68,6 +68,7 @@ t_response_code handle_login_request(const char* user_name, const char* user_pas
     if (error_code == R_SUCCESS) {
 
         handle_get_chats_request();
+        // handle_get_user_image();
         utils->log_name = get_log_name();
     
     }
