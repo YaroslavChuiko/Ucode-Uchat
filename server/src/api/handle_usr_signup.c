@@ -49,7 +49,7 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
-    handle_set_default_user_image("default_image.png", db_get_id_by_username(user_name->valuestring));
+    handle_set_default_user_image("server/data/default_image.png", db_get_id_by_username(user_name->valuestring));
 
     send_server_response(utils->ssl, R_SUCCESS, REQ_USR_SIGNUP);
 

@@ -23,7 +23,7 @@ void handle_get_user_image() {
 
     // Creating temp file
     FILE *fp;
-    if ((fp = fopen("received_avatar.png", "wb")) == NULL){
+    if ((fp = fopen("client/data/avatars/received_avatar.png", "wb")) == NULL){
         printf("Cannot open image file\n");
     }
 
