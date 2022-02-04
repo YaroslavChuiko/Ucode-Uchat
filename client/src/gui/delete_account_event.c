@@ -1,7 +1,8 @@
 #include "../../inc/client.h"
 
 void delete_account_btn_click(GtkWidget *widget, gpointer data) {
-    if (widget){};
+    if(widget){}
+    (void)data;
 
     if (handle_delete_account_request() == R_SUCCESS) {
         client_cleanup(false);
@@ -11,7 +12,8 @@ void delete_account_btn_click(GtkWidget *widget, gpointer data) {
 }
 
 void build_confirm_delete_account_window(GtkWidget *widget, gpointer data) {
-    if (widget){};
+    if(widget){}
+    (void)data;
 
     GtkWidget *popup_window = create_popup_window(400, 0);
     GtkWidget *confirm_delete_account_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);

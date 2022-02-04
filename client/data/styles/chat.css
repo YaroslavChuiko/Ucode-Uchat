@@ -78,6 +78,7 @@
 
 .input-msg_entry {
     outline: none;
+    border: none;
     box-shadow: none;
     font-size: 15px;
     color: @main-font-color;
@@ -93,6 +94,9 @@
     border-radius: 50%;
     background-image: url("../img/send3.png");
     background-size: 25px 25px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    border: none;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     transition: 0.2s all linear;
     background-color: @onfocus-color;

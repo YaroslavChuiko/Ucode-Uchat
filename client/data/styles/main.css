@@ -7,14 +7,13 @@
 @import url("chat.css");
 
 * {
-    /* color: @main-font-color;
-    background-color: @main-bg-color; */
     font-family: 'Poppins', sans-serif;
     font-weight: normal;
 }
 
 window {
-    border-radius: 0 0 10px 10px;
+    /* border-radius: 0 0 10px 10px;
+    border: none; */
     color: @main-font-color;
     background-color: @main-bg-color;
 }
@@ -31,8 +30,23 @@ window {
     margin: 0;
 }
 
-/* .edit_profile_menu {
-    background-color: mediumslateblue;
-    padding: 40px;
-} */
+.menubar {
+    background: none;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
 
+.menubar:hover .switch_auth_menu_label{
+    color: rgb(167, 188, 255);
+}
+
+.menubar_menu {
+    padding: 10px;
+    /* border-radius: 10px; */
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: @main-font-color;
+    background-color: @second-bg-color;
+}

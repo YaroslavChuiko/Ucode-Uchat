@@ -41,6 +41,7 @@ void activate_chat(GtkWidget *chatlist_item)
 void chatlist_item_on_click(GtkWidget *chatlist_item, gpointer data)
 {
     activate_chat(chatlist_item);
+    (void)data;
 }
 
 void update_chatlist_item_info(t_chat* chat)

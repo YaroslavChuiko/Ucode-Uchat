@@ -37,6 +37,7 @@ void search_field_change_event(GtkWidget *widget, gpointer data)
     {
         update_found_chats(search_str);
     }
+    (void)data;
 }
 
 void clear_search_field(GtkWidget *widget, gpointer entry_field)

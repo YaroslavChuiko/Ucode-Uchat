@@ -3,7 +3,6 @@
     font-size: 14px;
     border-radius: 10px;
     transition: 0.2s all linear;
-    /* border: 0px solid @main-bg-color; */
     outline: none;
     box-shadow: none;
     border: 3px solid @second-bg-color;

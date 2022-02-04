@@ -48,7 +48,7 @@ GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name);
 // void destroy(GtkWidget* widget, gpointer data);
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 GtkWidget *create_popup_window(int width, int height);
-void destroy_popup_window(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen);
+void destroy_popup_window(GtkWidget *widget, gpointer chat_screen);
 void build_authorizatioin_window();
 void build_chat_window();
 
@@ -60,8 +60,8 @@ void build_chat_screen();
 //AUTH EVENTS
 void signup_button_click(GtkWidget *widget, gpointer data);
 void login_button_click(GtkWidget *widget, gpointer data);
-void switch_to_signup_menu(GtkWidget *widget, GdkEventButton *event, gpointer main_area);
-void switch_to_login_menu(GtkWidget *widget, GdkEventButton *event, gpointer main_area);
+void switch_to_signup_menu(GtkWidget *widget, gpointer data);
+void switch_to_login_menu(GtkWidget *widget, gpointer data);
 void focus_out_username_field(GtkWidget *widget, gpointer data);
 void focus_out_password_field(GtkWidget *widget, gpointer data);
 void focus_out_repassword_field(GtkWidget *widget, gpointer data);
@@ -93,10 +93,10 @@ void delete_chat_btn_click(GtkWidget *widget, gpointer data);
 void build_confirm_delete_chat_window(GtkWidget *widget, gpointer data);
 
 //CREATE CHAT MENU
-void build_create_chat_menu(GtkWidget *main_area);
+void build_create_chat_menu();
 
 //CREATE CHAT MENU EVENTS
-void popup_create_chat_menu(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen);
+void popup_create_chat_menu(GtkWidget *widget, gpointer chat_screen);
 void create_chat_btn_click(GtkWidget *widget, gpointer data);
 
 //JOIN CHAT
@@ -165,9 +165,9 @@ void client_log(const char* info, t_info_type type);
 char* get_log_name();
 
 void build_rightbar_chat();
-void delete_message(GtkWidget *widget, GdkEventButton *event, t_msg *message);
+void delete_message(GtkWidget *widget, t_msg *message);
 void edit_button_click(GtkWidget *widget, t_msg *message);
-void edit_message(GtkWidget *widget, GdkEventButton *event, t_msg *message);
+void edit_message(GtkWidget *widget, t_msg *message);
 void add_message(t_msg *message);
 void update_chat_field();
 void scroll_to_end(GtkWidget *widget, gpointer data);

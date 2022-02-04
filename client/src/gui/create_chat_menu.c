@@ -1,6 +1,6 @@
 #include "../../inc/client.h"
 
-void build_create_chat_menu(GtkWidget *main_area)
+void build_create_chat_menu()
 {
     GtkWidget*  popup_window = create_popup_window(450, 0);
 

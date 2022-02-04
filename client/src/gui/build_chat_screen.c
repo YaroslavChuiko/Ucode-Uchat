@@ -81,7 +81,11 @@ void build_leftbar(GtkWidget *chat_screen)
     gtk_box_pack_start(GTK_BOX(btn_block), logout_btn, FALSE, FALSE, 0);
 
     GtkWidget *menubar = gtk_menu_bar_new();
+    g_signal_connect(G_OBJECT(menubar), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(menubar), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+    add_class(menubar, "menubar");
     GtkWidget *menu = gtk_menu_new();
+    add_class(menu, "menubar_menu");
     GtkWidget *change_login_btn = gtk_menu_item_new_with_label("Change login");
     g_signal_connect(change_login_btn, "activate", G_CALLBACK(build_change_login_window), NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), change_login_btn);
@@ -94,7 +98,7 @@ void build_leftbar(GtkWidget *chat_screen)
 
     gtk_widget_set_halign(GTK_WIDGET(menubar), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(menubar), GTK_ALIGN_START);
-    add_class(menubar, "chat");
+    // add_class(menubar, "chat");
     gtk_box_pack_end(GTK_BOX(btn_block), menubar, FALSE, FALSE, 0);
 
     GtkWidget *edit_profile_btn = gtk_menu_item_new_with_label("Edit profile");

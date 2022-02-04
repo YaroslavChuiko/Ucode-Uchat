@@ -2,6 +2,9 @@
 
 static void destroy(GtkWidget* widget, gpointer data)
 {
+    if(widget){}
+    (void)data;
+
     pthread_cancel(utils->th_reader);
 	handle_logout_request(true);
 	client_cleanup(true);
@@ -50,8 +53,11 @@ void build_chat_window()
     gtk_widget_show_all(main_window);
 }
 
-void destroy_popup_window(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen)
+void destroy_popup_window(GtkWidget *widget, gpointer chat_screen)
 {
+    if(widget){}
+    (void)chat_screen;
+
     GtkWidget *popup_window = gtk_widget_get_toplevel(widget);
     gtk_widget_destroy(popup_window);
 }

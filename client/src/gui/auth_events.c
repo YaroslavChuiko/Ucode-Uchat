@@ -1,27 +1,27 @@
 #include "../../inc/client.h"
 
-void switch_to_login_menu(GtkWidget *widget, GdkEventButton *event, gpointer data)
+void switch_to_login_menu(GtkWidget *widget, gpointer data)
 {
     if(widget){}
-    // if(event->type == GDK_BUTTON_PRESS && event->button == 1) {
-        GtkWidget *signup_menu = get_widget_by_name_r(main_window, "signup_menu");
-        gtk_widget_destroy(GTK_WIDGET(signup_menu));
-        build_login_menu();
-    // }
+    (void)data;
+    GtkWidget *signup_menu = get_widget_by_name_r(main_window, "signup_menu");
+    gtk_widget_destroy(GTK_WIDGET(signup_menu));
+    build_login_menu();
 }
 
-void switch_to_signup_menu(GtkWidget *widget, GdkEventButton *event, gpointer data)
+void switch_to_signup_menu(GtkWidget *widget, gpointer data)
 {
     if(widget){}
-    // if (event->type == GDK_BUTTON_PRESS && event->button == 1) {
-        GtkWidget *login_menu = get_widget_by_name_r(main_window, "login_menu");
-        gtk_widget_destroy(GTK_WIDGET(login_menu));
-        build_signup_menu();
-    // }
+    (void)data;
+    GtkWidget *login_menu = get_widget_by_name_r(main_window, "login_menu");
+    gtk_widget_destroy(GTK_WIDGET(login_menu));
+    build_signup_menu();
 }
 
 void focus_out_username_field(GtkWidget *widget, gpointer data)
 {
+    if(widget){}
+    (void)data;
     GtkWidget *username_field = get_widget_by_name_r(main_window, "username_field");
     GtkWidget *username_notify_label = get_widget_by_name_r(main_window, "username_notify_label");
     validate_name_field(username_field, username_notify_label);
@@ -29,6 +29,8 @@ void focus_out_username_field(GtkWidget *widget, gpointer data)
 
 void focus_out_password_field(GtkWidget *widget, gpointer data)
 {
+    if(widget){}
+    (void)data;
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");
     GtkWidget *password_notify_label = get_widget_by_name_r(main_window, "password_notify_label");
     validate_password_field(password_field, password_notify_label);
@@ -36,6 +38,8 @@ void focus_out_password_field(GtkWidget *widget, gpointer data)
 
 void focus_out_repassword_field(GtkWidget *widget, gpointer data)
 {
+    if(widget){}
+    (void)data;
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");
     GtkWidget *repassword_field = get_widget_by_name_r(main_window, "repassword_field");
     GtkWidget *repassword_notify_label = get_widget_by_name_r(main_window, "repassword_notify_label");
@@ -44,6 +48,8 @@ void focus_out_repassword_field(GtkWidget *widget, gpointer data)
 
 void signup_button_click(GtkWidget *widget, gpointer data)
 {
+    if(widget){}
+    (void)data;
     GtkWidget *username_field = get_widget_by_name_r(main_window, "username_field");
     GtkWidget *username_notify_label = get_widget_by_name_r(main_window, "username_notify_label");
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");
@@ -75,6 +81,8 @@ void signup_button_click(GtkWidget *widget, gpointer data)
 
 void login_button_click(GtkWidget *widget, gpointer data)
 {
+    if(widget){}
+    (void)data;
     GtkWidget *username_field = get_widget_by_name_r(main_window, "username_field");
     GtkWidget *username_notify_label = get_widget_by_name_r(main_window, "username_notify_label");
     GtkWidget *password_field = get_widget_by_name_r(main_window, "password_field");

@@ -7,20 +7,17 @@
     border: none;
     outline: none;
     transition: 0.2s all linear;
-    /* box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); */
-    /* background-color: @onfocus-color; */
     color: @main-font-color;
 }
 
 .btn--blue {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    background-color: @onfocus-color;
+    background: @onfocus-color;
 }
 
 .btn--blue:hover {
     background-color: rgb(92, 128, 246);
     box-shadow: rgba(71, 110, 239, 0.2) 0px 8px 24px;
-    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 }
 
 .btn--blue:active {
@@ -33,13 +30,12 @@
 
 .btn--dark-blue {
     box-shadow: rgba(61, 64, 67, 0.2) 0px 8px 24px;
-    background-color: @second-bg-color;
+    background: @second-bg-color;
 }
 
 .btn--dark-blue:hover {
     background-color: #4a5078;
     box-shadow: rgba(55, 74, 135, 0.2) 0px 8px 24px;
-    /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
 }
 
 .btn--dark-blue:active {
@@ -53,9 +49,13 @@
 .clear_search_btn {
     font-size: 14px;
     border-radius: 10px;
+    border: none;
+    background-repeat: no-repeat;
     background-image: url("../img/close.png");
     background-size: 14px 14px;
+    background-position: 50% 50%;
     transition: 0.2s background linear;
+    box-shadow: none;
     background-color: @second-bg-color;
 }
 
@@ -74,14 +74,11 @@
 }
 
 .switch_auth_menu_label {
-    /* color: rgb(0, 0, 255); */
     color: @onfocus-color;
-    /* text-decoration-line: underline; */
     padding: 3px 5px;
     transition: all 0.2s linear;
 }
 
 .event_switch_auth_menu:hover .switch_auth_menu_label {
-    /* color: rgb(0, 136, 255); */
     color: rgb(167, 188, 255);
 }

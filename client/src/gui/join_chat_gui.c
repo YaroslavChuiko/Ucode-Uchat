@@ -16,6 +16,7 @@ void join_chat_event(GtkWidget *widget, GdkEventButton *event, gpointer data)
         GtkWidget *search_field = get_widget_by_name_r(main_window, "global_search_field");
         gtk_entry_set_text(GTK_ENTRY(search_field), "");
     }
+    (void)data;
 }
 
 void add_join_chat_item(int id, char *chat_name)
@@ -62,30 +63,6 @@ void add_join_chat_item(int id, char *chat_name)
     // gtk_widget_set_name(chatlist_item_title, "chat_name");
     gtk_widget_set_halign(GTK_WIDGET(chatlist_item_title), GTK_ALIGN_START);
     gtk_box_pack_start(GTK_BOX(chatlist_item_text), chatlist_item_title, false, false, 0);
-    // GtkWidget *chat_list_item_message = gtk_label_new("Last message");
-    // gtk_widget_set_halign(GTK_WIDGET(chat_list_item_message), GTK_ALIGN_START);
-    // gtk_box_pack_start(GTK_BOX(chatlist_item_text), chat_list_item_message, false, false, 0);
-    //
-
-    // info block
-    // GtkWidget *chatlist_item_info = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    // gtk_widget_set_halign(GTK_WIDGET(chatlist_item_info), GTK_ALIGN_END);
-    // // gtk_widget_set_valign(GTK_WIDGET(chatlist_item_info), GTK_ALIGN_END);
-    // gtk_box_pack_end(GTK_BOX(chatlist_item), chatlist_item_info, false, false, 0);
-    // add_class(chatlist_item_info, "chatlist_item_info");
-
-    // GtkWidget *chatlist_item_time = gtk_label_new("15:00");
-    // gtk_widget_set_valign(GTK_WIDGET(chatlist_item_time), GTK_ALIGN_START);
-    // gtk_widget_set_halign(GTK_WIDGET(chatlist_item_time), GTK_ALIGN_END);
-    // gtk_box_pack_start(GTK_BOX(chatlist_item_info), chatlist_item_time, false, false, 0);
-    // add_class(chatlist_item_time, "chatlist_item_time");
-    // GtkWidget *chatlist_item_notify = gtk_label_new("2");
-    // gtk_widget_set_size_request(GTK_WIDGET(chatlist_item_notify), 20, 20);
-    // gtk_widget_set_valign(GTK_WIDGET(chatlist_item_notify), GTK_ALIGN_END);
-    // gtk_widget_set_halign(GTK_WIDGET(chatlist_item_notify), GTK_ALIGN_END);
-    // gtk_box_pack_start(GTK_BOX(chatlist_item_info), chatlist_item_notify, false, false, 0);
-    // add_class(chatlist_item_notify, "chatlist_item_notify");
-    //
 
     gtk_widget_show_all(event_box);
 }

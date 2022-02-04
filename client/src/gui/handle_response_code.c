@@ -186,7 +186,7 @@ void handle_edit_chat_response_code(int response_code, GtkWidget* entry_field, G
             GtkWidget *toplevel = gtk_widget_get_toplevel(change_chat_name_notify_label);
             gtk_widget_destroy(toplevel);
 
-            GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
+            // GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
             update_chatlist();
 
             GtkWidget *chat_header_title = get_widget_by_name_r(main_window, "chat_header_title");

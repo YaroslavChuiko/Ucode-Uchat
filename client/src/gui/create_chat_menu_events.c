@@ -1,15 +1,17 @@
 #include "../../inc/client.h"
 
-void popup_create_chat_menu(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen)
+void popup_create_chat_menu(GtkWidget *widget, gpointer chat_screen)
 {
-    if (widget){}
-    // if(event->type == GDK_BUTTON_PRESS && event->button == 1)
-    build_create_chat_menu((GtkWidget *)chat_screen);
+    if(widget){}
+    (void)chat_screen;
+
+    build_create_chat_menu();
 }
 
 void create_chat_btn_click(GtkWidget *widget, gpointer data)
 {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
     GtkWidget *chat_name_field = get_widget_by_name_r(toplevel, "chat_name_field");
     GtkWidget *chat_name_notify_label = get_widget_by_name_r(toplevel, "chat_name_notify_label");
 

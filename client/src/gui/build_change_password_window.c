@@ -2,6 +2,7 @@
 
 void focus_out_current_password_field(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *current_password_field = get_widget_by_name_r(toplevel, "current_password_field");
     GtkWidget *current_password_notify_label = get_widget_by_name_r(toplevel, "current_password_notify_label");
@@ -20,6 +21,7 @@ void focus_out_current_password_field(GtkWidget *widget, gpointer data) {
 
 void focus_out_new_password_field(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *new_password_field = get_widget_by_name_r(toplevel, "new_password_field");
     GtkWidget *new_password_notify_label = get_widget_by_name_r(toplevel, "new_password_notify_label");
@@ -28,6 +30,7 @@ void focus_out_new_password_field(GtkWidget *widget, gpointer data) {
 
 void focus_out_re_new_password_field(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *new_password_field = get_widget_by_name_r(toplevel, "new_password_field");
     GtkWidget *re_new_password_field = get_widget_by_name_r(toplevel, "re_new_password_field");
@@ -37,6 +40,7 @@ void focus_out_re_new_password_field(GtkWidget *widget, gpointer data) {
 
 void change_password_btn_click(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *current_password_field = get_widget_by_name_r(toplevel, "current_password_field");
     GtkWidget *current_password_notify_label = get_widget_by_name_r(toplevel, "current_password_notify_label");
@@ -44,7 +48,6 @@ void change_password_btn_click(GtkWidget *widget, gpointer data) {
     GtkWidget *new_password_notify_label = get_widget_by_name_r(toplevel, "new_password_notify_label");
     GtkWidget *re_new_password_field = get_widget_by_name_r(toplevel, "re_new_password_field");
     GtkWidget *re_new_password_notify_label = get_widget_by_name_r(toplevel, "re_new_password_notify_label");
-    // GtkWidget *change_password_notify_label = get_widget_by_name_r(toplevel, "change_password_notify_label");
 
     bool current_password_field_valid = validate_password_field(current_password_field, current_password_notify_label);
 
@@ -65,12 +68,8 @@ void change_password_btn_click(GtkWidget *widget, gpointer data) {
     bool re_new_password_field_valid = validate_repassword_field(new_password_field, re_new_password_field, re_new_password_notify_label);
 
 	if (!current_password_field_valid || !new_password_field_valid || !re_new_password_field_valid) {
-        // set_notify_error_style(change_password_notify_label, "Please fill all fields correctly!");
         return;
 	}
-    // else {
-    //     set_notify_success_style(change_password_notify_label, "");
-    // }
 
 	char *new_password = (char*)gtk_entry_get_text(GTK_ENTRY(new_password_field));
 
@@ -80,6 +79,7 @@ void change_password_btn_click(GtkWidget *widget, gpointer data) {
 
 void build_change_password_window(GtkWidget *widget, gpointer data) {
     if (widget){};
+    (void)data;
 
     GtkWidget *popup_window = create_popup_window(450, 0);
     GtkWidget *change_password_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -145,7 +145,7 @@ void build_change_password_window(GtkWidget *widget, gpointer data) {
     gtk_widget_set_halign(GTK_WIDGET(btn_box), GTK_ALIGN_CENTER);
     add_class(btn_box, "popup_btn_box");
 
-    GtkWidget *change_password_btn = gtk_button_new_with_label("Change password");
+    GtkWidget *change_password_btn = gtk_button_new_with_label("Submit");
     gtk_widget_set_size_request(GTK_WIDGET(change_password_btn), 150, 50);
     g_signal_connect(G_OBJECT(change_password_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(change_password_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);

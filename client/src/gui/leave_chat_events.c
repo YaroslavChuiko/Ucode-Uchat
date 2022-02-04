@@ -13,11 +13,12 @@ void leave_chat_btn_click(GtkWidget *widget, gpointer data) {
         GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
         gtk_widget_destroy(toplevel);
     }
-
+    (void)data;
 }
 
 void build_confirm_leave_chat_window(GtkWidget *widget, gpointer data) {
-    if (widget){};
+    if(widget){}
+    (void)data;
 
     GtkWidget *popup_window = create_popup_window(400, 0);
     GtkWidget *confirm_leave_chat_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);

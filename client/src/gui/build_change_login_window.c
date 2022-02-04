@@ -2,6 +2,7 @@
 
 void focus_out_login_field(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *login_field = get_widget_by_name_r(toplevel, "login_field");
     GtkWidget *login_notify_label = get_widget_by_name_r(toplevel, "login_notify_label");
@@ -10,6 +11,7 @@ void focus_out_login_field(GtkWidget *widget, gpointer data) {
 
 void change_login_btn_click(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *login_field = get_widget_by_name_r(toplevel, "login_field");
     GtkWidget *login_notify_label = get_widget_by_name_r(toplevel, "login_notify_label");
@@ -26,6 +28,7 @@ void change_login_btn_click(GtkWidget *widget, gpointer data) {
 
 void build_change_login_window(GtkWidget *widget, gpointer data) {
     if (widget){};
+    (void)data;
 
     GtkWidget *popup_window = create_popup_window(450, 0);
     GtkWidget *change_login_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -58,7 +61,7 @@ void build_change_login_window(GtkWidget *widget, gpointer data) {
     gtk_widget_set_halign(GTK_WIDGET(btn_box), GTK_ALIGN_CENTER);
     add_class(btn_box, "popup_btn_box");
 
-    GtkWidget *change_login_btn = gtk_button_new_with_label("Change login");
+    GtkWidget *change_login_btn = gtk_button_new_with_label("Submit");
     gtk_widget_set_size_request(GTK_WIDGET(change_login_btn), 150, 50);
     g_signal_connect(G_OBJECT(change_login_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(change_login_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);

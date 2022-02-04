@@ -2,6 +2,7 @@
 
 void focus_out_chat_name_field(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *chat_name_field = get_widget_by_name_r(toplevel, "chat_name_field");
     GtkWidget *chat_name_notify_label = get_widget_by_name_r(toplevel, "chat_name_notify_label");
@@ -10,6 +11,7 @@ void focus_out_chat_name_field(GtkWidget *widget, gpointer data) {
 
 void change_chat_name_btn_click(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
+    (void)data;
 
     GtkWidget *chat_name_field = get_widget_by_name_r(toplevel, "chat_name_field");
     GtkWidget *chat_name_notify_label = get_widget_by_name_r(toplevel, "chat_name_notify_label");
@@ -26,6 +28,7 @@ void change_chat_name_btn_click(GtkWidget *widget, gpointer data) {
 
 void build_change_chat_name_window(GtkWidget *widget, gpointer data) {
     if (widget){};
+    (void)data;
 
     GtkWidget *popup_window = create_popup_window(450, 0);
     GtkWidget *change_chat_name_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);

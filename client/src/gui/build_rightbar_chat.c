@@ -1,6 +1,9 @@
 #include "../../inc/client.h"
 
 void scroll_to_end(GtkWidget *widget, gpointer data) {
+    if(widget){}
+    (void)data;
+    
     GtkWidget *scrollable_wrap = get_widget_by_name_r(main_window, "scrollable_wrap");
     GtkWidget *chat_field = get_widget_by_name_r(main_window, "chat_field");
 
@@ -16,7 +19,7 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field) {
     if(widget){};
 
     GtkWidget *chat_container = get_widget_by_name_r(main_window, "chat");
-    GtkWidget *chat_field = get_widget_by_name_r(chat_container, "chat_field");
+    // GtkWidget *chat_field = get_widget_by_name_r(chat_container, "chat_field");
     GtkWidget *messaging_label = get_widget_by_name_r(chat_container, "messaging_label");
 
     gchar new_message[2048];

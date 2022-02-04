@@ -23,7 +23,7 @@ void build_signup_menu()
     //username box
     GtkWidget *username_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	GtkWidget *username_label = gtk_label_new("Username:");
+	// GtkWidget *username_label = gtk_label_new("Username:");
 	GtkWidget *username_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(username_field), "Username");
     gtk_widget_set_name(username_field, "username_field");
@@ -46,7 +46,7 @@ void build_signup_menu()
     //password box
     GtkWidget *password_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	GtkWidget *password_label = gtk_label_new("Password:");
+	// GtkWidget *password_label = gtk_label_new("Password:");
 	GtkWidget *password_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(password_field), "Password");
     gtk_widget_set_name(password_field, "password_field");
@@ -70,7 +70,7 @@ void build_signup_menu()
     //repassword box
     GtkWidget *repassword_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	GtkWidget *repassword_label = gtk_label_new("Repeat Password:");
+	// GtkWidget *repassword_label = gtk_label_new("Repeat Password:");
 	GtkWidget *repassword_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(repassword_field), "Repeat password");
     gtk_widget_set_name(repassword_field, "repassword_field");

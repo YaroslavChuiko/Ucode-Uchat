@@ -2,7 +2,8 @@
 
 void logout_btn_click(GtkWidget *widget, gpointer data)
 {
-    if (widget){};
+    if(widget){}
+    (void)data;
     
     handle_logout_request(false);
 	client_cleanup(false);
@@ -15,7 +16,8 @@ void logout_btn_click(GtkWidget *widget, gpointer data)
 // }
 
 void build_confirm_logout_window(GtkWidget *widget, gpointer data) {
-    if (widget){};
+    if(widget){}
+    (void)data;
 
     GtkWidget *popup_window = create_popup_window(400, 0);
     GtkWidget *confirm_logout_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
