@@ -24,26 +24,6 @@ t_response_code last_msg_id_response(const char* response_str, int* i_last_msg_i
 
 }
 
-void remove_chat_from_list(int chat_id) {
-
-    t_chat* curr_chat = mx_get_chat_by_id(utils->chatlist, chat_id);
-    if (curr_chat) {
-
-        // pthread_mutex_lock(&utils->lock);
-        if (utils->current_chat->id == chat_id) {
-            utils->current_chat = NULL;
-        }
-        mx_chat_pop_id(&utils->chatlist, chat_id);
-        if (mx_chat_list_size(utils->chatlist) == 0) {
-            utils->chatlist = NULL;
-        }
-
-        // pthread_mutex_unlock(&utils->lock);
-
-    }
-
-}
-
 int handle_last_msg_id_request(int chat_id) {
 
     cJSON *json = cJSON_CreateObject();
@@ -58,9 +38,6 @@ int handle_last_msg_id_request(int chat_id) {
 
     int last_msg_id = 0;
     if ((error_code = last_msg_id_response(response, &last_msg_id)) != R_SUCCESS) {
-        // if (error_code == R_CHAT_NOENT) {
-        //     remove_chat_from_list(chat_id);
-        // }
         logger(get_response_str(error_code), ERROR_LOG);
         free(response);
         return -1;

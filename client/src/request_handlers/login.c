@@ -9,7 +9,6 @@ void set_current_user(t_user** user, const cJSON* user_json) {
 
     if (!cJSON_IsNumber(id_json) || !cJSON_IsString(name_json) || 
         !cJSON_IsString(pass_json) || !cJSON_IsNumber(color_json)) {
-        printf("invalid json\n");
         return;
     }
 
@@ -39,7 +38,6 @@ t_response_code handle_login_response(const char* response_str) {
     pthread_mutex_unlock(&utils->lock);
 
     if (utils->current_user == NULL) {
-        printf("invalid json error\n");
         cJSON_Delete(json);
         return R_JSON_FAILURE; 
     }
