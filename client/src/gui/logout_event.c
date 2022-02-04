@@ -5,8 +5,10 @@ void logout_btn_click(GtkWidget *widget, gpointer data)
     if(widget){}
     (void)data;
     
+    pthread_cancel(utils->th_reader);
     handle_logout_request(false);
 	client_cleanup(false);
+    pthread_create(&utils->th_reader, NULL, handle_server_updates, NULL);
     build_authorizatioin_window();
 }
 

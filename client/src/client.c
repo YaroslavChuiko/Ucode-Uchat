@@ -10,8 +10,6 @@ int main(int argc, char **argv) {
 	srand(time(NULL));
 
 	int server_socket = 0;
-	pthread_t th_read;
-	
 	SSL_CTX *ctx = NULL; 
 	SSL *ssl = NULL;
 
@@ -28,8 +26,7 @@ int main(int argc, char **argv) {
 
 	build_authorizatioin_window();
 
-	pthread_create(&th_read, NULL, handle_server_updates, utils);
-	utils->th_reader = th_read;
+	pthread_create(&utils->th_reader, NULL, handle_server_updates, utils);
 
     gtk_main();
 

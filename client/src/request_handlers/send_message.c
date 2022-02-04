@@ -59,8 +59,7 @@ t_response_code handle_send_msg_request(const char* message_str) {
     cJSON_Delete(json);
 
     char* response = send_and_recv_from_server(utils->ssl, json_str);
-    int error_code = 0;
-    error_code = handle_send_msg_response(response, sent_msg);
+    int error_code = handle_send_msg_response(response, sent_msg);
     logger(get_response_str(error_code), error_code == R_SUCCESS ? INFO_LOG : ERROR_LOG);
 
     free(response);

@@ -1,6 +1,6 @@
 #include "../../inc/client.h"
 
-void delete_message(GtkWidget *widget, t_msg *message) {
+void delete_message(GtkWidget *widget, GdkEventButton *event, t_msg *message) {
     if(widget){};
 
     handle_delete_msg_request(message->message_id);
@@ -17,7 +17,7 @@ void edit_button_click(GtkWidget *widget, t_msg *message) {
     gchar new_message[2048];
     sprintf(new_message, "%s", gtk_entry_get_text(GTK_ENTRY(new_message_field)));
     if (!new_message[0]) {
-        delete_message(NULL, message);
+        delete_message(NULL, NULL, message);
         return;
     }
 
@@ -34,7 +34,7 @@ void edit_button_click(GtkWidget *widget, t_msg *message) {
     gtk_widget_show_all(chat_container);
 }
 
-void edit_message(GtkWidget *widget, t_msg *message) {
+void edit_message(GtkWidget *widget, GdkEventButton *event, t_msg *message) {
     if(widget){};
 
     GtkWidget *new_message_field = get_widget_by_name_r(main_window, "new_message_field");
