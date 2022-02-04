@@ -3,7 +3,6 @@
 t_client_utils* utils;
 GtkWidget *main_window;
 
-// void* handle_requests(void* arg);
 int main(int argc, char **argv) {
 
 	(void)argc;

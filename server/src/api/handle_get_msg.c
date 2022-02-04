@@ -1,6 +1,6 @@
 #include "../../inc/server.h"
 
-static cJSON* get_msg_by_id(const cJSON* msg_info, t_server_utils* utils) {
+static cJSON* get_msg_by_id(const cJSON* msg_info) {
 
     const cJSON *chat_id = cJSON_GetObjectItemCaseSensitive(msg_info, "chat_id");
     const cJSON *message_id = cJSON_GetObjectItemCaseSensitive(msg_info, "message_id");
@@ -26,8 +26,6 @@ static cJSON* get_msg_by_id(const cJSON* msg_info, t_server_utils* utils) {
     }
     sqlite3_finalize(stmt);
     sqlite3_close(db);
-    if (!message_json)
-        printf("json for %d, %d -- %s\n", chat_id->valueint, message_id->valueint, "not found");
     return message_json;
 
 }
@@ -39,7 +37,7 @@ void handle_get_msg(const cJSON* msg_info, t_server_utils* utils) {
         return;
     }
 
-    cJSON* msg_json = get_msg_by_id(msg_info, utils);
+    cJSON* msg_json = get_msg_by_id(msg_info);
     
     if (msg_json == NULL) {
         send_server_response(utils->ssl, R_JSON_FAILURE, REQ_GET_MSG);

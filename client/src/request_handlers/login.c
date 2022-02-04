@@ -43,7 +43,6 @@ t_response_code handle_login_response(const char* response_str) {
         cJSON_Delete(json);
         return R_JSON_FAILURE; 
     }
-    printf("avatar color is: %d\n", utils->current_user->avatar_color);
 
     cJSON_Delete(json);
     return R_SUCCESS;
@@ -69,6 +68,7 @@ t_response_code handle_login_request(const char* user_name, const char* user_pas
     if (error_code == R_SUCCESS) {
 
         handle_get_chats_request();
+        // handle_get_user_image();
         utils->log_name = get_log_name();
     
     }

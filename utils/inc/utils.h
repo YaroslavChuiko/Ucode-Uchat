@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <regex.h>
 
+#include "base64.h"
 #include "db_types.h"
 #include "const.h"
 #include "../../libraries/libmx/inc/libmx.h"
@@ -55,6 +56,9 @@ typedef enum e_request_type {
     REQ_DELETE_CHAT,
     REQ_DELETE_MESSAGE,
     REQ_EDIT_MESSAGE,
+
+    REQ_UPDATE_USER_IMAGE,
+    REQ_GET_USER_IMAGE,
 
     REQ_GET_CHATS,
     REQ_GET_CHAT_MSGS,
