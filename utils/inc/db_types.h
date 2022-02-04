@@ -30,4 +30,13 @@ typedef enum e_member_type {
     NORMAL_MEMBER,
 }            t_member_type;
 
+// Type for the color of the default avatar
+    // change the names to colors later
+typedef enum e_avatar_color {
+    A_COLOR_FIRST,
+    A_COLOR_SECOND,
+    A_COLOR_THIRD,
+    A_COLOR_FOURTH,
+}            t_avatar_color;
+
 #endif

@@ -2,14 +2,22 @@
 
 void set_current_user(t_user** user, const cJSON* user_json) {
 
-    *user = malloc(sizeof(t_user));
     const cJSON* id_json = cJSON_GetObjectItem(user_json, "id");
     const cJSON* name_json = cJSON_GetObjectItemCaseSensitive(user_json, "username");
     const cJSON* pass_json = cJSON_GetObjectItemCaseSensitive(user_json, "password");
+    const cJSON* color_json = cJSON_GetObjectItem(user_json, "avatar_color");
 
-    (*user)->user_id = cJSON_IsNumber(id_json) ? id_json->valueint : -1;
-    (*user)->name = cJSON_IsString(name_json) ? mx_strdup(name_json->valuestring) : NULL;
-    (*user)->password = cJSON_IsString(pass_json) ? mx_strdup(pass_json->valuestring) : NULL;
+    if (!cJSON_IsNumber(id_json) || !cJSON_IsString(name_json) || 
+        !cJSON_IsString(pass_json) || !cJSON_IsNumber(color_json)) {
+        printf("invalid json\n");
+        return;
+    }
+
+    *user = malloc(sizeof(t_user));
+    (*user)->user_id = id_json->valueint;
+    (*user)->name = mx_strdup(name_json->valuestring);
+    (*user)->password = mx_strdup(pass_json->valuestring);
+    (*user)->avatar_color = color_json->valueint;
 
 }
 
@@ -30,12 +38,12 @@ t_response_code handle_login_response(const char* response_str) {
     set_current_user(&utils->current_user, json);
     pthread_mutex_unlock(&utils->lock);
 
-    if (utils->current_user->user_id == -1 ||
-        !utils->current_user->name || 
-        !utils->current_user->password) {
-            cJSON_Delete(json);
-            return R_JSON_FAILURE; 
+    if (utils->current_user == NULL) {
+        printf("invalid json error\n");
+        cJSON_Delete(json);
+        return R_JSON_FAILURE; 
     }
+    printf("avatar color is: %d\n", utils->current_user->avatar_color);
 
     cJSON_Delete(json);
     return R_SUCCESS;

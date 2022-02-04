@@ -1,44 +1,10 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap'); */
-
-/* @font-face {
-    font-family: "Poppins";
-    src: local("Poppins Regular"), local("Poppins-Regular"),
-        url("../fonts/Poppins/Poppins-Regular.ttf") format('ttf');
-    font-weight: normal;
-}
-
-:root {
-    --main-bg-color: #292c43;
-    --second-bg-color: #2f334d;
-    --third-bg-color: #476eef;
-    --main-font-color: #f1f2f3;
-    --second-font-color: #717590;
-
-    --primary-color: rgb(26,92,255);
-    --primary-bg-color: rgba(26,92,255, .1);
-
-    --main-success-color: #42b983;
-    --success-font-color: #2e825c;
-    --success-color: rgb(70,201,58);
-    --success-bg-color: rgba(70,201,58,.1);
-
-    --danger-bg-color: rgb(255,71,87);
-    --danger-bg-color: rgb(255,71,87, .1);
-} */
-
-/* @import url("../fonts/Poppins/Poppins-Regular.ttf"); */
 @import url("vars.css");
 @import url("entry.css");
 @import url("button.css");
 @import url("auth.css");
+@import url("popup.css");
 @import url("leftbar.css");
-/* ///////////////////////////////  caret-color: rgb(180, 191, 216); */
-
-/* * {
-    font-family: 'Poppins', sans-serif;
-} */
-
+@import url("chat.css");
 
 * {
     /* color: @main-font-color;
@@ -49,13 +15,10 @@
 
 window {
     border-radius: 0 0 10px 10px;
+    color: @main-font-color;
     background-color: @main-bg-color;
 }
 
-
-.chat {
-    background-color: @main-bg-color;
-}
 
 .chatscreen_notify {
     color: @main-font-color;
@@ -68,31 +31,8 @@ window {
     margin: 0;
 }
 
-.right_message {
-    background-color: rgb(192, 172, 206);
-    color: rgb(24, 11, 33);
-    padding: 5px;
-    border-radius: 10px 0 10px 10px;
-}
-
-.left_message {
-    background-color: rgb(192, 172, 206);
-    color: rgb(24, 11, 33);
-    padding: 5px;
-    border-radius: 0 10px 10px 10px;
-}
-
-.message_btn {
-    padding: 0;
-    color: rgb(98, 157, 224);
-}
-
-.msg_btn {
-    padding: 0;
-}
-
-.edit_profile_menu {
+/* .edit_profile_menu {
     background-color: mediumslateblue;
     padding: 40px;
-}
+} */
 

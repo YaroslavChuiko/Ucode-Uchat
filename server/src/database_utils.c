@@ -26,7 +26,8 @@ int database_init() {
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT,"
             "`username` VARCHAR(32) NOT NULL,"
             "`password` VARCHAR(32) NOT NULL,"
-            "`image` BLOB);"
+            "`image` BLOB,"
+            "`avatar_color` TINYINT NOT NULL);"
 
         "CREATE TABLE `chats` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 

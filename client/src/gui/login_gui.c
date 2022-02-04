@@ -71,9 +71,12 @@ void build_login_menu()
     GtkWidget *login_btn_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
 	GtkWidget *login_btn = gtk_button_new_with_label("Login");
+	g_signal_connect(G_OBJECT(login_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(login_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
 	g_signal_connect(login_btn, "clicked", G_CALLBACK(login_button_click), NULL);
 	// gtk_widget_set_halign(login_btn, GTK_ALIGN_CENTER);
 	add_class(login_btn, "btn");
+	add_class(login_btn, "btn--blue");
     
     GtkWidget *login_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(login_notify_label, GTK_ALIGN_CENTER);

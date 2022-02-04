@@ -56,7 +56,17 @@ void update_chatlist_item_info(t_chat* chat)
     GtkWidget *chatlist_item_notify = get_widget_by_name_r(chatlist_item, "chatlist_item_notify");
     gtk_label_set_text(GTK_LABEL(chatlist_item_message), text);
     gtk_label_set_text(GTK_LABEL(chatlist_item_time), date_str);
-    gtk_label_set_text(GTK_LABEL(chatlist_item_notify), mx_itoa(new_msg_count));
+
+    if (new_msg_count > 0)
+    {
+        gtk_label_set_text(GTK_LABEL(chatlist_item_notify), mx_itoa(new_msg_count));
+        add_class(chatlist_item_notify, "chatlist_item_notify--visible");
+    }
+    else 
+    {
+        remove_class(chatlist_item_notify, "chatlist_item_notify--visible");
+    }
+    
 }
 
 void update_chatlist()

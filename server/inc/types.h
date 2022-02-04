@@ -8,6 +8,7 @@ typedef struct s_user {
     int user_id;
     char* name;
     char* password;
+    t_avatar_color avatar_color;
     t_chat* chats;
     struct s_user* next;
 }              t_user;

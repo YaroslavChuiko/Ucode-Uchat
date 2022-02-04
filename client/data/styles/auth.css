@@ -17,6 +17,7 @@
 
 .auth-menu_title {
     font-size: 24px;
+    /* letter-spacing: 1px; */
     font-weight: 600;
     color: @main-font-color;
 }

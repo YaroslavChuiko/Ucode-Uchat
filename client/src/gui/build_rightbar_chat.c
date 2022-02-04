@@ -51,10 +51,10 @@ void build_rightbar_chat() {
 
     GtkWidget *chat_header = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
     gtk_widget_set_hexpand(chat_header, TRUE);
-    add_class(chat_header, "chatlist_item");
+    add_class(chat_header, "chat_header");
 
     GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_set_size_request(GTK_WIDGET(avatar), 34, 34);
+    gtk_widget_set_size_request(GTK_WIDGET(avatar), 42, 42);
     gtk_widget_set_halign(avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(avatar, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(chat_header), avatar, FALSE, FALSE, 0);
@@ -65,7 +65,7 @@ void build_rightbar_chat() {
     gtk_widget_set_halign(GTK_WIDGET(chat_header_title), GTK_ALIGN_START);
     gtk_widget_set_valign(GTK_WIDGET(chat_header_title), GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(chat_header), chat_header_title, false, false, 0);
-    add_class(chat_header_title, "chatlist_item_text");
+    add_class(chat_header_title, "chat_title");
 
     if (utils->current_chat->permissions == ADMIN_MEMBER)
     {
@@ -110,13 +110,14 @@ void build_rightbar_chat() {
     GtkWidget *chat_field = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_widget_set_name(chat_field, "chat_field");
     gtk_widget_set_hexpand(chat_field, TRUE);
-    add_class(chat_field, "chat");
+    add_class(chat_field, "messagelist");
     gtk_widget_set_events(chat_field, GDK_ALL_EVENTS_MASK);
     g_signal_connect(chat_field, "size-allocate", G_CALLBACK(scroll_to_end), NULL);
     gtk_container_add(GTK_CONTAINER(scrollable_wrap), chat_field);
 
     GtkWidget *message_field = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_name(message_field, "message_field");
+    add_class(message_field, "input-msg_box");
     gtk_widget_set_halign(GTK_WIDGET(message_field), GTK_ALIGN_FILL);
     gtk_widget_set_valign(GTK_WIDGET(message_field), GTK_ALIGN_FILL);
     gtk_widget_set_hexpand(message_field, TRUE);
@@ -124,6 +125,7 @@ void build_rightbar_chat() {
 
     GtkWidget *new_message_field = gtk_entry_new();
     gtk_widget_set_name(new_message_field, "new_message_field");
+    add_class(new_message_field, "input-msg_entry");
     gtk_entry_set_placeholder_text(GTK_ENTRY(new_message_field), "Message");
     gtk_widget_set_halign(GTK_WIDGET(new_message_field), GTK_ALIGN_FILL);
     gtk_widget_set_valign(GTK_WIDGET(new_message_field), GTK_ALIGN_FILL);
@@ -131,8 +133,12 @@ void build_rightbar_chat() {
     g_signal_connect(new_message_field, "activate", G_CALLBACK(send_button_click), new_message_field);
     gtk_box_pack_start(GTK_BOX(message_field), new_message_field, TRUE, TRUE, 0);
 
-    GtkWidget *send_btn = gtk_button_new_with_label("S");
+    GtkWidget *send_btn = gtk_button_new();
+    gtk_widget_set_size_request(GTK_WIDGET(send_btn), 55, 55);
     gtk_widget_set_name(send_btn, "send_btn");
+    add_class(send_btn, "input-msg_send-btn");
+    g_signal_connect(G_OBJECT(send_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    g_signal_connect(G_OBJECT(send_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(send_btn, "clicked", G_CALLBACK(send_button_click), new_message_field);
     gtk_widget_set_halign(GTK_WIDGET(send_btn), GTK_ALIGN_END);
     gtk_widget_set_valign(GTK_WIDGET(send_btn), GTK_ALIGN_END);

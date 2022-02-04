@@ -50,10 +50,10 @@ void build_chat_window()
     gtk_widget_show_all(main_window);
 }
 
-static void destroy_popup_window(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen)
+void destroy_popup_window(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen)
 {
-    if (widget){}
-    gtk_widget_destroy(widget);
+    GtkWidget *popup_window = gtk_widget_get_toplevel(widget);
+    gtk_widget_destroy(popup_window);
 }
 
 GtkWidget *create_popup_window(int width, int height)
@@ -66,6 +66,7 @@ GtkWidget *create_popup_window(int width, int height)
     gtk_window_set_skip_taskbar_hint(GTK_WINDOW(popup_window), TRUE);
 	gtk_window_set_position(GTK_WINDOW(popup_window), GTK_WIN_POS_CENTER_ON_PARENT);
     gtk_window_set_decorated(GTK_WINDOW(popup_window), FALSE);
+    add_class(popup_window, "popup_window");
     g_signal_connect(G_OBJECT(popup_window), "focus-out-event", G_CALLBACK(destroy_popup_window), NULL);
 
     return popup_window;

@@ -30,7 +30,8 @@
 #include "types.h"
 
 unsigned long get_current_time();
-char* mx_get_string_time(unsigned long seconds);
+char* get_string_time(unsigned long seconds);
+t_avatar_color get_avatar_color();
 
 //GUI UTILS
 void on_crossing (GtkWidget *widget, GdkEventCrossing *event);
@@ -47,6 +48,7 @@ GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name);
 // void destroy(GtkWidget* widget, gpointer data);
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 GtkWidget *create_popup_window(int width, int height);
+void destroy_popup_window(GtkWidget *widget, GdkEventButton *event, gpointer chat_screen);
 void build_authorizatioin_window();
 void build_chat_window();
 
@@ -139,9 +141,9 @@ t_response_code handle_edit_password_request(const char* new_pass, const char* o
 t_response_code handle_leave_chat_request(const char* chat_name);
 
 t_msg* get_msg_from_json(cJSON* json);
-void handle_edit_password_response_code(int response_code, GtkWidget *change_password_notify_label);
-void handle_edit_username_response_code(int response_code, GtkWidget *change_login_notify_label);
-void handle_edit_chat_response_code(int response_code, GtkWidget *change_chat_name_notify_label);
+void handle_edit_password_response_code(int response_code, GtkWidget* entry_field, GtkWidget *change_password_notify_label);
+void handle_edit_username_response_code(int response_code, GtkWidget* entry_field, GtkWidget *change_login_notify_label);
+void handle_edit_chat_response_code(int response_code, GtkWidget* entry_field, GtkWidget *change_chat_name_notify_label);
 
 t_response_code handle_get_chats_response(t_chat** chat_list, const char* response_str, bool is_search);
 t_response_code handle_server_response(const char* response_str);
@@ -180,7 +182,7 @@ void build_change_chat_name_window(GtkWidget *widget, gpointer data);
 
 void leave_chat_btn_click(GtkWidget *widget, gpointer data);
 void build_confirm_leave_chat_window(GtkWidget *widget, gpointer data);
-void cancel_btn_click(GtkWidget *widget, gpointer data);
+// void cancel_btn_click(GtkWidget *widget, gpointer data);
 
 void delete_account_btn_click(GtkWidget *widget, gpointer data);
 void build_confirm_delete_account_window(GtkWidget *widget, gpointer data);
