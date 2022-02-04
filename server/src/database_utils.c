@@ -25,7 +25,8 @@ int database_init() {
         "CREATE TABLE `users` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT,"
             "`username` VARCHAR(32) NOT NULL,"
-            "`password` VARCHAR(32) NOT NULL);"
+            "`password` VARCHAR(32) NOT NULL,"
+            "`image` BLOB);"
 
         "CREATE TABLE `chats` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 

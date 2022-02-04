@@ -41,7 +41,7 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
     //     send_server_response(utils->ssl, R_PASS_LEN_INVALID, REQ_USR_SIGNUP);
     //     return;
     // }
-
+    
     if (!is_user_name_format_valid(user_name->valuestring)) {
         send_server_response(utils->ssl, R_NAME_FORMAT_INVALID, REQ_USR_SIGNUP);
         return;
@@ -53,6 +53,8 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
     
+    handle_set_default_user_image("default_image.png", db_get_id_by_username(user_name->valuestring));
+
     send_server_response(utils->ssl, R_SUCCESS, REQ_USR_SIGNUP);
 
 }
