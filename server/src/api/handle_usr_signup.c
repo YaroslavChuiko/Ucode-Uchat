@@ -1,6 +1,6 @@
 #include "../../inc/server.h"
 
-t_response_code db_add_user(const cJSON* user_info, t_server_utils* utils) {
+t_response_code db_add_user(const cJSON* user_info) {
 
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
     const cJSON *user_password = cJSON_GetObjectItemCaseSensitive(user_info, "password");
@@ -44,7 +44,7 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
     }
 
     int error_code = 0;
-    if ((error_code = db_add_user(user_info, utils)) != R_SUCCESS) {
+    if ((error_code = db_add_user(user_info)) != R_SUCCESS) {
         send_server_response(utils->ssl, error_code, REQ_USR_SIGNUP);
         return;
     }
