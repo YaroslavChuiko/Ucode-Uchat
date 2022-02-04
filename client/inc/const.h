@@ -7,6 +7,5 @@
 #define WINDOW_HEIGHT 760
 
 #define LEFT_BAR_W 440
-// #define LEFT_BAR_H 800
 
 #endif

@@ -1,5 +1,7 @@
 #include "../../inc/client.h"
 
+
+
 void add_message(t_msg *message) {
     GtkWidget *chat_field = get_widget_by_name_r(main_window, "chat_field");
 
@@ -38,8 +40,6 @@ void add_message(t_msg *message) {
     g_signal_connect(G_OBJECT(delete_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
 	g_signal_connect(G_OBJECT(delete_btn), "button_press_event", G_CALLBACK(delete_message), message);
 
-	// GtkWidget *delete_label = gtk_label_new("D");
-	// gtk_container_add(GTK_CONTAINER(delete_btn), delete_label);
 	if (cur_user) {
         gtk_box_pack_start(GTK_BOX(message_head), delete_btn, FALSE, FALSE, 0);
     }
@@ -54,18 +54,17 @@ void add_message(t_msg *message) {
         g_signal_connect(G_OBJECT(edit_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
         g_signal_connect(G_OBJECT(edit_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
         g_signal_connect(G_OBJECT(edit_btn), "button_press_event", G_CALLBACK(edit_message), message);
-
-        // GtkWidget *edit_label = gtk_label_new("E");
-        // gtk_container_add(GTK_CONTAINER(edit_btn), edit_label);
         gtk_box_pack_start(GTK_BOX(message_head), edit_btn, FALSE, FALSE, 0);
     }
 
     GtkWidget *user_name = gtk_label_new(message->sender_name);
     add_class(user_name, "msg_name");
     if (cur_user) {
+        add_class(user_name, "msg_name--right");
         gtk_box_pack_end(GTK_BOX(message_head), user_name, false, false, 0);
     }
     else {
+        add_class(user_name, "msg_name--left");
         gtk_box_pack_start(GTK_BOX(message_head), user_name, false, false, 0);
     }
     

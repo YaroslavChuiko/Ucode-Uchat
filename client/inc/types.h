@@ -5,14 +5,6 @@
 
 extern GtkWidget *main_window;
 
-// struct {
-//     // GtkWidget *chat_screen;
-//     // GtkWidget *popup_menu;
-//     // GtkWidget *left_bar;
-//     // GtkWidget *chat_list;
-//     // GtkWidget *chat;
-// }   t_chat_screen;
-
 // Type for the user saved from the server
 typedef struct s_user {
     int user_id;

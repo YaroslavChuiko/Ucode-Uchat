@@ -25,6 +25,8 @@
 }
 
 .btn--blue:focus {
+    outline: none;
+    border: none;
     background-color: rgb(92, 128, 246);
 }
 
@@ -43,6 +45,8 @@
 }
 
 .btn--dark-blue:focus {
+    outline: none;
+    border: none;
     background-color: #4a5078;
 }
 
@@ -50,6 +54,7 @@
     font-size: 14px;
     border-radius: 10px;
     border: none;
+    outline: none;
     background-repeat: no-repeat;
     background-image: url("../img/close.png");
     background-size: 14px 14px;
@@ -63,12 +68,15 @@
     background-image: url("../img/close-hover.png");
     background-color: rgba(71, 110, 239, 0.1);
 }
+
 .clear_search_btn:active {
-    /* background-size: 18px 18px;
-    transform: scale(1); */
+    outline: none;
+    border: none;
 }
 
 .clear_search_btn:focus {
+    outline: none;
+    border: none;
     background-image: url("../img/close-hover.png");
     background-color: rgba(71, 110, 239, 0.4);
 }
@@ -81,4 +89,34 @@
 
 .event_switch_auth_menu:hover .switch_auth_menu_label {
     color: rgb(167, 188, 255);
+}
+
+.input-msg_send-btn {
+    border-radius: 50%;
+    background-image: url("../img/send3.png");
+    background-size: 25px 25px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    outline: none;
+    border: none;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: 0.2s all linear;
+    background-color: @onfocus-color;
+}
+
+.input-msg_send-btn:hover {
+    background-color: rgb(92, 128, 246);
+    box-shadow: rgba(71, 110, 239, 0.2) 0px 8px 24px;
+}
+
+.input-msg_send-btn:active {
+    outline: none;
+    border: none;
+    background-color: rgb(38, 81, 221);
+}
+
+.input-msg_send-btn:focus {
+    outline: none;
+    border: none;
+    background-color: rgb(92, 128, 246);
 }

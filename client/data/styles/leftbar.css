@@ -30,8 +30,20 @@
     padding: 0px 30px;    
 }
 
-.btn_block {
-    padding: 10px 30px;
+.leftbar_footer {
+    padding: 15px 30px;
+}
+
+.leftbar_footer_username {
+    font-size: 14px;
+    color: @second-font-color;
+}
+
+.edit_profile_btn {
+    background-image: url("../img/settings.png");
+    background-size: 27px 27px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
 }
 
 /* chat list item */
@@ -91,14 +103,15 @@
 }
 
 .chatlist_item_notify {
-    background-color: #f84469;
     font-weight: 500;
     border-radius: 50%;
     opacity: 0;
-    transition: 0.2s opacity linear;
-    color: @main-font-color;
+    color: @second-bg-color;
 }
 
 .chatlist_item_notify--visible {
+    background-color: #f84469;
     opacity: 1;
+    transition: 0.2s all linear;
+    color: @main-font-color;
 }

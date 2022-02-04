@@ -37,8 +37,8 @@ window {
     outline: none;
 }
 
-.menubar:hover .switch_auth_menu_label{
-    color: rgb(167, 188, 255);
+.menubar:hover  .edit_profile_btn {
+    background-image: url("../img/settings-hover.png");
 }
 
 .menubar_menu {
@@ -49,4 +49,15 @@ window {
     box-shadow: none;
     color: @main-font-color;
     background-color: @second-bg-color;
+}
+
+.menubar_menu * {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 0px;
+    color: @main-font-color;
+}
+
+.menubar_menu *:hover {
+    background-color: @main-bg-color;
 }

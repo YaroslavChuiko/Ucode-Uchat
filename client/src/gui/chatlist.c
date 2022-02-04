@@ -55,7 +55,9 @@ void add_chatlist_item(int id, char *chat_name)
     t_chat* curr_chat = mx_get_chat_by_name(utils->chatlist, chat_name);
     if (curr_chat && curr_chat->last_new_msg)
     {
-        chatlist_item_message = gtk_label_new(curr_chat->last_new_msg->text);
+        char *msg_str = ellipsis_str(curr_chat->last_new_msg->text, 16);
+        chatlist_item_message = gtk_label_new(msg_str);
+        mx_strdel(&msg_str);
         chatlist_item_time = gtk_label_new(curr_chat->last_new_msg->date_str);
         chatlist_item_notify = gtk_label_new(mx_itoa(curr_chat->new_msg_count));
         curr_chat->new_msg_count > 0 ? add_class(chatlist_item_notify, "chatlist_item_notify--visible") :
@@ -65,7 +67,7 @@ void add_chatlist_item(int id, char *chat_name)
     {
         chatlist_item_message = gtk_label_new("No messages yet");
         chatlist_item_time = gtk_label_new("");
-        chatlist_item_notify = gtk_label_new("0");
+        chatlist_item_notify = gtk_label_new("");
     }
 
     gtk_widget_set_halign(GTK_WIDGET(chatlist_item_message), GTK_ALIGN_START);

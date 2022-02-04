@@ -65,20 +65,34 @@ void build_leftbar(GtkWidget *chat_screen)
     // gtk_widget_hide(gtk_scrolled_window_get_vscrollbar(GTK_SCROLLED_WINDOW(scrollable_wrap)));
     //
 
-    GtkWidget *btn_block = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
-    add_class(btn_block, "btn_block");
+    GtkWidget *leftbar_footer = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
+    add_class(leftbar_footer, "leftbar_footer");
 
-    GtkWidget *logout_btn = gtk_event_box_new();
-    add_class(logout_btn, "event_switch_auth_menu");
-    gtk_widget_set_halign(GTK_WIDGET(logout_btn), GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(GTK_WIDGET(logout_btn), GTK_ALIGN_START);
-    g_signal_connect(G_OBJECT(logout_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
-    g_signal_connect(G_OBJECT(logout_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
-    g_signal_connect(G_OBJECT(logout_btn), "button_press_event", G_CALLBACK(build_confirm_logout_window), NULL);
-    GtkWidget *logout_label = gtk_label_new("Log out");
-    add_class(logout_label, "switch_auth_menu_label");
-    gtk_container_add(GTK_CONTAINER(logout_btn), logout_label);
-    gtk_box_pack_start(GTK_BOX(btn_block), logout_btn, FALSE, FALSE, 0);
+    GtkWidget *user_avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    gtk_widget_set_size_request(GTK_WIDGET(user_avatar), 27, 27);
+    gtk_widget_set_halign(user_avatar, GTK_ALIGN_START);
+    gtk_widget_set_valign(user_avatar, GTK_ALIGN_CENTER);
+    gtk_box_pack_start(GTK_BOX(leftbar_footer), user_avatar, FALSE, FALSE, 0);
+    add_class(user_avatar, "chatlist_item_avatar");
+
+    GtkWidget *username = gtk_label_new(utils->current_user->name);
+    gtk_widget_set_name(username, "leftbar_footer_username");
+    gtk_widget_set_halign(GTK_WIDGET(username), GTK_ALIGN_START);
+    gtk_widget_set_valign(GTK_WIDGET(username), GTK_ALIGN_CENTER);
+    gtk_box_pack_start(GTK_BOX(leftbar_footer), username, false, false, 0);
+    add_class(username, "leftbar_footer_username");
+
+    // GtkWidget *logout_btn = gtk_event_box_new();
+    // add_class(logout_btn, "event_switch_auth_menu");
+    // gtk_widget_set_halign(GTK_WIDGET(logout_btn), GTK_ALIGN_CENTER);
+    // gtk_widget_set_valign(GTK_WIDGET(logout_btn), GTK_ALIGN_START);
+    // g_signal_connect(G_OBJECT(logout_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
+    // g_signal_connect(G_OBJECT(logout_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
+    // g_signal_connect(G_OBJECT(logout_btn), "button_press_event", G_CALLBACK(build_confirm_logout_window), NULL);
+    // GtkWidget *logout_label = gtk_label_new("Log out");
+    // add_class(logout_label, "switch_auth_menu_label");
+    // gtk_container_add(GTK_CONTAINER(logout_btn), logout_label);
+    // gtk_box_pack_start(GTK_BOX(leftbar_footer), logout_btn, FALSE, FALSE, 0);
 
     GtkWidget *menubar = gtk_menu_bar_new();
     g_signal_connect(G_OBJECT(menubar), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
@@ -95,16 +109,22 @@ void build_leftbar(GtkWidget *chat_screen)
     GtkWidget *delete_account_btn = gtk_menu_item_new_with_label("Delete account");
     g_signal_connect(delete_account_btn, "activate", G_CALLBACK(build_confirm_delete_account_window), NULL); 
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), delete_account_btn);
+    GtkWidget *logout_btn = gtk_menu_item_new_with_label("Log out");
+    g_signal_connect(logout_btn, "activate", G_CALLBACK(build_confirm_logout_window), NULL); 
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), logout_btn);
 
     gtk_widget_set_halign(GTK_WIDGET(menubar), GTK_ALIGN_CENTER);
     gtk_widget_set_valign(GTK_WIDGET(menubar), GTK_ALIGN_START);
     // add_class(menubar, "chat");
-    gtk_box_pack_end(GTK_BOX(btn_block), menubar, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(leftbar_footer), menubar, FALSE, FALSE, 0);
 
-    GtkWidget *edit_profile_btn = gtk_menu_item_new_with_label("Edit profile");
+    GtkWidget *edit_profile_btn = gtk_menu_item_new_with_label("");
+    // GtkWidget *edit_profile_btn = gtk_menu_item_new();
+    gtk_widget_set_size_request(GTK_WIDGET(edit_profile_btn), 30, 30);
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit_profile_btn), menu);
     gtk_menu_shell_append(GTK_MENU_SHELL(menubar), edit_profile_btn);
-    add_class(edit_profile_btn, "switch_auth_menu_label");
+    // add_class(edit_profile_btn, "switch_auth_menu_label");
+    add_class(edit_profile_btn, "edit_profile_btn");
 
     /*GtkWidget *change_login_btn = gtk_event_box_new();
     add_class(change_login_btn, "event_switch_auth_menu");
@@ -116,7 +136,7 @@ void build_leftbar(GtkWidget *chat_screen)
     GtkWidget *change_login_label = gtk_label_new("Change login");
     add_class(change_login_label, "switch_auth_menu_label");
     gtk_container_add(GTK_CONTAINER(change_login_btn), change_login_label);
-    gtk_box_pack_start(GTK_BOX(btn_block), change_login_btn, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(leftbar_footer), change_login_btn, FALSE, FALSE, 0);
 
     GtkWidget *change_password_btn = gtk_event_box_new();
     add_class(change_password_btn, "event_switch_auth_menu");
@@ -128,12 +148,12 @@ void build_leftbar(GtkWidget *chat_screen)
     GtkWidget *change_password_label = gtk_label_new("Change password");
     add_class(change_password_label, "switch_auth_menu_label");
     gtk_container_add(GTK_CONTAINER(change_password_btn), change_password_label);
-    gtk_box_pack_start(GTK_BOX(btn_block), change_password_btn, FALSE, FALSE, 0);*/
+    gtk_box_pack_start(GTK_BOX(leftbar_footer), change_password_btn, FALSE, FALSE, 0);*/
 
     gtk_box_pack_start(GTK_BOX(left_bar), header_block, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(left_bar), search_block, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(left_bar), scrollable_wrap, true, true, 0);
-    gtk_box_pack_start(GTK_BOX(left_bar), btn_block, false, false, 0);
+    gtk_box_pack_start(GTK_BOX(left_bar), leftbar_footer, false, false, 0);
 }
 
 void build_start_messaging_label()

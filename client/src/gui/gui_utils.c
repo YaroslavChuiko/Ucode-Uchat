@@ -134,3 +134,22 @@ GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name)
 
     return result;
 }
+
+char *ellipsis_str(const char *str, int overflow_len)
+{
+    char *tmp = NULL;
+    char *result = NULL;
+
+    if (mx_strlen(str) >= overflow_len)
+    {
+        tmp = mx_strndup(str, overflow_len);
+        result = mx_strjoin(tmp, "...");
+        mx_strdel(&tmp);
+    }
+    else
+    {
+        result = mx_strdup(str);
+    }
+
+    return result;
+}

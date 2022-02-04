@@ -1,6 +1,6 @@
 .login_menu, .signup_menu {
     font-family: "Poppins", sans-serif;
-    padding: 30px 70px 50px;
+    padding: 40px 70px 50px;
     color: @second-font-color;
     background-color: @main-bg-color;
 }

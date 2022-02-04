@@ -48,7 +48,8 @@ void update_chatlist_item_info(t_chat* chat)
 {
     GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
     GtkWidget *chatlist_item = get_widget_by_name_r(chatlist_container, chat->name);
-    char* text = chat->last_new_msg ? chat->last_new_msg->text : "No messages yet"; 
+
+    char* text = chat->last_new_msg ? ellipsis_str(chat->last_new_msg->text, 16) : mx_strdup("No messages yet"); 
     char* date_str = chat->last_new_msg ? chat->last_new_msg->date_str : ""; 
     int new_msg_count = chat ? chat->new_msg_count : 0; 
 
@@ -67,7 +68,7 @@ void update_chatlist_item_info(t_chat* chat)
     {
         remove_class(chatlist_item_notify, "chatlist_item_notify--visible");
     }
-    
+    mx_strdel(&text);
 }
 
 void update_chatlist()

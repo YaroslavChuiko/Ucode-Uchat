@@ -43,6 +43,7 @@ void set_notify_error_style( GtkWidget *notify_label, char *message);
 void set_notify_success_style( GtkWidget *notify_label, char *message);
 GtkWidget *get_widget_by_name(GtkWidget *container, char *name);
 GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name);
+char *ellipsis_str(const char *str, int overflow_len);
 
 //BUILD WINDOWS
 // void destroy(GtkWidget* widget, gpointer data);
@@ -168,9 +169,9 @@ void client_log(const char* info, t_info_type type);
 char* get_log_name();
 
 void build_rightbar_chat();
-void delete_message(GtkWidget *widget, t_msg *message);
+void delete_message(GtkWidget *widget, GdkEventButton *event, t_msg *message);
 void edit_button_click(GtkWidget *widget, t_msg *message);
-void edit_message(GtkWidget *widget, t_msg *message);
+void edit_message(GtkWidget *widget, GdkEventButton *event, t_msg *message);
 void add_message(t_msg *message);
 void update_chat_field();
 void scroll_to_end(GtkWidget *widget, gpointer data);
