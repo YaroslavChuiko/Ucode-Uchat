@@ -10,6 +10,7 @@ void change_avatar_btn_click(GtkWidget *widget, gpointer data) {
     char *new_avatar = (char*)gtk_entry_get_text(GTK_ENTRY(path_field));
 
     handle_update_user_image(new_avatar);
+    usleep(100000);
     handle_get_user_image(utils->current_user->user_id, &utils->current_user->avatar_path);
 
     gtk_widget_destroy(toplevel);
