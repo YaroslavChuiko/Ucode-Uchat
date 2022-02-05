@@ -86,8 +86,9 @@ void update_chatlist()
         clear_container(chatlist_container);
 
         while (chatlist)
-        {
-            add_chatlist_item(chatlist->id, chatlist->name);
+        {   
+            
+            add_chatlist_item(chatlist->id, chatlist->name, chatlist->avatar_color);
             chatlist = chatlist->next;
         }
 

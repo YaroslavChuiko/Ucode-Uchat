@@ -56,12 +56,14 @@ void build_rightbar_chat() {
     gtk_widget_set_hexpand(chat_header, TRUE);
     add_class(chat_header, "chat_header");
 
-    GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *avatar = gtk_drawing_area_new();
+    // GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(GTK_WIDGET(avatar), 42, 42);
+    g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_chat_avatar), (gpointer)utils->current_chat->avatar_color);
     gtk_widget_set_halign(avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(avatar, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(chat_header), avatar, FALSE, FALSE, 0);
-    add_class(avatar, "chatlist_item_avatar");
+    // add_class(avatar, "chatlist_item_avatar");
 
     GtkWidget *chat_header_title = gtk_label_new(utils->current_chat->name);
     gtk_widget_set_name(chat_header_title, "chat_header_title");

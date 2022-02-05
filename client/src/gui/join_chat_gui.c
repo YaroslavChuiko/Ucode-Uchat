@@ -19,7 +19,7 @@ void join_chat_event(GtkWidget *widget, GdkEventButton *event, gpointer data)
     (void)data;
 }
 
-void add_join_chat_item(int id, char *chat_name)
+void add_join_chat_item(int id, char *chat_name, t_avatar_color avatar_color)
 {
     GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
 
@@ -43,10 +43,10 @@ void add_join_chat_item(int id, char *chat_name)
     add_class(chatlist_item_id, "hidden");
     gtk_box_pack_start(GTK_BOX(chatlist_item), chatlist_item_id, FALSE, FALSE, 0);
 
-    // GtkWidget *avatar = gtk_drawing_area_new();
-    GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *avatar = gtk_drawing_area_new();
+    // GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(GTK_WIDGET(avatar), 42, 42);
-    // g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_event_avatar), (gpointer)(intptr_t)list->avatar);   // Получить avatar пользовтеля
+    g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_chat_avatar), (gpointer)avatar_color);
     gtk_widget_set_halign(avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(avatar, GTK_ALIGN_CENTER);
     add_class(avatar, "chatlist_item_avatar");

@@ -14,7 +14,7 @@ static void build_found_chats(t_chat *chat_list)
 
         while (chat_list)
         {
-            add_join_chat_item(chat_list->id, chat_list->name);
+            add_join_chat_item(chat_list->id, chat_list->name, chat_list->avatar_color);
             chat_list = chat_list->next;
         }
     }
