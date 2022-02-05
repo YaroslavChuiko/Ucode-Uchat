@@ -9,6 +9,7 @@ typedef struct s_msg {
     char* sender_name;
     char* date_str;
     char* text;
+    char* avatar_path;
     struct s_msg* next;
 }              t_msg;
 

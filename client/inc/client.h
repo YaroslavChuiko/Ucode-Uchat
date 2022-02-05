@@ -155,7 +155,7 @@ t_response_code get_response_code(cJSON* json);
 t_request_type get_request_type(cJSON* json);
 void update_last_chat_msg(t_chat* chat_to_update, t_msg* new_msg);
 
-void handle_get_user_image();
+void handle_get_user_image(int user_id, char** avatar_path);
 void handle_update_user_image(char *path);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);

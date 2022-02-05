@@ -17,6 +17,7 @@ void set_current_user(t_user** user, const cJSON* user_json) {
     (*user)->name = mx_strdup(name_json->valuestring);
     (*user)->password = mx_strdup(pass_json->valuestring);
     (*user)->avatar_color = color_json->valueint;
+    (*user)->avatar_path = NULL;
 
 }
 
@@ -65,8 +66,8 @@ t_response_code handle_login_request(const char* user_name, const char* user_pas
 
     if (error_code == R_SUCCESS) {
 
+        handle_get_user_image(utils->current_user->user_id, &utils->current_user->avatar_path);
         handle_get_chats_request();
-        // handle_get_user_image();
         utils->log_name = get_log_name();
     
     }

@@ -54,6 +54,7 @@ dkms.conf
 
 .vscode
 /server_utils
+/client/data/avatars/
 *.log
 
 uchat

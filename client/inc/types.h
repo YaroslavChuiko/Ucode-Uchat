@@ -10,6 +10,7 @@ typedef struct s_user {
     int user_id;
     char* name;
     char* password;
+    char* avatar_path;
     t_avatar_color avatar_color;
 }              t_user;
 

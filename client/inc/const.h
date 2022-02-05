@@ -8,4 +8,6 @@
 
 #define LEFT_BAR_W 440
 
+#define AVATAR_PATH "client/data/avatars/"
+
 #endif

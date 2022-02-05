@@ -7,6 +7,7 @@ t_response_code add_to_global_msglist(t_msg* new_msg) {
         return R_CHAT_NOENT;
     }
 
+    new_msg->avatar_path = mx_strdup(utils->current_user->avatar_path);
     mx_msg_push_back(&curr_chat->messages, new_msg);
     curr_chat->last_new_msg = mx_get_last_msg_node(curr_chat->messages);
     update_chatlist_item_info(curr_chat);
