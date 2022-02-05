@@ -1,5 +1,33 @@
 #include "../../inc/client.h"
 
+static gboolean da_expose(GtkWidget *widget, cairo_t *cr, gpointer data)
+{
+    char* a = "client/data/img/user_avatars/avatar4.png";
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale(a, 42, 42, FALSE, NULL); // get_pixbuf_with_size(a, 34, 34);
+    gdk_cairo_set_source_pixbuf(cr, pixbuf, 0, 0);
+    g_object_unref(G_OBJECT(pixbuf));
+
+    double x = 0,
+        y = 0,
+        width = 42,
+        height = 42,
+        aspect = 1.0,                       /* aspect ratio */
+        corner_radius = height / 2.0;       /* and corner curvature radius */
+    double radius = corner_radius / aspect;
+    double degrees = 3.14159265358979 / 180.0;
+
+    cairo_new_sub_path (cr);
+    cairo_arc (cr, x + width - radius, y + radius, radius, -90 * degrees, 0 * degrees);
+    cairo_arc (cr, x + width - radius, y + height - radius, radius, 0 * degrees, 90 * degrees);
+    cairo_arc (cr, x + radius, y + height - radius, radius, 90 * degrees, 180 * degrees);
+    cairo_arc (cr, x + radius, y + radius, radius, 180 * degrees, 270 * degrees);
+    cairo_close_path (cr);
+
+    cairo_fill(cr);
+    if (widget) {}
+    return FALSE;
+}
+
 void add_chatlist_item(int id, char *chat_name)
 {
     GtkWidget *chatlist_container = get_widget_by_name_r(main_window, "chatlist");
@@ -24,10 +52,10 @@ void add_chatlist_item(int id, char *chat_name)
     add_class(chatlist_item_id, "hidden");
     gtk_box_pack_start(GTK_BOX(chatlist_item), chatlist_item_id, FALSE, FALSE, 0);
 
-    // GtkWidget *avatar = gtk_drawing_area_new();
-    GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *avatar = gtk_drawing_area_new();
+    // GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(GTK_WIDGET(avatar), 42, 42);
-    // g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_event_avatar), (gpointer)(intptr_t)list->avatar);   // Получить avatar пользовтеля
+    g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(da_expose), NULL);   // Получить avatar пользовтеля
     gtk_widget_set_halign(avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(avatar, GTK_ALIGN_CENTER);
     add_class(avatar, "chatlist_item_avatar");

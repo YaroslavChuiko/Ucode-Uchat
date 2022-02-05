@@ -75,7 +75,33 @@
 }
 
 .chatlist_item_avatar {
-    background-color: yellow;
+    /* background-color: yellow; */
+    /*PINK*/
+    /* background-color: rgb(233, 30, 99);  */
+    /*AMBER*/
+    /* background-color: rgb(255, 193, 7);  */
+    /*YELLOW*/
+    /* background-color: rgb(255, 235, 59);  */
+    /*LIME*/
+    /* background-color: rgb(205, 220, 57); */
+    /*CYAN*/ 
+    /* background-color: rgb(0, 188, 212);  */
+    /*ORANGE*/
+    /* background-color: rgb(255, 152, 0);  */
+    /*GREEN*/
+    /* background-color: rgb(76, 175, 80);  */
+    /* LIGHT GREEN */
+    /* background-color: rgb(139, 195, 74); */
+    /*DEEP PURPLE*/
+    /* background-color: rgb(103, 58, 183);  */
+    /* PURPLE */
+    background-color: rgb(156, 39, 176);
+    /* background-image: url("../img/user-avatar4.png"); */
+    /* background-size: 25px 25px; */
+    /* background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat; */
+
     border-radius: 50%;
 }
 

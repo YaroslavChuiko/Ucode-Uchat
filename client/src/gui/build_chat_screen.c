@@ -68,12 +68,12 @@ void build_leftbar(GtkWidget *chat_screen)
     GtkWidget *leftbar_footer = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 10);
     add_class(leftbar_footer, "leftbar_footer");
 
-    GtkWidget *user_avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *user_avatar = gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(user_avatar), 27, 27);
+    g_signal_connect(G_OBJECT(user_avatar), "draw", G_CALLBACK(draw_user_avatar), (gpointer)27);   // Получить avatar пользовтеля
     gtk_widget_set_halign(user_avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(user_avatar, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(leftbar_footer), user_avatar, FALSE, FALSE, 0);
-    add_class(user_avatar, "chatlist_item_avatar");
 
     GtkWidget *username = gtk_label_new(utils->current_user->name);
     gtk_widget_set_name(username, "leftbar_footer_username");
@@ -106,6 +106,9 @@ void build_leftbar(GtkWidget *chat_screen)
     GtkWidget *change_password_btn = gtk_menu_item_new_with_label("Change password");
     g_signal_connect(change_password_btn, "activate", G_CALLBACK(build_change_password_window), NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), change_password_btn);
+    GtkWidget *change_avatar_btn = gtk_menu_item_new_with_label("Change avatar");
+    g_signal_connect(change_avatar_btn, "activate", G_CALLBACK(build_change_avatar_window), NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), change_avatar_btn);
     GtkWidget *delete_account_btn = gtk_menu_item_new_with_label("Delete account");
     g_signal_connect(delete_account_btn, "activate", G_CALLBACK(build_confirm_delete_account_window), NULL); 
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), delete_account_btn);
