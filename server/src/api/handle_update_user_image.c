@@ -16,7 +16,7 @@ void handle_update_user_image(const cJSON* data, t_server_utils* utils){
 
     // Get len of encoded image 
     int len_encoded = 0;
-    usleep(2000000);
+    usleep(500000);
     recv(utils->user->client_fd, &len_encoded, sizeof(int), 0);
     //printf("%d\n", len_encoded);
     

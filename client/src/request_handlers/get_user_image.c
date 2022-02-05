@@ -43,7 +43,7 @@ void handle_get_user_image(int user_id, char** avatar_path) {
 
     // Reciving len of encoded image
     int len_encoded = 0;
-    usleep(2000000);
+    usleep(500000);
     if(recv(utils->server_fd, &len_encoded, sizeof(int), 0) == 0) {
         printf("Error while receiving length\n");
         mx_strdel(&file_path);
