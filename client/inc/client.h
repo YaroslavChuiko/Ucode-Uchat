@@ -13,6 +13,9 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
+#include <cairo.h>
+// #include <netinet/in.h>
+// #include <arpa/inet.h>
 
 #ifdef __MACH__
 #include "../../libraries/openssl/openssl/ssl.h"

@@ -96,11 +96,11 @@
     /* background-color: rgb(103, 58, 183);  */
     /* PURPLE */
     background-color: rgb(156, 39, 176);
-    background-image: url("../img/user-avatar4.png");
+    /* background-image: url("../img/user-avatar4.png"); */
     /* background-size: 25px 25px; */
-    background-size: contain;
+    /* background-size: contain;
     background-position: 50% 50%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
 
     border-radius: 50%;
 }
