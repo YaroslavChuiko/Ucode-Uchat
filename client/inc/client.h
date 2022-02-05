@@ -56,6 +56,8 @@ void build_chat_window();
 
 //DRAW AVATAR
 gboolean draw_user_avatar(GtkWidget *widget, cairo_t *cr, gpointer data);
+gboolean draw_message_avatar(GtkWidget *widget, cairo_t *cr, gpointer data);
+gboolean draw_chat_avatar(GtkWidget *widget, cairo_t *cr, gpointer data);
 
 //AUTH
 void build_login_menu();
@@ -73,7 +75,7 @@ void focus_out_repassword_field(GtkWidget *widget, gpointer data);
 bool is_empty_field(GtkWidget *field, GtkWidget *notify_label);
 
 //CHATLIST
-void add_chatlist_item(int id, char *chat_name);
+void add_chatlist_item(int id, char *chat_name, t_avatar_color avatar_color);
 void build_chatlist_message(char *message);
 
 //CHATLIST EVENTS
@@ -85,8 +87,7 @@ void set_current_chat(GtkWidget *chatlist_item);
 void chatlist_item_on_click(GtkWidget *widget, gpointer data);
 void activate_chat(GtkWidget *chatlist_item);
 
-void build_start_messaging_label();////////////////////////////////
-// void build_delete_chat_btn();/////////////?????????????????????????????
+void build_start_messaging_label();
 
 //SEARCH CHAT
 void search_field_change_event(GtkWidget *widget, gpointer data);
@@ -106,7 +107,7 @@ void create_chat_btn_click(GtkWidget *widget, gpointer data);
 
 //JOIN CHAT
 void join_chat_event(GtkWidget *widget, GdkEventButton *event, gpointer data);
-void add_join_chat_item(int id, char *chat_name);
+void add_join_chat_item(int id, char *chat_name, t_avatar_color avatar_color);
 
 //LOG OUT
 void logout_btn_click(GtkWidget *widget, gpointer data);
