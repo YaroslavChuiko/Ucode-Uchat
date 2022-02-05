@@ -11,6 +11,8 @@ void send_image_to_server(int *socket, void *buffer, size_t length) {
 
 t_response_code handle_update_user_image(char *path) {
 
+    utils->is_suspended = true;
+
     // Send request for saving user avatar
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_UPDATE_USER_IMAGE);
@@ -90,6 +92,7 @@ t_response_code handle_update_user_image(char *path) {
         printf("Cannot close file\n");
         return R_FILE_ERROR;
     }
+    utils->is_suspended = false;
     return R_SUCCESS;
 
 }

@@ -22,6 +22,7 @@ static char* get_file_path_for(int user_id) {
 
 t_response_code handle_get_user_image(int user_id, char** avatar_path) {
 
+    utils->is_suspended = true;
     // Send request for receiving user avatar
     cJSON *json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "type", REQ_GET_USER_IMAGE);
@@ -35,7 +36,7 @@ t_response_code handle_get_user_image(int user_id, char** avatar_path) {
     // Creating temp file
     FILE *fp;
     char* file_path = get_file_path_for(user_id);
-    if ((fp = fopen(file_path, "wb+")) == NULL) {
+    if ((fp = fopen(file_path, "wb")) == NULL) {
         printf("Cannot open image file\n");
         mx_strdel(&file_path);
         return R_FILE_ERROR;
@@ -75,9 +76,14 @@ t_response_code handle_get_user_image(int user_id, char** avatar_path) {
         return R_FILE_ERROR;
     }
 
+    free(decoded);
+    
+    if (*avatar_path) {
+        mx_strdel(avatar_path);
+    }
     *avatar_path = mx_strdup(file_path);
     mx_strdel(&file_path);
-    free(decoded);
+    utils->is_suspended = false;
     return R_SUCCESS;
 
 }
