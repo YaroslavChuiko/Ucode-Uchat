@@ -16,7 +16,6 @@ t_response_code handle_signup_request(const char* user_name, const char* user_pa
     cJSON *json = cJSON_CreateObject();
     cJSON_AddStringToObject(json, "name", user_name);
     cJSON_AddStringToObject(json, "password", user_password);
-    cJSON_AddNumberToObject(json, "avatar_color", get_avatar_color());
     cJSON_AddNumberToObject(json, "type", REQ_USR_SIGNUP);
     char* json_str = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);

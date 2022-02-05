@@ -23,8 +23,6 @@ int db_delete_member(int chat_id, t_server_utils* utils) {
     if (db_execute_query(query) != 0) {
         return 1;
     }
-    
-    mx_chat_pop_id(&utils->user->chats, chat_id);
     return 0;
 
 }

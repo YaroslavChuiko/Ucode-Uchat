@@ -1,7 +1,7 @@
 #include "../../inc/utils.h"
 
-t_chat *mx_create_chat(int id, const char* name, int permissions)
-{
+t_chat *mx_create_chat(int id, const char* name, int permissions, int chat_color) {
+    
     t_chat *new_node = malloc(sizeof(t_chat));
     
     new_node->id = id;
@@ -11,13 +11,14 @@ t_chat *mx_create_chat(int id, const char* name, int permissions)
     new_node->new_messages = NULL;
     new_node->last_new_msg = NULL;
     new_node->new_msg_count = 0;
+    new_node->avatar_color = chat_color;
     new_node->next = NULL;
     return new_node;
 }
 
-void mx_chat_push_back(t_chat** list, int chat_id, const char* name, int permissions) {
+void mx_chat_push_back(t_chat** list, int chat_id, const char* name, int permissions, int chat_color) {
 
-    t_chat* new_node = mx_create_chat(chat_id, name, permissions);
+    t_chat* new_node = mx_create_chat(chat_id, name, permissions, chat_color);
     if (list != NULL && *list == NULL) {
         *list = new_node;
         return;
@@ -205,8 +206,8 @@ void mx_print_chat_list(t_chat* chat) {
     while (chat) {
 
         char str[200];
-        sprintf(str, "Gotten chat:\n\tid: %d, name: %s, perms: %d\n", 
-                chat->id, chat->name, chat->permissions);
+        sprintf(str, "Gotten chat:\n\tid: %d, name: %s, perms: %d, color: %d\n", 
+                chat->id, chat->name, chat->permissions, chat->avatar_color);
         logger(str, INFO_LOG);
 
         t_msg* msg = chat->messages;

@@ -26,13 +26,13 @@ int database_init() {
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT,"
             "`username` VARCHAR(32) NOT NULL,"
             "`password` VARCHAR(32) NOT NULL,"
-            "`image` BLOB,"
-            "`avatar_color` TINYINT NOT NULL);"
+            "`image` BLOB);"
 
         "CREATE TABLE `chats` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 
             "`name` VARCHAR(32) NOT NULL,"
-            "`date` INTEGER NOT NULL);" 
+            "`date` INTEGER NOT NULL,"
+            "`avatar_color` TINYINT NOT NULL);" 
         
         "CREATE TABLE `members` ("
             "`id` INTEGER PRIMARY KEY AUTOINCREMENT," 

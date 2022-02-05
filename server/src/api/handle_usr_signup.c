@@ -4,9 +4,8 @@ t_response_code db_add_user(const cJSON* user_info) {
 
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
     const cJSON *user_password = cJSON_GetObjectItemCaseSensitive(user_info, "password");
-    const cJSON *avatar_color = cJSON_GetObjectItem(user_info, "avatar_color");
     
-    if (!cJSON_IsString(user_name) || !cJSON_IsString(user_password) || !cJSON_IsNumber(avatar_color)) {
+    if (!cJSON_IsString(user_name) || !cJSON_IsString(user_password)) {
         return R_JSON_FAILURE;
     }
 
@@ -26,8 +25,8 @@ t_response_code db_add_user(const cJSON* user_info) {
     }
 
     char query[QUERY_LEN];
-    sprintf(query, "INSERT INTO `users` (`username`, `password`, `avatar_color`) VALUES('%s', '%s', '%d')", 
-            user_name->valuestring, user_password->valuestring, avatar_color->valueint);
+    sprintf(query, "INSERT INTO `users` (`username`, `password`) VALUES('%s', '%s')", 
+            user_name->valuestring, user_password->valuestring);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;

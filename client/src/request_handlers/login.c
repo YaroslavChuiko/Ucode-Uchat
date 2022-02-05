@@ -5,10 +5,9 @@ void set_current_user(t_user** user, const cJSON* user_json) {
     const cJSON* id_json = cJSON_GetObjectItem(user_json, "id");
     const cJSON* name_json = cJSON_GetObjectItemCaseSensitive(user_json, "username");
     const cJSON* pass_json = cJSON_GetObjectItemCaseSensitive(user_json, "password");
-    const cJSON* color_json = cJSON_GetObjectItem(user_json, "avatar_color");
 
     if (!cJSON_IsNumber(id_json) || !cJSON_IsString(name_json) || 
-        !cJSON_IsString(pass_json) || !cJSON_IsNumber(color_json)) {
+        !cJSON_IsString(pass_json)) {
         return;
     }
 
@@ -16,7 +15,6 @@ void set_current_user(t_user** user, const cJSON* user_json) {
     (*user)->user_id = id_json->valueint;
     (*user)->name = mx_strdup(name_json->valuestring);
     (*user)->password = mx_strdup(pass_json->valuestring);
-    (*user)->avatar_color = color_json->valueint;
     (*user)->avatar_path = NULL;
 
 }

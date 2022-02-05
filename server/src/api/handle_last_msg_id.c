@@ -8,7 +8,6 @@ t_response_code get_last_msg_id(const cJSON* chat_info, t_server_utils* utils, i
     }
 
     if (!db_chat_exists(chat_id->valueint)) {
-        mx_chat_pop_id(&utils->user->chats, chat_id->valueint);
         return R_CHAT_NOENT;
     }
 

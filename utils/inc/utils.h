@@ -109,8 +109,8 @@ bool is_strlen_valid(const char* str, int min_len, int max_len);
 
 // DATABASE LISTS
 
-t_chat *mx_create_chat(int id, const char* name, int permissions);
-void mx_chat_push_back(t_chat** list, int id, const char* name, int permissions);
+t_chat *mx_create_chat(int id, const char* name, int permissions, int chat_color);
+void mx_chat_push_back(t_chat** list, int id, const char* name, int permissions, int chat_color);
 void mx_clear_chat_list(t_chat **list);
 void mx_clear_chat(t_chat** p);
 t_chat* mx_get_chat_by_id(t_chat* list, int chat_id);

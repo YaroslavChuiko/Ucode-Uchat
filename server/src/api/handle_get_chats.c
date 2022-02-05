@@ -6,7 +6,8 @@ cJSON* get_chat_json(sqlite3_stmt* stmt, bool is_for_search) {
     cJSON* json = cJSON_CreateObject();
     cJSON_AddNumberToObject(json, "chat_id", sqlite3_column_int64(stmt, 0));
     cJSON_AddStringToObject(json, "chat_name", (const char*)sqlite3_column_text(stmt, 1));
-    cJSON_AddNumberToObject(json, "chat_permissions", !is_for_search ? sqlite3_column_int64(stmt, 2) : 1);
+    cJSON_AddNumberToObject(json, "chat_color", sqlite3_column_int64(stmt, 2));
+    cJSON_AddNumberToObject(json, "chat_permissions", !is_for_search ? sqlite3_column_int64(stmt, 3) : 1);
     return json;
 
 }
@@ -17,7 +18,7 @@ cJSON* get_chats_array_json(int user_id) {
     cJSON* chats_json = cJSON_CreateArray();
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
-    sqlite3_prepare_v2(db,  "SELECT chats.id, chats.name, members.permissions FROM chats "
+    sqlite3_prepare_v2(db,  "SELECT chats.id, chats.name, chats.avatar_color, members.permissions FROM chats "
                             "INNER JOIN `members` ON members.chat_id = chats.id "
                             "WHERE chats.id IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?) AND members.user_id = ? "
                             "ORDER BY chats.date DESC ",

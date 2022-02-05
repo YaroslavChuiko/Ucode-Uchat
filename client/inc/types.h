@@ -11,7 +11,6 @@ typedef struct s_user {
     char* name;
     char* password;
     char* avatar_path;
-    t_avatar_color avatar_color;
 }              t_user;
 
 typedef struct s_client_utils {
