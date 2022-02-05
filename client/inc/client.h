@@ -14,8 +14,6 @@
 #include <pthread.h>
 #include <gtk/gtk.h>
 #include <cairo.h>
-// #include <netinet/in.h>
-// #include <arpa/inet.h>
 
 #ifdef __MACH__
 #include "../../libraries/openssl/openssl/ssl.h"
@@ -55,6 +53,9 @@ GtkWidget *create_popup_window(int width, int height);
 void destroy_popup_window(GtkWidget *widget, gpointer chat_screen);
 void build_authorizatioin_window();
 void build_chat_window();
+
+//DRAW AVATAR
+gboolean draw_user_avatar(GtkWidget *widget, cairo_t *cr, gpointer data);
 
 //AUTH
 void build_login_menu();
@@ -182,6 +183,7 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field);
 
 void build_change_password_window(GtkWidget *widget, gpointer data);
 void build_change_login_window(GtkWidget *widget, gpointer data);
+void build_change_avatar_window(GtkWidget *widget, gpointer data);
 void build_change_chat_name_window(GtkWidget *widget, gpointer data);
 
 void leave_chat_btn_click(GtkWidget *widget, gpointer data);

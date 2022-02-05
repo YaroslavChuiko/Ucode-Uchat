@@ -2,7 +2,7 @@
 
 static gboolean da_expose(GtkWidget *widget, cairo_t *cr, gpointer data)
 {
-    char* a = "client/data/img/user_avatars/avatar2.png";
+    char* a = "client/data/img/user_avatars/avatar4.png";
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale(a, 42, 42, FALSE, NULL); // get_pixbuf_with_size(a, 34, 34);
     gdk_cairo_set_source_pixbuf(cr, pixbuf, 0, 0);
     g_object_unref(G_OBJECT(pixbuf));

@@ -24,6 +24,12 @@ void change_login_btn_click(GtkWidget *widget, gpointer data) {
 
     int response_code = handle_edit_username_request(new_login);
     handle_edit_username_response_code(response_code, login_field, login_notify_label);
+
+    if (response_code == R_SUCCESS)
+    {
+        GtkWidget *leftbar_footer_username = get_widget_by_name_r(main_window, "leftbar_footer_username");
+        gtk_label_set_text(GTK_LABEL(leftbar_footer_username), utils->current_user->name);
+    }
 }
 
 void build_change_login_window(GtkWidget *widget, gpointer data) {

@@ -1,7 +1,5 @@
 #include "../../inc/client.h"
 
-
-
 void add_message(t_msg *message) {
     GtkWidget *chat_field = get_widget_by_name_r(main_window, "chat_field");
 
@@ -14,14 +12,14 @@ void add_message(t_msg *message) {
     add_class(message_box, "msg_box");
     gtk_box_pack_start(GTK_BOX(chat_field), message_box, FALSE, FALSE, 0);
 
-    GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
+    GtkWidget *avatar = gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(avatar), 27, 27);
+    g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_user_avatar), (gpointer)27);   // Получить avatar пользовтеля
     gtk_widget_set_halign(avatar, cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
     gtk_widget_set_valign(avatar, GTK_ALIGN_START);
     if (!cur_user) {
         gtk_box_pack_start(GTK_BOX(message_box), avatar, FALSE, FALSE, 0);
     }
-    add_class(avatar, "chatlist_item_avatar");
 
     GtkWidget *message_text = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_widget_set_halign(GTK_WIDGET(message_text), cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
