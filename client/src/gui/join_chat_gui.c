@@ -45,7 +45,7 @@ void add_join_chat_item(int id, char *chat_name)
 
     // GtkWidget *avatar = gtk_drawing_area_new();
     GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
-    gtk_widget_set_size_request(GTK_WIDGET(avatar), 34, 34);
+    gtk_widget_set_size_request(GTK_WIDGET(avatar), 42, 42);
     // g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_event_avatar), (gpointer)(intptr_t)list->avatar);   // Получить avatar пользовтеля
     gtk_widget_set_halign(avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(avatar, GTK_ALIGN_CENTER);
@@ -60,7 +60,7 @@ void add_join_chat_item(int id, char *chat_name)
     add_class(chatlist_item_text, "chatlist_item_text");
 
     GtkWidget *chatlist_item_title = gtk_label_new(chat_name);
-    // gtk_widget_set_name(chatlist_item_title, "chat_name");
+    add_class(chatlist_item_title, "chatlist_item_title");
     gtk_widget_set_halign(GTK_WIDGET(chatlist_item_title), GTK_ALIGN_START);
     gtk_box_pack_start(GTK_BOX(chatlist_item_text), chatlist_item_title, false, false, 0);
 
