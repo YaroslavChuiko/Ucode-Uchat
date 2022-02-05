@@ -7,7 +7,6 @@ char* get_json_formatted_user(const t_user* user) {
     cJSON_AddNumberToObject(json, "id", user->user_id);
     cJSON_AddStringToObject(json, "username", user->name);
     cJSON_AddStringToObject(json, "password", user->password);
-    cJSON_AddNumberToObject(json, "avatar_color", user->avatar_color);
     cJSON_AddNumberToObject(json, "error_code", R_SUCCESS);
     char* user_info = cJSON_PrintUnformatted(json);
     cJSON_Delete(json);
@@ -22,7 +21,6 @@ void set_user_account_data(sqlite3_stmt* stmt, t_server_utils* utils) {
         utils->user = mx_create_user(sqlite3_column_int64(stmt, 0), utils->client_socket, utils->ssl);
         utils->user->name = mx_strdup((const char*)sqlite3_column_text(stmt, 1));
         utils->user->password = mx_strdup((const char*)sqlite3_column_text(stmt, 2));
-        utils->user->avatar_color = sqlite3_column_int(stmt, 3);
 
     }
     sqlite3_finalize(stmt);
@@ -52,10 +50,9 @@ t_response_code set_user_by_username(const char* username, const char* password,
     free(response);
     
     char result_to_log[QUERY_LEN];
-    sprintf(result_to_log, "Logged in user info: id: %d, name: %s, avatar color: %d", 
+    sprintf(result_to_log, "Logged in user info: id: %d, name: %s", 
             utils->user->user_id,
-            utils->user->name,
-            utils->user->avatar_color);
+            utils->user->name);
 
     logger(result_to_log, INFO_LOG);
     return R_SUCCESS;

@@ -26,7 +26,7 @@ $(LIBMX):
 	# make -sC $(LIBMX_DIR)
 
 $(UTILSLIB):
-	# make -sC $(UTILSLIB_DIR)
+	make -sC $(UTILSLIB_DIR)
 
 $(CJSON):
 	# make -sC $(CJSON_DIR)
@@ -35,7 +35,7 @@ $(SQLITE):
 	# make -sC $(SQLITE_DIR)
 
 $(SERVER):
-	# make -sC $(SERVER_DIR)
+	make -sC $(SERVER_DIR)
 
 $(CLIENT):
 	make -sC $(CLIENT_DIR)
@@ -48,9 +48,9 @@ clean:
 	rm -df $(OBJDIR) 
 
 uninstall:
-	# make -sC $(SERVER_DIR) $@
+	make -sC $(SERVER_DIR) $@
 	make -sC $(CLIENT_DIR) $@
-	# make -sC $(UTILSLIB_DIR) $@
+	make -sC $(UTILSLIB_DIR) $@
 	# make -sC $(LIBMX_DIR) $@
 	# make -sC $(CJSON_DIR) $@
 	# make -sC $(SQLITE_DIR) $@

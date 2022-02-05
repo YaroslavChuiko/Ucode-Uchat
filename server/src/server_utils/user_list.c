@@ -8,8 +8,6 @@ t_user* mx_create_user(int id, int client_fd, SSL* ssl) {
     new_node->name = NULL;
     new_node->password = NULL;
     new_node->ssl = ssl;
-
-    new_node->chats = db_get_chats_by_user_id(id);
     
     new_node->next = NULL;
     return new_node;
@@ -53,7 +51,6 @@ void mx_clear_user(t_user** p) {
 
     free((*p)->name);
     free((*p)->password);
-    mx_clear_chat_list(&(*p)->chats);
     free(*p);
     *p = NULL;
 
@@ -122,22 +119,6 @@ void mx_user_pop_index(t_user **list, int index) {
 
 }
 
-// int mx_get_user_id(int user_db_id) {
-
-//     int i = 0;
-//     t_user* curr_usr = global_state.logged_users;
-//     for (; curr_usr; ++i) {
-
-//         if (curr_usr->user_id == user_db_id)
-//             return i;
-
-//         curr_usr = curr_usr->next;
-
-//     }
-//     return i;
-
-// }
-
 void mx_clear_user_list(t_user **list)
 {
     if (list == NULL || *list == NULL)
@@ -171,30 +152,3 @@ int mx_user_list_size(t_user* list) {
     return size;
 
 }
-
-// remove later
-// void print_logged_users() {
-
-//     t_user* temp = global_state.logged_users;
-//     logger("Logged in:", INFO_LOG);
-//     while (temp) {
-
-//         char user[100];
-//         sprintf(user,  "logged in -- %d: %s", temp->user_id, temp->name);
-//         logger(user, INFO_LOG);
-
-//         t_chat* temp_chat = temp->chats;
-//         while (temp_chat) {
-
-//             char user[180];
-//             sprintf(user,  "\t\tchat_id -- %d, chat_name -- %s, chat_perms - %d", 
-//                     temp_chat->id, temp_chat->name, temp_chat->permissions);
-//             logger(user, INFO_LOG);
-//             temp_chat = temp_chat->next;
-
-//         }
-//         temp = temp->next;
-
-//     }
-
-// }

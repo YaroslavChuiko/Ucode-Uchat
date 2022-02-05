@@ -4,15 +4,18 @@ t_response_code add_chat_to_chatlist(cJSON* json, t_chat** chat_list, bool is_se
 
     cJSON* chat_id = cJSON_GetObjectItem(json, "chat_id");
     cJSON* chat_name = cJSON_GetObjectItemCaseSensitive(json, "chat_name");
+    cJSON* chat_color = cJSON_GetObjectItem(json, "chat_color");
     cJSON* chat_perms = cJSON_GetObjectItem(json, "chat_permissions");
 
-    if (!cJSON_IsNumber(chat_id) || !cJSON_IsString(chat_name) || !cJSON_IsNumber(chat_perms)) {
+    if (!cJSON_IsNumber(chat_id) || !cJSON_IsString(chat_name) || 
+        !cJSON_IsNumber(chat_perms) || !cJSON_IsNumber(chat_color)) {
         return R_JSON_FAILURE;
     }
     if (!is_search)
         pthread_mutex_lock(&utils->lock);
     
-    mx_chat_push_back(chat_list, chat_id->valueint, chat_name->valuestring, chat_perms->valueint);
+    mx_chat_push_back(chat_list, chat_id->valueint, chat_name->valuestring,
+                    chat_perms->valueint, chat_color->valueint);
     
     if (!is_search)
         pthread_mutex_unlock(&utils->lock);
@@ -83,7 +86,6 @@ t_response_code handle_get_chats_request() {
     if ((error_code = handle_get_chats_response(&utils->chatlist, response, false)) != R_SUCCESS) {
         logger(get_response_str(error_code), ERROR_LOG);
         free(response);
-        utils->is_suspended = false;
         return error_code;
     }
     free(response);

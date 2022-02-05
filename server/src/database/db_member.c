@@ -38,8 +38,6 @@ int db_insert_member(const char* chat_name, t_member_type member_type, t_server_
     if (db_execute_query(query) != 0) {
         return 1;
     }
-
-    mx_chat_push_back(&utils->user->chats, chat_id, chat_name, member_type);
     
     return 0;
 

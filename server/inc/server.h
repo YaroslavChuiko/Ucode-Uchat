@@ -76,7 +76,7 @@ sqlite3* open_database();
 int db_execute_query(const char* query);
 sqlite3_stmt* db_execute_stmt_for(const char* query, sqlite3* db);
 
-t_response_code db_insert_chat(const char* chat_name, int date);
+t_response_code db_insert_chat(const char* chat_name, int date, int avatar_color);
 bool db_chat_exists(int chat_id);
 int db_get_chats_total(int user_id);
 bool db_has_chat_perms(int user_id, int chat_id, t_member_type perms);
@@ -84,7 +84,6 @@ bool db_user_exists(const char* username);
 char* db_get_username_by_id(int user_id);
 t_chat* db_get_chat_by_id(int user_id, int chat_id);
 int db_insert_member(const char* chat_name, t_member_type member_type, t_server_utils* utils);
-t_chat* db_get_chats_by_user_id(int user_id);
 t_user* db_get_user_by_id(int user_id, t_server_utils* utils);
 bool db_is_chat_member(int user_id, int chat_id);
 int db_get_chat_id_by_name(const char* chat_name);
