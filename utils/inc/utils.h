@@ -27,6 +27,7 @@ typedef enum e_response_code {
     R_DB_FAILURE,
     R_JSON_FAILURE,
     R_INVALID_INPUT,
+    R_FILE_ERROR,
     
     R_USR_EXISTS,
     R_USR_NOENT,
@@ -134,6 +135,5 @@ t_chat* mx_get_chat_by_name(t_chat* list, const char* name);
 t_msg* mx_get_msg_by_id(t_msg* list, int id);
 void mx_clear_msg(t_msg** p);
 t_msg* mx_get_last_msg_node(t_msg* list);
-void mx_print_msg(t_msg* msg); // remove
 
 #endif

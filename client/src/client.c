@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 	SSL_CTX *ctx = NULL; 
 	SSL *ssl = NULL;
 
-	connect_to_server(atoi(argv[1]), &server_socket, &ctx, &ssl);
+	connect_to_server(argv[1], atoi(argv[1]), &server_socket, &ctx, &ssl);
 	client_init(server_socket, ssl, ctx);
 
     gtk_init(&argc, &argv);

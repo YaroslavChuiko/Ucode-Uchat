@@ -20,7 +20,7 @@ static char* get_file_path_for(int user_id) {
 
 }
 
-void handle_get_user_image(int user_id, char** avatar_path) {
+t_response_code handle_get_user_image(int user_id, char** avatar_path) {
 
     // Send request for receiving user avatar
     cJSON *json = cJSON_CreateObject();
@@ -38,7 +38,7 @@ void handle_get_user_image(int user_id, char** avatar_path) {
     if ((fp = fopen(file_path, "wb+")) == NULL) {
         printf("Cannot open image file\n");
         mx_strdel(&file_path);
-        return;
+        return R_FILE_ERROR;
     }
 
     // Reciving len of encoded image
@@ -47,7 +47,7 @@ void handle_get_user_image(int user_id, char** avatar_path) {
     if(recv(utils->server_fd, &len_encoded, sizeof(int), 0) == 0) {
         printf("Error while receiving length\n");
         mx_strdel(&file_path);
-        return;
+        return R_FILE_ERROR;
     }
     
     // Reciving encoded image
@@ -66,17 +66,18 @@ void handle_get_user_image(int user_id, char** avatar_path) {
     if (ferror(fp)) {
         printf("fwrite() failed\n");
         mx_strdel(&file_path);
-        return;
+        return R_FILE_ERROR;
     }
     int r;
     if ((r = fclose(fp)) == EOF) {
         printf("Cannot close file handler\n");
         mx_strdel(&file_path);
-        return;
+        return R_FILE_ERROR;
     }
 
     *avatar_path = mx_strdup(file_path);
     mx_strdel(&file_path);
     free(decoded);
+    return R_SUCCESS;
 
 }

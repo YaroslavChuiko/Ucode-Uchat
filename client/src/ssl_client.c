@@ -7,7 +7,7 @@ void init_ssl(SSL_CTX **ctx) {
     
     *ctx = SSL_CTX_new(TLS_client_method());
     if (*ctx == NULL) {
-        logger(strerror(errno), ERROR_LOG);
+		handle_error(strerror(errno));
 		exit(EXIT_FAILURE);
     } 
 }
@@ -18,7 +18,7 @@ void connect_ssl(SSL **ssl, int* server_fd, SSL_CTX **ctx) {
 	SSL_set_fd(*ssl, *server_fd);
 
 	if (SSL_connect(*ssl) == -1) {
-		logger(strerror(errno), ERROR_LOG);
+		handle_error(strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 }

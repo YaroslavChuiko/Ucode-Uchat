@@ -208,11 +208,3 @@ int mx_get_msg_idx_by_id(t_msg* list, int id) {
 
 }
 
-void mx_print_msg(t_msg* msg) {
-
-    char str[200];
-    sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
-            msg->text, msg->chat_id, msg->sender_id, msg->sender_name, msg->date_str);
-    logger(str, INFO_LOG);
-
-}

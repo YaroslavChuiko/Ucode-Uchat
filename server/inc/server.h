@@ -39,6 +39,7 @@ void send_server_response(SSL* ssl, t_response_code code, t_request_type req_typ
 void client_cleanup(t_server_utils* utils, bool is_client_exit);
 int server_socket_init(struct sockaddr* serv_address, socklen_t address_size);
 void new_client_create(SSL* ssl, int client_socket);
+void handle_error(const char* error);
 
 // REQUEST HANDLERS
 

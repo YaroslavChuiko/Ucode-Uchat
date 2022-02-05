@@ -27,15 +27,15 @@ void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx) {
 // Check if command line arguments are valid
 void handle_arg_errors(char** argv) {
 
-	if (argv[1] == NULL /* || argv[2] == NULL*/) {
+	if (argv[1] == NULL /*|| argv[2] == NULL*/) {
 		mx_printerr("usage: ./uchat [ip] [port]\n");
-		pthread_exit((void*)EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	} 
 
 }
 
 // Establish a connection with the server via the port
-void connect_to_server(int port, int* server_fd, SSL_CTX **ctx, SSL **ssl) {
+void connect_to_server(const char* ip_address, int port, int* server_fd, SSL_CTX **ctx, SSL **ssl) {
 
     struct sockaddr_in server_addr;
 
@@ -46,12 +46,12 @@ void connect_to_server(int port, int* server_fd, SSL_CTX **ctx, SSL **ssl) {
 	server_addr.sin_port = htons(port);
 	
 	if ((*server_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {		
-		logger(strerror(errno), ERROR_LOG);
+		handle_error(strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
 	if (connect(*server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) {
-		logger(strerror(errno), ERROR_LOG);
+		handle_error(strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
@@ -76,5 +76,14 @@ char* get_log_name() {
 	mx_strcat(log_name, ".log");
 	mx_strdel(&id_str);
 	return log_name;
+
+}
+
+void handle_error(const char* error) {
+
+	char* err_str = mx_strjoin(error, "\n");
+    mx_printerr(err_str);
+    logger(err_str, ERROR_LOG);
+	mx_strdel(&err_str);
 
 }

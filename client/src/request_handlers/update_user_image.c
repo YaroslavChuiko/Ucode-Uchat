@@ -9,7 +9,7 @@ void send_image_to_server(int *socket, void *buffer, size_t length) {
     }
 }
 
-void handle_update_user_image(char *path) {
+t_response_code handle_update_user_image(char *path) {
 
     // Send request for saving user avatar
     cJSON *json = cJSON_CreateObject();
@@ -25,7 +25,7 @@ void handle_update_user_image(char *path) {
     FILE *fp;
     if((fp = fopen(path, "rb")) == NULL) {
         printf("Cannot open file\n");
-        return;
+        return R_FILE_ERROR;
     }
     int r;
     
@@ -35,7 +35,8 @@ void handle_update_user_image(char *path) {
         printf("fseek() failed\n");
         if ((r = fclose(fp)) == EOF) {
             printf("Cannot close file\n");         
-        }    
+        }
+        return R_FILE_ERROR;
     }  
     
     long flen = ftell(fp);
@@ -43,7 +44,8 @@ void handle_update_user_image(char *path) {
         printf("ftell() failed\n");
         if ((r = fclose(fp)) == EOF) {
             printf("Cannot close file\n");
-        }   
+        }
+        return R_FILE_ERROR;
     }
     
     fseek(fp, 0, SEEK_SET);
@@ -52,7 +54,8 @@ void handle_update_user_image(char *path) {
         r = fclose(fp);
         if (r == EOF) {
             printf("Cannot close file\n");
-        }    
+        }
+        return R_FILE_ERROR;
     }
 
     // Read the data of the file which will be sent to server
@@ -62,7 +65,8 @@ void handle_update_user_image(char *path) {
         printf("fread() failed\n");
         if ((r = fclose(fp)) == EOF) {
             printf("Cannot close file\n");
-        }    
+        }
+        return R_FILE_ERROR;
     }
     
     // Encode readed data
@@ -84,6 +88,8 @@ void handle_update_user_image(char *path) {
 
     if ((r = fclose(fp)) == EOF) {
         printf("Cannot close file\n");
+        return R_FILE_ERROR;
     }
+    return R_SUCCESS;
 
 }
