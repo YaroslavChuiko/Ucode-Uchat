@@ -7,6 +7,7 @@ void user_cleanup(t_user** user) {
     }
 	mx_strdel(&(*user)->name);
 	mx_strdel(&(*user)->password);
+	mx_strdel(&(*user)->avatar_path);
 	free(*user);
 	*user = NULL;
 

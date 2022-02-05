@@ -22,9 +22,6 @@ t_request_type handle_request_for(const char* request, t_server_utils* utils) {
     }
 
     t_request_type type = get_request_type(json);
-    char str[100];
-    sprintf(str, "The type of the request is: %d\n", type);
-    logger(str, INFO_LOG);
     
     if (type == REQ_USR_LOGOUT) {
         type = handle_usr_logout(json, utils);

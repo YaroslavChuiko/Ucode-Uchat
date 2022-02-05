@@ -3,6 +3,7 @@ CFLAGS = -std=gnu11 -pthread -g
 # -Wall -Wextra -Werror -Wpedantic
 # CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread -g
 
+UTIL_DIRS = logs data/avatars
 OBJDIR = obj
 SRCDIR = src src/request_handlers src/gui
 UCHAT = ../uchat
@@ -35,14 +36,14 @@ LIB_FLAGS = -lmx -lcjson -lsqlite3 -lssl -lcrypto\
 all: $(UCHAT)
 
 $(UCHAT):
-	mkdir logs $(OBJDIR)
+	mkdir $(UTIL_DIRS) $(OBJDIR)
 	$(CC) $(CFLAGS) $(GTK_FLAGS) -c $(SRC)
 	mv *.o $(OBJDIR)
 	$(CC) $(CFLAGS) $(GTK_LIBS_FLAGS) -o $(UCHAT) $(OBJS) $(LIB_FLAGS)
 
 clean:
 	rm -f $(OBJS)
-	rm -rdf logs $(OBJDIR)
+	rm -rdf $(UTIL_DIRS) $(OBJDIR)
 
 uninstall:
 	make clean

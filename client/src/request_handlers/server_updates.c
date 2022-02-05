@@ -12,13 +12,15 @@ void set_messages_as_read_for(t_chat* chat) {
 							new_msg->message_id, new_msg->sender_id, new_msg->sender_name,
 							new_msg->chat_id, new_msg->text, new_msg->date_str);
 
+		t_msg* msg_to_add = mx_get_last_msg_node(chat->messages);
+		msg_to_add->avatar_path = mx_strdup(new_msg->avatar_path);
+
 		if (chat->new_msg_count >= 1)
 			chat->new_msg_count -= 1;
 
 		if (mx_msg_list_size(chat->messages) == 1) {
 			update_chat_field();
 		} else {
-			t_msg* msg_to_add = mx_get_last_msg_node(chat->messages);
 			add_message(msg_to_add);
 		}
 		new_msg = new_msg->next;
@@ -47,6 +49,7 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 		client_log("You're reading an incoming message", INFO_LOG);
 		if (!curr_chat->new_messages) {
 			
+			handle_get_user_image(new_msg->sender_id, &new_msg->avatar_path);
 			mx_msg_push_back(&curr_chat->messages, new_msg);
 			curr_chat->last_new_msg = mx_get_last_msg_node(curr_chat->messages);
 			
@@ -68,6 +71,7 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 	} else if (message_id > last_new_msg_id) {
 		
 		client_log("You have an incoming message", INFO_LOG);
+		handle_get_user_image(new_msg->sender_id, &new_msg->avatar_path);
 		mx_msg_push_back(&curr_chat->new_messages, new_msg);
 		curr_chat->last_new_msg = mx_get_last_msg_node(curr_chat->new_messages);
 		curr_chat->new_msg_count += 1;
@@ -77,8 +81,8 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 	update_chatlist_item_info(curr_chat);
 
 	char str[200];
-	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s\n", 
-			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str);
+	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s, avatar: %s\n", 
+			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str, new_msg->avatar_path);
 	client_log(str, INFO_LOG);
 	g_usleep(100000);
 	return 0;

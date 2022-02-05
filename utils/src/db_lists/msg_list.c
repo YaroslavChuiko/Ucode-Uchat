@@ -10,6 +10,7 @@ t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id
     new_node->sender_name = mx_strdup(user_name);
     new_node->text = mx_strdup(text);
     new_node->date_str = mx_strdup(date_str);
+    new_node->avatar_path = NULL;
     new_node->next = NULL;
     
     return new_node;
@@ -50,6 +51,7 @@ void mx_clear_msg(t_msg** p) {
     free((*p)->sender_name);
     free((*p)->text);
     free((*p)->date_str);
+    free((*p)->avatar_path);
     free(*p);
     *p = NULL;
 
