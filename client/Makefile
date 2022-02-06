@@ -1,7 +1,7 @@
 CC = clang
 # CFLAGS = -std=gnu11 -pthread -g 
 # -Wall -Wextra -Werror -Wpedantic
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread -g
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -pthread
 
 UTIL_DIRS = data/avatars
 OBJDIR = obj
