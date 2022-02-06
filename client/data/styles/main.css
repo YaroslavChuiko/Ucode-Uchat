@@ -12,8 +12,6 @@
 }
 
 window {
-    /* border-radius: 0 0 10px 10px;
-    border: none; */
     color: @main-font-color;
     background-color: @main-bg-color;
 }
@@ -43,7 +41,6 @@ window {
 
 .menubar_menu {
     padding: 10px;
-    /* border-radius: 10px; */
     border: none;
     outline: none;
     box-shadow: none;

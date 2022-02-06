@@ -3,6 +3,7 @@
 
 #include <errno.h>
 #include <regex.h>
+#include <stdio.h>
 
 // #include "base64.h"
 #include "db_types.h"

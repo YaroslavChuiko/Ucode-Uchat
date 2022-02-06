@@ -1,6 +1,5 @@
 .leftbar {
     background-color: @main-bg-color;
-    /* border-right: 1px solid #383d5c; */
     border-right: 1px solid @second-bg-color;
 }
 
@@ -21,12 +20,11 @@
     border: none;
 }
 
-.scrollable_wrap {
-    /* background-color: lime; */
-}
+/* .scrollable_wrap {
+    background-color: lime;
+} */
 
 .chatlist {
-    /* background-color: maroon; */
     padding: 0px 30px;    
 }
 

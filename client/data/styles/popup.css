@@ -1,15 +1,9 @@
 .popup_menu {
-    /* border-radius: 10px; */
     padding: 40px;
     background-color: @main-bg-color;
     color: @main-font-color;
 }
 
-.create_chat_menu {
-    /* padding: 40px; */
-    /* background-color: @main-bg-color;
-    border-radius: 10px; */
-}
 
 .popup_window_title {
     font-size: 24px;

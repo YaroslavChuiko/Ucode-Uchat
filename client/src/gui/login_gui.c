@@ -28,7 +28,6 @@ void build_login_menu()
     //username box
     GtkWidget *username_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     
-	// GtkWidget *username_label = gtk_label_new("Username:");
 	GtkWidget *username_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(username_field), "Username");
     gtk_widget_set_name(username_field, "username_field");
@@ -40,7 +39,6 @@ void build_login_menu()
     gtk_widget_set_name(username_notify_label, "username_notify_label");
 	add_class(username_notify_label, "notify-label");
 
-	// gtk_box_pack_start(GTK_BOX(username_box), username_label,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(username_box), username_field,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(username_box), username_notify_label,FALSE,FALSE,0);
     //
@@ -48,13 +46,11 @@ void build_login_menu()
     //password box
     GtkWidget *password_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     
-	// GtkWidget *password_label = gtk_label_new("Password:");
 	GtkWidget *password_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(password_field), "Password");
     gtk_widget_set_name(password_field, "password_field");
 	add_class(password_field, "input-field");
     add_class(password_field, "input-field--password");
-    // gtk_entry_set_max_length(GTK_ENTRY(password_field), MAX_USERNAME);
 	gtk_entry_set_visibility(GTK_ENTRY(password_field), false);
 
     GtkWidget *password_notify_label = gtk_label_new(" ");
@@ -62,7 +58,6 @@ void build_login_menu()
     gtk_widget_set_name(password_notify_label, "password_notify_label");
 	add_class(password_notify_label, "notify-label");
 
-	// gtk_box_pack_start(GTK_BOX(password_box), password_label,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(password_box), password_field,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(password_box), password_notify_label,FALSE,FALSE,0);
     //
@@ -74,7 +69,6 @@ void build_login_menu()
 	g_signal_connect(G_OBJECT(login_btn), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
     g_signal_connect(G_OBJECT(login_btn), "leave-notify-event", G_CALLBACK(on_crossing), NULL);
 	g_signal_connect(login_btn, "clicked", G_CALLBACK(login_button_click), NULL);
-	// gtk_widget_set_halign(login_btn, GTK_ALIGN_CENTER);
 	add_class(login_btn, "btn");
 	add_class(login_btn, "btn--blue");
     

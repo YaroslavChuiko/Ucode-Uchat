@@ -7,7 +7,6 @@ void build_create_chat_menu()
     GtkWidget *create_chat_menu = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_container_add(GTK_CONTAINER(popup_window), create_chat_menu );
     add_class(create_chat_menu, "popup_menu");
-    // add_class(create_chat_menu, "create_chat_menu");
 
     GtkWidget *menu_title = gtk_label_new("Create new chat");
     gtk_widget_set_halign(GTK_WIDGET(menu_title), GTK_ALIGN_CENTER);

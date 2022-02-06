@@ -103,7 +103,6 @@
     margin: 0 0 5px 10px;
     font-size: 16px;
     font-weight: 500;
-    /* color: @main-font-color; */
     color: @second-font-color;
 }
 
@@ -112,7 +111,6 @@
     font-weight: normal;
     font-size: 12px;
     margin: 5px 0 20px 10px;
-    /* transition: 0.2s color linear; */
     color: @second-font-color;
 }
 

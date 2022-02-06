@@ -19,7 +19,6 @@ void build_confirm_logout_window(GtkWidget *widget, gpointer data) {
     GtkWidget *popup_window = create_popup_window(400, 0);
     GtkWidget *confirm_logout_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-    // gtk_widget_set_size_request(GTK_WIDGET(confirm_logout_box), 200, 150);
 	gtk_container_add(GTK_CONTAINER(popup_window), confirm_logout_box);
     add_class(confirm_logout_box, "popup_menu");
     add_class(confirm_logout_box, "edit_profile_menu");

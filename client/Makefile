@@ -31,7 +31,7 @@ LIB_FLAGS = -lmx -lcjson -lsqlite3 -lssl -lcrypto\
 			-L$(UTILSLIB_DIR) $(UTILSLIB_NAME)\
 			-L$(LIBMX_DIR) $(LIBMX_NAME)\
 			-L$(CJSON_DIR) $(CJSON_NAME)\
-			# -L$(SSL_FILES) -I$(SSL_INC_FILES)
+			-L$(SSL_FILES) -I$(SSL_INC_FILES)
 
 all: $(UCHAT)
 

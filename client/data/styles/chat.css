@@ -2,7 +2,6 @@
     padding: 25px 35px 25px 35px;
     background-color: @main-bg-color;
     border-bottom: 1px solid @second-bg-color;
-    /* border-radius: 10px; */
     color: @main-font-color;
 }
 

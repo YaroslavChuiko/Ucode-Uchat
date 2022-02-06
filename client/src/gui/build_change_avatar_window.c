@@ -36,7 +36,6 @@ void build_change_avatar_window(GtkWidget *widget, gpointer data) {
     GtkWidget *path_field = gtk_entry_new();
     gtk_widget_set_name(path_field, "path_field");
     gtk_entry_set_placeholder_text(GTK_ENTRY(path_field), "Avatar path");
-    // g_signal_connect(G_OBJECT(path_field), "focus-out-event", G_CALLBACK(focus_out_login_field), NULL);
     add_class(path_field, "input-field");
     add_class(path_field, "input-field--name");
 

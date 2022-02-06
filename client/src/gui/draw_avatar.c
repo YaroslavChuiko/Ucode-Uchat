@@ -10,7 +10,7 @@ gboolean draw_user_avatar(GtkWidget *widget, cairo_t *cr, gpointer data)
     path = mx_strjoin(tmp, ".png");
     mx_strdel(&tmp);
 
-    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale(path, 27, 27, FALSE, NULL); // get_pixbuf_with_size(a, 34, 34);
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file_at_scale(path, 27, 27, FALSE, NULL);
     mx_strdel(&path);
     gdk_cairo_set_source_pixbuf(cr, pixbuf, 0, 0);
     g_object_unref(G_OBJECT(pixbuf));
@@ -19,8 +19,8 @@ gboolean draw_user_avatar(GtkWidget *widget, cairo_t *cr, gpointer data)
     double y = 0;
     double width = 27;
     double height = 27;
-    double aspect = 1.0;                       /* aspect ratio */
-    double corner_radius = height / 2.0;       /* and corner curvature radius */
+    double aspect = 1.0;
+    double corner_radius = height / 2.0;
     double radius = corner_radius / aspect;
     double degrees = 3.14159265358979 / 180.0;
 

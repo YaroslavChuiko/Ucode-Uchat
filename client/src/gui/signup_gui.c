@@ -23,22 +23,18 @@ void build_signup_menu()
     //username box
     GtkWidget *username_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	// GtkWidget *username_label = gtk_label_new("Username:");
 	GtkWidget *username_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(username_field), "Username");
     gtk_widget_set_name(username_field, "username_field");
 	add_class(username_field, "input-field");
     add_class(username_field, "input-field--name");
-    // gtk_entry_set_max_length(GTK_ENTRY(password_field), MAX_USERNAME);
-	g_signal_connect(G_OBJECT(username_field), "focus-out-event", G_CALLBACK(focus_out_username_field), NULL); //password_notify_label
-	// g_signal_connect(GTK_ENTRY(username_field), "changed", G_CALLBACK(username_field_change_event), NULL);
+	g_signal_connect(G_OBJECT(username_field), "focus-out-event", G_CALLBACK(focus_out_username_field), NULL);
 
     GtkWidget *username_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(username_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(username_notify_label, "username_notify_label");
 	add_class(username_notify_label, "notify-label");
 
-	// gtk_box_pack_start(GTK_BOX(username_box), username_label,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(username_box), username_field,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(username_box), username_notify_label,FALSE,FALSE,0);
     //
@@ -46,23 +42,19 @@ void build_signup_menu()
     //password box
     GtkWidget *password_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	// GtkWidget *password_label = gtk_label_new("Password:");
 	GtkWidget *password_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(password_field), "Password");
     gtk_widget_set_name(password_field, "password_field");
 	add_class(password_field, "input-field");
     add_class(password_field, "input-field--password");
-    // gtk_entry_set_max_length(GTK_ENTRY(password_field), MAX_USERNAME);
 	gtk_entry_set_visibility(GTK_ENTRY(password_field), false);
 	g_signal_connect(G_OBJECT(password_field), "focus-out-event", G_CALLBACK(focus_out_password_field), NULL);
-	// g_signal_connect(GTK_ENTRY(password_field), "changed", G_CALLBACK(password_field_change_event), NULL);
 
     GtkWidget *password_notify_label = gtk_label_new(" ");
 	gtk_widget_set_halign(password_notify_label, GTK_ALIGN_START);
     gtk_widget_set_name(password_notify_label, "password_notify_label");
 	add_class(password_notify_label, "notify-label");
 
-	// gtk_box_pack_start(GTK_BOX(password_box), password_label,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(password_box), password_field,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(password_box), password_notify_label,FALSE,FALSE,0);
     //
@@ -70,13 +62,11 @@ void build_signup_menu()
     //repassword box
     GtkWidget *repassword_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
-	// GtkWidget *repassword_label = gtk_label_new("Repeat Password:");
 	GtkWidget *repassword_field = gtk_entry_new();
 	gtk_entry_set_placeholder_text(GTK_ENTRY(repassword_field), "Repeat password");
     gtk_widget_set_name(repassword_field, "repassword_field");
 	add_class(repassword_field, "input-field");
     add_class(repassword_field, "input-field--password");
-    // gtk_entry_set_max_length(GTK_ENTRY(password_field), MAX_USERNAME);
 	gtk_entry_set_visibility(GTK_ENTRY(repassword_field), false);
 	g_signal_connect(G_OBJECT(repassword_field), "focus-out-event", G_CALLBACK(focus_out_repassword_field), NULL);
 
@@ -85,7 +75,6 @@ void build_signup_menu()
     gtk_widget_set_name(repassword_notify_label, "repassword_notify_label");
 	add_class(repassword_notify_label, "notify-label");
 
-	// gtk_box_pack_start(GTK_BOX(repassword_box), repassword_label,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(repassword_box), repassword_field,FALSE,FALSE,0);
 	gtk_box_pack_start(GTK_BOX(repassword_box), repassword_notify_label,FALSE,FALSE,0);
     //

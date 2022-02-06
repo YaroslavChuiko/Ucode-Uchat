@@ -19,7 +19,6 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field) {
     if(widget){};
 
     GtkWidget *chat_container = get_widget_by_name_r(main_window, "chat");
-    // GtkWidget *chat_field = get_widget_by_name_r(chat_container, "chat_field");
     GtkWidget *messaging_label = get_widget_by_name_r(chat_container, "messaging_label");
 
     gchar new_message[2048];
@@ -39,8 +38,6 @@ void send_button_click(GtkWidget *widget, gpointer new_message_field) {
 
         add_message(mx_get_last_msg_node(utils->current_chat->messages));
 
-        //gtk_widget_show_all(chat_container);
-    
     }
 
 }
@@ -55,13 +52,11 @@ void build_rightbar_chat() {
     add_class(chat_header, "chat_header");
 
     GtkWidget *avatar = gtk_drawing_area_new();
-    // GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(GTK_WIDGET(avatar), 42, 42);
     g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_chat_avatar), (gpointer)utils->current_chat->avatar_color);
     gtk_widget_set_halign(avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(avatar, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(chat_header), avatar, FALSE, FALSE, 0);
-    // add_class(avatar, "chatlist_item_avatar");
 
     GtkWidget *chat_header_title = gtk_label_new(utils->current_chat->name);
     gtk_widget_set_name(chat_header_title, "chat_header_title");

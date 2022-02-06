@@ -46,7 +46,6 @@ GtkWidget *get_widget_by_name_r(GtkWidget *container, char *name);
 char *ellipsis_str(const char *str, int overflow_len);
 
 //BUILD WINDOWS
-// void destroy(GtkWidget* widget, gpointer data);
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 GtkWidget *create_popup_window(int width, int height);
 void destroy_popup_window(GtkWidget *widget, gpointer chat_screen);
@@ -188,7 +187,6 @@ void build_change_chat_name_window(GtkWidget *widget, gpointer data);
 
 void leave_chat_btn_click(GtkWidget *widget, gpointer data);
 void build_confirm_leave_chat_window(GtkWidget *widget, gpointer data);
-// void cancel_btn_click(GtkWidget *widget, gpointer data);
 
 void delete_account_btn_click(GtkWidget *widget, gpointer data);
 void build_confirm_delete_account_window(GtkWidget *widget, gpointer data);

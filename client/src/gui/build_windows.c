@@ -65,7 +65,6 @@ void destroy_popup_window(GtkWidget *widget, gpointer chat_screen)
 GtkWidget *create_popup_window(int width, int height)
 {
     GtkWidget*  popup_window = gtk_window_new(GTK_WINDOW_TOPLEVEL); //GTK_WINDOW_POPUP
-    // t_chat_screen.popup_menu = popup_window;
     gtk_widget_set_name(GTK_WIDGET(popup_window), "popup_window");
     gtk_window_set_default_size(GTK_WINDOW(popup_window), width, height);
     gtk_window_set_transient_for(GTK_WINDOW(popup_window), GTK_WINDOW(main_window));

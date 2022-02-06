@@ -21,9 +21,6 @@ int main(int argc, char **argv) {
 	load_css();
 	build_authorization_window();
 
-    // gtk_window_set_icon_from_file(GTK_WINDOW(main_window), "client/data/img/logo.png", NULL);
-    // gtk_window_set_icon_name(GTK_WINDOW(main_window), "UChat");
-
 	pthread_create(&utils->th_reader, NULL, handle_server_updates, utils);
 
     gtk_main();

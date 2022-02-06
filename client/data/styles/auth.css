@@ -5,18 +5,12 @@
     background-color: @main-bg-color;
 }
 
-.signup_menu {
-    /* padding: 50px; */
-}
-
 .auth-menu_title-block {
-
     margin-bottom: 30px;
 }
 
 .auth-menu_title {
     font-size: 24px;
-    /* letter-spacing: 1px; */
     font-weight: 600;
     color: @main-font-color;
 }

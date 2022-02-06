@@ -26,7 +26,6 @@ void add_join_chat_item(int id, char *chat_name, t_avatar_color avatar_color)
     GtkWidget *event_box = gtk_event_box_new();
     gtk_event_box_set_above_child(GTK_EVENT_BOX(event_box), TRUE);
     gtk_box_pack_start(GTK_BOX(chatlist_container), event_box, FALSE, FALSE, 0);
-    // gtk_widget_set_name(event_box, mx_itoa(id));
     gtk_widget_set_name(event_box, chat_name);
     add_class(event_box, "chatlist_item_wrap");
 	g_signal_connect(G_OBJECT(event_box), "enter-notify-event", G_CALLBACK(on_crossing), NULL);
@@ -44,12 +43,10 @@ void add_join_chat_item(int id, char *chat_name, t_avatar_color avatar_color)
     gtk_box_pack_start(GTK_BOX(chatlist_item), chatlist_item_id, FALSE, FALSE, 0);
 
     GtkWidget *avatar = gtk_drawing_area_new();
-    // GtkWidget *avatar = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_widget_set_size_request(GTK_WIDGET(avatar), 42, 42);
     g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_chat_avatar), (gpointer)avatar_color);
     gtk_widget_set_halign(avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(avatar, GTK_ALIGN_CENTER);
-    add_class(avatar, "chatlist_item_avatar");
     gtk_box_pack_start(GTK_BOX(chatlist_item), avatar, FALSE, FALSE, 0);
 
     // text block
