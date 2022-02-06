@@ -1,12 +1,7 @@
 #ifndef CLIENT_HEADER
 #define CLIENT_HEADER
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <strings.h>
 #include <signal.h>
-#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -14,6 +9,7 @@
 #include <pthread.h>
 #include <gtk/gtk.h>
 #include <cairo.h>
+// #include <unistd.h>
 
 #ifdef __MACH__
 #include "../../libraries/openssl/openssl/ssl.h"
@@ -26,9 +22,10 @@
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/libmx/inc/libmx.h"
 #include "../../utils/inc/utils.h"
-
-#include "const.h"
 #include "types.h"
+#include "const.h"
+
+extern GtkWidget *main_window;
 
 unsigned long get_current_time();
 char* get_string_time(unsigned long seconds);
@@ -161,8 +158,8 @@ t_response_code get_response_code(cJSON* json);
 t_request_type get_request_type(cJSON* json);
 void update_last_chat_msg(t_chat* chat_to_update, t_msg* new_msg);
 
-t_response_code handle_get_user_image(int user_id, char** avatar_path);
-t_response_code handle_update_user_image(char *path);
+// t_response_code handle_get_user_image(int user_id, char** avatar_path);
+// t_response_code handle_update_user_image(char *path);
 
 void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx);
 void client_cleanup(bool is_client_exit);
@@ -171,8 +168,6 @@ void handle_arg_errors(char** argv);
 
 void init_ssl(SSL_CTX **ctx);
 void connect_ssl(SSL **ssl, int* server_fd, SSL_CTX **ctx);
-void client_log(const char* info, t_info_type type);
-char* get_log_name();
 
 void build_rightbar_chat();
 void delete_message(GtkWidget *widget, GdkEventButton *event, t_msg *message);

@@ -68,7 +68,6 @@ t_response_code handle_login_request(const char* user_name, const char* user_pas
 
         // handle_get_user_image(utils->current_user->user_id, &utils->current_user->avatar_path);
         handle_get_chats_request();
-        utils->log_name = get_log_name();
     
     }
 

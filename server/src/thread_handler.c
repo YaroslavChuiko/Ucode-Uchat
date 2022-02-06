@@ -1,5 +1,4 @@
 #include "../inc/server.h"
-#include <sys/select.h>
 
 char* get_client_request(SSL* ssl, int length) {
 

@@ -2,7 +2,6 @@
 #define DB_TYPES_H
 
 // Type for the color of the default avatar
-    // change the names to colors later
 typedef enum e_avatar_color {
     A_COLOR_FIRST,
     A_COLOR_SECOND,

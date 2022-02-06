@@ -94,7 +94,6 @@ t_response_code handle_get_chats_request() {
         utils->current_chat = mx_get_chat_by_id(utils->chatlist, curr_chat_id);
     }
     
-    mx_print_chat_list(utils->chatlist);
     return R_SUCCESS;
 
 }

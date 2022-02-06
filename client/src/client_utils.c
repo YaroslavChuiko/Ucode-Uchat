@@ -18,7 +18,6 @@ void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx) {
 	utils->current_user = NULL;
 	utils->current_chat = NULL;
 	utils->chatlist = NULL;
-	utils->log_name = NULL;
 	utils->is_suspended = true;
 	pthread_mutex_unlock(&utils->lock);
 
@@ -27,7 +26,7 @@ void client_init(int server_fd, SSL *ssl, SSL_CTX* ctx) {
 // Check if command line arguments are valid
 void handle_arg_errors(char** argv) {
 
-	if (argv[1] == NULL /*|| argv[2] == NULL*/) {
+	if (argv[1] == NULL || argv[2] == NULL) {
 		mx_printerr("usage: ./uchat [ip] [port]\n");
 		exit(EXIT_FAILURE);
 	} 
@@ -56,27 +55,6 @@ void connect_to_server(const char* ip_address, int port, int* server_fd, SSL_CTX
 	}
 
 	connect_ssl(ssl, server_fd, ctx);
-}
-
-void client_log(const char* info, t_info_type type) {
-
-    FILE* fd = fopen(utils->log_name, "a+");
-    fprintf(fd, "%s: ", type == ERROR_LOG ? "ERROR" : "INFO");
-    fprintf(fd, "%s\n", info);
-    fclose(fd);
-
-}
-
-char* get_log_name() {
-
-	char* log_name = mx_strnew(mx_strlen(CLIENTLOG_NAME) + 5);
-	char* id_str = mx_itoa(utils->current_user->user_id);
-	mx_strcat(log_name, CLIENTLOG_NAME);
-	mx_strcat(log_name, id_str);
-	mx_strcat(log_name, ".log");
-	mx_strdel(&id_str);
-	return log_name;
-
 }
 
 void handle_error(const char* error) {

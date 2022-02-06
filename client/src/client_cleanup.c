@@ -18,7 +18,6 @@ void client_cleanup(bool is_client_exit) {
 	pthread_mutex_lock(&utils->lock);
 	user_cleanup(&utils->current_user);
 	mx_clear_chat_list(&utils->chatlist);
-	mx_strdel(&utils->log_name);
 	pthread_mutex_unlock(&utils->lock);
 
 	if (is_client_exit) {
