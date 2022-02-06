@@ -86,6 +86,7 @@ static const t_response response_objs[] = {
     { R_DB_FAILURE, "A database error occurred when handling the request" },
     { R_JSON_FAILURE, "A json error occurred when handling the request" },
     { R_INVALID_INPUT, "The input was invalid" },
+    { R_FILE_ERROR, "A file error occured" },
     { R_USR_EXISTS, "The user with this name already exists" },
     { R_USR_NOENT, "There's no user by that name" },
     { R_INVALID_PASS, "The entered password is incorrect" },
@@ -121,8 +122,8 @@ int mx_chat_list_size(t_chat* list);
 
 void mx_print_chat_list(t_chat* chat); // remove
 
-t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
-void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str);
+t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str, t_avatar_color color);
+void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str, t_avatar_color color);
 void mx_msg_push_back(t_msg** list, t_msg* new_node);
 void mx_clear_msg_list(t_msg **list);
 void mx_msg_pop_index(t_msg **list, int index);

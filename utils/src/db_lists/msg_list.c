@@ -1,6 +1,7 @@
 #include "../../inc/utils.h"
 
-t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str) {
+t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id, 
+                    const char* text, const char* date_str, t_avatar_color color) {
     
     t_msg *new_node = malloc(sizeof(t_msg));
     
@@ -10,6 +11,7 @@ t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id
     new_node->sender_name = mx_strdup(user_name);
     new_node->text = mx_strdup(text);
     new_node->date_str = mx_strdup(date_str);
+    new_node->avatar_color = color;
     new_node->avatar_path = NULL;
     new_node->next = NULL;
     
@@ -35,10 +37,10 @@ void mx_msg_push_back(t_msg** list, t_msg* new_node) {
 
 }
 
-void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* user_name, 
-                        int chat_id, const char* text, const char* date_str) {
+void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* user_name, int chat_id, 
+                        const char* text, const char* date_str, t_avatar_color color) {
 
-    t_msg* new_node = mx_create_msg(msg_id, user_id, user_name, chat_id, text, date_str);
+    t_msg* new_node = mx_create_msg(msg_id, user_id, user_name, chat_id, text, date_str, color);
     mx_msg_push_back(list, new_node);
 
 }

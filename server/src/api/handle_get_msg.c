@@ -10,7 +10,7 @@ static cJSON* get_msg_by_id(const cJSON* msg_info) {
     }
     sqlite3* db = open_database();
     sqlite3_stmt* stmt;
-    sqlite3_prepare_v2(db,  "SELECT messages.id, messages.user_id, users.username, messages.chat_id, messages.text, messages.date "
+    sqlite3_prepare_v2(db,  "SELECT messages.id, messages.user_id, users.username, users.avatar_color, messages.chat_id, messages.text, messages.date "
                             "FROM `messages` INNER JOIN `users` ON users.id = messages.user_id "
                             "WHERE messages.chat_id = ? AND messages.id = ?",
                             -1, &stmt, NULL);
@@ -48,7 +48,6 @@ void handle_get_msg(const cJSON* msg_info, t_server_utils* utils) {
     cJSON_AddItemReferenceToObject(json, "message", msg_json);
     cJSON_AddNumberToObject(json, "type", REQ_GET_MSG);
     cJSON_AddNumberToObject(json, "error_code", R_SUCCESS);
-    
     char* json_str = cJSON_PrintUnformatted(json);
     send_response_to(utils->ssl, json_str);
     

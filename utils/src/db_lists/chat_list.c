@@ -214,8 +214,8 @@ void mx_print_chat_list(t_chat* chat) {
         while (msg) {
 
             char str[200];
-            sprintf(str, "Chat message:\n\tid: %d, text: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s, avatar: %s\n", 
-                    msg->message_id, msg->text, msg->chat_id, msg->sender_id, msg->sender_name, msg->date_str, msg->avatar_path);
+            sprintf(str, "Chat message:\n\tid: %d, text: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s, avatar: %d\n", 
+                    msg->message_id, msg->text, msg->chat_id, msg->sender_id, msg->sender_name, msg->date_str, msg->avatar_color);
             logger(str, INFO_LOG);
             msg = msg->next;
 
