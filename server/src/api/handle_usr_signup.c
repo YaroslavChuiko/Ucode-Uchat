@@ -14,15 +14,15 @@ t_response_code db_add_user(const cJSON* user_info) {
         return R_USR_EXISTS;
     }
 
-    // if (!is_strlen_valid(user_name->valuestring, MIN_NAME_INPUT_LEN, MAX_NAME_INPUT_LEN)) {
-    //     return R_NAME_LEN_INVALID;
-    // }
-    // if (!is_strlen_valid(user_password->valuestring, MIN_PASS_INPUT_LEN, MAX_PASS_INPUT_LEN)) {
-    //     return R_PASS_LEN_INVALID;
-    // }
-    
+    if (!is_strlen_valid(user_name->valuestring, MIN_NAME_INPUT_LEN, MAX_NAME_INPUT_LEN)) {
+        return R_NAME_LEN_INVALID;
+    }
     if (!is_user_name_format_valid(user_name->valuestring)) {
         return R_NAME_FORMAT_INVALID;
+    }
+    
+    if (!is_strlen_valid(user_password->valuestring, MIN_PASS_INPUT_LEN, MAX_PASS_INPUT_LEN)) {
+        return R_PASS_LEN_INVALID;
     }
 
     char query[QUERY_LEN];

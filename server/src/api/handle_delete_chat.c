@@ -16,7 +16,7 @@ t_response_code db_delete_chat(const char* chat_name, int chat_id) {
 
 }
 
-int db_delete_member(int chat_id, t_server_utils* utils) {
+int db_delete_member(int chat_id) {
     
     char query[QUERY_LEN];
     sprintf(query, "DELETE FROM `members` WHERE `chat_id` = '%d'", chat_id);
@@ -71,7 +71,7 @@ void handle_delete_chat(const cJSON* chat_info, t_server_utils* utils) {
         return;
     }
     
-    if (db_delete_member(chat_id, utils) != 0) {
+    if (db_delete_member(chat_id) != 0) {
         send_server_response(utils->ssl, R_DB_FAILURE, REQ_DELETE_CHAT);
         return;
     }

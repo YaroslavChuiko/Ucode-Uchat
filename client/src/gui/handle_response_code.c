@@ -59,6 +59,14 @@ void handle_signup_response_code(int response_code, GtkWidget *signup_notify_lab
         case R_USR_EXISTS:
             set_notify_error_style(signup_notify_label, get_response_str(R_USR_EXISTS));
             break;
+
+        case R_NAME_LEN_INVALID:
+            set_notify_error_style(signup_notify_label, get_response_str(R_NAME_LEN_INVALID));
+            break;
+
+        case R_PASS_LEN_INVALID:
+            set_notify_error_style(signup_notify_label, get_response_str(R_PASS_LEN_INVALID));
+            break;
         
         default:
             break;

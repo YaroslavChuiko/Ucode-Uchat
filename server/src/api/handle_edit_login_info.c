@@ -44,10 +44,10 @@ void handle_edit_username(const cJSON* user_info, t_server_utils* utils) {
         return;
     }
 
-    // if (!is_strlen_valid(new_name->valuestring, MIN_NAME_INPUT_LEN, MAX_NAME_INPUT_LEN)) {
-    //     send_server_response(utils->ssl, R_NAME_LEN_INVALID, REQ_EDIT_USERNAME);
-    //     return;
-    // }
+    if (!is_strlen_valid(new_name->valuestring, MIN_NAME_INPUT_LEN, MAX_NAME_INPUT_LEN)) {
+        send_server_response(utils->ssl, R_NAME_LEN_INVALID, REQ_EDIT_USERNAME);
+        return;
+    }
 
     if (!is_user_name_format_valid(new_name->valuestring)) {
         send_server_response(utils->ssl, R_NAME_FORMAT_INVALID, REQ_EDIT_USERNAME);
@@ -84,10 +84,10 @@ void handle_edit_password(const cJSON* pass_info, t_server_utils* utils) {
         return;
     }
 
-    // if (!is_strlen_valid(new_pass->valuestring, MIN_PASS_INPUT_LEN, MAX_PASS_INPUT_LEN)) {
-    //     send_server_response(utils->ssl, R_PASS_LEN_INVALID, REQ_EDIT_PASSWORD);
-    //     return;
-    // }
+    if (!is_strlen_valid(new_pass->valuestring, MIN_PASS_INPUT_LEN, MAX_PASS_INPUT_LEN)) {
+        send_server_response(utils->ssl, R_PASS_LEN_INVALID, REQ_EDIT_PASSWORD);
+        return;
+    }
 
     if ((error_code = db_modify_password(utils->user->user_id, new_pass->valuestring)) != R_SUCCESS) {
         send_server_response(utils->ssl, error_code, REQ_EDIT_PASSWORD);

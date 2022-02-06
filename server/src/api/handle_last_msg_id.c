@@ -1,6 +1,6 @@
 #include "../../inc/server.h"
 
-t_response_code get_last_msg_id(const cJSON* chat_info, t_server_utils* utils, int* last_msg_id) {
+t_response_code get_last_msg_id(const cJSON* chat_info, int* last_msg_id) {
 
     const cJSON *chat_id = cJSON_GetObjectItemCaseSensitive(chat_info, "chat_id");
     if (!cJSON_IsNumber(chat_id)) {
@@ -33,7 +33,7 @@ void handle_last_msg_id(const cJSON* chat_info, t_server_utils* utils) {
     }
     int last_msg_id = -1;
     int error_code = 0;
-    if ((error_code = get_last_msg_id(chat_info, utils, &last_msg_id)) != R_SUCCESS) {
+    if ((error_code = get_last_msg_id(chat_info, &last_msg_id)) != R_SUCCESS) {
         send_server_response(utils->ssl, error_code, REQ_LAST_MSG_ID);
         return;
     }

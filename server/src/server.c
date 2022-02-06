@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
     int client_socket;
     socklen_t address_size = sizeof(struct sockaddr_in);
 
-    // daemon_init();
+    daemon_init();
 
 	SSL_CTX *ctx = NULL;
 	SSL *ssl = NULL;
