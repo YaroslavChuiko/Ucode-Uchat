@@ -1,5 +1,12 @@
 #include "../../inc/client.h"
 
+void load_css()
+{
+	GtkCssProvider *styles = gtk_css_provider_new();
+    gtk_css_provider_load_from_path(styles, "client/data/styles/main.css", NULL);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(styles), GTK_STYLE_PROVIDER_PRIORITY_USER);
+}
+
 void add_class(GtkWidget *widget, char *class_name)
 {
 	GtkStyleContext *context = gtk_widget_get_style_context(widget);

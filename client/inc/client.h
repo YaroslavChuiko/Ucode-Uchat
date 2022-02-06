@@ -36,6 +36,7 @@ t_avatar_color get_avatar_color();
 void handle_error(const char* error);
 
 //GUI UTILS
+void load_css();
 void on_crossing (GtkWidget *widget, GdkEventCrossing *event);
 void add_class(GtkWidget *widget, char *class_name);
 void remove_class(GtkWidget *widget, char *class_name);
@@ -52,7 +53,7 @@ char *ellipsis_str(const char *str, int overflow_len);
 GtkWidget* create_new_window(char *title, int width, int height, bool resizable);
 GtkWidget *create_popup_window(int width, int height);
 void destroy_popup_window(GtkWidget *widget, gpointer chat_screen);
-void build_authorizatioin_window();
+void build_authorization_window();
 void build_chat_window();
 
 //DRAW AVATAR

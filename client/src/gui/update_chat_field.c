@@ -14,7 +14,7 @@ void add_message(t_msg *message) {
 
     GtkWidget *avatar = gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(avatar), 27, 27);
-    // g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_message_avatar), message->);   // Получить avatar пользовтеля
+    g_signal_connect(G_OBJECT(avatar), "draw", G_CALLBACK(draw_user_avatar), (gpointer)message->avatar_color);   // Получить avatar пользовтеля
     gtk_widget_set_halign(avatar, cur_user ? GTK_ALIGN_START : GTK_ALIGN_END);
     gtk_widget_set_valign(avatar, GTK_ALIGN_START);
     if (!cur_user) {

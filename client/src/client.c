@@ -18,13 +18,11 @@ int main(int argc, char **argv) {
 
     gtk_init(&argc, &argv);
 
-	// CSS
-	GtkCssProvider *styles = gtk_css_provider_new();
-    gtk_css_provider_load_from_path(styles, "client/data/styles/main.css", NULL);
-    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(styles), GTK_STYLE_PROVIDER_PRIORITY_USER);
-	//
+	load_css();
+	build_authorization_window();
 
-	build_authorizatioin_window();
+    // gtk_window_set_icon_from_file(GTK_WINDOW(main_window), "client/data/img/logo.png", NULL);
+    // gtk_window_set_icon_name(GTK_WINDOW(main_window), "UChat");
 
 	pthread_create(&utils->th_reader, NULL, handle_server_updates, utils);
 
