@@ -63,7 +63,9 @@ gboolean draw_chat_avatar(GtkWidget *widget, cairo_t *cr, gpointer data);
 //AUTH
 void build_login_menu();
 void build_signup_menu();
+
 void build_chat_screen();
+void build_leftbar(GtkWidget *chat_screen);
 
 //AUTH EVENTS
 void signup_button_click(GtkWidget *widget, gpointer data);
