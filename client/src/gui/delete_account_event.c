@@ -6,7 +6,7 @@ void delete_account_btn_click(GtkWidget *widget, gpointer data) {
 
     if (handle_delete_account_request() == R_SUCCESS) {
         client_cleanup(false);
-        build_authorizatioin_window();
+        build_authorization_window();
     }
 
 }

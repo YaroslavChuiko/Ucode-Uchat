@@ -28,16 +28,16 @@ bool validate_name_field(GtkWidget *username_field, GtkWidget *username_notify_l
         set_notify_error_style(username_notify_label, "Fill the name please!");
 		return false;
     }
-    else if (mx_strlen(user_name) < 1) //4
+    else if (mx_strlen(user_name) < MIN_NAME_INPUT_LEN)
     {
         set_field_error_style(username_field);
-        set_notify_error_style(username_notify_label, "The name length must be atleast 4 characters");
+        set_notify_error_style(username_notify_label, "The name length must be at least 4 characters");
 		return false;
     }
-    else if (mx_strlen(user_name) > 15)
+    else if (mx_strlen(user_name) > MAX_NAME_INPUT_LEN)
     {
         set_field_error_style(username_field);
-        set_notify_error_style(username_notify_label, "the name length must not exceed 15 characters");
+        set_notify_error_style(username_notify_label, "The name length must not exceed 16 characters");
 		return false;
     }
     else if (!is_user_name_format_valid(user_name))
@@ -64,16 +64,16 @@ bool validate_password_field(GtkWidget *password_field, GtkWidget *password_noti
         set_notify_error_style(password_notify_label, "Fill the password please!");
 		return false;
     }
-    else if (mx_strlen(user_password) < 1) //8
+    else if (mx_strlen(user_password) < MIN_PASS_INPUT_LEN)
     {
         set_field_error_style(password_field);
-        set_notify_error_style(password_notify_label, "Password length must be atleast 8 characters");
+        set_notify_error_style(password_notify_label, "Password length must be at least 8 characters");
 		return false;
     }
-    else if (mx_strlen(user_password) > 15)
+    else if (mx_strlen(user_password) > MAX_PASS_INPUT_LEN)
     {
         set_field_error_style(password_field);
-        set_notify_error_style(password_notify_label, "Password length must not exceed 15 characters");
+        set_notify_error_style(password_notify_label, "Password length must not exceed 30 characters");
 		return false;
     }
     else

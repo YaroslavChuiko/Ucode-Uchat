@@ -23,12 +23,12 @@ GtkWidget* create_new_window(char *title, int width, int height, bool resizable)
 	return window;
 }
 
-void build_authorizatioin_window()
+void build_authorization_window()
 {
 	if (main_window)
         gtk_widget_destroy(main_window);
 
-	main_window = create_new_window("login", 500, 0, false);
+	main_window = create_new_window("Authorization", 500, 0, false);
 
 	GtkWidget* main_area = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_widget_set_name(main_area, "main_area");

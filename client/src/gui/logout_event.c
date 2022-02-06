@@ -9,13 +9,8 @@ void logout_btn_click(GtkWidget *widget, gpointer data)
     handle_logout_request(false);
 	client_cleanup(false);
     pthread_create(&utils->th_reader, NULL, handle_server_updates, NULL);
-    build_authorizatioin_window();
+    build_authorization_window();
 }
-
-// void cancel_btn_click(GtkWidget *widget, gpointer data) {
-//     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
-//     gtk_widget_destroy(toplevel);
-// }
 
 void build_confirm_logout_window(GtkWidget *widget, gpointer data) {
     if(widget){}
