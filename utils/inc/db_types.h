@@ -18,6 +18,7 @@ typedef struct s_msg {
     char* date_str;
     char* text;
     char* avatar_path;
+    t_avatar_color avatar_color;
     struct s_msg* next;
 }              t_msg;
 

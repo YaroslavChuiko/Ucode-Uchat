@@ -10,7 +10,7 @@ void set_messages_as_read_for(t_chat* chat) {
 
 		mx_msg_dfl_push_back(&chat->messages, 
 							new_msg->message_id, new_msg->sender_id, new_msg->sender_name,
-							new_msg->chat_id, new_msg->text, new_msg->date_str);
+							new_msg->chat_id, new_msg->text, new_msg->date_str, new_msg->avatar_color);
 
 		t_msg* msg_to_add = mx_get_last_msg_node(chat->messages);
 		// msg_to_add->avatar_path = mx_strdup(new_msg->avatar_path);

@@ -41,7 +41,7 @@ void connect_to_server(const char* ip_address, int port, int* server_fd, SSL_CTX
 	init_ssl(ctx);
 
     server_addr.sin_family = AF_INET;
-	server_addr.sin_addr.s_addr = inet_addr(IP_ADDRESS);
+	server_addr.sin_addr.s_addr = inet_addr(ip_address);
 	server_addr.sin_port = htons(port);
 	
 	if ((*server_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {		
