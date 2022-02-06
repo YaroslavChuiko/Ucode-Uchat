@@ -22,8 +22,6 @@ t_chat* handle_search_chats_request(const char* search_str) {
     }
     free(response);
 
-    mx_print_chat_list(chat_list);
-
     utils->is_suspended = false;
     return chat_list;
 

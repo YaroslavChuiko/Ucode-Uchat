@@ -209,4 +209,3 @@ int mx_get_msg_idx_by_id(t_msg* list, int id) {
     return -1;
 
 }
-

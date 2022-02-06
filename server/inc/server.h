@@ -3,17 +3,11 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <errno.h>
-#include <string.h>
-#include <strings.h>
 #include <signal.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <pthread.h>
-#include <syslog.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
+// #include <unistd.h>
 
 #ifdef __MACH__
 #include "../../libraries/openssl/openssl/ssl.h"
@@ -67,9 +61,10 @@ void handle_delete_account(const cJSON* chat_info, t_server_utils* utils);
 void handle_leave_chat(const cJSON* chat_info, t_server_utils* utils);
 t_request_type handle_usr_logout(const cJSON* logout_info, t_server_utils* utils);
 
-void handle_set_default_user_image(char *path, int id);
-void handle_update_user_image(const cJSON* data, t_server_utils* utils);
-void handle_get_user_image(const cJSON* data, t_server_utils* utils);
+// void handle_set_default_user_image(char *path, int id);
+// void handle_update_user_image(const cJSON* data, t_server_utils* utils);
+// void handle_get_user_image(const cJSON* data, t_server_utils* utils);
+
 // SQL
 
 int database_init();
@@ -113,8 +108,8 @@ static const t_req_handler request_handlers[] = {
     handle_delete_chat,
     handle_delete_message,
     handle_edit_message,
-    handle_update_user_image,
-    handle_get_user_image,
+    // handle_update_user_image,
+    // handle_get_user_image,
     handle_get_chats,
     handle_get_chat_msgs,
     handle_get_msg,

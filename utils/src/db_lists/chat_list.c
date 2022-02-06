@@ -200,29 +200,3 @@ int mx_get_last_msg_id(t_chat* chat) {
     return current ? current->message_id : 0;
 
 }
-
-void mx_print_chat_list(t_chat* chat) {
-
-    while (chat) {
-
-        char str[200];
-        sprintf(str, "Gotten chat:\n\tid: %d, name: %s, perms: %d, color: %d\n", 
-                chat->id, chat->name, chat->permissions, chat->avatar_color);
-        logger(str, INFO_LOG);
-
-        t_msg* msg = chat->messages;
-        while (msg) {
-
-            char str[200];
-            sprintf(str, "Chat message:\n\tid: %d, text: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s, avatar: %d\n", 
-                    msg->message_id, msg->text, msg->chat_id, msg->sender_id, msg->sender_name, msg->date_str, msg->avatar_color);
-            logger(str, INFO_LOG);
-            msg = msg->next;
-
-        }
-
-        chat = chat->next;
-
-    }
-
-}

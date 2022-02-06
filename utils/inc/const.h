@@ -3,10 +3,9 @@
 
 #define DB_NAME         "server_utils/database.db"
 #define LOGFILE_NAME    "server_utils/uchat.log"
-#define CLIENTLOG_NAME  "client/logs/client"
 
-#define QUERY_LEN 500
-#define SENT_DATA_LEN 4000
+#define QUERY_LEN       500
+#define SENT_DATA_LEN   4000
 
 // Both for a chat and a user name
 #define MAX_NAME_INPUT_LEN  16

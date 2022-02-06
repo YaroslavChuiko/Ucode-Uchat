@@ -1,10 +1,6 @@
 #ifndef CLIENT_TYPES_H
 #define CLIENT_TYPES_H
 
-#include <gtk/gtk.h>
-
-extern GtkWidget *main_window;
-
 // Type for the user saved from the server
 typedef struct s_user {
     int user_id;
@@ -23,7 +19,6 @@ typedef struct s_client_utils {
     t_user* current_user;
     t_chat* current_chat;
     t_chat* chatlist;
-    char* log_name;
     // for suspending server updates during request handling
     bool is_suspended;
 }              t_client_utils;

@@ -1,14 +1,10 @@
 #ifndef UTILS_HEADER
 #define UTILS_HEADER
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
 #include <errno.h>
 #include <regex.h>
 
-#include "base64.h"
+// #include "base64.h"
 #include "db_types.h"
 #include "const.h"
 #include "../../libraries/libmx/inc/libmx.h"
@@ -58,8 +54,8 @@ typedef enum e_request_type {
     REQ_DELETE_MESSAGE,
     REQ_EDIT_MESSAGE,
 
-    REQ_UPDATE_USER_IMAGE,
-    REQ_GET_USER_IMAGE,
+    // REQ_UPDATE_USER_IMAGE,
+    // REQ_GET_USER_IMAGE,
 
     REQ_GET_CHATS,
     REQ_GET_CHAT_MSGS,
@@ -119,8 +115,6 @@ t_chat* mx_get_chat_by_id(t_chat* list, int chat_id);
 void mx_chat_pop_id(t_chat **list, int chat_id);
 void mx_chat_pop_index(t_chat **list, int index);
 int mx_chat_list_size(t_chat* list);
-
-void mx_print_chat_list(t_chat* chat); // remove
 
 t_msg* mx_create_msg(int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str, t_avatar_color color);
 void mx_msg_dfl_push_back(t_msg** list, int msg_id, int user_id, const char* user_name, int chat_id, const char* text, const char* date_str, t_avatar_color color);

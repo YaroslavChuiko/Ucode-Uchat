@@ -46,7 +46,6 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 
 	if (is_current && message_id > curr_last_msg_id) {
 
-		client_log("You're reading an incoming message", INFO_LOG);
 		if (!curr_chat->new_messages) {
 			
 			// handle_get_user_image(new_msg->sender_id, &new_msg->avatar_path);
@@ -70,7 +69,6 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 
 	} else if (message_id > last_new_msg_id) {
 		
-		client_log("You have an incoming message", INFO_LOG);
 		// handle_get_user_image(new_msg->sender_id, &new_msg->avatar_path);
 		mx_msg_push_back(&curr_chat->new_messages, new_msg);
 		curr_chat->last_new_msg = mx_get_last_msg_node(curr_chat->new_messages);
@@ -79,11 +77,7 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 	}
 	
 	update_chatlist_item_info(curr_chat);
-
-	char str[200];
-	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s, avatar: %d\n", 
-			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str, new_msg->avatar_color);
-	client_log(str, INFO_LOG);
+	
 	g_usleep(100000);
 	return 0;
   
