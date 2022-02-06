@@ -10,7 +10,7 @@ void set_messages_as_read_for(t_chat* chat) {
 
 		mx_msg_dfl_push_back(&chat->messages, 
 							new_msg->message_id, new_msg->sender_id, new_msg->sender_name,
-							new_msg->chat_id, new_msg->text, new_msg->date_str);
+							new_msg->chat_id, new_msg->text, new_msg->date_str, new_msg->avatar_color);
 
 		t_msg* msg_to_add = mx_get_last_msg_node(chat->messages);
 		// msg_to_add->avatar_path = mx_strdup(new_msg->avatar_path);
@@ -81,8 +81,8 @@ static int handle_new_message(t_chat* curr_chat, int message_id, bool is_current
 	update_chatlist_item_info(curr_chat);
 
 	char str[200];
-	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s, avatar: %s\n", 
-			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str, new_msg->avatar_path);
+	sprintf(str, "This is a t_msg msg:\n\ttext: %s, chat_id: %d, sender_id: %d, sender_name: %s, date: %s, avatar: %d\n", 
+			new_msg->text, new_msg->chat_id, new_msg->sender_id, new_msg->sender_name, new_msg->date_str, new_msg->avatar_color);
 	client_log(str, INFO_LOG);
 	g_usleep(100000);
 	return 0;
