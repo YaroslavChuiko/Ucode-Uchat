@@ -9,16 +9,16 @@ void recv_image_from_server(int *socket, unsigned char **buffer, size_t length) 
     }
 }
 
-static char* get_file_path_for(int user_id) {
+// static char* get_file_path_for(int user_id) {
 
-    char* id_str = mx_itoa(user_id);
-    char* file_name = mx_strnew(mx_strlen(AVATAR_PATH) + mx_strlen(id_str) + 9);
-    mx_strcat(file_name, AVATAR_PATH);
-    mx_strcat(file_name, id_str);
-    mx_strcat(file_name, "_user.png");
-    return file_name;
+//     char* id_str = mx_itoa(user_id);
+//     char* file_name = mx_strnew(mx_strlen(AVATAR_PATH) + mx_strlen(id_str) + 9);
+//     mx_strcat(file_name, AVATAR_PATH);
+//     mx_strcat(file_name, id_str);
+//     mx_strcat(file_name, "_user.png");
+//     return file_name;
 
-}
+// }
 
 // t_response_code handle_get_user_image(int user_id, char** avatar_path) {
 

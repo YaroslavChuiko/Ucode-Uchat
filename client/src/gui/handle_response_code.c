@@ -59,6 +59,10 @@ void handle_signup_response_code(int response_code, GtkWidget *signup_notify_lab
         case R_USR_EXISTS:
             set_notify_error_style(signup_notify_label, get_response_str(R_USR_EXISTS));
             break;
+
+        case R_PASS_LEN_INVALID:
+            set_notify_error_style(signup_notify_label, get_response_str(R_PASS_LEN_INVALID));
+            break;
         
         default:
             break;
@@ -99,7 +103,8 @@ void handle_join_chat_response_code(int response_code, char *chat_name)
     switch (response_code)
     {
         case R_SUCCESS:
-            update_chatlist();
+            GtkWidget *search_field = get_widget_by_name_r(main_window, "global_search_field");
+            gtk_entry_set_text(GTK_ENTRY(search_field), "");
             GtkWidget *new_chatlist_item = get_widget_by_name_r(main_window, chat_name);
             activate_chat(new_chatlist_item);
             break;

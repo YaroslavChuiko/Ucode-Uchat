@@ -4,10 +4,10 @@ void change_avatar_btn_click(GtkWidget *widget, gpointer data) {
     GtkWidget *toplevel = gtk_widget_get_toplevel(widget);
     (void)data;
 
-    GtkWidget *path_field = get_widget_by_name_r(toplevel, "path_field");
-    GtkWidget *path_notify_label = get_widget_by_name_r(toplevel, "path_notify_label");
+    // GtkWidget *path_field = get_widget_by_name_r(toplevel, "path_field");
+    // GtkWidget *path_notify_label = get_widget_by_name_r(toplevel, "path_notify_label");
 
-    char *new_avatar = (char*)gtk_entry_get_text(GTK_ENTRY(path_field));
+    // char *new_avatar = (char*)gtk_entry_get_text(GTK_ENTRY(path_field));
 
     // handle_update_user_image(new_avatar);
     // usleep(4000000);
