@@ -15,7 +15,7 @@ cJSON* get_search_chats_array(const cJSON* chat_info, t_server_utils* utils) {
     mx_strcat(search_str, "%%");
     mx_strcat(search_str, search_pattern->valuestring);
     mx_strcat(search_str, "%%");
-    sqlite3_prepare_v2(db,  "SELECT chats.id, chats.name FROM chats "
+    sqlite3_prepare_v2(db,  "SELECT chats.id, chats.name, chats.avatar_color FROM chats "
                             "WHERE chats.name LIKE ? "
                             "AND chats.id NOT IN (SELECT `chat_id` FROM `members` WHERE `user_id` = ?) "
                             "ORDER BY chats.date DESC ",

@@ -70,7 +70,7 @@ void build_leftbar(GtkWidget *chat_screen)
 
     GtkWidget *user_avatar = gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(user_avatar), 27, 27);
-    g_signal_connect(G_OBJECT(user_avatar), "draw", G_CALLBACK(draw_user_avatar), NULL);   // Получить avatar пользовтеля
+    // g_signal_connect(G_OBJECT(user_avatar), "draw", G_CALLBACK(draw_user_avatar), NULL);   // Получить avatar пользовтеля
     gtk_widget_set_halign(user_avatar, GTK_ALIGN_START);
     gtk_widget_set_valign(user_avatar, GTK_ALIGN_CENTER);
     gtk_box_pack_start(GTK_BOX(leftbar_footer), user_avatar, FALSE, FALSE, 0);

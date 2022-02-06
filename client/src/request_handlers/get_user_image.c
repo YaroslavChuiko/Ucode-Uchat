@@ -37,7 +37,7 @@ t_response_code handle_get_user_image(int user_id, char** avatar_path) {
     FILE *fp;
     char* file_path = get_file_path_for(user_id);
     if ((fp = fopen(file_path, "wb")) == NULL) {
-        printf("Cannot open image file\n");
+        handle_error("Cannot open image file");
         mx_strdel(&file_path);
         return R_FILE_ERROR;
     }
@@ -46,7 +46,7 @@ t_response_code handle_get_user_image(int user_id, char** avatar_path) {
     int len_encoded = 0;
     usleep(500000);
     if(recv(utils->server_fd, &len_encoded, sizeof(int), 0) == 0) {
-        printf("Error while receiving length\n");
+        handle_error("Error while receiving length");
         mx_strdel(&file_path);
         return R_FILE_ERROR;
     }
@@ -65,13 +65,13 @@ t_response_code handle_get_user_image(int user_id, char** avatar_path) {
     // Writing decoded image to created file
     fwrite(decoded, flen, 1, fp);
     if (ferror(fp)) {
-        printf("fwrite() failed\n");
+        handle_error("fwrite() failed");
         mx_strdel(&file_path);
         return R_FILE_ERROR;
     }
     int r;
     if ((r = fclose(fp)) == EOF) {
-        printf("Cannot close file handler\n");
+        handle_error("Cannot close file handler");
         mx_strdel(&file_path);
         return R_FILE_ERROR;
     }

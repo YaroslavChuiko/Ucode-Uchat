@@ -26,7 +26,7 @@ t_response_code handle_update_user_image(char *path) {
     // Open image to read
     FILE *fp;
     if((fp = fopen(path, "rb")) == NULL) {
-        printf("Cannot open file\n");
+        handle_error("Cannot open file");
         return R_FILE_ERROR;
     }
     int r;
@@ -34,28 +34,28 @@ t_response_code handle_update_user_image(char *path) {
     // Get the length of the file data
     fseek(fp, 0, SEEK_END);
     if (ferror(fp)) {
-        printf("fseek() failed\n");
+        handle_error("fseek() failed");
         if ((r = fclose(fp)) == EOF) {
-            printf("Cannot close file\n");         
+            handle_error("Cannot close file");         
         }
         return R_FILE_ERROR;
     }  
     
     long flen = ftell(fp);
     if (flen == -1) {
-        printf("ftell() failed\n");
+        handle_error("ftell() failed");
         if ((r = fclose(fp)) == EOF) {
-            printf("Cannot close file\n");
+            handle_error("Cannot close file");
         }
         return R_FILE_ERROR;
     }
     
     fseek(fp, 0, SEEK_SET);
     if (ferror(fp)) {
-        printf("fseek() failed\n");
+        handle_error("fseek() failed");
         r = fclose(fp);
         if (r == EOF) {
-            printf("Cannot close file\n");
+            handle_error("Cannot close file");
         }
         return R_FILE_ERROR;
     }
@@ -64,9 +64,9 @@ t_response_code handle_update_user_image(char *path) {
     unsigned char *read_data = malloc((unsigned)flen + 1);
     fread(read_data, flen, 1, fp);
     if (ferror(fp)) {
-        printf("fread() failed\n");
+        handle_error("fread() failed");
         if ((r = fclose(fp)) == EOF) {
-            printf("Cannot close file\n");
+            handle_error("Cannot close file");
         }
         return R_FILE_ERROR;
     }
@@ -80,8 +80,8 @@ t_response_code handle_update_user_image(char *path) {
     free(read_data);
 
     int len_encoded = strlen((char *)out_b64);
-    // printf("%d\n", len_encoded);
-    // printf("%s\n", out_b64);
+    // handle_error("%d\n", len_encoded);
+    // handle_error("%s\n", out_b64);
     // Send all to server
     send(utils->server_fd, &len_encoded, sizeof(int), 0);
     send_image_to_server(&utils->server_fd, out_b64, len_encoded);
@@ -89,7 +89,7 @@ t_response_code handle_update_user_image(char *path) {
     free(out_b64); 
 
     if ((r = fclose(fp)) == EOF) {
-        printf("Cannot close file\n");
+        handle_error("Cannot close file");
         return R_FILE_ERROR;
     }
     utils->is_suspended = false;

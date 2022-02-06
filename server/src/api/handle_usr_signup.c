@@ -4,8 +4,9 @@ t_response_code db_add_user(const cJSON* user_info) {
 
     const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
     const cJSON *user_password = cJSON_GetObjectItemCaseSensitive(user_info, "password");
+    const cJSON *avatar_color = cJSON_GetObjectItemCaseSensitive(user_info, "avatar_color");
     
-    if (!cJSON_IsString(user_name) || !cJSON_IsString(user_password)) {
+    if (!cJSON_IsString(user_name) || !cJSON_IsString(user_password) || !cJSON_IsNumber(avatar_color)) {
         return R_JSON_FAILURE;
     }
 
@@ -25,8 +26,8 @@ t_response_code db_add_user(const cJSON* user_info) {
     }
 
     char query[QUERY_LEN];
-    sprintf(query, "INSERT INTO `users` (`username`, `password`) VALUES('%s', '%s')", 
-            user_name->valuestring, user_password->valuestring);
+    sprintf(query, "INSERT INTO `users` (`username`, `password`, `avatar_color`) VALUES('%s', '%s', '%d')", 
+            user_name->valuestring, user_password->valuestring, avatar_color->valueint);
     
     if (db_execute_query(query) != 0) {
         return R_DB_FAILURE;
@@ -47,8 +48,8 @@ void handle_usr_signup(const cJSON* user_info, t_server_utils* utils) {
         send_server_response(utils->ssl, error_code, REQ_USR_SIGNUP);
         return;
     }
-    const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
-    handle_set_default_user_image("server/data/default_image.png", db_get_id_by_username(user_name->valuestring));
+    // const cJSON *user_name = cJSON_GetObjectItemCaseSensitive(user_info, "name");
+    // handle_set_default_user_image("server/data/default_image.png", db_get_id_by_username(user_name->valuestring));
 
     send_server_response(utils->ssl, R_SUCCESS, REQ_USR_SIGNUP);
 

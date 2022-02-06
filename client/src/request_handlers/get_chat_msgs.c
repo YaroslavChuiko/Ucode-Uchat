@@ -20,10 +20,10 @@ t_response_code add_msg_to_msglist(cJSON* json) {
 
 	t_msg* new_msg = mx_create_msg(msg_id->valueint, sender_id->valueint, sender_name->valuestring, 
 											chat_id->valueint, text->valuestring, get_string_time(date->valueint));
-    if (new_msg->sender_id != utils->current_user->user_id)
-        handle_get_user_image(new_msg->sender_id, &new_msg->avatar_path);
-    else
-        new_msg->avatar_path = mx_strdup(utils->current_user->avatar_path);
+    // if (new_msg->sender_id != utils->current_user->user_id)
+    //     handle_get_user_image(new_msg->sender_id, &new_msg->avatar_path);
+    // else
+    //     new_msg->avatar_path = mx_strdup(utils->current_user->avatar_path);
 
     mx_msg_push_back(&chat_by_id->messages, new_msg);
     
