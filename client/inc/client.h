@@ -11,13 +11,13 @@
 #include <cairo.h>
 // #include <unistd.h>
 
-#ifdef __MACH__
+// #ifdef __MACH__
 #include "../../libraries/openssl/openssl/ssl.h"
 #include "../../libraries/openssl/openssl/err.h"
-#else
-#include <openssl/ssl.h>
-#include <openssl/err.h>
-#endif
+// #else
+// #include <openssl/ssl.h>
+// #include <openssl/err.h>
+// #endif
 
 #include "../../libraries/cjson/inc/cJSON.h"
 #include "../../libraries/libmx/inc/libmx.h"

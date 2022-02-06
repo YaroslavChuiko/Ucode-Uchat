@@ -8,11 +8,11 @@ int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd)
     }
 
     *lineptr = mx_realloc(*lineptr, buf_size);
-    #ifdef __MACH__
+    // #ifdef __MACH__
         mx_memset(*lineptr, '\0', malloc_size(*lineptr));
-    #else
-        mx_memset(*lineptr, '\0', malloc_usable_size(*lineptr));
-    #endif
+    // #else
+        // mx_memset(*lineptr, '\0', malloc_usable_size(*lineptr));
+    // #endif
 
     char ch;
     buf_size = 1;
