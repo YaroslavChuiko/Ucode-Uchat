@@ -23,16 +23,16 @@ OBJS = $(OBJDIR)/*.o
 all: $(LIBMX) $(UTILSLIB) $(CJSON) $(SQLITE) $(SERVER) $(CLIENT)
 
 $(LIBMX):
-	# make -sC $(LIBMX_DIR)
+	make -sC $(LIBMX_DIR)
 
 $(UTILSLIB):
 	make -sC $(UTILSLIB_DIR)
 
 $(CJSON):
-	# make -sC $(CJSON_DIR)
+	make -sC $(CJSON_DIR)
 
 $(SQLITE):
-	# make -sC $(SQLITE_DIR)
+	make -sC $(SQLITE_DIR)
 
 $(SERVER):
 	make -sC $(SERVER_DIR)
@@ -52,9 +52,9 @@ uninstall:
 	make -sC $(SERVER_DIR) $@
 	make -sC $(CLIENT_DIR) $@
 	make -sC $(UTILSLIB_DIR) $@
-	# make -sC $(LIBMX_DIR) $@
-	# make -sC $(CJSON_DIR) $@
-	# make -sC $(SQLITE_DIR) $@
+	make -sC $(LIBMX_DIR) $@
+	make -sC $(CJSON_DIR) $@
+	make -sC $(SQLITE_DIR) $@
 	make clean
 	rm -f $(UCHAT)
 
