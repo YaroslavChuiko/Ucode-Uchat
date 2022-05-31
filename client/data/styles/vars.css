@@ -1,0 +1,11 @@
+/* background color */
+@define-color main-bg-color #292c43;
+@define-color second-bg-color #2f334d;
+@define-color onfocus-color rgb(71, 110, 239); /* #476eef; */
+
+/* fonts */
+@define-color main-font-color #f1f2f3;
+@define-color second-font-color #717590;
+
+@define-color success-color rgb(70,201,58);
+@define-color danger-color rgb(255,71,87);

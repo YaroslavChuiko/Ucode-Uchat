@@ -1,0 +1,122 @@
+.btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 8px 0px;
+    border: none;
+    outline: none;
+    transition: 0.2s all linear;
+    color: @main-font-color;
+}
+
+.btn--blue {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background: @onfocus-color;
+}
+
+.btn--blue:hover {
+    background-color: rgb(92, 128, 246);
+    box-shadow: rgba(71, 110, 239, 0.2) 0px 8px 24px;
+}
+
+.btn--blue:active {
+    background-color: rgb(38, 81, 221);
+}
+
+.btn--blue:focus {
+    outline: none;
+    border: none;
+    background-color: rgb(92, 128, 246);
+}
+
+.btn--dark-blue {
+    box-shadow: rgba(61, 64, 67, 0.2) 0px 8px 24px;
+    background: @second-bg-color;
+}
+
+.btn--dark-blue:hover {
+    background-color: #4a5078;
+    box-shadow: rgba(55, 74, 135, 0.2) 0px 8px 24px;
+}
+
+.btn--dark-blue:active {
+    background-color: #282b41;
+}
+
+.btn--dark-blue:focus {
+    outline: none;
+    border: none;
+    background-color: #4a5078;
+}
+
+.clear_search_btn {
+    font-size: 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-repeat: no-repeat;
+    background-image: url("../img/close.png");
+    background-size: 14px 14px;
+    background-position: 50% 50%;
+    transition: 0.2s background linear;
+    box-shadow: none;
+    background-color: @second-bg-color;
+}
+
+.clear_search_btn:hover {
+    background-image: url("../img/close-hover.png");
+    background-color: rgba(71, 110, 239, 0.1);
+}
+
+.clear_search_btn:active {
+    outline: none;
+    border: none;
+}
+
+.clear_search_btn:focus {
+    outline: none;
+    border: none;
+    background-image: url("../img/close-hover.png");
+    background-color: rgba(71, 110, 239, 0.4);
+}
+
+.switch_auth_menu_label {
+    color: @onfocus-color;
+    padding: 3px 5px;
+    transition: all 0.2s linear;
+}
+
+.event_switch_auth_menu:hover .switch_auth_menu_label {
+    color: rgb(167, 188, 255);
+}
+
+.input-msg_send-btn {
+    border-radius: 50%;
+    background-image: url("../img/send.png");
+    background-size: 25px 25px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    outline: none;
+    border: none;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: 0.2s all linear;
+    background-color: @onfocus-color;
+}
+
+.input-msg_send-btn:hover {
+    background-color: rgb(92, 128, 246);
+    box-shadow: rgba(71, 110, 239, 0.2) 0px 8px 24px;
+}
+
+.input-msg_send-btn:active {
+    outline: none;
+    border: none;
+    background-color: rgb(38, 81, 221);
+}
+
+.input-msg_send-btn:focus {
+    outline: none;
+    border: none;
+    background-color: rgb(92, 128, 246);
+}

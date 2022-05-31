@@ -1,0 +1,23 @@
+.popup_menu {
+    padding: 40px;
+    background-color: @main-bg-color;
+    color: @main-font-color;
+}
+
+
+.popup_window_title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.popup_btn_box {
+    margin-top: 20px;
+}
+
+.confirm_text {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: @main-font-color;
+}

@@ -1,0 +1,60 @@
+@import url("vars.css");
+@import url("entry.css");
+@import url("button.css");
+@import url("auth.css");
+@import url("popup.css");
+@import url("leftbar.css");
+@import url("chat.css");
+
+* {
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+}
+
+window {
+    color: @main-font-color;
+    background-color: @main-bg-color;
+}
+
+
+.chatscreen_notify {
+    color: @main-font-color;
+}
+
+.hidden {
+    font-size: 0px;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.menubar {
+    background: none;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.menubar:hover  .edit_profile_btn {
+    background-image: url("../img/settings-hover.png");
+}
+
+.menubar_menu {
+    padding: 10px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: @main-font-color;
+    background-color: @second-bg-color;
+}
+
+.menubar_menu * {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 0px;
+    color: @main-font-color;
+}
+
+.menubar_menu *:hover {
+    background-color: @main-bg-color;
+}

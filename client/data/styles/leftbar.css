@@ -1,0 +1,141 @@
+.leftbar {
+    background-color: @main-bg-color;
+    border-right: 1px solid @second-bg-color;
+}
+
+.leftbar_header_block {
+    margin: 50px 0px 30px;
+    padding: 0px 30px;
+}
+
+.leftbar_header_label {
+    font-size: 32px;
+    font-weight: 600;
+    color: @main-font-color;
+}
+
+.search_block {
+    padding: 0px 30px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+/* .scrollable_wrap {
+    background-color: lime;
+} */
+
+.chatlist {
+    padding: 0px 30px;    
+}
+
+.leftbar_footer {
+    padding: 15px 30px;
+}
+
+.leftbar_footer_username {
+    font-size: 14px;
+    color: @second-font-color;
+}
+
+.edit_profile_btn {
+    background-image: url("../img/settings.png");
+    background-size: 27px 27px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+/* chat list item */
+.chatlist_item {
+    padding: 15px 18px;
+    background-color: #2f334d;
+    border-radius: 10px;
+    color: @second-font-color;
+}
+
+.chatlist_item_wrap:hover .chatlist_item{
+    background-color: rgba(71, 110, 239, 0.3);
+    transition: 0.2s background linear;
+}
+
+.chatlist_item_wrap.active .chatlist_item{
+    background-color: @onfocus-color;
+    transition: 0.2s background linear;
+}
+
+.chatlist_item_wrap.active .chatlist_item_message{
+    color: @main-font-color;
+    transition: 0.2s color linear;
+}
+
+.chatlist_item_wrap.active .chatlist_item_time{
+    color: @main-font-color;
+    transition: 0.2s color linear;
+}
+
+.chatlist_item_avatar {
+    /* background-color: yellow; */
+    /*YELLOW*/
+    /* background-color: rgb(255, 235, 59);  */
+    /*LIME*/
+    /* background-color: rgb(205, 220, 57); */
+    /*CYAN*/ 
+    /* background-color: rgb(0, 188, 212);  */
+    /*ORANGE*/
+    /* background-color: rgb(255, 152, 0);  */
+    /*GREEN*/
+    /* background-color: rgb(76, 175, 80);  */
+    /*PINK*/
+    /* background-color: rgb(233, 30, 99);  */
+    /*AMBER*/
+    /* background-color: rgb(255, 193, 7);  */
+    /*DEEP PURPLE*/
+    /* background-color: rgb(103, 58, 183);  */
+    /* LIGHT GREEN */
+    /* background-color: rgb(139, 195, 74); */
+    /* PURPLE */
+    /* background-color: rgb(156, 39, 176); */
+    /* background-image: url("../img/user-avatar4.png"); */
+    /* background-size: 25px 25px; */
+    /* background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat; */
+
+    border-radius: 50%;
+}
+
+.chatlist_item_text {
+    margin-left: 10px;
+}
+
+.chatlist_item_title {
+    font-weight: 500;
+    font-size: 16px;
+    color: @main-font-color;
+}
+
+.chatlist_item_message {
+    color: @second-font-color;
+}
+
+.chatlist_item_info {
+
+}
+
+.chatlist_item_time {
+    color: @second-font-color;
+    margin-bottom: 15px;
+}
+
+.chatlist_item_notify {
+    font-weight: 500;
+    border-radius: 50%;
+    opacity: 0;
+    color: @second-bg-color;
+}
+
+.chatlist_item_notify--visible {
+    background-color: #f84469;
+    opacity: 1;
+    transition: 0.2s all linear;
+    color: @main-font-color;
+}

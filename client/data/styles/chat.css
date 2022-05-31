@@ -1,0 +1,98 @@
+.chat_header {
+    padding: 25px 35px 25px 35px;
+    background-color: @main-bg-color;
+    border-bottom: 1px solid @second-bg-color;
+    color: @main-font-color;
+}
+
+.chat_title {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: @main-font-color;
+}
+
+.messagelist {
+    padding: 20px 35px 0px;
+    background-color: @main-bg-color;;
+}
+
+.right_message {
+    padding: 10px 15px;
+    border-radius: 10px 0 10px 10px;
+    background-color: @onfocus-color;
+    color: @main-font-color;
+}
+
+.left_message {
+    padding: 15px;
+    border-radius: 0 10px 10px 10px;
+    background-color: @second-bg-color;
+    color: @main-font-color;
+}
+
+.msg_box {
+    margin-bottom: 10px;
+    color: @second-font-color;
+}
+
+.delete_msg_btn {
+    background-image: url("../img/close.png");
+    background-size: 12px 12px;
+    background-position: 4px 5px;
+    background-repeat: no-repeat;
+    padding: 0;
+}
+
+.delete_msg_btn:hover {
+    background-image: url("../img/close-hover.png");
+}
+
+.edit_msg_btn {
+    background-image: url("../img/pencil.png");
+    background-size: 13px 13px;
+    background-position: 4px 4px;
+    background-repeat: no-repeat;
+    padding: 0;
+}
+
+.edit_msg_btn:hover {
+    background-image: url("../img/pencil-hover.png");
+}
+
+.msg_name {
+    font-weight: 500;
+}
+
+.msg_name--right {
+    margin-left: 20px;
+}
+
+.msg_name--left {
+    margin-right: 20px;
+}
+
+.msg_time {
+    font-size: 12px;
+}
+
+.input-msg_box {
+    padding: 20px 35px;
+    border-top: 1px solid @second-bg-color;
+    background-color: @main-bg-color;
+}
+
+.input-msg_entry {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    font-size: 15px;
+    color: @main-font-color;
+    background-color: @main-bg-color;
+}
+
+.input-msg_entry:focus {
+    outline: none;
+    box-shadow: none;
+}
+
