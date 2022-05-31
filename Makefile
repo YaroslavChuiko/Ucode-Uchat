@@ -22,6 +22,9 @@ OBJS = $(OBJDIR)/*.o
 
 all: $(LIBMX) $(UTILSLIB) $(CJSON) $(SQLITE) $(SERVER) $(CLIENT)
 
+install:
+	sudo apt update && sudo apt install libsqlite3-dev libssl-dev
+
 $(LIBMX):
 	make -sC $(LIBMX_DIR)
 
