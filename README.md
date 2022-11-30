@@ -1,4 +1,4 @@
-# Uchat-Ucode
+# Ucode-Uchat
 A REST API for a chat application, implemented in C. 
 
 ## Compiling and building
