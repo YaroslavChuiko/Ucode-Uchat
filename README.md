@@ -1,5 +1,32 @@
-# Ucode-Uchat
-A REST API for a chat application, implemented in C. 
+<head>
+    <div align="center">
+        <h1 align="center">Ucode-Uchat</h2>
+    </div>
+</head>
+
+<div align="center">
+  <img alt="c" src="https://img.shields.io/badge/C-3581E5.svg?style=for-the-badge&logo=c&logoColor=white" />
+  <img alt="gtk3" src="https://img.shields.io/badge/-GTK+3.0-7FE719.svg?style=for-the-badge&logo=gtk&logoColor=white&labelFontColor=black" />
+  <img alt="css" src="https://img.shields.io/badge/-CSS3-1572B6.svg?style=for-the-badge&logo=css3&logoColor=white" />
+  <img alt="sqlite" src="https://img.shields.io/badge/SQLite-003B57.svg?style=for-the-badge&logo=SQlite&logoColor=white" />
+  <img alt="openssl" src="https://img.shields.io/badge/-OpenSSL-721412.svg?style=for-the-badge&logo=OpenSSL&logoColor=white" />
+  <img alt="json" src="https://img.shields.io/badge/-JSON-000000.svg?style=for-the-badge&logo=json&logoColor=white" />
+  <br> 
+  <img alt="commit" src="https://img.shields.io/github/last-commit/YaroslavChuiko/Ucode-Uchat?label=last%20commit&style=for-the-badge" />
+  <img alt="size" src="https://img.shields.io/github/repo-size/YaroslavChuiko/Ucode-Uchat?style=for-the-badge" />
+  <img alt="release" src="https://img.shields.io/github/v/release/YaroslavChuiko/Ucode-Uchat?include_prereleases&style=for-the-badge" />
+  <img alt="downloads" src="https://img.shields.io/github/downloads/YaroslavChuiko/Ucode-Uchat/total?style=for-the-badge" />
+</div>
+
+<div align="center">
+  <h3>A simple chat application, implemented in C.</h3>
+  
+  <h3>Demo</h3>
+  <p><a href="https://youtu.be/BJMFtsvIYG8" target="_blank">Demo video</a></p>
+</div>
+
+<br/>
+<br/>
 
 ## Compiling and building
 If you use MacOS, follow the next steps: 
